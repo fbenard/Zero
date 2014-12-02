@@ -1,0 +1,50 @@
+<?php
+
+// Class
+
+cons('EXCEPTION_CLASS_IS_ABSTRACT');
+cons('EXCEPTION_CLASS_METHOD_NOT_FOUND');
+
+
+// Controllers
+
+cons('EXCEPTION_CONTROLLER_NOT_FOUND');
+cons('EXCEPTION_CONTROLLER_ACTION_NOT_FOUND');
+
+
+// Files
+
+cons('EXCEPTION_FILE_NOT_FOUND');
+
+
+// HTTP
+
+cons('EXCEPTION_HTTP_STATUS_CODE_NOT_VALID');
+
+
+// Permissions
+
+cons('EXCEPTION_PERMISSION_NOT_GRANTED');
+
+
+// Preferences
+
+cons('EXCEPTION_PREFERENCE_NOT_AN_ARRAY');
+
+
+// Routes
+
+cons('EXCEPTION_ROUTE_NOT_FOUND');
+
+
+// Services
+
+cons('EXCEPTION_SERVICE_NOT_FOUND');
+
+
+// Variables
+
+cons('EXCEPTION_VARIABLE_NOT_FOUND');
+cons('EXCEPTION_VARIABLE_PATH_NOT_VALID');
+
+?>

@@ -1,0 +1,16 @@
+{
+	"helper/directory": "/Zero/Services/Helpers/DirectoryHelper",
+	"helper/file": "/Zero/Services/Helpers/FileHelper",
+	"manager/buffer": "/Zero/Services/Managers/BufferManager",
+	"manager/constant": "/Zero/Services/Managers/ConstantManager",
+	"manager/controller": "/Zero/Services/Managers/ControllerManager",
+	"manager/environment": "/Zero/Services/Managers/EnvironmentManager",
+	"manager/error": "/Zero/Services/Managers/ErrorManager",
+	"manager/exception": "/Zero/Services/Managers/ExceptionManager",
+	"manager/log": "/Zero/Services/Managers/LogManager",
+	"manager/preference": "/Zero/Services/Managers/PreferenceManager",
+	"manager/route": "/Zero/Services/Managers/RouteManager",
+	"manager/session": "/Zero/Services/Managers/SessionManager",
+	"manager/universe": "/Zero/Services/Managers/UniverseManager",
+	"renderer/log": "/Zero/Services/Renderers/LogRenderer"
+}
