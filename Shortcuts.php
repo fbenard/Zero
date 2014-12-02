@@ -101,6 +101,17 @@ function pref($preferenceCode, $preferenceValue = null, $isLocked = false)
  *
  */
 
+function redirect($url)
+{
+	header('Location: ' . $url);
+	die();
+}
+
+
+/**
+ *
+ */
+
 function render($viewCode, $viewArguments = null)
 {
 	require_once(PATH_ZERO . 'Classes/View.php');

@@ -56,8 +56,7 @@ abstract class AbstractController
 
 	protected function redirect($url)
 	{
-		header('Location: ' . $url);
-		die();
+		redirect($url);
 	}
 
 
