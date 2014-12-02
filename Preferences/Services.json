@@ -1,4 +1,9 @@
 {
+	"factory/service":
+	{
+		"path": "/Components/fbenard/zero/Services/Factories/ServiceFactory",
+		"classname": "Zero\\Services\\Factories\\ServiceFactory"
+	},
 	"helper/directory":
 	{
 		"path": "/Components/fbenard/zero/Services/Helpers/DirectoryHelper",
