@@ -36,11 +36,6 @@ class ControllerManager
 
 		//
 
-		$this->_controller = new $className();
-
-
-		//
-
 		$this->_action = 'action_' . $definition['action'];
 
 		if (method_exists($this->_controller, $this->_action) === false)
