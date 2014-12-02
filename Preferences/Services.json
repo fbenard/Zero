@@ -1,16 +1,72 @@
 {
-	"helper/directory": "/Zero/Services/Helpers/DirectoryHelper",
-	"helper/file": "/Zero/Services/Helpers/FileHelper",
-	"manager/buffer": "/Zero/Services/Managers/BufferManager",
-	"manager/constant": "/Zero/Services/Managers/ConstantManager",
-	"manager/controller": "/Zero/Services/Managers/ControllerManager",
-	"manager/environment": "/Zero/Services/Managers/EnvironmentManager",
-	"manager/error": "/Zero/Services/Managers/ErrorManager",
-	"manager/exception": "/Zero/Services/Managers/ExceptionManager",
-	"manager/log": "/Zero/Services/Managers/LogManager",
-	"manager/preference": "/Zero/Services/Managers/PreferenceManager",
-	"manager/route": "/Zero/Services/Managers/RouteManager",
-	"manager/session": "/Zero/Services/Managers/SessionManager",
-	"manager/universe": "/Zero/Services/Managers/UniverseManager",
-	"renderer/log": "/Zero/Services/Renderers/LogRenderer"
+	"helper/directory":
+	{
+		"path": "/Components/fbenard/zero/Services/Helpers/DirectoryHelper",
+		"classname": "Zero\\Services\\Helpers\\DirectoryHelper"
+	},
+	"helper/file":
+	{
+		"path": "/Components/fbenard/zero/Services/Helpers/FileHelper",
+		"classname": "Zero\\Services\\Helpers\\FileHelper"
+	},
+	"manager/buffer":
+	{
+		"path": "/Components/fbenard/zero/Services/Managers/BufferManager",
+		"classname": "Zero\\Services\\Managers\\BufferManager"
+	},
+	"manager/constant":
+	{
+		"path": "/Components/fbenard/zero/Services/Managers/ConstantManager",
+		"classname": "Zero\\Services\\Managers\\ConstantManager"
+	},
+	"manager/controller":
+	{
+		"path": "/Components/fbenard/zero/Services/Managers/ControllerManager",
+		"classname": "Zero\\Services\\Managers\\ControllerManager"
+	},
+	"manager/environment":
+	{
+		"path": "/Components/fbenard/zero/Services/Managers/EnvironmentManager",
+		"classname": "Zero\\Services\\Managers\\EnvironmentManager"
+	},
+	"manager/error":
+	{
+		"path": "/Components/fbenard/zero/Services/Managers/ErrorManager",
+		"classname": "Zero\\Services\\Managers\\ErrorManager"
+	},
+	"manager/exception":
+	{
+		"path": "/Components/fbenard/zero/Services/Managers/ExceptionManager",
+		"classname": "Zero\\Services\\Managers\\ExceptionManager"
+	},
+	"manager/log":
+	{
+		"path": "/Components/fbenard/zero/Services/Managers/LogManager",
+		"classname": "Zero\\Services\\Managers\\LogManager"
+	},
+	"manager/preference":
+	{
+		"path": "/Components/fbenard/zero/Services/Managers/PreferenceManager",
+		"classname": "Zero\\Services\\Managers\\PreferenceManager"
+	},
+	"manager/route":
+	{
+		"path": "/Components/fbenard/zero/Services/Managers/RouteManager",
+		"classname": "Zero\\Services\\Managers\\RouteManager"
+	},
+	"manager/session":
+	{
+		"path": "/Components/fbenard/zero/Services/Managers/SessionManager",
+		"classname": "Zero\\Services\\Managers\\SessionManager"
+	},
+	"manager/universe":
+	{
+		"path": "/Components/fbenard/zero/Services/Managers/UniverseManager",
+		"classname": "Zero\\Services\\Managers\\UniverseManager"
+	},
+	"renderer/log":
+	{
+		"path": "/Components/fbenard/zero/Services/Renderers/LogRenderer",
+		"classname": "Zero\\Services\\Renderers\\LogRenderer"
+	}
 }

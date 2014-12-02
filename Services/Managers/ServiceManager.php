@@ -88,19 +88,11 @@ class ServiceManager
 
 			$definition = $this->_definitions[$serviceCode];
 
-			$path = PATH_ROOT . $definition . '.php';
-			$className = str_replace
-			(
-				[
-					'/Application/',
-					'/'
-				],
-				[
-					'\\Goloboard\\',
-					'\\'
-				],
-				$definition
-			);
+			
+			//
+
+			$path = PATH_ROOT . $definition['path'] . '.php';
+			$className = $definition['classname'];
 
 
 			//
