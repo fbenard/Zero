@@ -19,7 +19,7 @@ define('PATH_ROOT', getcwd() . '/');
 define('PATH_APPLICATION', PATH_ROOT . 'Application/');
 define('PATH_COMPONENTS', PATH_ROOT . 'Components/');
 define('PATH_TEMPORARY', PATH_ROOT . 'Temporary/');
-define('PATH_ZERO', PATH_ROOT . 'Zero/');
+define('PATH_ZERO', PATH_COMPONENTS . 'fbenard/zero/');
 
 
 // Dependencies
@@ -28,8 +28,6 @@ require_once(PATH_ZERO . 'Services/Managers/ErrorManager.php');
 require_once(PATH_ZERO . 'Services/Managers/ExceptionManager.php');
 require_once(PATH_ZERO . 'Services/Managers/ServiceManager.php');
 require_once(PATH_ZERO . 'Shortcuts.php');
-
-require_once(PATH_COMPONENTS . 'autoload.php');
 
 
 // Setup error/exception handlers
