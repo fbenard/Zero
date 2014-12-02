@@ -5,6 +5,11 @@
 namespace Zero\Services\Managers;
 
 
+// Dependencies
+
+require_once(PATH_ZERO . 'Services/Factories/ServiceFactory.php');
+
+
 /**
  *
  */
@@ -78,39 +83,16 @@ class ServiceManager
 		{
 			//
 
-			if (array_key_exists($serviceCode, $this->_definitions) === false)
-			{
-				e(EXCEPTION_SERVICE_NOT_FOUND);
-			}
+			$factory = new \Zero\Services\Factories\ServiceFactory();
 
 
 			//
 
-			$definition = $this->_definitions[$serviceCode];
-
-			
-			//
-
-			$path = PATH_ROOT . $definition['path'] . '.php';
-			$className = $definition['classname'];
-
-
-			//
-
-			if (file_exists($path) === false)
-			{
-				e(EXCEPTION_SERVICE_NOT_FOUND);
-			}
-			
-			
-			//
-			
-			require_once($path);
-
-
-			// Create the service
-			
-			$this->_services[$serviceCode] = new $className();
+			$this->_services[$serviceCode] = $factory->buildService
+			(
+				$serviceCode,
+				$this->_definitions
+			);
 		}
 		
 		
