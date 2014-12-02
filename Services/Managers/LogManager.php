@@ -65,7 +65,7 @@ class LogManager
 			$nbItems = 1;
 		}
 
-		$progress = round($nbItemsCompleted / $nbItems * 100, 2);
+		$progress = round($nbItemsCompleted / $nbItems * 100, 0);
 
 
 		//
