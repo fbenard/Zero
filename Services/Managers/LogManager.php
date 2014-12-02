@@ -65,7 +65,7 @@ class LogManager
 			$nbItems = 1;
 		}
 
-		$progress = $nbItemsCompleted / $nbItems;
+		$progress = round($nbItemsCompleted / $nbItems * 100, 2);
 
 
 		//
@@ -99,7 +99,7 @@ class LogManager
 			"\033[1;31m",
 			str_pad(null, 10 - (round($progress / 10, 0)), '='),
 			"\033[0;0m ",
-			round($progress * 100, 2) . '%',
+			$progress . '%',
 			' --- ',
 			$nbItemsCompleted . '/' . $nbItems
 		);
