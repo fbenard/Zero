@@ -1,31 +1,29 @@
 {
-    "name": "fbenard/zero",
-    "type": "library",
-    "description": "Micro PHP Framework",
-    "keywords": ["micro", "php", "framework"],
-    "homepage": "http://github.com/fbenard/Zero",
-    "license": "MIT",
-    "authors":
-    [
-        {
-            "name": "Fabien BÉNARD",
-            "email": "fb.spam@me.com",
-            "homepage": "http://fabienbenard.com",
-            "role": "Developer"
-        }
-    ],
-    "require":
-    {
-        "php": ">=5.4.0",
-        "guzzlehttp/guzzle": "5.*",
-        "kriswallsmith/assetic": "1.2.*@dev",
-        "illuminate/database": "5.0.*@dev"
-    },
-    "autoload":
-    {
-        "psr-0":
-        {
-            "Zero": "src"
-        }
-    }
+	"name": "fbenard/zero",
+	"type": "library",
+	"description": "Micro PHP Framework",
+	"keywords": ["micro", "php", "framework"],
+	"homepage": "http://github.com/fbenard/Zero",
+	"license": "MIT",
+	"authors":
+	[
+		{
+			"name": "Fabien BÉNARD",
+			"email": "fb.spam@me.com",
+			"homepage": "http://fabienbenard.com",
+			"role": "Developer"
+		}
+	],
+	"require":
+	{
+		"php": ">=5.4.0",
+		"guzzlehttp/guzzle": "5.*"
+	},
+	"autoload":
+	{
+		"psr-4":
+		{
+			"Zero": ""
+		}
+	}
 }
