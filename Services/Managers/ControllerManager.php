@@ -28,42 +28,10 @@ class ControllerManager
 
 		$definition = service('manager/route')->_route;
 
-		$path = PATH_ROOT . $definition['controller'] . '.php';
-		$className = str_replace
-		(
-			[
-				'/Application/',
-				'/'
-			],
-			[
-				'\\Goloboard\\',
-				'\\'
-			],
-			$definition['controller']
-		);
-
-
-		//
-
-		if (file_exists($path) === false)
-		{
-			e(EXCEPTION_CONTROLLER_NOT_FOUND);
-		}
-
-
-		//
-
-		require_once($path);
-
-
-		//
 		
-		$reflection = new \ReflectionClass($className);
+		//
 
-		if ($reflection->isInstantiable() === false)
-		{
-			e(EXCEPTION_CONTROLLER_NOT_FOUND);
-		}
+		$this->_controller = service($definition['service']);
 
 
 		//
