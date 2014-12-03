@@ -1,7 +1,9 @@
 {
 	"name": "fbenard/zero",
-	"type": "library",
 	"description": "Micro PHP Framework",
+	"version": "",
+	"time": "",
+	"type": "library",
 	"keywords": ["micro", "php", "framework"],
 	"homepage": "http://github.com/fbenard/Zero",
 	"license": "MIT",
@@ -14,11 +16,18 @@
 			"role": "Developer"
 		}
 	],
+	"support":
+	{
+		"email": "fb.spam@me.com",
+		"issues": "http://github.com/fbenard/zero/issues",
+		"source": "http://github.com/fbenard/zero"
+	},
 	"require":
 	{
 		"php": ">=5.4.0",
 		"guzzlehttp/guzzle": "5.*"
 	},
+	"minimum-stability": "dev",
 	"autoload":
 	{
 		"psr-4":
