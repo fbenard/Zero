@@ -61,6 +61,25 @@ class ControllerManager
 
 	public function run()
 	{
+		//
+
+		$definition = service('manager/route')->_route;
+
+
+		//
+
+		foreach ($definition['pre'] as $pre)
+		{
+			$preFragments = explode('::', $pre);
+
+			$serviceCode = $preFragments[0];
+			$methodName = $preFragments[1];
+
+			$service = service($serviceCode);
+			$service->$methodName();
+		}
+
+		
 		// Clear buffer
 
 		service('manager/buffer')->clearBuffer();
@@ -78,6 +97,20 @@ class ControllerManager
 		);
 
 
+		//
+
+		foreach ($definition['post'] as $post)
+		{
+			$postFragments = explode('::', $post);
+			
+			$serviceCode = $postFragments[0];
+			$methodName = $postFragments[1];
+
+			$service = service($serviceCode);
+			$service->$methodName();
+		}
+
+		
 		// Push the response
 		
 		//$this->_controller->response->push($output);
