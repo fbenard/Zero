@@ -100,7 +100,11 @@ class HttpHelper
 
 		// Did it succeed?
 
-		if ((int)($statusCode) !== (int)($response->getStatusCode()))
+		if
+		(
+			(is_null($statusCode) === false) &&
+			((int)($statusCode) !== (int)($response->getStatusCode()))
+		)
 		{
 			e
 			(
