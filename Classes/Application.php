@@ -124,17 +124,13 @@ class Application
 	
 	public function isRunningCli()
 	{
-		if
-		(
-			(array_key_exists('HTTP_HOST', $_SERVER) === true) &&
-			(empty($_SERVER['HTTP_HOST']) === false)
-		)
+		if (php_sapi_name() === 'cli')
 		{
-			return false;
+			return true;
 		}
 		else
 		{
-			return true;
+			return false;
 		}
 	}
 	
