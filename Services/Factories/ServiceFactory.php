@@ -27,13 +27,7 @@ class ServiceFactory
 
 		//
 
-		$definition = $definitions[$serviceCode];
-
-		
-		//
-
-		$path = PATH_ROOT . $definition['path'] . '.php';
-		$className = $definition['classname'];
+		$className = $definitions[$serviceCode];
 
 
 		//
