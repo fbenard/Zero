@@ -115,7 +115,6 @@ class Application
 		service('manager/controller')->initialize();
 		service('manager/preference')->initialize();
 		service('manager/session')->initialize();
-		//service('manager/user')->initialize();
 	}
 	
 	
