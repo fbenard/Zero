@@ -51,7 +51,9 @@ class RouteManager
 				[
 					'action' => 'index',
 					'arguments' => [],
-					'controller' => null
+					'post' => [],
+					'pre' => [],
+					'service' => null
 				],
 				$definition
 			);
