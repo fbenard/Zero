@@ -20,10 +20,6 @@ define('PATH_ZERO', PATH_COMPONENTS . 'fbenard/zero/');
 // Dependencies
 
 require_once(PATH_COMPONENTS . 'autoload.php');
-
-require_once(PATH_ZERO . 'Services/Managers/ErrorManager.php');
-require_once(PATH_ZERO . 'Services/Managers/ExceptionManager.php');
-require_once(PATH_ZERO . 'Services/Managers/ServiceManager.php');
 require_once(PATH_ZERO . 'Shortcuts.php');
 
 
@@ -31,22 +27,6 @@ require_once(PATH_ZERO . 'Shortcuts.php');
 
 set_error_handler('\\Zero\\Services\\Managers\\ErrorManager::onError', E_ALL | E_STRICT);
 set_exception_handler('\\Zero\\Services\\Managers\\ExceptionManager::onException');
-
-
-// Check whether Core/Application is available
-
-$pathToApplication = getcwd() . '/Components/fbenard/zero/Classes/Application.php';
-
-if (file_exists($pathToApplication) === false)
-{
-	print("ERROR: Zero is missing.\n");
-	exit(1);
-}
-
-
-// Dependencies
-
-require_once($pathToApplication);
 
 
 // Start the application

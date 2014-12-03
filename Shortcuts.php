@@ -114,7 +114,6 @@ function redirect($url)
 
 function render($viewCode, $viewArguments = null)
 {
-	require_once(PATH_ZERO . 'Classes/View.php');
 	$view = new \Zero\Classes\View();
 	print $view->render($viewCode, $viewArguments);
 }

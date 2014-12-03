@@ -36,7 +36,6 @@ class ConstantManager
 			{
 				require_once($pathToFile);
 			}
-			
 		}
 	}
 	

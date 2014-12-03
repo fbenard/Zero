@@ -5,11 +5,6 @@
 namespace Zero\Services\Renderers;
 
 
-// Dependencies
-
-require_once(PATH_ZERO . 'Services/Renderers/ErrorRenderer.php');
-
-
 /**
  *
  */

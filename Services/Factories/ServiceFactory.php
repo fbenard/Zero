@@ -37,19 +37,6 @@ class ServiceFactory
 
 
 		//
-
-		if (file_exists($path) === false)
-		{
-			e(EXCEPTION_SERVICE_NOT_FOUND);
-		}
-		
-		
-		//
-		
-		require_once($path);
-
-
-		//
 		
 		$reflection = new \ReflectionClass($className);
 

@@ -5,11 +5,6 @@
 namespace Zero\Services\Managers;
 
 
-// Dependencies
-
-require_once(PATH_ZERO . 'Services/Factories/ServiceFactory.php');
-
-
 /**
  *
  */

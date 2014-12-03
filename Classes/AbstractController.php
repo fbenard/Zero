@@ -5,11 +5,6 @@
 namespace Zero\Classes;
 
 
-// Dependencies
-
-require_once(PATH_ZERO . 'Classes/View.php');
-
-
 /**
  *
  */
