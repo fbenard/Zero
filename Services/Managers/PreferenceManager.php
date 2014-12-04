@@ -102,7 +102,6 @@ class PreferenceManager
 				{
 					if (file_exists($path) === true)
 					{
-						dlog($path);
 						require($path);
 					}
 				}
