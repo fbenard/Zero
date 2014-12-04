@@ -24,207 +24,94 @@ class PreferenceManager
 	{
 		$this->_preferences = [];
 	}
-
-
-	/**
-	 *
-	 */
-
-	public function addPreferenceValue($preferenceCode, $preferenceValue, $isAppended = true, $isLocked = false)
-	{
-		//
-
-		$currentPreferenceValue = $this->getPreferenceValue($preferenceCode);
-
-		
-		//
-
-		if (is_null($currentPreferenceValue) === true)
-		{
-			$currentPreferenceValue = array();
-		}
-
-
-		//
-
-		if (is_array($currentPreferenceValue) === false)
-		{
-			e
-			(
-				EXCEPTION_PREFERENCE_NOT_AN_ARRAY,
-				array
-				(
-					'preferenceCode' => $preferenceCode,
-					'preferenceValue' => $currentPreferenceValue
-				)
-			);
-		}
-
-
-		//
-
-		if (in_array($preferenceValue, $currentPreferenceValue) === true)
-		{
-			return;
-		}
-
-
-		//
-
-		if ($isAppended === true)
-		{
-			array_push($currentPreferenceValue, $preferenceValue);
-		}
-		else
-		{
-			array_unshift($currentPreferenceValue, $preferenceValue);
-		}
-
-
-		//
-
-		$this->setPreferenceValue($preferenceCode, $currentPreferenceValue, $isLocked);
-	}
 	
 	
 	/**
 	 *
 	 */
 	
-	private function getPreference($preferenceCode)
+	public function getPreference($preferenceCode)
 	{
-		// Have we defined this preference?
-		
-		if (array_key_exists($preferenceCode, $this->_preferences) === false)
-		{
-			return;
-		}
-		
-		
-		// Get a reference to the preference
-		
-		$preference = &$this->_preferences[$preferenceCode];
-		
-		
-		return $preference;
-	}
-	
-	
-	/**
-	 *
-	 */
-	
-	public function getPreferenceValue($preferenceCode)
-	{
-		// Have we defined this preference?
-		
-		$preference = $this->getPreference($preferenceCode);
-		
-		
 		//
 
 		if
 		(
-			(is_array($preference) === false) ||
-			(array_key_exists('value', $preference) === false)
+			(array_key_exists($preferenceCode, $this->_preferences) === false) ||
+			(is_array($this->_preferences[$preferenceCode]) === false) ||
+			(array_key_exists('value', $this->_preferences[$preferenceCode]) === false)
 		)
 		{
 			return;
 		}
 		
 		
-		return $preference['value'];
+		//
+
+		$result = $this->_preferences[$preferenceCode]['value'];
+
+
+		return $result;
 	}
 	
 	
 	/**
-	 * Initializes the preference manager
 	 *
-	 * @param	array	$pathsToExtensions 	Paths to extensions
 	 */
 	
 	public function initialize()
 	{
 		//
 
-		$pathsToExtensions =
+		$pathToExtensions =
 		[
 			PATH_ZERO,
 			PATH_APPLICATION
 		];
-		
+
 		
 		// Define the number of passes
 		
-		$nbPasses = count($pathsToExtensions) - 1;
+		$nbPasses = count($pathToExtensions) - 1;
 
 
 		// Perform n passes
 		
 		for ($i = 0; $i < $nbPasses; $i++)
 		{
-			// Load main preferences first
-			
-			foreach ($pathsToExtensions as $pathToExtension)
+			foreach ($pathToExtensions as $pathToExtension)
 			{
-				$this->loadPreferences($pathToExtension, false);
+				// Prepare global path
+
+				$path = $pathToExtension . 'Preferences/Preferences';
+
+
+				// Build paths
+			
+				$paths =
+				[
+					$path . '.php',
+					$path . '.' . service('manager/environment')->_environment . '.php',
+					$path . '.' . service('manager/universe')->_universe . '.php',
+					$path . '.' . service('manager/environment')->_environment . '.' . service('manager/universe')->_universe . '.php'
+				];
+
+				
+				// Load each path
+
+				foreach ($paths as $path)
+				{
+					if (file_exists($path) === true)
+					{
+						dlog($path);
+						require($path);
+					}
+				}
 			}
 			
 			
-			// Parse all extensions for environment-specific preferences
+			// End of pass, remove the first extension
 			
-			foreach ($pathsToExtensions as $pathToExtension)
-			{
-				$this->loadPreferences($pathToExtension, true);
-			}
-			
-			
-			// Make sure we remove the first extension, this ensures we progressively eliminate extensions as passes go
-			
-			array_shift($pathsToExtensions);
-		}
-	}
-	
-
-	/**
-	 *
-	 */
-
-	public function loadPreferences($pathToExtension, $useEnvironmentName = false)
-	{
-		// Prepare standard path
-
-		$pathToPreference = $pathToExtension . 'Preferences/Preferences';
-
-
-		// Add environment if necessary
-
-		if ($useEnvironmentName === true)
-		{
-			$pathToPreference .= '.' . service('manager/environment')->_environment;
-		}
-
-
-		// Add universe, if any
-
-		$universe = service('manager/universe')->_universe;
-
-		if (empty($universe) === false)
-		{
-			// Load Preferences.Environment.Universe.php
-			
-			if (file_exists($pathToPreference . '.' . $universe . '.php') === true)
-			{
-				require($pathToPreference . '.' . $universe . '.php');
-			}
-		}
-		
-		
-		// Load Preferences.Environment.php
-	
-		if (file_exists($pathToPreference . '.php') === true)
-		{
-			require($pathToPreference . '.php');
+			array_shift($pathToExtensions);
 		}
 	}
 	
@@ -233,21 +120,16 @@ class PreferenceManager
 	 *
 	 */
 	
-	public function setPreferenceValue($preferenceCode, $preferenceValue, $isLocked = false)
+	public function setPreference($preferenceCode, $preferenceValue, $isLocked = false)
 	{
-		//
-		
-		$preference = $this->getPreference($preferenceCode);
-		
-		
-
 		//
 
 		if
 		(
-			(is_array($preference) === true) &&
-			(array_key_exists('isLocked', $preference) === true) &&
-			($preference['isLocked'] === true)
+			(array_key_exists($preferenceCode, $this->_preferences) === true) &&
+			(is_array($this->_preferences[$preferenceCode]) === true) &&
+			(array_key_exists('isLocked', $this->_preferences[$preferenceCode]) === true) &&
+			($this->_preferences[$preferenceCode]['isLocked'] === true)
 		)
 		{
 			return;
@@ -266,11 +148,13 @@ class PreferenceManager
 		}
 
 		
-		// Set the preference value
+		// Set the preference
 		
-		$this->_preferences[$preferenceCode] = array();
-		$this->_preferences[$preferenceCode]['value'] = $preferenceValue;
-		$this->_preferences[$preferenceCode]['isLocked'] = $isLocked;
+		$this->_preferences[$preferenceCode] =
+		[
+			'value' => $preferenceValue,
+			'isLocked' => $isLocked
+		];
 	}
 }
 

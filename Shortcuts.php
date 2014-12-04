@@ -88,11 +88,11 @@ function pref($preferenceCode, $preferenceValue = null, $isLocked = false)
 {
 	if (func_num_args() === 1)
 	{
-		return service('manager/preference')->getPreferenceValue($preferenceCode);
+		return service('manager/preference')->getPreference($preferenceCode);
 	}
 	else
 	{
-		service('manager/preference')->setPreferenceValue($preferenceCode, $preferenceValue, $isLocked);
+		service('manager/preference')->setPreference($preferenceCode, $preferenceValue, $isLocked);
 	}
 }
 
