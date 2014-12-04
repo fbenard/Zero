@@ -17,7 +17,7 @@ class SessionManager
 	
 	public function initialize()
 	{
-		//
+		// No session in CLI
 
 		if (app()->isRunningCli() === true)
 		{
@@ -25,7 +25,7 @@ class SessionManager
 		}
 
 
-		//
+		// Extend duration of session to a week
 
 		$duration = 7 * 24 * 60 * 60;
 
@@ -45,21 +45,21 @@ class SessionManager
 	
 	public function reset()
 	{
-		//
-		
+		// No session in CLI
+
 		if (app()->isRunningCli() === true)
 		{
 			return;
 		}
 
 
-		//
+		// Destroy the session
 
 		session_unset();
 		session_destroy();
 		
 		
-		//
+		// Destroy the cookie
 
 		setcookie('sessionKey', '');
 	}
