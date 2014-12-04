@@ -256,11 +256,11 @@ class PreferenceManager
 
 		// Handle PRE special cases
 
-		if ($preferenceCode === '[Zero]/localization/language')
+		if ($preferenceCode === 'fbenard/zero/localization/language')
 		{
 			setlocale(LC_ALL, $preferenceValue);
 		}
-		else if ($preferenceCode === '[Zero]/localization/timezone')
+		else if ($preferenceCode === 'fbenard/zero/localization/timezone')
 		{
 			date_default_timezone_set($preferenceValue);
 		}

@@ -2,7 +2,7 @@
 
 // Culture
 
-pref('[Zero]/culture/language', 'en');
-pref('[Zero]/culture/timezone', 'UTC');
+pref('fbenard/zero/culture/language', 'en');
+pref('fbenard/zero/culture/timezone', 'UTC');
 
 ?>
