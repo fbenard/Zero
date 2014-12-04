@@ -30,9 +30,9 @@ class ConstantManager
 
 		foreach ($paths as $path)
 		{
-			$pathsToFiles = service('helper/file')->listFiles($path . 'Constants/', '*.php');
+			$pathToFiles = service('helper/file')->listFiles($path . 'Constants/', '*.php');
 			
-			foreach ($pathsToFiles as $pathToFile)
+			foreach ($pathToFiles as $pathToFile)
 			{
 				require_once($pathToFile);
 			}
