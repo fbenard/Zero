@@ -22,8 +22,8 @@ class LogRenderer
 
 	public function __construct()
 	{
-		$this->_templates = array
-		(
+		$this->_templates =
+		[
 			'log/' => "%{message}",
 			'log/error' => "*** %{message}",
 			'log/information' => "=== %{message}",
@@ -34,7 +34,7 @@ class LogRenderer
 			'print/information' => "\033[1;36m=== %{message}\033[0;0m%{pads}\n",
 			'print/progress' => "%{message}%{pads}\r",
 			'print/success' => "\033[1;32m=== %{message}\033[0;0m%{pads}\n"
-		);
+		];
 	}
 
 

@@ -92,8 +92,8 @@ class LogManager
 
 		//
 
-		$outputFragments = array
-		(
+		$outputFragments =
+		[
 			"\033[1;32m",
 			str_pad(null, round($progress / 10, 0), '='),
 			"\033[1;31m",
@@ -102,7 +102,7 @@ class LogManager
 			$progress . '%',
 			' --- ',
 			$nbItemsCompleted . '/' . $nbItems
-		);
+		];
 
 
 		//
