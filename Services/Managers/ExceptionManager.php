@@ -17,7 +17,7 @@ class ExceptionManager
 	
 	public static function onException($exception)
 	{
-		//
+		// Build an exception renderer
 
 		$exceptionRenderer = new \Zero\Services\Renderers\ExceptionRenderer();
 

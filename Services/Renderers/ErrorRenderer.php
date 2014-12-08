@@ -87,6 +87,23 @@ class ErrorRenderer
 		}
 		
 		
+		// Display context
+
+		if
+		(
+			(is_array($errorContext) === true) &&
+			(empty($errorContext) === false)
+		)
+		{
+			print("\n\033[1;37mContext:" . "\n");
+			
+			foreach ($errorContext as $key => $value)
+			{
+				print("\033[0;0m- " . $key . ' = "' . substr(print_r($value, true), 0, 100) . '"' . "\n");
+			}
+		}
+		
+		
 		// Display trace
 
 		if
@@ -95,7 +112,7 @@ class ErrorRenderer
 			(empty($errorTraces) === false)
 		)
 		{
-			print("\033[1;37mTrace:" . "\n");
+			print("\n\033[1;37mTrace:" . "\n");
 			
 			foreach ($errorTraces as $errorTrace)
 			{
