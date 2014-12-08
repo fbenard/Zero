@@ -31,6 +31,6 @@ set_exception_handler('\\Zero\\Services\\Managers\\ExceptionManager::onException
 
 // Start the application
 
-app()->run();
+\z\app()->run();
 
 ?>

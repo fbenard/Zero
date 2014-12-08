@@ -103,7 +103,7 @@ class RouteManager
 
 		//
 
-		if (app()->isRunningCli() === true)
+		if (\z\app()->isRunningCli() === true)
 		{
 			global $argv;
 			$this->_uri = '/cli/' . $argv[1];
@@ -188,7 +188,7 @@ class RouteManager
 
 		if (is_null($this->_route) === true)
 		{
-			e(EXCEPTION_ROUTE_NOT_FOUND);
+			\z\e(EXCEPTION_ROUTE_NOT_FOUND);
 		}
 	}
 }

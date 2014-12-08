@@ -90,9 +90,9 @@ class PreferenceManager
 				$paths =
 				[
 					$path . '.php',
-					$path . '.' . service('manager/environment')->_environment . '.php',
-					$path . '.' . service('manager/universe')->_universe . '.php',
-					$path . '.' . service('manager/environment')->_environment . '.' . service('manager/universe')->_universe . '.php'
+					$path . '.' . \z\service('manager/environment')->_environment . '.php',
+					$path . '.' . \z\service('manager/universe')->_universe . '.php',
+					$path . '.' . \z\service('manager/environment')->_environment . '.' . \z\service('manager/universe')->_universe . '.php'
 				];
 
 				

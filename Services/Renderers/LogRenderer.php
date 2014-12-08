@@ -105,7 +105,7 @@ class LogRenderer
 
 		if
 		(
-			(app()->isRunningCli() === false) ||
+			(\z\app()->isRunningCli() === false) ||
 			($this->isTerminal() === false)
 		)
 		{

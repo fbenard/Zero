@@ -17,7 +17,7 @@ class LogManager
 
 	public function log($message)
 	{
-		service('renderer/log')->renderLog
+		\z\service('renderer/log')->renderLog
 		(
 			$message
 		);
@@ -30,7 +30,7 @@ class LogManager
 
 	public function logError($message)
 	{
-		service('renderer/log')->renderLog
+		\z\service('renderer/log')->renderLog
 		(
 			$message,
 			'error'
@@ -44,7 +44,7 @@ class LogManager
 
 	public function logInformation($message)
 	{
-		service('renderer/log')->renderLog
+		\z\service('renderer/log')->renderLog
 		(
 			$message,
 			'information'
@@ -130,7 +130,7 @@ class LogManager
 
 		//
 
-		service('renderer/log')->renderLog
+		\z\service('renderer/log')->renderLog
 		(
 			$message,
 			'progress'
@@ -144,7 +144,7 @@ class LogManager
 
 	public function logSuccess($message)
 	{
-		service('renderer/log')->renderLog
+		\z\service('renderer/log')->renderLog
 		(
 			$message,
 			'success'

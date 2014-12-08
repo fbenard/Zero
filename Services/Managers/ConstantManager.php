@@ -30,7 +30,7 @@ class ConstantManager
 
 		foreach ($paths as $path)
 		{
-			$pathToFiles = service('helper/file')->listFiles($path . 'Constants/', '*.php');
+			$pathToFiles = \z\service('helper/file')->listFiles($path . 'Constants/', '*.php');
 			
 			foreach ($pathToFiles as $pathToFile)
 			{

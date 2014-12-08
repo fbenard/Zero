@@ -1,5 +1,10 @@
 <?php
 
+// Namespace
+
+namespace z;
+
+
 /**
  *
  */
@@ -16,7 +21,7 @@ function app()
 
 function cons($constantName, $constantValue = null)
 {
-	return service('manager/constant')->setConstant($constantName, $constantValue);
+	return \z\service('manager/constant')->setConstant($constantName, $constantValue);
 }
 
 
@@ -26,7 +31,7 @@ function cons($constantName, $constantValue = null)
 
 function dlog($message)
 {
-	service('manager/log')->log($message);
+	\z\service('manager/log')->log($message);
 }
 
 
@@ -36,7 +41,7 @@ function dlog($message)
 
 function dloge($message)
 {
-	service('manager/log')->logError($message);
+	\z\service('manager/log')->logError($message);
 }
 
 
@@ -46,7 +51,7 @@ function dloge($message)
 
 function dlogi($message)
 {
-	service('manager/log')->logInformation($message);
+	\z\service('manager/log')->logInformation($message);
 }
 
 
@@ -56,7 +61,7 @@ function dlogi($message)
 
 function dlogp($nbItemsRemaining, $nbItems, &$timeOfStart, $message = null)
 {
-	service('manager/log')->logProgress($nbItemsRemaining, $nbItems, $timeOfStart, $message);
+	\z\service('manager/log')->logProgress($nbItemsRemaining, $nbItems, $timeOfStart, $message);
 }
 
 
@@ -66,7 +71,7 @@ function dlogp($nbItemsRemaining, $nbItems, &$timeOfStart, $message = null)
 
 function dlogs($message)
 {
-	service('manager/log')->logSuccess($message);
+	\z\service('manager/log')->logSuccess($message);
 }
 
 
@@ -74,9 +79,9 @@ function dlogs($message)
  *
  */
 
-function e($exceptionCode)
+function e($exceptionCode, $exceptionContext)
 {
-	throw new \Exception($exceptionCode);
+	throw new \Zero\Classes\Exception($exceptionCode, $exceptionContext);
 }
 
 
@@ -88,11 +93,11 @@ function pref($preferenceCode, $preferenceValue = null, $isLocked = false)
 {
 	if (func_num_args() === 1)
 	{
-		return service('manager/preference')->getPreference($preferenceCode);
+		return \z\service('manager/preference')->getPreference($preferenceCode);
 	}
 	else
 	{
-		service('manager/preference')->setPreference($preferenceCode, $preferenceValue, $isLocked);
+		\z\service('manager/preference')->setPreference($preferenceCode, $preferenceValue, $isLocked);
 	}
 }
 
@@ -125,7 +130,7 @@ function render($viewCode, $viewArguments = null)
 
 function service($serviceCode)
 {
-	return app()->_serviceManager->getService($serviceCode);
+	return \z\app()->_serviceManager->getService($serviceCode);
 }
 
 ?>

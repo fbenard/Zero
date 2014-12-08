@@ -33,7 +33,7 @@ abstract class AbstractController
 
 		//
 
-		if (app()->isRunningCli() === false)
+		if (\z\app()->isRunningCli() === false)
 		{
 			$headers = apache_request_headers();
 			
@@ -51,7 +51,7 @@ abstract class AbstractController
 
 	protected function redirect($url)
 	{
-		redirect($url);
+		\z\redirect($url);
 	}
 
 

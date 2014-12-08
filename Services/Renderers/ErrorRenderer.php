@@ -19,7 +19,7 @@ class ErrorRenderer
 	{
 		// Rendering the error (GUI / CLI)
 		
-		if (app()->isRunningCli() === true)
+		if (\z\app()->isRunningCli() === true)
 		{
 			self::renderErrorCli
 			(

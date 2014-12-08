@@ -26,7 +26,7 @@ class EnvironmentManager
 
 		$environment = 'Prod';
 		
-		if (app()->isRunningCli() === true)
+		if (\z\app()->isRunningCli() === true)
 		{
 			global $argv;
 			

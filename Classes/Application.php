@@ -77,13 +77,13 @@ class Application
 
 		// Initialize managers
 
-		service('manager/constant')->initialize();
-		service('manager/universe')->initialize();
-		service('manager/environment')->initialize();
-		service('manager/route')->initialize();
-		service('manager/controller')->initialize();
-		service('manager/preference')->initialize();
-		service('manager/session')->initialize();
+		\z\service('manager/constant')->initialize();
+		\z\service('manager/universe')->initialize();
+		\z\service('manager/environment')->initialize();
+		\z\service('manager/route')->initialize();
+		\z\service('manager/controller')->initialize();
+		\z\service('manager/preference')->initialize();
+		\z\service('manager/session')->initialize();
 	}
 	
 	
@@ -117,7 +117,7 @@ class Application
 		
 		// Run the controller manager
 
-		service('manager/controller')->run();
+		\z\service('manager/controller')->run();
 		
 		
 		// Finalize the application

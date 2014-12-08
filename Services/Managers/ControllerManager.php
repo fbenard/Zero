@@ -26,12 +26,12 @@ class ControllerManager
 	{
 		//
 
-		$definition = service('manager/route')->_route;
+		$definition = \z\service('manager/route')->_route;
 
 		
 		//
 
-		$this->_controller = service($definition['service']);
+		$this->_controller = \z\service($definition['service']);
 
 
 		//
@@ -40,7 +40,7 @@ class ControllerManager
 
 		if (method_exists($this->_controller, $this->_action) === false)
 		{
-			e(EXCEPTION_CONTROLLER_ACTION_NOT_FOUND);
+			\z\e(EXCEPTION_CONTROLLER_ACTION_NOT_FOUND);
 		}
 
 
@@ -63,7 +63,7 @@ class ControllerManager
 	{
 		//
 
-		$definition = service('manager/route')->_route;
+		$definition = \z\service('manager/route')->_route;
 
 
 		//
@@ -75,14 +75,14 @@ class ControllerManager
 			$serviceCode = $preFragments[0];
 			$methodName = $preFragments[1];
 
-			$service = service($serviceCode);
+			$service = \z\service($serviceCode);
 			$service->$methodName();
 		}
 
 		
 		// Clear buffer
 
-		service('manager/buffer')->clearBuffer();
+		\z\service('manager/buffer')->clearBuffer();
 
 
 		// Run the controller
@@ -106,7 +106,7 @@ class ControllerManager
 			$serviceCode = $postFragments[0];
 			$methodName = $postFragments[1];
 
-			$service = service($serviceCode);
+			$service = \z\service($serviceCode);
 			$service->$methodName();
 		}
 

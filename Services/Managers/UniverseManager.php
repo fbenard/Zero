@@ -26,7 +26,7 @@ class UniverseManager
 
 		$universe = 'splio';
 		
-		if (app()->isRunningCli() === true)
+		if (\z\app()->isRunningCli() === true)
 		{
 			global $argv;
 
