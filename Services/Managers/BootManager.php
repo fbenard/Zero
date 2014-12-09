@@ -101,12 +101,7 @@ class BootManager
 
 		if (empty($this->_environment) === true)
 		{
-			e(EXCEPTION_ENVIRONMENT_NOT_VALID);
-		}
-
-		if (empty($this->_universe) === true)
-		{
-			e(EXCEPTION_UNIVERSE_NOT_VALID);
+			\z\e(EXCEPTION_ENVIRONMENT_NOT_VALID);
 		}
 	}
 }
