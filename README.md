@@ -1,7 +1,7 @@
 Zero
 ====
 
-Zero is a micro-framework written for PHP applications.
+Zero is a micro-framework written in PHP, for PHP applications.
 
 ![Build status](https://circleci.com/gh/fbenard/Zero/tree/master.svg?style=shield&circle-token=78096b1f781cc4fccd2d99a7d17328b79dbf73ce)
 
