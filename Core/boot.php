@@ -20,7 +20,7 @@ define('PATH_ZERO', PATH_COMPONENTS . 'fbenard/zero/');
 // Dependencies
 
 require_once(PATH_COMPONENTS . 'autoload.php');
-require_once(PATH_ZERO . 'shortcuts.php');
+require_once(PATH_ZERO . 'Core/shortcuts.php');
 
 
 // Setup error/exception handlers
