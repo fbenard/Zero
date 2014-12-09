@@ -79,7 +79,7 @@ function dlogs($message)
  *
  */
 
-function e($exceptionCode, $exceptionContext)
+function e($exceptionCode, $exceptionContext = null)
 {
 	throw new \Zero\Classes\Exception($exceptionCode, $exceptionContext);
 }
