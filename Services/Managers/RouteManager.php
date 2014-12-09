@@ -34,17 +34,17 @@ class RouteManager
 
 	public function initialize()
 	{
-		//
+		// Load routes
 
 		$rawDefinitions = file_get_contents(PATH_APPLICATION . 'Preferences/Routes.json');
 		$this->_definitions = json_decode($rawDefinitions, true);
 
 
-		//
+		// For each route
 
 		foreach ($this->_definitions as $uri => &$definition)
 		{
-			//
+			// Make sure the route definition is valid
 
 			$definition = array_merge
 			(
@@ -101,7 +101,7 @@ class RouteManager
 		}
 
 
-		//
+		// Build the URI
 
 		if (\z\app()->isRunningCli() === true)
 		{
@@ -114,7 +114,7 @@ class RouteManager
 		}
 
 
-		//
+		// Remove empty URI fragments
 
 		$uriFragments = explode('/', $this->_uri);
 
