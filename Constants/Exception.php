@@ -12,6 +12,11 @@
 \z\cons('EXCEPTION_CONTROLLER_ACTION_NOT_FOUND');
 
 
+// Environment
+
+\z\cons('EXCEPTION_ENVIRONMENT_NOT_VALID');
+
+
 // Files
 
 \z\cons('EXCEPTION_FILE_NOT_FOUND');
@@ -46,5 +51,10 @@
 
 \z\cons('EXCEPTION_VARIABLE_NOT_FOUND');
 \z\cons('EXCEPTION_VARIABLE_PATH_NOT_VALID');
+
+
+// Universe
+
+\z\cons('EXCEPTION_UNIVERSE_NOT_VALID');
 
 ?>
