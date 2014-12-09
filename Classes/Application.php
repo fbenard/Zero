@@ -49,7 +49,7 @@ class Application
 	
 	public static function getInstance()
 	{
-		// Create the application if needed
+		// Create the instance if needed
 		
 		if (is_null(Application::$_instance) === true)
 		{
