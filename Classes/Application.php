@@ -67,16 +67,6 @@ class Application
 	
 	private function initialize()
 	{
-		// Initialize CLI
-
-		if ($this->isRunningCli() === true)
-		{
-			ini_set('memory_limit', '-1');
-		}
-
-
-		// Initialize managers
-
 		\z\service('manager/constant')->initialize();
 		\z\service('manager/boot')->initialize();
 		\z\service('manager/route')->initialize();

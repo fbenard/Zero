@@ -60,6 +60,14 @@ class PreferenceManager
 	
 	public function initialize()
 	{
+		// Initialize CLI
+
+		if (\z\app()->isRunningCli() === true)
+		{
+			ini_set('memory_limit', '-1');
+		}
+
+
 		//
 
 		$pathToExtensions =
