@@ -45,6 +45,7 @@
 // Services
 
 \z\cons('EXCEPTION_SERVICE_NOT_FOUND');
+\z\cons('EXCEPTION_SERVICE_NOT_INSTANTIABLE');
 
 
 // Variables

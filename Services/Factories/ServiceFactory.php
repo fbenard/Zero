@@ -21,7 +21,14 @@ class ServiceFactory
 
 		if (array_key_exists($serviceCode, $definitions) === false)
 		{
-			\z\e(EXCEPTION_SERVICE_NOT_FOUND);
+			\z\e
+			(
+				EXCEPTION_SERVICE_NOT_FOUND,
+				[
+					'serviceCode' => $serviceCode,
+					'definitions' => $definitions
+				]
+			);
 		}
 
 
@@ -36,7 +43,14 @@ class ServiceFactory
 
 		if ($reflection->isInstantiable() === false)
 		{
-			\z\e(EXCEPTION_SERVICE_NOT_FOUND);
+			\z\e
+			(
+				EXCEPTION_SERVICE_NOT_INSTANTIABLE,
+				[
+					'serviceCode' => $serviceCode,
+					'definitions' => $definitions
+				]
+			);
 		}
 
 
