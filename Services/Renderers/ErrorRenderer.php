@@ -99,7 +99,20 @@ class ErrorRenderer
 			
 			foreach ($errorContext as $key => $value)
 			{
-				print("\033[0;0m- " . $key . ' = "' . substr(print_r($value, true), 0, 100) . '"' . "\n");
+				print("\033[0;0m- " . $key . ' = ');
+
+				if (is_object($value) === true)
+				{
+					print("\033[0;0m" . '"' . get_class($value) . '"' . "\n");
+				}
+				else if (is_array($value) === true)
+				{
+					print("\n\033[0;0m" . print_r($value, true) . "\n");
+				}
+				else
+				{
+					print("\033[0;0m" . '"' . $value . '"' . "\n");
+				}
 			}
 		}
 		
