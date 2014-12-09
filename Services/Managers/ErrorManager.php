@@ -31,8 +31,8 @@ class ErrorManager
 			$errorDescription,
 			$errorFile,
 			$errorLine,
-			debug_backtrace(),
-			$errorContext
+			$errorContext,
+			debug_backtrace()
 		);
 
 
