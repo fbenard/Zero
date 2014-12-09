@@ -188,7 +188,15 @@ class RouteManager
 
 		if (is_null($this->_route) === true)
 		{
-			\z\e(EXCEPTION_ROUTE_NOT_FOUND);
+			\z\e
+			(
+				EXCEPTION_ROUTE_NOT_FOUND,
+				[
+					'uri' => $this->_uri,
+					'route' => $this->_route,
+					'definitions' => array_keys($this->_definitions)
+				]
+			);
 		}
 	}
 }
