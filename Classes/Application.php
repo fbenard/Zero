@@ -78,8 +78,7 @@ class Application
 		// Initialize managers
 
 		\z\service('manager/constant')->initialize();
-		\z\service('manager/universe')->initialize();
-		\z\service('manager/environment')->initialize();
+		\z\service('manager/boot')->initialize();
 		\z\service('manager/route')->initialize();
 		\z\service('manager/controller')->initialize();
 		\z\service('manager/preference')->initialize();
