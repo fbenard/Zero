@@ -18,4 +18,4 @@ TBD.
 
 ## License
 
-The code for Zero is distributed under the terms of the MIT license. See [LICENSE.txt] for the full license.
+The code for Zero is distributed under the terms of the MIT license. See [LICENSE.txt](LICENSE.txt) for the full license.
