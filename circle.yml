@@ -1,3 +1,10 @@
+machine:
+    php:
+        version: 5.4.21
 test:
     override:
-        - phpunit
+        - phpunit --testsuite "classes"
+        - phpunit --testsuite "services/factories"
+        - phpunit --testsuite "services/helpers"
+        - phpunit --testsuite "services/managers"
+        - phpunit --testsuite "services/renderers"
