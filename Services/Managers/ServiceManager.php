@@ -14,6 +14,7 @@ class ServiceManager
 	// Attributes
 
 	private $_definitions = null;
+	private $_factory = null;
 	private $_services = null;
 
 
@@ -24,6 +25,7 @@ class ServiceManager
 	public function __construct()
 	{
 		$this->_definitions = [];
+		$this->_factory = new \Zero\Services\Factories\ServiceFactory();
 		$this->_services = [];
 	}
 
@@ -62,14 +64,10 @@ class ServiceManager
 				$rawDefinitions = file_get_contents($pathToService);
 				$definitions = json_decode($rawDefinitions, true);
 
-				
-				// Store definitions
 
-				$this->_definitions = array_merge
-				(
-					$this->_definitions,
-					$definitions
-				);
+				// Register services
+
+				$this->registerServices($definitions);
 			}
 		}
 	}
@@ -81,26 +79,39 @@ class ServiceManager
 	
 	public function getService($serviceCode = null)
 	{
-		//
+		// If no service code given, return service manager
+
+		if (empty($serviceCode) === true)
+		{
+			return $this;
+		}
+
+
+		// Has the service been retrieved already?
 
 		if (array_key_exists($serviceCode, $this->_services) === false)
 		{
-			//
+			// Build the service
 
-			$factory = new \Zero\Services\Factories\ServiceFactory();
-
-
-			//
-
-			$this->_services[$serviceCode] = $factory->buildService
+			$service = $this->_factory->buildService
 			(
 				$serviceCode,
 				$this->_definitions
 			);
+
+
+			// Store the service
+
+			$this->_services[$serviceCode] = $service;
 		}
 		
 		
-		return $this->_services[$serviceCode];
+		// Get the service
+
+		$service = $this->_services[$serviceCode];
+
+
+		return $service;
 	}
 
 
@@ -110,6 +121,8 @@ class ServiceManager
 
 	public function registerServices($services)
 	{
+		// Register each service provided
+
 		foreach ($services as $serviceCode => $serviceClassName)
 		{
 			$this->_definitions[$serviceCode] = $serviceClassName;
