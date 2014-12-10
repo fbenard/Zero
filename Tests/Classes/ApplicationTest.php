@@ -18,6 +18,7 @@ extends \PHPUnit_Framework_TestCase
 	
 	public function test_finalize()
 	{
+		$this->markTestIncomplete();
 	}
 
 	
@@ -27,6 +28,7 @@ extends \PHPUnit_Framework_TestCase
 	
 	public function test_getInstance()
 	{
+		$this->markTestIncomplete();
 	}
 
 	
@@ -36,6 +38,7 @@ extends \PHPUnit_Framework_TestCase
 	
 	public function test_initialize()
 	{
+		$this->markTestIncomplete();
 	}
 	
 	
@@ -45,6 +48,7 @@ extends \PHPUnit_Framework_TestCase
 	
 	public function test_isRunningCli()
 	{
+		$this->markTestIncomplete();
 	}
 	
 	
@@ -54,6 +58,7 @@ extends \PHPUnit_Framework_TestCase
 	
 	public function test_run()
 	{
+		$this->markTestIncomplete();
 	}
 }
 

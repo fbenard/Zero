@@ -18,6 +18,7 @@ extends \PHPUnit_Framework_TestCase
 
 	public function test_get()
 	{
+		$this->markTestIncomplete();
 	}
 
 
@@ -27,6 +28,7 @@ extends \PHPUnit_Framework_TestCase
 
 	public function test_render()
 	{
+		$this->markTestIncomplete();
 	}
 }
 

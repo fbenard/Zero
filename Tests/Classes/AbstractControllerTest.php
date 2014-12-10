@@ -18,6 +18,7 @@ extends \PHPUnit_Framework_TestCase
 
 	public function test_redirect()
 	{
+		$this->markTestIncomplete();
 	}
 
 
@@ -27,6 +28,7 @@ extends \PHPUnit_Framework_TestCase
 
 	public function test_renderView()
 	{
+		$this->markTestIncomplete();
 	}
 
 
@@ -36,6 +38,7 @@ extends \PHPUnit_Framework_TestCase
 
 	public function test_renderJson()
 	{
+		$this->markTestIncomplete();
 	}
 	
 	
@@ -45,6 +48,7 @@ extends \PHPUnit_Framework_TestCase
 	
 	public function test_sendHeaders()
 	{
+		$this->markTestIncomplete();
 	}
 }
 
