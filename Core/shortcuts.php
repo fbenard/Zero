@@ -128,7 +128,7 @@ function render($viewCode, $viewArguments = null)
  *
  */
 
-function service($serviceCode)
+function service($serviceCode = null)
 {
 	return \z\app()->_serviceManager->getService($serviceCode);
 }

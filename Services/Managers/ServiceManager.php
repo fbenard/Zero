@@ -79,7 +79,7 @@ class ServiceManager
 	 *
 	 */
 	
-	public function getService($serviceCode)
+	public function getService($serviceCode = null)
 	{
 		//
 
