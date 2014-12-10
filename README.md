@@ -3,12 +3,12 @@ Zero
 
 Zero is a micro-framework written in PHP, for PHP applications.
 
-![Build status](https://circleci.com/gh/fbenard/Zero/tree/master.svg?style=shield&circle-token=78096b1f781cc4fccd2d99a7d17328b79dbf73ce)
+![Build status](https://circleci.com/gh/fbenard/zero/tree/master.svg?style=shield&circle-token=78096b1f781cc4fccd2d99a7d17328b79dbf73ce)
 
 
 ## Installation
 
-- `composer.json`
+**composer.json**
 
 ```json
 {
@@ -23,7 +23,7 @@ Zero is a micro-framework written in PHP, for PHP applications.
 }
 ```
 
-- `index.php`
+**index.php**
 
 ```php
 <?php
@@ -33,7 +33,7 @@ require_once(getcwd() . '/Components/fbenard/zero/Core/boot.php');
 ?>
 ```
 
-- `.htaccess`
+**.htaccess**
 
 ```
 Options			+ExecCGI +FollowSymLinks +Includes -Indexes -Multiviews
@@ -43,7 +43,7 @@ RewriteBase		/
 RewriteRule		.* index.php
 ```
 
-- `Application/Preferences/Boot.json`
+**Application/Preferences/Boot.json**
 
 ```json
 {
