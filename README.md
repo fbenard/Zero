@@ -6,7 +6,22 @@ Zero is a micro-framework written in PHP, for PHP applications.
 ![Build status](https://circleci.com/gh/fbenard/zero/tree/master.svg?style=shield&circle-token=78096b1f781cc4fccd2d99a7d17328b79dbf73ce)
 
 
-## Installation
+## Install
+
+```
+composer global require fbenard/zero:*
+php ~/.composer/vendor/fbenard/zero/Core/zero-cli.php install
+```
+
+
+## Create a new application
+
+```
+zero create my-app
+```
+
+
+## Structure
 
 **composer.json**
 
