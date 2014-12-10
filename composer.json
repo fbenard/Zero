@@ -1,8 +1,6 @@
 {
 	"name": "fbenard/zero",
 	"description": "Micro PHP Framework",
-	"version": "",
-	"time": "",
 	"type": "library",
 	"keywords": ["micro", "php", "framework"],
 	"homepage": "http://github.com/fbenard/Zero",
