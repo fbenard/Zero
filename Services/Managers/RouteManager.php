@@ -34,69 +34,102 @@ class RouteManager
 
 	public function initialize()
 	{
-		// Load routes
+		// Define paths
 
-		$rawDefinitions = file_get_contents(PATH_APPLICATION . 'Preferences/Routes.json');
-		$this->_definitions = json_decode($rawDefinitions, true);
-
-
-		// For each route
-
-		foreach ($this->_definitions as $uri => &$definition)
+		$paths =
+		[
+			PATH_ZERO,
+			PATH_APPLICATION
+		];
+		
+		
+		// For each path
+		
+		foreach ($paths as $path)
 		{
-			// Make sure the route definition is valid
+			// Find routes
 
-			$definition = array_merge
-			(
-				[
-					'action' => 'index',
-					'arguments' => [],
-					'post' => [],
-					'pre' => [],
-					'service' => null
-				],
-				$definition
-			);
+			$pathToRoutes = \z\service('helper/file')->listFiles($path . 'Preferences/Routes/', '*.json');
 
 
-			//
-
-			$uriFragments = explode('/', $uri);
-
-			foreach ($uriFragments as $key => &$uriFragment)
-			{
-				//
-
-				if (empty($uriFragment) === true)
-				{
-					unset($uriFragments[$key]);
-					continue;
-				}
-
-
-				//
-
-				if (preg_match('/\{([a-zA-Z0-9]+)\}/', $uriFragment, $matches) === 1)
-				{
-					$uriFragment = '(' . $definition['arguments'][$matches[1]]['pattern'] . ')';
-				}
-			}
-
-
-			//
-
-			$newUri = '/' . implode('/', $uriFragments);
+			// For each route
 			
-			if ($newUri != $uri)
+			foreach ($pathToRoutes as $pathToRoute)
 			{
-				//
+				// Load definitions
 
-				unset($this->_definitions[$uri]);
+				$rawDefinitions = file_get_contents($pathToRoute);
+				$definitions = json_decode($rawDefinitions, true);
 
 
-				//
+				// For each route
 
-				$this->_definitions[$newUri] = $definition;
+				foreach ($definitions as $uri => &$definition)
+				{
+					// Make sure the route definition is valid
+
+					$definition = array_merge
+					(
+						[
+							'action' => 'index',
+							'arguments' => [],
+							'post' => [],
+							'pre' => [],
+							'service' => null
+						],
+						$definition
+					);
+
+
+					//
+
+					$uriFragments = explode('/', $uri);
+
+					foreach ($uriFragments as $key => &$uriFragment)
+					{
+						//
+
+						if (empty($uriFragment) === true)
+						{
+							unset($uriFragments[$key]);
+							continue;
+						}
+
+
+						//
+
+						if (preg_match('/\{([a-zA-Z0-9]+)\}/', $uriFragment, $matches) === 1)
+						{
+							$uriFragment = '(' . $definition['arguments'][$matches[1]]['pattern'] . ')';
+						}
+					}
+
+
+					//
+
+					$newUri = '/' . implode('/', $uriFragments);
+					
+					if ($newUri != $uri)
+					{
+						//
+
+						unset($definitions[$uri]);
+
+
+						//
+
+						$definitions[$newUri] = $definition;
+					}
+				}
+
+
+				// Store definitions
+
+				$this->_definitions = array_merge
+				(
+					$this->_definitions,
+					$definitions
+				);
 			}
 		}
 

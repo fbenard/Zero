@@ -34,7 +34,7 @@ class ServiceManager
 
 	public function initialize()
 	{
-		//
+		// Define paths
 
 		$paths =
 		[
@@ -43,25 +43,34 @@ class ServiceManager
 		];
 		
 		
-		//
+		// For each path
 		
 		foreach ($paths as $path)
 		{
-			$pathToDefinitions = $path . 'Preferences/Services.json';
+			// Find services
 
-			if (file_exists($pathToDefinitions) === false)
+			$fileHelper = new \Zero\Services\Helpers\FileHelper();
+			$pathToServices = $fileHelper->listFiles($path . 'Preferences/Services/', '*.json');
+
+
+			// For each service
+
+			foreach ($pathToServices as $pathToService)
 			{
-				continue;
+				// Load definitions
+
+				$rawDefinitions = file_get_contents($pathToService);
+				$definitions = json_decode($rawDefinitions, true);
+
+				
+				// Store definitions
+
+				$this->_definitions = array_merge
+				(
+					$this->_definitions,
+					$definitions
+				);
 			}
-
-			$rawDefinitions = file_get_contents($pathToDefinitions);
-			$definitions = json_decode($rawDefinitions, true);
-
-			$this->_definitions = array_merge
-			(
-				$this->_definitions,
-				$definitions
-			);
 		}
 	}
 
