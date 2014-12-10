@@ -102,6 +102,19 @@ class ServiceManager
 		
 		return $this->_services[$serviceCode];
 	}
+
+
+	/**
+	 *
+	 */
+
+	public function registerServices($services)
+	{
+		foreach ($services as $serviceCode => $serviceClassName)
+		{
+			$this->_definitions[$serviceCode] = $serviceClassName;
+		}
+	}
 }
 
 ?>
