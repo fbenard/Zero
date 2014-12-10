@@ -33,6 +33,16 @@ require_once(getcwd() . '/Components/fbenard/zero/Core/boot.php');
 ?>
 ```
 
+- `.htaccess`
+
+```
+Options			+ExecCGI +FollowSymLinks +Includes -Indexes -Multiviews
+IndexIgnore		*/*
+RewriteEngine	On
+RewriteBase		/
+RewriteRule		.* index.php
+```
+
 - `Application/Preferences/Boot.json`
 
 ```json
