@@ -35,14 +35,16 @@ require_once(getcwd() . '/Components/fbenard/zero/Core/boot.php');
 
 - `Application/Preferences/Boot.json`
 
+```json
 {
 	"environment": "local"
 }
+```
 
 
 ## Authors
 
-TBD.
+Zero is carefully taken care of by [Fabien BÉNARD](http://fabienbenard.com).
 
 
 ## License
