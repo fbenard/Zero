@@ -8,7 +8,36 @@ Zero is a micro-framework written in PHP, for PHP applications.
 
 ## Installation
 
-TBD.
+- `composer.json`
+
+```json
+{
+	"config":
+	{
+		"vendor-dir": "Components"
+	},
+	"require":
+	{
+		"fbenard/zero": "dev-master"
+	}
+}
+```
+
+- `index.php`
+
+```php
+<?php
+
+require_once(getcwd() . '/Components/fbenard/zero/Core/boot.php');
+
+?>
+```
+
+- `Application/Preferences/Boot.json`
+
+{
+	"environment": "local"
+}
 
 
 ## Authors
