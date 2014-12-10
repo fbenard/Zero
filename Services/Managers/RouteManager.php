@@ -139,7 +139,13 @@ class RouteManager
 		if (\z\app()->isRunningCli() === true)
 		{
 			global $argv;
-			$this->_uri = '/cli/' . $argv[1];
+
+			$this->_uri = '/cli/';
+
+			if (array_key_exists(1, $argv) === true)
+			{
+				$this->_uri .= $argv[1];
+			}
 		}
 		else
 		{
