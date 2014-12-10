@@ -3,7 +3,7 @@
 	"description": "Micro PHP Framework",
 	"type": "library",
 	"keywords": ["micro", "php", "framework"],
-	"homepage": "http://github.com/fbenard/Zero",
+	"homepage": "http://github.com/fbenard/zero",
 	"license": "MIT",
 	"authors":
 	[
