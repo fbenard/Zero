@@ -16,7 +16,7 @@ extends \PHPUnit_Framework_TestCase
 	 *
 	 */
 	
-	private function test_finalize()
+	public function test_finalize()
 	{
 	}
 
@@ -25,7 +25,7 @@ extends \PHPUnit_Framework_TestCase
 	 *
 	 */
 	
-	public static function test_getInstance()
+	public function test_getInstance()
 	{
 	}
 
@@ -34,7 +34,7 @@ extends \PHPUnit_Framework_TestCase
 	 *
 	 */
 	
-	private function test_initialize()
+	public function test_initialize()
 	{
 	}
 	

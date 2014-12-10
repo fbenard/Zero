@@ -16,7 +16,7 @@ extends \PHPUnit_Framework_TestCase
 	 *
 	 */
 
-	protected function test_redirect()
+	public function test_redirect()
 	{
 	}
 
@@ -25,7 +25,7 @@ extends \PHPUnit_Framework_TestCase
 	 *
 	 */
 
-	protected function test_renderView()
+	public function test_renderView()
 	{
 	}
 
@@ -34,7 +34,7 @@ extends \PHPUnit_Framework_TestCase
 	 *
 	 */
 
-	protected function test_renderJson()
+	public function test_renderJson()
 	{
 	}
 	
