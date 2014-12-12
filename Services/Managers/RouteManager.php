@@ -35,26 +35,17 @@ class RouteManager
 
 	public function initialize()
 	{
-		// Build the URI and verb
-
-		if (\z\app()->isRunningCli() === true)
-		{
-			global $argv;
-
-			if (array_key_exists(1, $argv) === true)
-			{
-				$this->_uri = $argv[1];
-			}
-
-			$this->_verb = 'CLI';
-		}
-		else
-		{
-			$this->_uri = explode('?', $_SERVER['REQUEST_URI'], 2)[0];
-			$this->_verb = $_SERVER['REQUEST_METHOD'];
-		}
+		$this->loadDefinitions();
+		$this->setRoute();
+	}
 
 
+	/**
+	 *
+	 */
+
+	private function loadDefinitions()
+	{
 		// Define paths
 
 		$paths =
@@ -65,31 +56,31 @@ class RouteManager
 		
 		
 		// For each path
-		
+
 		foreach ($paths as $path)
 		{
-			// Find routes
+			// Find definitions
 
-			$pathToRoutes = \z\service('helper/file')->listFiles($path . 'Preferences/Routes/', '*.json');
+			$pathToDefinitions = \z\service('helper/file')->listFiles($path . 'Preferences/Routes/', '*.json');
 
 
-			// For each route
+			// For each definitions
 			
-			foreach ($pathToRoutes as $pathToRoute)
+			foreach ($pathToDefinitions as $pathToDefinition)
 			{
 				// Load definitions
 
-				$rawDefinitions = file_get_contents($pathToRoute);
+				$rawDefinitions = file_get_contents($pathToDefinition);
 				$definitions = json_decode($rawDefinitions, true);
 
 
-				// For each route
+				// For each definition
 
 				foreach ($definitions as $uri => &$verbs)
 				{
 					foreach ($verbs as $verb => &$definition)
 					{
-						// Make sure the route definition is valid
+						// Make sure the definition is valid
 
 						$definition = array_merge
 						(
@@ -102,36 +93,6 @@ class RouteManager
 							],
 							$definition
 						);
-
-
-						//
-
-						$uriFragments = explode('/', $uri);
-
-						foreach ($uriFragments as $key => &$uriFragment)
-						{
-							if (preg_match('/\{([a-zA-Z0-9]+)\}/', $uriFragment, $matches) === 1)
-							{
-								$uriFragment = '(' . $definition['arguments'][$matches[1]]['pattern'] . ')';
-							}
-						}
-
-
-						//
-
-						$newUri = implode('/', $uriFragments);
-
-						if ($newUri != $uri)
-						{
-							//
-
-							unset($definitions[$uri][$verb]);
-
-
-							//
-
-							$definitions[$newUri][$verb] = $definition;
-						}
 					}
 
 
@@ -145,47 +106,99 @@ class RouteManager
 				}
 			}
 		}
+	}
 
 
-		//
+	/**
+	 *
+	 */
+
+	public function setRoute($uri = null, $verb = null)
+	{
+		// Build the URI
+
+		if (empty($uri) === true)
+		{
+			if (\z\app()->isRunningCli() === true)
+			{
+				global $argv;
+
+				if (array_key_exists(1, $argv) === true)
+				{
+					$this->_uri = $argv[1];
+				}
+			}
+			else
+			{
+				$this->_uri = explode('?', $_SERVER['REQUEST_URI'], 2)[0];
+			}			
+		}
+
+		
+		// Build the verb
+
+		if (empty($verb) === true)
+		{
+			if (\z\app()->isRunningCli() === true)
+			{
+				$this->_verb = 'CLI';
+			}
+			else
+			{
+				$this->_verb = $_SERVER['REQUEST_METHOD'];
+			}
+		}
+
+
+		// Try to find the URI/verb in definitions
 
 		foreach ($this->_definitions as $uri => $verbs)
 		{
-			//
+			// Is the verb supported?
 
-			if (array_key_exists($verb, $verbs) === false)
+			if (array_key_exists($this->_verb, $verbs) === false)
 			{
 				continue;
 			}
 
+			
+			// Get the definition
 
-			//
+			$definition = $verbs[$this->_verb];
 
-			$pattern = '/^' . str_replace('/', '\/', $uri) . '\/?$/';
+
+			// Replace URI arguments by their pattern
+
+			$uriFragments = explode('/', $uri);
+
+			foreach ($uriFragments as $key => &$uriFragment)
+			{
+				if (preg_match('/\{([a-zA-Z0-9]+)\}/', $uriFragment, $matches) === 1)
+				{
+					$uriFragment = '(' . $definition['arguments'][$matches[1]]['pattern'] . ')';
+				}
+			}
+
+
+			// Does the URI match?
+
+			$pattern = '/^' . str_replace('/', '\/', implode('/', $uriFragments)) . '\/?$/';
 
 			if (preg_match($pattern, $this->_uri, $matches) !== 1)
 			{
 				continue;
 			}
 
-			
-			//
-
-			$definition = $verbs[$verb];
-
 
 			//
 
 			array_shift($matches);
 
-
-			//
-
 			$nbMatches = count($matches);
 			$nbArguments = count($definition['arguments']);
 
 
-			//
+			// Extract arguments
 
 			if
 			(
@@ -204,14 +217,14 @@ class RouteManager
 			}
 
 
-			//
+			// This is the route!
 
 			$this->_route = $definition;
 			break;
 		}
 
 
-		//
+		// Do we have a route?
 
 		if (is_null($this->_route) === true)
 		{
@@ -220,7 +233,7 @@ class RouteManager
 				EXCEPTION_ROUTE_NOT_FOUND,
 				[
 					'uri' => $this->_uri,
-					'verb' => $verb,
+					'verb' => $this->_verb,
 					'definitions' => array_keys($this->_definitions)
 				]
 			);
