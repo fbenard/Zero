@@ -230,26 +230,43 @@ class ErrorRenderer
 			print('<body>');
 
 
-			// Display public information
-			
+			//
+
 			print('<h1>' . $errorTitle . '</h1>');
+			print('<p>' . $errorDescription . '</p>');
 			
-			if (empty($errorDescription) === false)
+
+			//
+
+			print('<hr />');
+			print('<p><strong>Code</strong></p>');
+			print('<pre>' . $errorCode . '</pre>');
+			print('<p><strong>File</strong></p>');
+			print('<pre>' . $errorFile . '</pre>');
+			print('<p><strong>Line</strong></p>');
+			print('<pre>' . $errorLine . '</pre>');
+			
+			
+			// Display the context
+
+			if
+			(
+				(is_array($errorContext) === true) &&
+				(empty($errorContext) === false)
+			)
 			{
-				print('<p>' . $errorDescription . '</p>');
+				print('<hr />');
+				print('<h2>Context</h2>');
+				
+				foreach ($errorContext as $key => $value)
+				{
+					print('<p><strong>' . $key . '</strong></p>');
+					print('<pre>' . print_r($value, true) . '</pre>');
+				}
 			}
-
-			print('<h2>Code</h2>');
-			print('<p>' . $errorCode . '</p>');
-
-
-			// Display location
-
-			print('<h2>Location</h2>');
-			print('<p>' . $errorFile . ' (' . $errorLine . ')</p>');
 			
 			
-			// If there are traces, display each
+			// Display the trace
 
 			if
 			(
@@ -257,57 +274,33 @@ class ErrorRenderer
 				(empty($errorTraces) === false)
 			)
 			{
+				print('<hr />');
 				print('<h2>Trace</h2>');
 				print('<table>');
-				print('<thead>');
-				print('<tr>');
-				print('<th colspan="2">Location</th>');
-				print('<th>Class</th>');
-				print('<th>Function</th>');
-				print('</tr>');
-				print('</thead>');
-				print('</tbody>');
 				
 				foreach ($errorTraces as $errorTrace)
 				{
+					$errorTrace = array_merge
+					(
+						[
+							'file' => null,
+							'line' => null,
+							'class' => null,
+							'function' => null,
+							'type' => '::',
+							'args' => null
+						],
+						$errorTrace
+					);
+
 					print('<tr>');
-					print('<td>');
-					
-					if (isset($errorTrace['file']) === true)
-					{
-						print($errorTrace['file']);
-					}
-					
-					print('</td>');
-					print('<td>');
-					
-					if (isset($errorTrace['line']) === true)
-					{
-						print($errorTrace['line']);
-					}
-					
-					print('</td>');
-					print('<td>');
-					
-					if (isset($errorTrace['class']) === true)
-					{
-						print($errorTrace['class']);
-					}
-					
-					print('</td>');
-					print('<td>');
-					
-					if (isset($errorTrace['function']) === true)
-					{
-						print($errorTrace['function']);
-					}
-					
-					print('</td>');
+					print('<td valign="top">' . $errorTrace['file'] . '</td>');
+					print('<td valign="top">' . $errorTrace['line'] . '</td>');
+					print('<td valign="top"><pre>' . $errorTrace['class'] . '::' . $errorTrace['function'] . '</pre></td>');
+					print('<td valign="top"><pre>' . print_r($errorTrace['args'], true) . '</pre></td>');
 					print('</tr>');
 				}
 				
-				print('</tr>');
-				print('</tbody>');
 				print('</table>');
 			}
 
