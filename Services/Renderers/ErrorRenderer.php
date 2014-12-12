@@ -312,7 +312,7 @@ class ErrorRenderer
 		}
 
 
-		// Make sure we quit the application
+		// Quit the application
 
 		die();
 	}
