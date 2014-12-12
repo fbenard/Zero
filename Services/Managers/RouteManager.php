@@ -16,6 +16,7 @@ class RouteManager
 	private $_definitions = null;
 	public $_route = null;
 	public $_uri = null;
+	public $_verb = null;
 
 
 	/**
@@ -34,6 +35,26 @@ class RouteManager
 
 	public function initialize()
 	{
+		// Build the URI and verb
+
+		if (\z\app()->isRunningCli() === true)
+		{
+			global $argv;
+
+			if (array_key_exists(1, $argv) === true)
+			{
+				$this->_uri = $argv[1];
+			}
+
+			$this->_verb = 'CLI';
+		}
+		else
+		{
+			$this->_uri = explode('?', $_SERVER['REQUEST_URI'], 2)[0];
+			$this->_verb = $_SERVER['REQUEST_METHOD'];
+		}
+
+
 		// Define paths
 
 		$paths =
@@ -64,126 +85,93 @@ class RouteManager
 
 				// For each route
 
-				foreach ($definitions as $uri => &$definition)
+				foreach ($definitions as $uri => &$verbs)
 				{
-					// Make sure the route definition is valid
+					foreach ($verbs as $verb => &$definition)
+					{
+						// Make sure the route definition is valid
 
-					$definition = array_merge
+						$definition = array_merge
+						(
+							[
+								'action' => 'index',
+								'arguments' => [],
+								'post' => [],
+								'pre' => [],
+								'service' => null
+							],
+							$definition
+						);
+
+
+						//
+
+						$uriFragments = explode('/', $uri);
+
+						foreach ($uriFragments as $key => &$uriFragment)
+						{
+							if (preg_match('/\{([a-zA-Z0-9]+)\}/', $uriFragment, $matches) === 1)
+							{
+								$uriFragment = '(' . $definition['arguments'][$matches[1]]['pattern'] . ')';
+							}
+						}
+
+
+						//
+
+						$newUri = implode('/', $uriFragments);
+
+						if ($newUri != $uri)
+						{
+							//
+
+							unset($definitions[$uri][$verb]);
+
+
+							//
+
+							$definitions[$newUri][$verb] = $definition;
+						}
+					}
+
+
+					// Store definitions
+
+					$this->_definitions = array_merge
 					(
-						[
-							'action' => 'index',
-							'arguments' => [],
-							'post' => [],
-							'pre' => [],
-							'service' => null
-						],
-						$definition
+						$this->_definitions,
+						$definitions
 					);
-
-
-					//
-
-					$uriFragments = explode('/', $uri);
-
-					foreach ($uriFragments as $key => &$uriFragment)
-					{
-						//
-
-						if (empty($uriFragment) === true)
-						{
-							unset($uriFragments[$key]);
-							continue;
-						}
-
-
-						//
-
-						if (preg_match('/\{([a-zA-Z0-9]+)\}/', $uriFragment, $matches) === 1)
-						{
-							$uriFragment = '(' . $definition['arguments'][$matches[1]]['pattern'] . ')';
-						}
-					}
-
-
-					//
-
-					$newUri = '/' . implode('/', $uriFragments);
-					
-					if ($newUri != $uri)
-					{
-						//
-
-						unset($definitions[$uri]);
-
-
-						//
-
-						$definitions[$newUri] = $definition;
-					}
 				}
-
-
-				// Store definitions
-
-				$this->_definitions = array_merge
-				(
-					$this->_definitions,
-					$definitions
-				);
-			}
-		}
-
-
-		// Build the URI
-
-		if (\z\app()->isRunningCli() === true)
-		{
-			global $argv;
-
-			$this->_uri = '/cli/';
-
-			if (array_key_exists(1, $argv) === true)
-			{
-				$this->_uri .= $argv[1];
-			}
-		}
-		else
-		{
-			$this->_uri = explode('?', $_SERVER['REQUEST_URI'], 2)[0];
-		}
-
-
-		// Remove empty URI fragments
-
-		$uriFragments = explode('/', $this->_uri);
-
-		foreach ($uriFragments as $key => &$uriFragment)
-		{
-			//
-
-			if (empty($uriFragment) === true)
-			{
-				unset($uriFragments[$key]);
-				continue;
 			}
 		}
 
 
 		//
 
-		foreach ($this->_definitions as $uri => &$definition)
+		foreach ($this->_definitions as $uri => $verbs)
 		{
+			//
+
+			if (array_key_exists($verb, $verbs) === false)
+			{
+				continue;
+			}
+
+
 			//
 
 			$pattern = '/^' . str_replace('/', '\/', $uri) . '\/?$/';
 
-
-			//
-
-			if (preg_match($pattern, '/' . implode('/', $uriFragments), $matches) !== 1)
+			if (preg_match($pattern, $this->_uri, $matches) !== 1)
 			{
 				continue;
 			}
+
+			
+			//
+
+			$definition = $verbs[$verb];
 
 
 			//
@@ -232,7 +220,7 @@ class RouteManager
 				EXCEPTION_ROUTE_NOT_FOUND,
 				[
 					'uri' => $this->_uri,
-					'route' => $this->_route,
+					'verb' => $verb,
 					'definitions' => array_keys($this->_definitions)
 				]
 			);
