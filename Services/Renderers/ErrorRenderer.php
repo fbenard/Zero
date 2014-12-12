@@ -294,8 +294,8 @@ class ErrorRenderer
 					);
 
 					print('<tr>');
-					print('<td valign="top">' . $errorTrace['file'] . '</td>');
-					print('<td valign="top">' . $errorTrace['line'] . '</td>');
+					print('<td valign="top"><pre>' . $errorTrace['file'] . '</pre></td>');
+					print('<td valign="top"><pre>' . $errorTrace['line'] . '</pre></td>');
 					print('<td valign="top"><pre>' . $errorTrace['class'] . '::' . $errorTrace['function'] . '</pre></td>');
 					print('<td valign="top"><pre>' . print_r($errorTrace['args'], true) . '</pre></td>');
 					print('</tr>');
