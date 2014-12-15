@@ -26,17 +26,17 @@ class ControllerManager
 	{
 		//
 
-		$definition = \z\service('manager/route')->_route;
+		$route = \z\service('manager/route')->_route;
 
 		
 		//
 
-		$this->_controller = \z\service($definition['service']);
+		$this->_controller = \z\service($route['service']);
 
 
 		//
 
-		$this->_action = 'action_' . $definition['action'];
+		$this->_action = 'action_' . $route['action'];
 
 		if (method_exists($this->_controller, $this->_action) === false)
 		{
@@ -48,7 +48,7 @@ class ControllerManager
 		
 		$this->_arguments = [];
 
-		foreach ($definition['arguments'] as $argumentCode => $argument)
+		foreach ($route['arguments'] as $argumentCode => $argument)
 		{
 			$this->_arguments[$argumentCode] = $argument['value'];
 		}
@@ -63,12 +63,12 @@ class ControllerManager
 	{
 		//
 
-		$definition = \z\service('manager/route')->_route;
+		$route = \z\service('manager/route')->_route;
 
 
 		//
 
-		foreach ($definition['pre'] as $pre)
+		foreach ($route['pre'] as $pre)
 		{
 			$preFragments = explode('::', $pre);
 
@@ -99,7 +99,7 @@ class ControllerManager
 
 		//
 
-		foreach ($definition['post'] as $post)
+		foreach ($route['post'] as $post)
 		{
 			$postFragments = explode('::', $post);
 			
