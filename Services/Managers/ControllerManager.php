@@ -70,13 +70,16 @@ class ControllerManager
 
 		foreach ($route['pre'] as $pre)
 		{
-			$preFragments = explode('::', $pre);
+			$pre = array_merge
+			(
+				[
+					'method' => null,
+					'service' => null
+				],
+				$pre
+			);
 
-			$serviceCode = $preFragments[0];
-			$methodName = $preFragments[1];
-
-			$service = \z\service($serviceCode);
-			$service->$methodName();
+			\z\service($pre['service'])->$pre['method']();
 		}
 
 		
@@ -101,13 +104,16 @@ class ControllerManager
 
 		foreach ($route['post'] as $post)
 		{
-			$postFragments = explode('::', $post);
-			
-			$serviceCode = $postFragments[0];
-			$methodName = $postFragments[1];
+			$post = array_merge
+			(
+				[
+					'method' => null,
+					'service' => null
+				],
+				$post
+			);
 
-			$service = \z\service($serviceCode);
-			$service->$methodName();
+			\z\service($post['service'])->$post['method']();
 		}
 
 		

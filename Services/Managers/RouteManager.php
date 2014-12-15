@@ -84,7 +84,9 @@ class RouteManager
 					(
 						[
 							'arguments' => [],
-							'verbs' => []
+							'verbs' => [],
+							'post' => [],
+							'pre' => []
 						],
 						$definition
 					);
@@ -100,8 +102,6 @@ class RouteManager
 						(
 							[
 								'action' => 'index',
-								'post' => [],
-								'pre' => [],
 								'service' => null
 							],
 							$verb
@@ -236,7 +236,9 @@ class RouteManager
 			(
 				$verb,
 				[
-					'arguments' => $definition['arguments']
+					'arguments' => $definition['arguments'],
+					'post' => $definition['post'],
+					'pre' => $definition['pre']
 				]
 			);
 
