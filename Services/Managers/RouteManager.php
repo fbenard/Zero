@@ -76,34 +76,47 @@ class RouteManager
 
 				// For each definition
 
-				foreach ($definitions as $uri => &$verbs)
+				foreach ($definitions as $uri => &$definition)
 				{
-					foreach ($verbs as $verb => &$definition)
-					{
-						// Make sure the definition is valid
+					// Make sure the definition is valid
 
-						$definition = array_merge
+					$definition = array_merge
+					(
+						[
+							'arguments' => [],
+							'verbs' => []
+						],
+						$definition
+					);
+
+
+					// For each verb
+
+					foreach ($definition['verbs'] as $verbCode => &$verb)
+					{
+						// Make sure the verb is valid
+
+						$verb = array_merge
 						(
 							[
 								'action' => 'index',
-								'arguments' => [],
 								'post' => [],
 								'pre' => [],
 								'service' => null
 							],
-							$definition
+							$verb
 						);
 					}
-
-
-					// Store definitions
-
-					$this->_definitions = array_merge
-					(
-						$this->_definitions,
-						$definitions
-					);
 				}
+
+
+				// Store definitions
+
+				$this->_definitions = array_merge
+				(
+					$this->_definitions,
+					$definitions
+				);
 			}
 		}
 	}
@@ -152,19 +165,19 @@ class RouteManager
 
 		// Try to find the URI/verb in definitions
 
-		foreach ($this->_definitions as $uri => $verbs)
+		foreach ($this->_definitions as $uri => $definition)
 		{
 			// Is the verb supported?
 
-			if (array_key_exists($this->_verb, $verbs) === false)
+			if (array_key_exists($this->_verb, $definition['verbs']) === false)
 			{
 				continue;
 			}
 
 			
-			// Get the definition
+			// Get the verb
 
-			$definition = $verbs[$this->_verb];
+			$verb = $definition['verbs'][$this->_verb];
 
 
 			// Replace URI arguments by their pattern
@@ -219,7 +232,14 @@ class RouteManager
 
 			// This is the route!
 
-			$this->_route = $definition;
+			$this->_route = array_merge
+			(
+				$verb,
+				[
+					'arguments' => $definition['arguments']
+				]
+			);
+
 			break;
 		}
 
