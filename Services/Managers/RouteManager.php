@@ -190,7 +190,7 @@ class RouteManager
 			}
 
 
-			//
+			// Count matches vs arguments
 
 			array_shift($matches);
 
