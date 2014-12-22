@@ -24,16 +24,12 @@ class LogRenderer
 	{
 		$this->_templates =
 		[
-			'log/' => "%{message}",
-			'log/error' => "*** %{message}",
-			'log/information' => "=== %{message}",
-			'log/progress' => null,
-			'log/success' => "=== %{message}",
-			'print/' => "%{message}%{pads}\n",
-			'print/error' => "\033[1;31m*** %{message}\033[0;0m%{pads}\n",
-			'print/information' => "\033[1;36m=== %{message}\033[0;0m%{pads}\n",
-			'print/progress' => "%{message}%{pads}\r",
-			'print/success' => "\033[1;32m=== %{message}\033[0;0m%{pads}\n"
+			null => "%{message}%{pads}\n",
+			'error' => "\033[1;31m*** %{message}\033[0;0m%{pads}\n",
+			'information' => "\033[1;36m=== %{message}\033[0;0m%{pads}\n",
+			'progress' => "%{message}%{pads}\r",
+			'prompt' => "\033[1;33m*** %{message}\033[0;0m",
+			'success' => "\033[1;32m=== %{message}\033[0;0m%{pads}\n"
 		];
 	}
 
@@ -42,11 +38,11 @@ class LogRenderer
 	 *
 	 */
 
-	public function formatMessage($message, $templateName)
+	public function formatMessage($message, $templateCode)
 	{
 		// Does the template exist?
 
-		if (isset($this->_templates[$templateName]) === false)
+		if (isset($this->_templates[$templateCode]) === false)
 		{
 			return $message;
 		}
@@ -54,7 +50,7 @@ class LogRenderer
 
 		// Get the template
 
-		$template = $this->_templates[$templateName];
+		$template = $this->_templates[$templateCode];
 
 
 		// Format the message
@@ -148,7 +144,7 @@ class LogRenderer
 	 *
 	 */
 
-	public function renderLog($message, $templateName = null)
+	public function renderLog($message, $templateCode = null)
 	{
 		// Format the message
 
@@ -162,17 +158,16 @@ class LogRenderer
 		}
 
 
-		//
+		// Format the output
 
-		$logMessage = $this->formatMessage($message, 'log/' . $templateName);
-		$printMessage = $this->formatMessage($message, 'print/' . $templateName);
+		$output = $this->formatMessage($message, $templateCode);
 
 
-		// Print the message
+		// Print the output
 
 		if ($this->isMute() === false)
 		{
-			print $printMessage;
+			print $output;
 		}
 	}
 }
