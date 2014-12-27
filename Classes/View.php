@@ -39,12 +39,12 @@ class View
 
 	public function render($viewCode, $viewArguments = null)
 	{
-		//
+		// Store variables
 
 		$this->_variables = $viewArguments;
 
 
-		//
+		// Build the path to the view
 
 		$pathToView = PATH_APPLICATION . 'Views/' . $viewCode;
 
@@ -57,7 +57,7 @@ class View
 		}
 		
 		
-		//
+		// Render the view
 
 		require_once($pathToView);
 
