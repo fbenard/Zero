@@ -17,7 +17,7 @@ class ServiceFactory
 	
 	public function buildService($serviceCode, $definitions)
 	{
-		//
+		// Make sure the service has a definition
 
 		if (array_key_exists($serviceCode, $definitions) === false)
 		{
@@ -32,12 +32,12 @@ class ServiceFactory
 		}
 
 
-		//
+		// Build the classname
 
 		$className = $definitions[$serviceCode];
 
 
-		//
+		// Make sure the service is instantiable
 		
 		$reflection = new \ReflectionClass($className);
 
