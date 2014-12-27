@@ -48,6 +48,21 @@ class View
 
 		$pathToView = PATH_APPLICATION . 'Views/' . $viewCode;
 
+		
+		// Make sure the view exists
+
+		if (file_exists($pathToView) === false)
+		{
+			\z\e
+			(
+				EXCEPTION_VIEW_NOT_FOUND,
+				[
+					'viewCode' => $viewCode,
+					'viewArguments' => $viewArguments
+				]
+			);
+		}
+
 
 		// Start buffering output
 		
