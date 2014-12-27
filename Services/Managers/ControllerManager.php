@@ -31,7 +31,7 @@ class ControllerManager
 		
 		//
 
-		$this->_controller = \z\service($route['service']);
+		$this->_controller = \z\service('factory/controller')->buildController($route['controller']);
 
 
 		//

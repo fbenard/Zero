@@ -102,7 +102,7 @@ class RouteManager
 						(
 							[
 								'action' => 'index',
-								'service' => null
+								'controller' => null
 							],
 							$verb
 						);
