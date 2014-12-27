@@ -1,11 +1,5 @@
 <?php
 
-// Class
-
-\z\cons('EXCEPTION_CLASS_IS_ABSTRACT');
-\z\cons('EXCEPTION_CLASS_METHOD_NOT_FOUND');
-
-
 // Controllers
 
 \z\cons('EXCEPTION_CONTROLLER_NOT_FOUND');
