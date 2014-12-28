@@ -58,7 +58,7 @@ class ErrorRenderer
 
 		if (empty($errorTitle) === false)
 		{
-			print("\n\033[1;31m*** \033[1;31m" . $errorTitle . "\n");
+			print("\n\033[1;31m*** \033[1;31m" . $errorTitle . " (" . $errorCode . ")\n");
 		}
 		
 		if (empty($errorDescription) === false)
@@ -69,12 +69,7 @@ class ErrorRenderer
 		print("\n");
 
 		
-		// Display error code and location
-
-		if (empty($errorCode) === false)
-		{
-			print("\033[1;37mCode:\t\033[0;0m" . $errorCode . "\n");
-		}
+		// Display error location
 
 		if (empty($errorFile) === false)
 		{
