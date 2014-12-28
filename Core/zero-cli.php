@@ -123,6 +123,12 @@ function execute($commands)
 
 function help()
 {
+	display('Zero CLI', 'info');
+	display('Usage: zero [action]');
+	display('Commands:');
+	display("\t" . 'help' . "\t\t" . 'Displays this help');
+	display("\t" . 'install' . "\t\t" . 'Installs Zero CLI');
+	display("\t" . 'create' . "\t\t" . 'Creates a new application');
 }
 
 
