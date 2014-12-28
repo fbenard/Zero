@@ -7,7 +7,12 @@
 
 function install()
 {
-	display('Installing Zero CLI...');
+	// Log
+
+	display('Installing Zero CLI...', 'info');
+
+	
+	// Install zero-cli and zero-app
 
 	$pathToZero = __DIR__ . '/';
 
@@ -22,6 +27,11 @@ function install()
 			'sudo chmod 755 /usr/local/bin/app'
 		]
 	);
+	
+
+	// Log
+
+	display('Zero CLI successfully installed!', 'success');
 }
 
 
@@ -51,7 +61,7 @@ function display($message, $templateCode = null)
 
 	$templates =
 	[
-		null => "%{message}\n",
+		null => "\033[0;37m%{message}\033[0;0m\n",
 		'error' => "\033[1;31m*** %{message}\033[0;0m\n",
 		'info' => "\033[1;36m=== %{message}\033[0;0m\n",
 		'progress' => "%{message}\r",
