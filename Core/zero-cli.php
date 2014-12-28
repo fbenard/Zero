@@ -105,12 +105,19 @@ function display($message, $templateCode = null)
 
 function execute($commands)
 {
+	// For each command
+
 	foreach ($commands as $command)
 	{
+		// Display it if --verbose
+
 		if (verbose() === true)
 		{
 			display($command);
 		}
+
+		
+		// Execute the command
 
 		exec($command);
 	}
