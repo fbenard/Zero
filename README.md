@@ -44,7 +44,7 @@ zero create my-app
 ```php
 <?php
 
-require_once(getcwd() . '/Components/fbenard/zero/Core/boot.php');
+require_once(getcwd() . '/Components/fbenard/zero/Core/zero-boot.php');
 
 ?>
 ```
