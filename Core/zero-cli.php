@@ -143,7 +143,9 @@ function main()
 	global $argv;
 	
 
-	//
+	// Define the action
+
+	$action = 'help';
 
 	if (array_key_exists(1, $argv) === true)
 	{
@@ -151,15 +153,7 @@ function main()
 	}
 
 
-	//
-
-	if (function_exists($action) === false)
-	{
-		help();
-	}
-
-
-	//
+	// Execute the action
 
 	$action();
 }
