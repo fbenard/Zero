@@ -7,15 +7,21 @@
 
 function install()
 {
-	/*
-	rm -f /usr/local/bin/zero
-	ln -s /var/www/app/Components/fbenard/zero/Core/zero-cli.php /usr/local/bin/zero
-	sudo chmod 755 /usr/local/bin/zero
+	display('Installing Zero CLI...');
 
-	rm -f /usr/local/bin/app
-	ln -s /var/www/app/Components/fbenard/zero/Core/zero-app.php /usr/local/bin/app
-	sudo chmod 755 /usr/local/bin/app
-	*/
+	$pathToZero = __DIR__ . '/';
+
+	execute
+	(
+		[
+			'rm -f /usr/local/bin/zero',
+			'rm -f /usr/local/bin/app',
+			'ln -s ' . $pathToZero . 'zero-cli.php /usr/local/bin/zero',
+			'ln -s ' . $pathToZero . 'zero-app.php /usr/local/bin/app',
+			'sudo chmod 755 /usr/local/bin/zero',
+			'sudo chmod 755 /usr/local/bin/app'
+		]
+	);
 }
 
 
@@ -39,9 +45,131 @@ function create()
  *
  */
 
+function display($message, $templateCode = null)
+{
+	// Build templates
+
+	$templates =
+	[
+		null => "%{message}\n",
+		'error' => "\033[1;31m*** %{message}\033[0;0m\n",
+		'info' => "\033[1;36m=== %{message}\033[0;0m\n",
+		'progress' => "%{message}\r",
+		'prompt' => "\033[1;33m*** %{message}\033[0;0m",
+		'success' => "\033[1;32m=== %{message}\033[0;0m\n"
+	];
+
+
+	// Does the template exist?
+
+	if (isset($templates[$templateCode]) === false)
+	{
+		print $message;
+	}
+
+
+	// Get the template
+
+	$template = $templates[$templateCode];
+
+
+	// Format the output
+
+	$output = str_replace
+	(
+		'%{message}',
+		$message,
+		$template
+	);
+
+
+	// Print the output
+
+	print($output);
+}
+
+
+/**
+ *
+ */
+
+function execute($commands)
+{
+	foreach ($commands as $command)
+	{
+		if (verbose() === true)
+		{
+			display($command);
+		}
+
+		exec($command);
+	}
+}
+
+
+/**
+ *
+ */
+
+function help()
+{
+}
+
+
+/**
+ *
+ */
+
 function main()
 {
-	print("Zero CLI\n");
+	// Globals
+
+	global $argv;
+	
+
+	//
+
+	if (array_key_exists(1, $argv) === true)
+	{
+		$action = $argv[1];
+	}
+
+
+	//
+
+	if (function_exists($action) === false)
+	{
+		help();
+	}
+
+
+	//
+
+	$action();
+}
+
+
+/**
+ *
+ */
+
+function verbose()
+{
+	// Globals
+
+	global $argv;
+
+	
+	//
+
+	if (in_array('--verbose', $argv) === true)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 
