@@ -67,7 +67,8 @@ function create()
 			'mkdir -p ' . $pathToApplication,
 			'mkdir -p ' . $pathToApplication . 'Application',
 			'cp ' . $pathToZero . 'Templates/.htaccess ' . $pathToApplication . '.htaccess',
-			'cp ' . $pathToZero . 'Templates/index.php ' . $pathToApplication . 'index.php'
+			'cp ' . $pathToZero . 'Templates/index.php ' . $pathToApplication . 'index.php',
+			'cp ' . $pathToZero . 'Templates/composer.json ' . $pathToApplication . 'composer.json'
 		]
 	);
 
