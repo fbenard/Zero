@@ -1,0 +1,30 @@
+{
+	"name": "",
+	"description": "",
+	"type": "project",
+	"keywords": [],
+	"homepage": "",
+	"license": "proprietary",
+	"authors":
+	[
+	],
+	"support":
+	{
+		"email": ""
+	},
+	"config":
+	{
+		"vendor-dir": "Components"
+	},
+	"require": 
+	{
+		"fbenard/zero": "*"
+	},
+	"minimum-stability": "dev",
+	"autoload":
+	{
+		"psr-4":
+		{
+		}
+	}
+}
