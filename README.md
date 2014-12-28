@@ -18,53 +18,7 @@ php Components/fbenard/zero/Core/zero-cli.php install
 ## Create a new application
 
 ```
-zero create my-app
-```
-
-
-## Structure
-
-**composer.json**
-
-```json
-{
-	"config":
-	{
-		"vendor-dir": "Components"
-	},
-	"require":
-	{
-		"fbenard/zero": "dev-master"
-	}
-}
-```
-
-**index.php**
-
-```php
-<?php
-
-require_once(getcwd() . '/Components/fbenard/zero/Core/zero-boot.php');
-
-?>
-```
-
-**.htaccess**
-
-```
-Options			+ExecCGI +FollowSymLinks +Includes -Indexes -Multiviews
-IndexIgnore		*/*
-RewriteEngine	On
-RewriteBase		/
-RewriteRule		.* index.php
-```
-
-**Application/Preferences/Boot.json**
-
-```json
-{
-	"environment": "local"
-}
+zero create
 ```
 
 
