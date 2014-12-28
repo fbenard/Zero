@@ -74,6 +74,14 @@ class RouteManager
 				$definitions = json_decode($rawDefinitions, true);
 
 
+				// Make sure definitions is an array
+
+				if (is_array($definitions) === false)
+				{
+					continue;
+				}
+
+
 				// For each definition
 
 				foreach ($definitions as $uri => &$definition)
