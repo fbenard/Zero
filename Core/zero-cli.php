@@ -65,7 +65,7 @@ function display($message = null, $templateCode = null)
 		'error' => "\033[1;31m*** %{message}\033[0;0m\n",
 		'info' => "\033[1;36m=== %{message}\033[0;0m\n",
 		'progress' => "%{message}\r",
-		'prompt' => "\033[1;33m*** %{message}\033[0;0m",
+		'prompt' => "\033[1;33m=== %{message}\033[0;0m",
 		'success' => "\033[1;32m=== %{message}\033[0;0m\n"
 	];
 
