@@ -55,7 +55,7 @@ function create()
  *
  */
 
-function display($message, $templateCode = null)
+function display($message = null, $templateCode = null)
 {
 	// Build templates
 
