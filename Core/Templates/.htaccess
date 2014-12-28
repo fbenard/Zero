@@ -1,0 +1,12 @@
+# Global settings
+
+Options			+ExecCGI +FollowSymLinks +Includes -Indexes -Multiviews
+IndexIgnore		*/*
+RewriteEngine	On
+RewriteBase		/
+
+
+# Rewrite rules
+
+RewriteRule		.* \
+				index.php

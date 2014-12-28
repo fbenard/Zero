@@ -41,13 +41,40 @@ function install()
 
 function create()
 {
-	/*
-	- Application
-		- Preferences
-			- Boot.json
-	- index.php
-	- .htaccess
-	*/
+	// Log
+
+	display('Creating a new application...', 'info');
+
+
+	// Get the application code
+
+	do
+	{
+		display('App code: ', 'prompt');
+		$applicationCode = readline();
+	}
+	while (empty($applicationCode) === true);
+
+	
+	// Create the application
+
+	$pathToZero = __DIR__ . '/';
+	$pathToApplication = getcwd() . '/' . $applicationCode . '/';
+
+	execute
+	(
+		[
+			'mkdir -p ' . $pathToApplication,
+			'mkdir -p ' . $pathToApplication . 'Application',
+			'cp ' . $pathToZero . 'Templates/.htaccess ' . $pathToApplication . '.htaccess',
+			'cp ' . $pathToZero . 'Templates/index.php ' . $pathToApplication . 'index.php'
+		]
+	);
+
+
+	// Log
+
+	display('Application successfully created!', 'success');
 }
 
 
