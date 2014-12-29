@@ -8,5 +8,12 @@ RewriteBase		/
 
 # Rewrite rules
 
-RewriteRule		.* \
-				index.php
+RewriteRule		^static/(.+)$ \
+				Static/$1
+
+RewriteCond		%{REQUEST_URI} \
+				!(static\/) \
+				[NC]
+
+RewriteRule		^.* \
+				Application/index.php
