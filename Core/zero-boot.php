@@ -9,7 +9,7 @@ ini_set('display_errors', 'on');
 
 // Build paths
 
-define('PATH_ROOT', getcwd() . '/');
+define('PATH_ROOT', dirname(getcwd()) . '/');
 
 define('PATH_APPLICATION', PATH_ROOT . 'Application/');
 define('PATH_COMPONENTS', PATH_ROOT . 'Components/');
