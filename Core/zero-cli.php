@@ -68,8 +68,8 @@ function create()
 			'mkdir -p ' . $pathToApplication . 'Application',
 			'mkdir -p ' . $pathToApplication . 'Static',
 			'mkdir -p ' . $pathToApplication . 'Temporary',
-			'cp -R ' . $pathToZero . 'Templates/Application/* ' . $pathToApplication . 'Application',
 			'cp -R ' . $pathToZero . 'Templates/Static/* ' . $pathToApplication . 'Static',
+			'cp -R ' . $pathToZero . 'Templates/index.php ' . $pathToApplication . 'index.php',
 			'cp ' . $pathToZero . 'Templates/.htaccess ' . $pathToApplication . '.htaccess',
 			'cp ' . $pathToZero . 'Templates/composer.json ' . $pathToApplication . 'composer.json',
 			'chmod -R 755 ' . $pathToApplication . 'Temporary'
@@ -221,7 +221,7 @@ function update()
 			'mkdir -p ' . $pathToApplication,
 			'mkdir -p ' . $pathToApplication . 'Application',
 			'mkdir -p ' . $pathToApplication . 'Temporary',
-			'cp -R ' . $pathToZero . 'Templates/Application/* ' . $pathToApplication . 'Application',
+			'cp ' . $pathToZero . 'Templates/index.php ' . $pathToApplication . 'index.php',
 			'cp ' . $pathToZero . 'Templates/.htaccess ' . $pathToApplication . '.htaccess',
 			'chmod -R 755 ' . $pathToApplication . 'Temporary'
 		]
