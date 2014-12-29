@@ -161,9 +161,10 @@ function help()
 	display('Zero CLI', 'info');
 	display('Usage: zero [action]');
 	display('Commands:');
+	display("\t" . 'create' . "\t\t" . 'Creates a new application');
 	display("\t" . 'help' . "\t\t" . 'Displays this help');
 	display("\t" . 'install' . "\t\t" . 'Installs Zero CLI');
-	display("\t" . 'create' . "\t\t" . 'Creates a new application');
+	display("\t" . 'update' . "\t\t" . 'Updates an existing application');
 }
 
 
@@ -191,6 +192,16 @@ function main()
 	// Execute the action
 
 	$action();
+}
+
+
+/**
+ *
+ */
+
+function update()
+{
+	create();
 }
 
 
