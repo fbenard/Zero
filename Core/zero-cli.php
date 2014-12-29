@@ -205,7 +205,32 @@ function main()
 
 function update()
 {
-	create();
+	// Log
+
+	display('Updating application...', 'info');
+
+	
+	// Update the application
+
+	$pathToZero = __DIR__ . '/';
+	$pathToApplication = getcwd() . '/';
+
+	execute
+	(
+		[
+			'mkdir -p ' . $pathToApplication,
+			'mkdir -p ' . $pathToApplication . 'Application',
+			'mkdir -p ' . $pathToApplication . 'Temporary',
+			'cp -R ' . $pathToZero . 'Templates/Application/* ' . $pathToApplication . 'Application',
+			'cp ' . $pathToZero . 'Templates/.htaccess ' . $pathToApplication . '.htaccess',
+			'chmod -R 755 ' . $pathToApplication . 'Temporary'
+		]
+	);
+
+
+	// Log
+
+	display('Application successfully updated!', 'success');
 }
 
 
