@@ -178,8 +178,11 @@ class ErrorRenderer
 		
 		//
 
-		header('Status: 500 Internal Server Error');
-		header('Cache-Control: private, no-cache, no-store, must-revalidate');
+		if (headers_sent() === false)
+		{
+			header('Status: 500 Internal Server Error');
+			header('Cache-Control: private, no-cache, no-store, must-revalidate');
+		}
 
 
 		//
@@ -190,12 +193,15 @@ class ErrorRenderer
 			($headers['Accept'] === 'application/json')
 		)
 		{
-			//
+			// Send Content-Type header
 
-			header('Content-Type: application/json; charset=UTF-8');
+			if (headers_sent() === false)
+			{				
+				header('Content-Type: application/json; charset=UTF-8');
+			}
 
 
-			//
+			// Render the error
 
 			print
 			(
@@ -214,9 +220,12 @@ class ErrorRenderer
 		}
 		else
 		{
-			//
+			// Send Content-Type header
 
-			header('Content-Type: text/html; charset=UTF-8');
+			if (headers_sent() === false)
+			{				
+				header('Content-Type: text/html; charset=UTF-8');
+			}
 
 
 			//
