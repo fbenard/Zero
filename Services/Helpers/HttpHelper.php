@@ -106,7 +106,7 @@ class HttpHelper
 			((int)($statusCode) !== (int)($response->getStatusCode()))
 		)
 		{
-			e
+			\z\e
 			(
 				EXCEPTION_HTTP_STATUS_CODE_NOT_VALID,
 				[
