@@ -136,14 +136,17 @@ class RouteManager
 
 	public function setRoute($uri = null, $verb = null)
 	{
+		// Globals
+
+		global $argv;
+
+
 		// Build the URI
 
 		if (empty($uri) === true)
 		{
 			if (\z\app()->isRunningCli() === true)
 			{
-				global $argv;
-
 				if (array_key_exists(1, $argv) === true)
 				{
 					$this->_uri = $argv[1];
@@ -211,29 +214,40 @@ class RouteManager
 			}
 
 
-			// Count matches vs arguments
+			// Build arguments
 
-			array_shift($matches);
+			if (\z\app()->isRunningCli() === true)
+			{
+				$arguments = array_slice($argv, 2);
+			}
+			else
+			{
+				array_shift($matches);
+				$arguments = $matches;
+			}
 
-			$nbMatches = count($matches);
-			$nbArguments = count($definition['arguments']);
+
+			// Count arguments
+
+			$nbArguments = count($arguments);
+			$nbArgumentsDefined = count($definition['arguments']);
 
 
 			// Extract arguments
 
 			if
 			(
-				($nbMatches > 0) &&
-				($nbMatches === $nbArguments)
+				($nbArguments > 0) &&
+				($nbArguments === $nbArgumentsDefined)
 			)
 			{
 				//
 
-				$arguments = array_keys($definition['arguments']);
+				$keys = array_keys($definition['arguments']);
 
-				foreach ($matches as $key => $value)
+				foreach ($arguments as $key => $value)
 				{
-					$definition['arguments'][$arguments[$key]]['value'] = $value;
+					$definition['arguments'][$keys[$key]]['value'] = $value;
 				}
 			}
 
