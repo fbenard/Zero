@@ -219,6 +219,14 @@ class RouteManager
 			if (\z\app()->isRunningCli() === true)
 			{
 				$arguments = array_slice($argv, 2);
+
+				foreach ($arguments as $key => &$value)
+				{
+					if (strpos($value, '-') === 0)
+					{
+						unset($arguments[$key]);
+					}
+				}
 			}
 			else
 			{
