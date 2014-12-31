@@ -25,38 +25,38 @@ class BootManager
 	{
 		// Default boot
 
-		$this->_environment = 'prod';
+		$this->_environment = null;
 		$this->_universe = null;
-
 
 		
 		// Get boot from Boot.json
 
 		$pathToBoot = PATH_APPLICATION . 'Preferences/Boot.json';
+		$boot = [];
 
 		if (file_exists($pathToBoot) === true)
 		{
 			// Decode Boot.json
 
-			$rawJson = file_get_contents($pathToBoot);
-			$json = json_decode($rawJson, true);
+			$rawBoot = file_get_contents($pathToBoot);
+			$boot = json_decode($rawBoot, true);
 
 			
 			// Grab environment and universe
 
-			if (array_key_exists('environment', $json) === true)
+			if (array_key_exists('environment', $boot) === true)
 			{
-				$this->_environment = $json['environment'];
+				$this->_environment = $boot['environment'];
 			}
 
-			if (array_key_exists('universe', $json) === true)
+			if (array_key_exists('universe', $boot) === true)
 			{
-				$this->_universe = $json['universe'];
+				$this->_universe = $boot['universe'];
 			}
 		}
 
-		
-		// Get boot from CLI
+
+		// Are we in CLI mode?
 
 		if (\z\app()->isRunningCli() === true)
 		{
@@ -95,13 +95,28 @@ class BootManager
 				$this->_universe = $options['universe'];
 			}
 		}
-
-
-		// Make sure boot is valid
-
-		if (empty($this->_environment) === true)
+		else if
+		(
+			(array_key_exists('hosts', $boot) === true) &&
+			(array_key_exists($_SERVER['SERVER_NAME'], $boot['hosts']) === true)
+		)
 		{
-			\z\e(EXCEPTION_ENVIRONMENT_NOT_VALID);
+			// Grab the host
+
+			$host = $boot['hosts'][$_SERVER['SERVER_NAME']];
+
+
+			// Grab environment and universe
+
+			if (array_key_exists('environment', $host) === true)
+			{
+				$this->_environment = $host['environment'];
+			}
+
+			if (array_key_exists('universe', $host) === true)
+			{
+				$this->_universe = $host['universe'];
+			}
 		}
 	}
 }
