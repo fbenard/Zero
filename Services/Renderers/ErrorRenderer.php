@@ -236,15 +236,13 @@ class ErrorRenderer
 
 			//
 
-			print('<h1>' . $errorTitle . '</h1>');
+			print('<h1>' . $errorTitle . ' (' . $errorCode . ')</h1>');
 			print('<p>' . $errorDescription . '</p>');
 			
 
 			//
 
 			print('<hr />');
-			print('<p><strong>Code</strong></p>');
-			print('<pre>' . $errorCode . '</pre>');
 			print('<p><strong>File</strong></p>');
 			print('<pre>' . $errorFile . '</pre>');
 			print('<p><strong>Line</strong></p>');
@@ -300,8 +298,6 @@ class ErrorRenderer
 					print('<tr>');
 					print('<td valign="top"><pre>' . $errorTrace['file'] . '</pre></td>');
 					print('<td valign="top"><pre>' . $errorTrace['line'] . '</pre></td>');
-					print('<td valign="top"><pre>' . $errorTrace['class'] . '::' . $errorTrace['function'] . '</pre></td>');
-					print('<td valign="top"><pre>' . print_r($errorTrace['args'], true) . '</pre></td>');
 					print('</tr>');
 				}
 				
