@@ -22,6 +22,26 @@ class ExceptionRenderer
 		$errorRenderer = new \Zero\Services\Renderers\ErrorRenderer();
 
 		
+		// Try to get the file
+
+		$exceptionFile = $exception->getFile();
+
+		if (method_exists($exception, 'computeFile') === true)
+		{
+			$exceptionFile = $exception->computeFile();
+		}
+
+
+		// Try to get the line
+
+		$exceptionLine = $exception->getLine();
+
+		if (method_exists($exception, 'computeLine') === true)
+		{
+			$exceptionLine = $exception->computeLine();
+		}
+
+
 		// Try to get the context
 
 		$exceptionContext = [];
@@ -39,8 +59,8 @@ class ExceptionRenderer
 			$exception->getCode(),
 			$exception->getMessage(),
 			null,
-			$exception->getFile(),
-			$exception->getLine(),
+			$exceptionFile,
+			$exceptionLine,
 			$exceptionContext,
 			$exception->getTrace()
 		);

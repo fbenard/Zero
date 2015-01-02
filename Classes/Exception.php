@@ -43,6 +43,48 @@ extends \Exception
 	 *
 	 */
 
+	public function computeFile()
+	{
+		//
+
+		$trace = $this->getTrace();
+		$traceItem = array_shift($trace);
+
+
+		//
+
+		$result = $traceItem['file'];
+
+		
+		return $result;
+	}
+
+
+	/**
+	 *
+	 */
+
+	public function computeLine()
+	{
+		//
+
+		$trace = $this->getTrace();
+		$traceItem = array_shift($trace);
+
+
+		//
+
+		$result = $traceItem['line'];
+
+
+		return $result;
+	}
+
+
+	/**
+	 *
+	 */
+
 	public function getContext()
 	{
 		return $this->_context;
