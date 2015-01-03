@@ -119,8 +119,9 @@ function redirect($url)
 
 function render($viewCode, $viewArguments = null)
 {
-	$view = new \Zero\Classes\View();
-	print $view->render($viewCode, $viewArguments);
+	$output = \z\service('renderer/view')->renderView($viewCode, $viewArguments);
+	print $output;
+	return $output;
 }
 
 
