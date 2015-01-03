@@ -29,6 +29,16 @@ function cons($constantName, $constantValue = null)
  *
  */
 
+function dispatch($eventCode, $event, $sender)
+{
+	return \z\service('manager/event')->dispatch($eventCode, $event, $sender);
+}
+
+
+/**
+ *
+ */
+
 function dlog($message)
 {
 	return \z\service('manager/log')->log($message);
@@ -82,6 +92,16 @@ function dlogs($message)
 function e($exceptionCode, $exceptionContext = null)
 {
 	throw new \Zero\Classes\Exception($exceptionCode, $exceptionContext);
+}
+
+
+/**
+ *
+ */
+
+function listen($eventCode, $listener)
+{
+	return \z\service('manager/event')->listen($eventCode, $listener);
 }
 
 
