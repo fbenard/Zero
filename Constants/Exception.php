@@ -10,6 +10,7 @@
 // Files
 
 \z\cons('EXCEPTION_FILE_NOT_FOUND');
+\z\cons('EXCEPTION_FILE_NOT_GRANTED');
 
 
 // HTTP
