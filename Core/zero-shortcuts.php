@@ -31,7 +31,7 @@ function cons($constantName, $constantValue = null)
 
 function dlog($message)
 {
-	\z\service('manager/log')->log($message);
+	return \z\service('manager/log')->log($message);
 }
 
 
@@ -41,7 +41,7 @@ function dlog($message)
 
 function dloge($message)
 {
-	\z\service('manager/log')->logError($message);
+	return \z\service('manager/log')->logError($message);
 }
 
 
@@ -51,7 +51,7 @@ function dloge($message)
 
 function dlogi($message)
 {
-	\z\service('manager/log')->logInformation($message);
+	return \z\service('manager/log')->logInformation($message);
 }
 
 
@@ -61,7 +61,7 @@ function dlogi($message)
 
 function dlogp($nbItemsRemaining, $nbItems, &$timeOfStart, $message = null)
 {
-	\z\service('manager/log')->logProgress($nbItemsRemaining, $nbItems, $timeOfStart, $message);
+	return \z\service('manager/log')->logProgress($nbItemsRemaining, $nbItems, $timeOfStart, $message);
 }
 
 
@@ -71,7 +71,7 @@ function dlogp($nbItemsRemaining, $nbItems, &$timeOfStart, $message = null)
 
 function dlogs($message)
 {
-	\z\service('manager/log')->logSuccess($message);
+	return \z\service('manager/log')->logSuccess($message);
 }
 
 
@@ -97,7 +97,7 @@ function pref($preferenceCode, $preferenceValue = null, $isLocked = false)
 	}
 	else
 	{
-		\z\service('manager/preference')->setPreference($preferenceCode, $preferenceValue, $isLocked);
+		return \z\service('manager/preference')->setPreference($preferenceCode, $preferenceValue, $isLocked);
 	}
 }
 
