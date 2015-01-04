@@ -44,4 +44,9 @@
 \z\cons('EXCEPTION_VARIABLE_NOT_FOUND');
 \z\cons('EXCEPTION_VARIABLE_PATH_NOT_VALID');
 
+
+// Views
+
+\z\cons('EXCEPTION_VIEW_NOT_FOUND');
+
 ?>
