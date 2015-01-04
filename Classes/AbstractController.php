@@ -71,7 +71,7 @@ abstract class AbstractController
 	 *
 	 */
 
-	protected function renderJson($data)
+	protected function renderJson($data = null)
 	{
 		$json = json_encode($data);
 		$this->sendHeaders();
