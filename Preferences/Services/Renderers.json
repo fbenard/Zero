@@ -1,4 +1,5 @@
 {
+	"renderer/error": "\\Zero\\Services\\Renderers\\ErrorRenderer",
 	"renderer/log": "\\Zero\\Services\\Renderers\\LogRenderer",
 	"renderer/view": "\\Zero\\Services\\Renderers\\ViewRenderer"
 }
