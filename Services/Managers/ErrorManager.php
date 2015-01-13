@@ -17,26 +17,52 @@ class ErrorManager
 	
 	public static function onError($errorCode, $errorDescription, $errorFile = null, $errorLine = null, $errorContext = null)
 	{
-		// Build error renderer
+		// Build error
 
-		$errorRenderer = new \Zero\Services\Renderers\ErrorRenderer();
-
-		
-		// Render the error
-
-		$errorRenderer->renderError
-		(
+		$error =
+		[
 			$errorCode,
-			'Error #' . $errorCode,
+			$errorCode,
 			$errorDescription,
 			$errorFile,
 			$errorLine,
 			$errorContext,
 			debug_backtrace()
+		];
+
+
+		// Build error renderer
+
+		$errorRenderer = new \Zero\Services\Renderers\ErrorRenderer();
+
+
+		// Render the error
+
+		$output = call_user_func_array
+		(
+			[
+				$errorRenderer,
+				'renderError'
+			],
+			$error
 		);
 
+		
+		// Display the output
 
-		return true;
+		print($output);
+
+
+		// Exit
+
+		if (is_int($errorCode) === true)
+		{
+			exit($errorCode);
+		}
+		else
+		{
+			exit(1);
+		}
 	}
 }
 

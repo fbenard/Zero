@@ -14,37 +14,42 @@ class ErrorRenderer
 	/**
 	 *
 	 */
-	
-	public function renderError($errorCode, $errorTitle, $errorDescription = null, $errorFile = null, $errorLine = null, $errorContext = null, $errorTraces = null)
+
+	public function renderError($errorCode, $errorTitle, $errorDescription, $errorFile, $errorLine, $errorContext, $errorTraces)
 	{
-		// Rendering the error (GUI / CLI)
-		
-		if (\z\app()->isRunningCli() === true)
+		// Define method name
+
+		if (php_sapi_name() === 'cli')
 		{
-			self::renderErrorCli
-			(
-				$errorCode,
-				$errorTitle,
-				$errorDescription,
-				$errorFile,
-				$errorLine,
-				$errorContext,
-				$errorTraces
-			);
+			$methodName = 'renderErrorCli';
 		}
 		else
 		{
-			self::renderErrorGui
-			(
-				$errorCode,
-				$errorTitle,
-				$errorDescription,
-				$errorFile,
-				$errorLine,
-				$errorContext,
-				$errorTraces
-			);
+			$methodName = 'renderErrorGui';
 		}
+
+
+		// Render the error
+
+		$result = call_user_func_array
+		(
+			[
+				$this,
+				$methodName
+			],
+			func_get_args()
+		);
+
+
+		// Convert arrays to string
+
+		if (is_array($result) === true)
+		{
+			$result = implode(null, $result);
+		}
+
+
+		return $result;
 	}
 
 
@@ -54,31 +59,36 @@ class ErrorRenderer
 
 	public function renderErrorCli($errorCode, $errorTitle, $errorDescription, $errorFile, $errorLine, $errorContext, $errorTraces)
 	{
+		// Build result
+
+		$result = [];
+
+
 		// Display title and description
 
 		if (empty($errorTitle) === false)
 		{
-			print("\n\033[1;31m*** \033[1;31m" . $errorTitle . " (" . $errorCode . ")\n");
+			$result[] = "\n\033[1;31m*** \033[1;31m" . $errorTitle . " (" . $errorCode . ")\n";
 		}
 		
 		if (empty($errorDescription) === false)
 		{
-			print("\033[0;31m" . $errorDescription . "\n");
+			$result[] = "\033[0;31m" . $errorDescription . "\n";
 		}
 
-		print("\n");
+		$result[] = "\n";
 
 		
 		// Display error location
 
 		if (empty($errorFile) === false)
 		{
-			print("\033[1;37mFile:\t\033[0;0m" . $errorFile . "\n");
+			$result[] = "\033[1;37mFile:\t\033[0;0m" . $errorFile . "\n";
 		}
 
 		if (empty($errorLine) === false)
 		{
-			print("\033[1;37mLine:\t\033[0;0m" . $errorLine . "\n");
+			$result[] = "\033[1;37mLine:\t\033[0;0m" . $errorLine . "\n";
 		}
 		
 		
@@ -90,23 +100,23 @@ class ErrorRenderer
 			(empty($errorContext) === false)
 		)
 		{
-			print("\n\033[1;37mContext:" . "\n");
+			$result[] = "\n\033[1;37mContext:" . "\n";
 			
 			foreach ($errorContext as $key => $value)
 			{
-				print("\033[0;0m- " . $key . ' = ');
+				$result[] = "\033[0;0m- " . $key . ' = ';
 
 				if (is_object($value) === true)
 				{
-					print("\033[0;0m" . '"' . get_class($value) . '"' . "\n");
+					$result[] = "\033[0;0m" . '"' . get_class($value) . '"' . "\n";
 				}
 				else if (is_array($value) === true)
 				{
-					print("\n\033[0;0m" . print_r($value, true) . "\n");
+					$result[] = "\n\033[0;0m" . print_r($value, true) . "\n";
 				}
 				else
 				{
-					print("\033[0;0m" . '"' . $value . '"' . "\n");
+					$result[] = "\033[0;0m" . '"' . $value . '"' . "\n";
 				}
 			}
 		}
@@ -120,7 +130,7 @@ class ErrorRenderer
 			(empty($errorTraces) === false)
 		)
 		{
-			print("\n\033[1;37mTrace:" . "\n");
+			$result[] = "\n\033[1;37mTrace:" . "\n";
 			
 			foreach ($errorTraces as $errorTrace)
 			{
@@ -130,27 +140,18 @@ class ErrorRenderer
 					(isset($errorTrace['line']) === true)
 				)
 				{
-					print("\033[0;0m- " . basename($errorTrace['file']) . ' (' . $errorTrace['line'] . ')' . "\n");
+					$result[] = "\033[0;0m- " . basename($errorTrace['file']) . ' (' . $errorTrace['line'] . ')' . "\n";
 				}
 			}
 		}
-		
-		
+
+
 		// Ensure terminal is back to normal
 
-		print("\033[0;0m" . "\n");
-		
+		$result[] = "\033[0;0m" . "\n";
 
-		// Always exit with an error code
 
-		if (is_int($errorCode) === true)
-		{
-			exit($errorCode);
-		}
-		else
-		{
-			exit(1);	
-		}
+		return $result;
 	}
 
 
@@ -171,150 +172,203 @@ class ErrorRenderer
 		}
 		
 		
-		//
+		// Get HTTP request headers
 
-		$headers = apache_request_headers();
+		$requestHeaders = apache_request_headers();
+		$requestHeaders = array_change_key_case($requestHeaders, CASE_LOWER);
+
+
+		// Build HTTP response headers
+
+		$responseHeaders =
+		[
+			'status' => '500 Internal Server Error',
+			'cache-control' => 'private, no-cache, no-store, must-revalidate',
+			'content-type' => 'text/html; charset=UTF-8'
+		];
 
 		
-		//
+		// Build the result
 
-		if (headers_sent() === false)
-		{
-			header('Status: 500 Internal Server Error');
-			header('Cache-Control: private, no-cache, no-store, must-revalidate');
-		}
-
-
-		//
+		$result = [];
 
 		if
 		(
-			(array_key_exists('Accept', $headers) === true) &&
-			($headers['Accept'] === 'application/json')
+			(
+				(array_key_exists('content-type', $requestHeaders) === true) &&
+				($requestHeaders['content-type'] === 'application/json')
+			)
+			||
+			(
+				(array_key_exists('accept', $requestHeaders) === true) &&
+				($requestHeaders['accept'] === 'application/json')
+			)
 		)
 		{
-			// Send Content-Type header
+			// Content-Type is application/json
 
-			if (headers_sent() === false)
-			{				
-				header('Content-Type: application/json; charset=UTF-8');
-			}
+			$responseHeaders['content-type'] = 'application/json; charset=UTF-8';
 
 
 			// Render the error
 
-			print
+			$result = call_user_func_array
 			(
-				json_encode
-				(
-					[
-						'errorCode' => $errorCode,
-						'errorDescription' => $errorDescription,
-						'errorFile' => $errorFile,
-						'errorLine' => $errorLine,
-						'errorTitle' => $errorTitle,
-						'errorTraces' => $errorTraces
-					]
-				)
+				[
+					$this,
+					'renderErrorJson'
+				],
+				func_get_args()
 			);
 		}
 		else
 		{
-			// Send Content-Type header
-
-			if (headers_sent() === false)
-			{				
-				header('Content-Type: text/html; charset=UTF-8');
-			}
-
-
-			//
-
-			print('<html>');
-			print('<body>');
-
-
-			//
-
-			print('<h1>' . $errorTitle . ' (' . $errorCode . ')</h1>');
-			print('<p>' . $errorDescription . '</p>');
-			
-
-			//
-
-			print('<hr />');
-			print('<p><strong>File</strong></p>');
-			print('<pre>' . $errorFile . '</pre>');
-			print('<p><strong>Line</strong></p>');
-			print('<pre>' . $errorLine . '</pre>');
-			
-			
-			// Display the context
-
-			if
+			$result = call_user_func_array
 			(
-				(is_array($errorContext) === true) &&
-				(empty($errorContext) === false)
-			)
-			{
-				print('<hr />');
-				print('<h2>Context</h2>');
-				
-				foreach ($errorContext as $key => $value)
-				{
-					print('<p><strong>' . $key . '</strong></p>');
-					print('<pre>' . print_r($value, true) . '</pre>');
-				}
-			}
-			
-			
-			// Display the trace
-
-			if
-			(
-				(is_array($errorTraces) === true) &&
-				(empty($errorTraces) === false)
-			)
-			{
-				print('<hr />');
-				print('<h2>Trace</h2>');
-				print('<table>');
-				
-				foreach ($errorTraces as $errorTrace)
-				{
-					$errorTrace = array_merge
-					(
-						[
-							'file' => null,
-							'line' => null,
-							'class' => null,
-							'function' => null,
-							'type' => '::',
-							'args' => null
-						],
-						$errorTrace
-					);
-
-					print('<tr>');
-					print('<td valign="top"><pre>' . $errorTrace['file'] . '</pre></td>');
-					print('<td valign="top"><pre>' . $errorTrace['line'] . '</pre></td>');
-					print('</tr>');
-				}
-				
-				print('</table>');
-			}
-
-
-			//
-
-			print('</body>');
-			print('</html>');
+				[
+					$this,
+					'renderErrorHtml'
+				],
+				func_get_args()
+			);
 		}
 
 
-		// Quit the application
+		// Send HTTP response headers
 
-		die();
+		if (headers_sent() === false)
+		{
+			foreach ($responseHeaders as $header)
+			{
+				header($header);
+			}
+		}
+
+
+		return $result;
+	}
+
+
+	/**
+	 *
+	 */
+
+	private function renderErrorHtml($errorCode, $errorTitle, $errorDescription, $errorFile, $errorLine, $errorContext, $errorTraces)
+	{
+		// Build result
+
+		$result = [];
+
+
+		//
+
+		$result[] = '<html>';
+		$result[] = '<body>';
+
+
+		//
+
+		$result[] = '<h1>' . $errorTitle . ' (' . $errorCode . ')</h1>';
+		$result[] = '<p>' . $errorDescription . '</p>';
+		
+
+		//
+
+		$result[] = '<hr />';
+		$result[] = '<p><strong>File</strong></p>';
+		$result[] = '<pre>' . $errorFile . '</pre>';
+		$result[] = '<p><strong>Line</strong></p>';
+		$result[] = '<pre>' . $errorLine . '</pre>';
+		
+		
+		// Display the context
+
+		if
+		(
+			(is_array($errorContext) === true) &&
+			(empty($errorContext) === false)
+		)
+		{
+			$result[] = '<hr />';
+			$result[] = '<h2>Context</h2>';
+			
+			foreach ($errorContext as $key => $value)
+			{
+				$result[] = '<p><strong>' . $key . '</strong></p>';
+				$result[] = '<pre>' . print_r($value, true) . '</pre>';
+			}
+		}
+		
+		
+		// Display the trace
+
+		if
+		(
+			(is_array($errorTraces) === true) &&
+			(empty($errorTraces) === false)
+		)
+		{
+			$result[] = '<hr />';
+			$result[] = '<h2>Trace</h2>';
+			$result[] = '<table>';
+			
+			foreach ($errorTraces as $errorTrace)
+			{
+				$errorTrace = array_merge
+				(
+					[
+						'file' => null,
+						'line' => null,
+						'class' => null,
+						'function' => null,
+						'type' => '::',
+						'args' => null
+					],
+					$errorTrace
+				);
+
+				$result[] = '<tr>';
+				$result[] = '<td valign="top"><pre>' . $errorTrace['file'] . '</pre></td>';
+				$result[] = '<td valign="top"><pre>' . $errorTrace['line'] . '</pre></td>';
+				$result[] = '</tr>';
+			}
+			
+			$result[] = '</table>';
+		}
+
+
+		//
+
+		$result[] = '</body>';
+		$result[] = '</html>';
+
+
+		return $result;
+	}
+
+
+	/**
+	 *
+	 */
+
+	private function renderErrorJson($errorCode, $errorTitle, $errorDescription, $errorFile, $errorLine, $errorContext, $errorTraces)
+	{
+		// Build the result
+
+		$result = json_encode
+		(
+			[
+				'errorCode' => $errorCode,
+				'errorDescription' => $errorDescription,
+				'errorFile' => $errorFile,
+				'errorLine' => $errorLine,
+				'errorTitle' => $errorTitle,
+				'errorTraces' => $errorTraces
+			]
+		);
+
+
+		return $result;
 	}
 }
 
