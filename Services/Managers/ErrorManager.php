@@ -17,8 +17,8 @@ class ErrorManager
 	
 	public static function onError($errorCode, $errorDescription, $errorFile = null, $errorLine = null, $errorContext = null)
 	{
-		//
-		
+		// Build error renderer
+
 		$errorRenderer = new \Zero\Services\Renderers\ErrorRenderer();
 
 		
