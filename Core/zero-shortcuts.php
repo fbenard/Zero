@@ -137,10 +137,21 @@ function redirect($url)
  *
  */
 
-function render($viewCode, $viewArguments = null)
+function render($viewCode, $viewArguments = null, $print = true)
 {
+	// Render the view
+
 	$output = \z\service('renderer/view')->renderView($viewCode, $viewArguments);
-	print $output;
+
+
+	// Print it
+
+	if ($print === true)
+	{
+		print $output;
+	}
+
+
 	return $output;
 }
 
