@@ -238,9 +238,9 @@ class ErrorRenderer
 
 		if (headers_sent() === false)
 		{
-			foreach ($responseHeaders as $header)
+			foreach ($responseHeaders as $headerCode => $headerValue)
 			{
-				header($header);
+				header($headerCode . ': ' . $headerValue);
 			}
 		}
 
