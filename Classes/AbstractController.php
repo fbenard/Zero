@@ -27,7 +27,7 @@ abstract class AbstractController
 		//
 
 		$this->_contentType = 'text/html';
-		$this->_statusCode = '200 OK';
+		$this->_statusCode = 200;
 		$this->_view = new \Zero\Classes\View();
 
 
@@ -95,8 +95,9 @@ abstract class AbstractController
 
 		// Send HTTP headers
 
+		http_response_code($this->_statusCode);
+
 		header('Content-Type: ' . $this->_contentType . '; charset=UTF-8');
-		header('Status: ' . $this->_statusCode);
 		header('Cache-Control: private, no-cache, no-store, must-revalidate');
 	}
 }

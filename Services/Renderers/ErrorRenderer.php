@@ -180,9 +180,10 @@ class ErrorRenderer
 
 		// Build HTTP response headers
 
+		http_response_code(500);
+
 		$responseHeaders =
 		[
-			'status' => '500 Internal Server Error',
 			'cache-control' => 'private, no-cache, no-store, must-revalidate',
 			'content-type' => 'text/html; charset=UTF-8'
 		];
@@ -194,15 +195,8 @@ class ErrorRenderer
 
 		if
 		(
-			(
-				(array_key_exists('content-type', $requestHeaders) === true) &&
-				($requestHeaders['content-type'] === 'application/json')
-			)
-			||
-			(
-				(array_key_exists('accept', $requestHeaders) === true) &&
-				($requestHeaders['accept'] === 'application/json')
-			)
+			(array_key_exists('accept-content', $requestHeaders) === true) &&
+			($requestHeaders['accept-content'] === 'application/json')
 		)
 		{
 			// Content-Type is application/json
