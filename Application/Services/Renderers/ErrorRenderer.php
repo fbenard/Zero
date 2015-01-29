@@ -83,7 +83,7 @@ class ErrorRenderer
 
 		if (empty($errorFile) === false)
 		{
-			$result[] = "\033[1;37mFile:\t\033[0;0m" . $errorFile . "\n";
+			$result[] = "\033[1;37mFile:\t\033[0;0m" . str_replace(getcwd(), null, $errorFile) . "\n";
 		}
 
 		if (empty($errorLine) === false)
@@ -140,7 +140,7 @@ class ErrorRenderer
 					(isset($errorTrace['line']) === true)
 				)
 				{
-					$result[] = "\033[0;0m- " . basename($errorTrace['file']) . ' (' . $errorTrace['line'] . ')' . "\n";
+					$result[] = "\033[0;0m- " . str_replace(getcwd(), null, $errorTrace['file']) . ' (' . $errorTrace['line'] . ')' . "\n";
 				}
 			}
 		}
@@ -270,7 +270,7 @@ class ErrorRenderer
 
 		$result[] = '<hr />';
 		$result[] = '<p><strong>File</strong></p>';
-		$result[] = '<pre>' . $errorFile . '</pre>';
+		$result[] = '<pre>' . str_replace(getcwd(), null, $errorFile) . '</pre>';
 		$result[] = '<p><strong>Line</strong></p>';
 		$result[] = '<pre>' . $errorLine . '</pre>';
 		
@@ -322,7 +322,7 @@ class ErrorRenderer
 				);
 
 				$result[] = '<tr>';
-				$result[] = '<td valign="top"><pre>' . $errorTrace['file'] . '</pre></td>';
+				$result[] = '<td valign="top"><pre>' . str_replace(getcwd(), null, $errorTrace['file']) . '</pre></td>';
 				$result[] = '<td valign="top"><pre>' . $errorTrace['line'] . '</pre></td>';
 				$result[] = '</tr>';
 			}
