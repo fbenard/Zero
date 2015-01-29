@@ -31,7 +31,7 @@ class BootManager
 		
 		// Get boot from Boot.json
 
-		$pathToBoot = PATH_APPLICATION . 'Preferences/Boot.json';
+		$pathToBoot = PATH_APPLICATION . 'Config/Boot.json';
 		$boot = [];
 
 		if (file_exists($pathToBoot) === true)

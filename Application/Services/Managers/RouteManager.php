@@ -61,7 +61,7 @@ class RouteManager
 		{
 			// Find definitions
 
-			$pathToDefinitions = \z\service('helper/file')->listFiles($path . 'Preferences/Routes/', '*.json');
+			$pathToDefinitions = \z\service('helper/file')->listFiles($path . 'Config/Routes/', '*.json');
 
 
 			// For each definitions

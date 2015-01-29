@@ -90,7 +90,7 @@ class PreferenceManager
 			{
 				// Prepare global path
 
-				$path = $pathToExtension . 'Preferences/Preferences';
+				$path = $pathToExtension . 'Config/Preferences/Preferences';
 
 
 				// Build paths

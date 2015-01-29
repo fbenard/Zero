@@ -52,7 +52,7 @@ class ServiceManager
 			// Find services
 
 			$fileHelper = new \fbenard\Zero\Services\Helpers\FileHelper();
-			$pathToServices = $fileHelper->listFiles($path . 'Preferences/Services/', '*.json');
+			$pathToServices = $fileHelper->listFiles($path . 'Config/Services/', '*.json');
 
 
 			// For each service
