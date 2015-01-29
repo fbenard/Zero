@@ -25,7 +25,7 @@ class ServiceManager
 	public function __construct()
 	{
 		$this->_definitions = [];
-		$this->_factory = new \Zero\Services\Factories\ServiceFactory();
+		$this->_factory = new \fbenard\Zero\Services\Factories\ServiceFactory();
 		$this->_services = [];
 	}
 
@@ -51,7 +51,7 @@ class ServiceManager
 		{
 			// Find services
 
-			$fileHelper = new \Zero\Services\Helpers\FileHelper();
+			$fileHelper = new \fbenard\Zero\Services\Helpers\FileHelper();
 			$pathToServices = $fileHelper->listFiles($path . 'Preferences/Services/', '*.json');
 
 

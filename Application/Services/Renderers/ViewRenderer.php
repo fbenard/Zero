@@ -20,7 +20,7 @@ class ViewRenderer
 		
 		// Build a view
 		
-		$this->_view = new \Zero\Classes\View();
+		$this->_view = new \fbenard\Zero\Classes\View();
 
 
 		// Render the view

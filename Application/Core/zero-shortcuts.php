@@ -11,7 +11,7 @@ namespace z;
 
 function app()
 {
-	return \Zero\Classes\Application::getInstance();
+	return \fbenard\Zero\Classes\Application::getInstance();
 }
 
 
@@ -91,7 +91,7 @@ function dlogs($message)
 
 function e($exceptionCode, $exceptionContext = null)
 {
-	throw new \Zero\Classes\Exception($exceptionCode, $exceptionContext);
+	throw new \fbenard\Zero\Classes\Exception($exceptionCode, $exceptionContext);
 }
 
 

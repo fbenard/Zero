@@ -63,7 +63,7 @@ class ExceptionManager
 
 		// Build error renderer
 
-		$errorRenderer = new \Zero\Services\Renderers\ErrorRenderer();
+		$errorRenderer = new \fbenard\Zero\Services\Renderers\ErrorRenderer();
 
 
 		// Render the error

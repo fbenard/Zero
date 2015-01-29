@@ -23,7 +23,7 @@ class Application
 	
 	private function __construct()
 	{
-		$this->_serviceManager = new \Zero\Services\Managers\ServiceManager();
+		$this->_serviceManager = new \fbenard\Zero\Services\Managers\ServiceManager();
 		$this->_serviceManager->initialize();
 	}
 	
@@ -53,11 +53,11 @@ class Application
 		
 		if (is_null(Application::$_instance) === true)
 		{
-			\Zero\Classes\Application::$_instance = new \Zero\Classes\Application();
+			\fbenard\Zero\Classes\Application::$_instance = new \fbenard\Zero\Classes\Application();
 		}
 		
 		
-		return \Zero\Classes\Application::$_instance;
+		return \fbenard\Zero\Classes\Application::$_instance;
 	}
 
 	

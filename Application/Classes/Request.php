@@ -13,7 +13,7 @@ class Request
 {
 	// Traits
 
-	use \Zero\Traits\GetSet;
+	use \fbenard\Zero\Traits\GetSet;
 
 
 	// Attributes

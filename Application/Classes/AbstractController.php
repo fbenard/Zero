@@ -28,7 +28,7 @@ abstract class AbstractController
 
 		$this->_contentType = 'text/html';
 		$this->_statusCode = 200;
-		$this->_view = new \Zero\Classes\View();
+		$this->_view = new \fbenard\Zero\Classes\View();
 
 
 		//
