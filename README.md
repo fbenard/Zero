@@ -10,8 +10,7 @@ Zero is a micro-framework written in PHP, for PHP applications.
 
 ```
 composer global require fbenard/zero:*
-php ~/.composer/vendor/fbenard/zero/Core/zero-cli.php install
-php Components/fbenard/zero/Core/zero-cli.php install
+php ~/.composer/vendor/fbenard/zero/Application/Core/zero-cli.php install
 ```
 
 

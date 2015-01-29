@@ -1,0 +1,4 @@
+{
+	"helper/directory": "\\fbenard\\Zero\\Services\\Helpers\\DirectoryHelper",
+	"helper/file": "\\fbenard\\Zero\\Services\\Helpers\\FileHelper"
+}

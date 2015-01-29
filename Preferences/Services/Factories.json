@@ -1,4 +1,0 @@
-{
-	"factory/controller": "\\Zero\\Services\\Factories\\ControllerFactory",
-	"factory/service": "\\Zero\\Services\\Factories\\ServiceFactory"
-}

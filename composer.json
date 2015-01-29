@@ -9,7 +9,7 @@
 	[
 		{
 			"name": "Fabien BÉNARD",
-			"email": "fb.spam@me.com",
+			"email": "contact@fabienbenard.com",
 			"homepage": "http://fabienbenard.com",
 			"role": "Developer"
 		}
@@ -29,12 +29,11 @@
 	{
 		"phpunit/phpunit": "4.4.x-dev"
 	},
-	"minimum-stability": "dev",
 	"autoload":
 	{
 		"psr-4":
 		{
-			"Zero\\": ""
+			"fbenard\\Zero\\": "Application/"
 		}
 	}
 }
