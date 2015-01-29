@@ -2,7 +2,7 @@
 
 // Namespace
 
-namespace Zero\Tests\Classes;
+namespace fbenard\Zero\Tests\Classes;
 
 
 /**
