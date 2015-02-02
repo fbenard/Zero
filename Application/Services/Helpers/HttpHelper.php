@@ -15,7 +15,7 @@ class HttpHelper
 	 *
 	 */
 
-	public function call($verb, $host, $uri, $headers = null, $query = null, $body = null, $statusCode = 200)
+	public function call($verb, $host, $port, $uri, $headers = null, $query = null, $body = null, $statusCode = 200)
 	{
 		// Globals
 
@@ -53,6 +53,11 @@ class HttpHelper
 				'exceptions' => false
 			]
 		);
+
+
+		//
+
+		$request->setPort($port);
 
 
 		// Log the request
