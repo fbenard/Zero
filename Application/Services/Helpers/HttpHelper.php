@@ -11,37 +11,25 @@ namespace fbenard\Zero\Services\Helpers;
 
 class HttpHelper
 {
-	// Attributes
-
-	private $_client = null;
-
-
 	/**
 	 *
 	 */
 
-	public function __construct($host)
+	public function call($verb, $host, $uri, $headers = null, $query = null, $body = null, $statusCode = 200)
 	{
+		// Globals
+
+		global $argv;
+
+
 		// Build the HTTP client
 
-		$this->_client = new \GuzzleHttp\Client
+		$client = new \GuzzleHttp\Client
 		(
 			[
 				'base_url' => $host
 			]
 		);
-	}
-
-
-	/**
-	 *
-	 */
-
-	public function call($verb, $uri, $headers = null, $query = null, $body = null, $statusCode = 200)
-	{
-		// Globals
-
-		global $argv;
 
 
 		// Make sure headers is an array
@@ -54,7 +42,7 @@ class HttpHelper
 
 		// Build the request
 
-		$request = $this->_client->createRequest
+		$request = $client->createRequest
 		(
 			$verb,
 			$uri,
@@ -82,7 +70,7 @@ class HttpHelper
 
 		// Send the request
 
-		$response = $this->_client->send($request);
+		$response = $client->send($request);
 
 
 		// Log the response
