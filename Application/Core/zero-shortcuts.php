@@ -160,6 +160,16 @@ function render($viewCode, $viewArguments = null, $print = true)
  *
  */
 
+function request()
+{
+	return \z\service('manager/request')->getRequest();
+}
+
+
+/**
+ *
+ */
+
 function service($serviceCode = null)
 {
 	return \z\app()->_serviceManager->getService($serviceCode);
