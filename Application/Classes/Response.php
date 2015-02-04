@@ -11,11 +11,6 @@ namespace fbenard\Zero\Classes;
 
 class Response
 {
-	// Traits
-
-	use \fbenard\Zero\Traits\GetSet;
-
-
 	// Attributes
 
 	private $_contentType = null;
