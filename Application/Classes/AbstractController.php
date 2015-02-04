@@ -13,6 +13,7 @@ abstract class AbstractController
 {
 	// Attributes
 
+	protected $_output = null;
 	protected $_response = null;
 	protected $_view = null;
 
@@ -44,6 +45,7 @@ abstract class AbstractController
 
 	public function pushResponse()
 	{
+		$this->_response->setBody($this->_output);
 		$this->_response->push();
 	}
 
@@ -69,8 +71,7 @@ abstract class AbstractController
 
 	protected function renderView($viewCode, $viewArguments = null)
 	{
-		$output = $this->_view->render($viewCode, $viewArguments);
-		$this->_response->setBody($output);
+		$this->setOutput($this->_view->render($viewCode, $viewArguments));
 	}
 
 
@@ -78,10 +79,9 @@ abstract class AbstractController
 	 *
 	 */
 
-	protected function renderJson($data = null)
+	protected function setOutput($output)
 	{
-		$output = json_encode($data);
-		$this->_response->setBody($output);
+		$this->_output = $output;
 	}
 }
 
