@@ -96,7 +96,7 @@ class ControllerManager
 
 		// Run the controller
 
-		$result = call_user_func_array
+		call_user_func_array
 		(
 			[
 				$this->_controller,
@@ -125,7 +125,7 @@ class ControllerManager
 		
 		// Push the response
 		
-		//$this->_controller->response->push($output);
+		$this->_controller->pushResponse();
 	}
 }
 

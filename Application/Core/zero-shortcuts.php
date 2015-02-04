@@ -128,8 +128,8 @@ function pref($preferenceCode, $preferenceValue = null, $isLocked = false)
 
 function redirect($url)
 {
-	header('Location: ' . $url);
-	die();
+	$response = new \fbenard\Zero\Classes\Response();
+	$response->redirect($url);
 }
 
 
