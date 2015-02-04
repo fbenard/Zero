@@ -24,17 +24,17 @@ class ControllerManager
 
 	public function initialize()
 	{
-		//
+		// Get the current route
 
 		$route = \z\service('manager/route')->_route;
 
 		
-		//
+		// Build the controller for this route
 
 		$this->_controller = \z\service('factory/controller')->buildController($route['controller']);
 
 
-		//
+		// Check whether the action is supported by the controller
 
 		$this->_action = 'action_' . $route['action'];
 
@@ -67,12 +67,12 @@ class ControllerManager
 
 	public function run()
 	{
-		//
+		// Get the current route
 
 		$route = \z\service('manager/route')->_route;
 
 
-		//
+		// Execute each pre action
 
 		foreach ($route['pre'] as $pre)
 		{
@@ -106,7 +106,7 @@ class ControllerManager
 		);
 
 
-		//
+		// Execute each post action
 
 		foreach ($route['post'] as $post)
 		{
