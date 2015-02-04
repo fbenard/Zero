@@ -40,7 +40,13 @@ class ControllerManager
 
 		if (method_exists($this->_controller, $this->_action) === false)
 		{
-			\z\e(EXCEPTION_CONTROLLER_ACTION_NOT_FOUND);
+			\z\e
+			(
+				EXCEPTION_CONTROLLER_ACTION_NOT_FOUND,
+				[
+					'action' => $route['action']
+				]
+			);
 		}
 
 
