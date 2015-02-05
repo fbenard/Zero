@@ -15,7 +15,7 @@ class HttpHelper
 	 *
 	 */
 
-	public function call($verb, $host, $port, $uri, $headers = null, $query = null, $body = null, $statusCode = 200)
+	public function call($verb, $host, $port, $uri, $headers = null, $query = null, $body = null, $statusCode = null)
 	{
 		// Globals
 
