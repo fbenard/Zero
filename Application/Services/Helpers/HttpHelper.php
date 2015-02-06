@@ -22,11 +22,21 @@ class HttpHelper
 		global $argv;
 
 
-		// Make sure headers is an array
+		// Fix headers, query and body
 
 		if (is_array($headers) === false)
 		{
 			$headers = [];
+		}
+
+		if (is_array($query) === false)
+		{
+			$query = [];
+		}
+
+		if (is_null($body) === true)
+		{
+			$body = '';
 		}
 
 
@@ -47,13 +57,17 @@ class HttpHelper
 			$verb,
 			$uri,
 			[
-				'port' => $port,
-				'headers' => $headers,
-				'query' => $query,
-				'body' => $body,
 				'exceptions' => false
 			]
 		);
+
+
+		// Setup the request
+
+		$request->setPort($port);
+		$request->setHeaders($headers);
+		$request->setQuery($query);
+		$request->setBody(\GuzzleHttp\Stream\Stream::factory($body));
 
 
 		// Log the request
