@@ -47,17 +47,13 @@ class HttpHelper
 			$verb,
 			$uri,
 			[
+				'port' => $port,
 				'headers' => $headers,
 				'query' => $query,
 				'body' => $body,
 				'exceptions' => false
 			]
 		);
-
-
-		//
-
-		$request->setPort($port);
 
 
 		// Log the request
