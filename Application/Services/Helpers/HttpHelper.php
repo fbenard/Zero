@@ -22,6 +22,14 @@ class HttpHelper
 		global $argv;
 
 
+		// Make sure headers is an array
+
+		if (is_array($headers) === false)
+		{
+			$headers = [];
+		}
+
+
 		// Build the HTTP client
 
 		$client = new \GuzzleHttp\Client
@@ -30,14 +38,6 @@ class HttpHelper
 				'base_url' => $host
 			]
 		);
-
-
-		// Make sure headers is an array
-
-		if (is_array($headers) === false)
-		{
-			$headers = [];
-		}
 
 
 		// Build the request
