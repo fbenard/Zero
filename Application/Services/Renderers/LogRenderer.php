@@ -63,18 +63,9 @@ class LogRenderer
 		);
 		
 
-		//
+		// Generate pads
 
-		if ($this->isTerminal() === true)
-		{
-			// Generate pads
-
-			$pads = str_pad(null, @exec('tput cols') - strlen($message) - strlen('%{pads}'), ' ');
-		}
-		else
-		{
-			$pads = null;
-		}
+		$pads = str_pad(null, @exec('tput cols') - strlen($message) - strlen('%{pads}'), ' ');
 
 
 		// Format the message with pads
@@ -99,43 +90,13 @@ class LogRenderer
 	{
 		//
 
-		if
-		(
-			(\z\app()->isRunningCli() === false) ||
-			($this->isTerminal() === false)
-		)
-		{
-			return true;
-		}
-		else
+		if (\z\app()->isRunningCli() === true)
 		{
 			return false;
 		}
-	}
-
-
-	/**
-	 *
-	 */
-
-	public function isTerminal()
-	{
-		//
-
-		$term = trim(getenv('ENV'));
-
-		if
-		(
-			(posix_isatty(STDERR) === true)  &&
-			(posix_isatty(STDOUT) === true) &&
-			($term !== 'dumb')
-		)
-		{
-			return true;
-		}
 		else
 		{
-			return false;
+			return true;
 		}
 	}
 
