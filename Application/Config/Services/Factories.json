@@ -1,5 +1,4 @@
 {
 	"factory/controller": "\\fbenard\\Zero\\Services\\Factories\\ControllerFactory",
-	"factory/db/query": "\\fbenard\\Material\\Services\\Factories\\QueryFactory",
 	"factory/service": "\\fbenard\\Zero\\Services\\Factories\\ServiceFactory"
 }
