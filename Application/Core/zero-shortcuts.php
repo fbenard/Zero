@@ -29,6 +29,16 @@ function cons($constantName, $constantValue = null)
  *
  */
 
+function db()
+{
+	return \z\service('factory/db/query')->buildQuery();
+}
+
+
+/**
+ *
+ */
+
 function dispatch($eventCode, $event, $sender)
 {
 	return \z\service('manager/event')->dispatch($eventCode, $event, $sender);
