@@ -17,12 +17,26 @@ class ControllerFactory
 	
 	public function buildController($controllerCode)
 	{
-		// Build the classname
+		// Build the class name
 
 		$className = $controllerCode;
 
 
-		// Make sure the controller is instantiable
+		// Make sure the class exists
+
+		if (class_exists($className) === false)
+		{
+			\z\e
+			(
+				EXCEPTION_CONTROLLER_NOT_INSTANTIABLE,
+				[
+					'controllerCode' => $controllerCode
+				]
+			);
+		}
+
+
+		// Make sure the class is instantiable
 		
 		$reflection = new \ReflectionClass($className);
 
