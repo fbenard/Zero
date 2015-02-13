@@ -41,6 +41,29 @@ class ServiceManager
 
 	public function initialize()
 	{
+		// Load definitions
+
+		$this->loadDefinitions();
+	}
+
+
+	/**
+	 *
+	 */
+
+	private function loadDefinitions()
+	{
+		// Get the cache
+
+		$cache = \z\cache()->getCache('services');
+
+		if ($cache !== false)
+		{
+			$this->_definitions = unserialize($cache);
+			return;
+		}
+
+
 		//
 
 		$dependencies = \z\boot()->dependencies;
@@ -71,6 +94,15 @@ class ServiceManager
 				$this->registerServices($definitions);
 			}
 		}
+
+
+		// Set the cache
+
+		\z\cache()->setCache
+		(
+			'services',
+			serialize($this->_definitions)
+		);
 	}
 
 
@@ -120,7 +152,7 @@ class ServiceManager
 	 *
 	 */
 
-	public function registerServices($services)
+	private function registerServices($services)
 	{
 		// Register each service provided
 

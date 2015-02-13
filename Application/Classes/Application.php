@@ -20,6 +20,7 @@ class Application
 	
 	private static $_instance = null;
 	private $_bootManager = null;
+	private $_cacheManager = null;
 	private $_serviceManager = null;
 	
 	
@@ -32,6 +33,7 @@ class Application
 		//
 
 		$this->_bootManager = new \fbenard\Zero\Services\Managers\BootManager();
+		$this->_cacheManager = new \fbenard\Zero\Services\Managers\CacheManager();
 		$this->_serviceManager = new \fbenard\Zero\Services\Managers\ServiceManager();
 	}
 	
@@ -77,6 +79,7 @@ class Application
 	{
 		//
 
+		$this->_cacheManager->initialize();
 		$this->_bootManager->initialize();
 		$this->_serviceManager->initialize();
 
@@ -84,9 +87,9 @@ class Application
 		//
 
 		\z\service('manager/constant')->initialize();
+		\z\service('manager/preference')->initialize();
 		\z\service('manager/route')->initialize();
 		\z\service('manager/controller')->initialize();
-		\z\service('manager/preference')->initialize();
 		\z\service('manager/session')->initialize();
 	}
 	

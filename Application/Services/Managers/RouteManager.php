@@ -51,6 +51,17 @@ class RouteManager
 
 	private function loadDefinitions()
 	{
+		// Get the cache
+
+		$cache = \z\cache()->getCache('routes');
+
+		if ($cache !== false)
+		{
+			$this->_definitions = unserialize($cache);
+			return;
+		}
+
+
 		//
 
 		$dependencies = \z\boot()->dependencies;
@@ -128,6 +139,15 @@ class RouteManager
 				);
 			}
 		}
+
+
+		// Set the cache
+
+		\z\cache()->setCache
+		(
+			'routes',
+			serialize($this->_definitions)
+		);
 	}
 
 

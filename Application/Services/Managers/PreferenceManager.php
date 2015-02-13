@@ -73,6 +73,29 @@ class PreferenceManager
 		}
 
 
+		// Load preferences
+
+		$this->loadPreferences();
+	}
+
+
+	/**
+	 *
+	 */
+
+	private function loadPreferences()
+	{
+		// Get the cache
+
+		$cache = \z\cache()->getCache('preferences');
+
+		if ($cache !== false)
+		{
+			$this->_preferences = unserialize($cache);
+			return;
+		}
+
+
 		// Define the number of passes
 		
 		$dependencies = \z\boot()->dependencies;
@@ -117,6 +140,15 @@ class PreferenceManager
 			
 			array_shift($dependencies);
 		}
+
+
+		// Set the cache
+
+		\z\cache()->setCache
+		(
+			'preferences',
+			serialize($this->_preferences)
+		);
 	}
 	
 	

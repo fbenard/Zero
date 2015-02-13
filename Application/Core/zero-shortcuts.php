@@ -29,6 +29,16 @@ function boot()
  *
  */
 
+function cache()
+{
+	return \z\app()->cacheManager;
+}
+
+
+/**
+ *
+ */
+
 function cons($constantName, $constantValue = null)
 {
 	return \z\service('manager/constant')->setConstant($constantName, $constantValue);

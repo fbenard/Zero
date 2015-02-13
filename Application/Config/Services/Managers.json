@@ -1,6 +1,5 @@
 {
 	"manager/buffer": "\\fbenard\\Zero\\Services\\Managers\\BufferManager",
-	"manager/cache": "\\fbenard\\Zero\\Services\\Managers\\CacheManager",
 	"manager/constant": "\\fbenard\\Zero\\Services\\Managers\\ConstantManager",
 	"manager/controller": "\\fbenard\\Zero\\Services\\Managers\\ControllerManager",
 	"manager/error": "\\fbenard\\Zero\\Services\\Managers\\ErrorManager",
