@@ -87,7 +87,8 @@ class PreferenceManager
 	{
 		// Get the cache
 
-		$cache = \z\cache()->getCache('preferences');
+		$cacheCode = 'preferences_' . \z\boot()->environment . '_' . \z\boot()->universe;
+		$cache = \z\cache()->getCache($cacheCode);
 
 		if ($cache !== false)
 		{
@@ -146,7 +147,7 @@ class PreferenceManager
 
 		\z\cache()->setCache
 		(
-			'preferences',
+			$cacheCode,
 			serialize($this->_preferences)
 		);
 	}

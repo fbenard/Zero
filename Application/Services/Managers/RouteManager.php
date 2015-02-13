@@ -53,7 +53,8 @@ class RouteManager
 	{
 		// Get the cache
 
-		$cache = \z\cache()->getCache('routes');
+		$cacheCode = 'routes_' . \z\boot()->environment . '_' . \z\boot()->universe;
+		$cache = \z\cache()->getCache($cacheCode);
 
 		if ($cache !== false)
 		{
@@ -145,7 +146,7 @@ class RouteManager
 
 		\z\cache()->setCache
 		(
-			'routes',
+			$cacheCode,
 			serialize($this->_definitions)
 		);
 	}

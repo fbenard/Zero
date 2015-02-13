@@ -55,7 +55,8 @@ class ServiceManager
 	{
 		// Get the cache
 
-		$cache = \z\cache()->getCache('services');
+		$cacheCode = 'services_' . \z\boot()->environment . '_' . \z\boot()->universe;
+		$cache = \z\cache()->getCache($cacheCode);
 
 		if ($cache !== false)
 		{
@@ -100,7 +101,7 @@ class ServiceManager
 
 		\z\cache()->setCache
 		(
-			'services',
+			$cacheCode,
 			serialize($this->_definitions)
 		);
 	}
