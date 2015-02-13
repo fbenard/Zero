@@ -69,10 +69,18 @@ class BootManager
 		}
 
 
+		//
+
+		foreach ($dependencies as &$dependency)
+		{
+			$dependency = PATH_COMPONENTS . $dependency;
+		}
+
+
 		// Inject Zero and the application
 
 		array_unshift($dependencies, PATH_ZERO);
-		array_unshift($dependencies, PATH_APPLICATION);
+		array_push($dependencies, PATH_APPLICATION);
 		
 
 		// De-duplicate dependencies
