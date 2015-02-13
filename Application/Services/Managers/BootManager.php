@@ -11,10 +11,16 @@ namespace fbenard\Zero\Services\Managers;
 
 class BootManager
 {
+	// Traits
+
+	use \fbenard\Zero\Traits\Get;
+
+	
 	// Attributes
 
-	public $_environment = null;
-	public $_universe = null;
+	private $_dependencies = null;
+	private $_environment = null;
+	private $_universe = null;
 
 
 	/**
