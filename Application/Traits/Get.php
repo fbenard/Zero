@@ -17,12 +17,12 @@ trait Get
 
 	public function __get($attributeCode)
 	{
-		//
+		// Build attribute code
 
 		$attributeCode = '_' . $attributeCode;
 
-		
-		//
+
+		// If attribute exists, return it
 
 		if (isset($this->$attributeCode) === true)
 		{
