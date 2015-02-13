@@ -172,7 +172,7 @@ function render($viewCode, $viewArguments = null, $print = true)
 
 function request()
 {
-	return \z\service('manager/request')->getRequest();
+	return \z\service('manager/request')->request;
 }
 
 

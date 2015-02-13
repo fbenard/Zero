@@ -11,6 +11,11 @@ namespace fbenard\Zero\Services\Managers;
 
 class ServiceManager
 {
+	// Traits
+
+	use \fbenard\Zero\Traits\Get;
+
+	
 	// Attributes
 
 	private $_definitions = null;

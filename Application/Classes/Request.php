@@ -11,6 +11,11 @@ namespace fbenard\Zero\Classes;
 
 class Request
 {
+	// Traits
+
+	use \fbenard\Zero\Traits\Get;
+
+	
 	// Attributes
 
 	private $_get = null;

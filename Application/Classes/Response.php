@@ -11,6 +11,11 @@ namespace fbenard\Zero\Classes;
 
 class Response
 {
+	// Traits
+
+	use \fbenard\Zero\Traits\Get;
+
+	
 	// Attributes
 
 	private $_body = null;

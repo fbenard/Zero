@@ -11,12 +11,17 @@ namespace fbenard\Zero\Services\Managers;
 
 class RouteManager
 {
+	// Traits
+
+	use \fbenard\Zero\Traits\Get;
+
+	
 	// Attributes
 
 	private $_definitions = null;
-	public $_route = null;
-	public $_uri = null;
-	public $_verb = null;
+	private $_route = null;
+	private $_uri = null;
+	private $_verb = null;
 
 
 	/**

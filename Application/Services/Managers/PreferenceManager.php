@@ -11,6 +11,11 @@ namespace fbenard\Zero\Services\Managers;
 
 class PreferenceManager
 {
+	// Traits
+
+	use \fbenard\Zero\Traits\Get;
+
+	
 	// Attributes
 	
 	private $_preferences = null;

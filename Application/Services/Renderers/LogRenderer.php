@@ -11,6 +11,11 @@ namespace fbenard\Zero\Services\Renderers;
 
 class LogRenderer
 {
+	// Traits
+
+	use \fbenard\Zero\Traits\Get;
+
+	
 	// Attributes
 
 	private $_templates = null;

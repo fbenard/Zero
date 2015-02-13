@@ -11,11 +11,16 @@ namespace fbenard\Zero\Services\Managers;
 
 class ControllerManager
 {
+	// Traits
+
+	use \fbenard\Zero\Traits\Get;
+
+	
 	// Attributes
 
-	public $_action = null;
-	public $_arguments = null;
-	public $_controller = null;
+	private $_action = null;
+	private $_arguments = null;
+	private $_controller = null;
 
 
 	/**

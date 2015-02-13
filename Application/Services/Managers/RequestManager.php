@@ -11,6 +11,11 @@ namespace fbenard\Zero\Services\Managers;
 
 class RequestManager
 {
+	// Traits
+
+	use \fbenard\Zero\Traits\Get;
+
+	
 	// Attributes
 
 	private $_request = null;
@@ -23,16 +28,6 @@ class RequestManager
 	public function __construct()
 	{
 		$this->_request = new \fbenard\Zero\Classes\Request();
-	}
-
-
-	/**
-	 *
-	 */
-
-	public function getRequest()
-	{
-		return $this->_request;
 	}
 }
 

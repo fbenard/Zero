@@ -11,9 +11,14 @@ namespace fbenard\Zero\Classes;
 
 class View
 {
-	//
+	// Traits
 
-	public $_variables = null;
+	use \fbenard\Zero\Traits\Get;
+
+	
+	// Attributes
+
+	private $_variables = null;
 
 
 	/**

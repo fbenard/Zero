@@ -11,6 +11,11 @@ namespace fbenard\Zero\Classes;
 
 abstract class AbstractController
 {
+	// Traits
+
+	use \fbenard\Zero\Traits\Get;
+
+	
 	// Attributes
 
 	protected $_output = null;
