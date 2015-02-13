@@ -90,7 +90,7 @@ class LogRenderer
 	{
 		//
 
-		if (\z\app()->isRunningCli() === true)
+		if (\z\app()->isCli() === true)
 		{
 			return false;
 		}

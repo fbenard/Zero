@@ -66,7 +66,7 @@ class View
 
 		// Start buffering output
 		
-		if (\z\app()->isRunningCli() === false)
+		if (\z\app()->isCli() === false)
 		{
 			ob_start();
 		}
@@ -81,7 +81,7 @@ class View
 		
 		$output = null;
 
-		if (\z\app()->isRunningCli() === false)
+		if (\z\app()->isCli() === false)
 		{
 			$output = ob_get_contents();
 		}
@@ -89,7 +89,7 @@ class View
 
 		// Clean the buffer
 		
-		if (\z\app()->isRunningCli() === false)
+		if (\z\app()->isCli() === false)
 		{
 			ob_end_clean();
 		}

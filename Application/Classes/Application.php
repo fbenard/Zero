@@ -11,10 +11,16 @@ namespace fbenard\Zero\Classes;
 
 class Application
 {
+	// Traits
+
+	use \fbenard\Zero\Traits\Get;
+
+	
 	// Attributes
 	
 	private static $_instance = null;
-	public $_serviceManager = null;
+	private $_bootManager = null;
+	private $_serviceManager = null;
 	
 	
 	/**
@@ -23,8 +29,10 @@ class Application
 	
 	private function __construct()
 	{
+		//
+
+		$this->_bootManager = new \fbenard\Zero\Services\Managers\BootManager();
 		$this->_serviceManager = new \fbenard\Zero\Services\Managers\ServiceManager();
-		$this->_serviceManager->initialize();
 	}
 	
 	
@@ -36,7 +44,7 @@ class Application
 	{
 		// If in CLI mode, exit with 0
 
-		if ($this->isRunningCli() === true)
+		if ($this->isCli() === true)
 		{
 			exit(0);
 		}
@@ -67,8 +75,15 @@ class Application
 	
 	private function initialize()
 	{
+		//
+
+		$this->_bootManager->initialize();
+		$this->_serviceManager->initialize();
+
+
+		//
+
 		\z\service('manager/constant')->initialize();
-		\z\service('manager/boot')->initialize();
 		\z\service('manager/route')->initialize();
 		\z\service('manager/controller')->initialize();
 		\z\service('manager/preference')->initialize();
@@ -80,7 +95,7 @@ class Application
 	 *
 	 */
 	
-	public function isRunningCli()
+	public function isCli()
 	{
 		if (php_sapi_name() === 'cli')
 		{

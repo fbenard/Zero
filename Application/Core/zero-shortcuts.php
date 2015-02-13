@@ -19,6 +19,16 @@ function app()
  *
  */
 
+function boot()
+{
+	return \z\app()->bootManager;
+}
+
+
+/**
+ *
+ */
+
 function cons($constantName, $constantValue = null)
 {
 	return \z\service('manager/constant')->setConstant($constantName, $constantValue);
@@ -172,7 +182,7 @@ function request()
 
 function service($serviceCode = null)
 {
-	return \z\app()->_serviceManager->getService($serviceCode);
+	return \z\app()->serviceManager->getService($serviceCode);
 }
 
 ?>

@@ -19,22 +19,18 @@ class ConstantManager
 	{
 		//
 
-		$paths =
-		[
-			PATH_ZERO,
-			PATH_APPLICATION
-		];
+		$dependencies = \z\boot()->dependencies;
 		
 		
 		//
 
-		foreach ($paths as $path)
+		foreach ($dependencies as $dependency)
 		{
-			$pathToFiles = \z\service('helper/file')->listFiles($path . 'Constants/', '*.php');
+			$paths = \z\service('helper/file')->listFiles($dependency . 'Constants/', '*.php');
 			
-			foreach ($pathToFiles as $pathToFile)
+			foreach ($paths as $path)
 			{
-				require_once($pathToFile);
+				require_once($path);
 			}
 		}
 	}

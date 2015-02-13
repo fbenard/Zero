@@ -1,5 +1,4 @@
 {
-	"manager/boot": "\\fbenard\\Zero\\Services\\Managers\\BootManager",
 	"manager/buffer": "\\fbenard\\Zero\\Services\\Managers\\BufferManager",
 	"manager/cache": "\\fbenard\\Zero\\Services\\Managers\\CacheManager",
 	"manager/constant": "\\fbenard\\Zero\\Services\\Managers\\ConstantManager",

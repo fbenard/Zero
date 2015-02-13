@@ -46,31 +46,27 @@ class RouteManager
 
 	private function loadDefinitions()
 	{
-		// Define paths
+		//
 
-		$paths =
-		[
-			PATH_ZERO,
-			PATH_APPLICATION
-		];
+		$dependencies = \z\boot()->dependencies;
 		
 		
-		// For each path
+		//
 
-		foreach ($paths as $path)
+		foreach ($dependencies as $dependency)
 		{
 			// Find definitions
 
-			$pathToDefinitions = \z\service('helper/file')->listFiles($path . 'Config/Routes/', '*.json');
+			$paths = \z\service('helper/file')->listFiles($dependency . 'Config/Routes/', '*.json');
 
 
 			// For each definitions
 			
-			foreach ($pathToDefinitions as $pathToDefinition)
+			foreach ($paths as $path)
 			{
 				// Load definitions
 
-				$rawDefinitions = file_get_contents($pathToDefinition);
+				$rawDefinitions = file_get_contents($path);
 				$definitions = json_decode($rawDefinitions, true);
 
 
@@ -145,7 +141,7 @@ class RouteManager
 
 		if (empty($uri) === true)
 		{
-			if (\z\app()->isRunningCli() === true)
+			if (\z\app()->isCli() === true)
 			{
 				if (array_key_exists(1, $argv) === true)
 				{
@@ -163,7 +159,7 @@ class RouteManager
 
 		if (empty($verb) === true)
 		{
-			if (\z\app()->isRunningCli() === true)
+			if (\z\app()->isCli() === true)
 			{
 				$this->_verb = 'CLI';
 			}
@@ -216,7 +212,7 @@ class RouteManager
 
 			// Build arguments
 
-			if (\z\app()->isRunningCli() === true)
+			if (\z\app()->isCli() === true)
 			{
 				$arguments = array_slice($argv, 2);
 

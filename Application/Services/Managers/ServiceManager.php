@@ -36,32 +36,28 @@ class ServiceManager
 
 	public function initialize()
 	{
-		// Define paths
+		//
 
-		$paths =
-		[
-			PATH_ZERO,
-			PATH_APPLICATION
-		];
+		$dependencies = \z\boot()->dependencies;
 		
 		
-		// For each path
+		//
 		
-		foreach ($paths as $path)
+		foreach ($dependencies as $dependency)
 		{
 			// Find services
 
 			$fileHelper = new \fbenard\Zero\Services\Helpers\FileHelper();
-			$pathToServices = $fileHelper->listFiles($path . 'Config/Services/', '*.json');
+			$paths = $fileHelper->listFiles($dependency . 'Config/Services/', '*.json');
 
 
 			// For each service
 
-			foreach ($pathToServices as $pathToService)
+			foreach ($paths as $path)
 			{
 				// Load definitions
 
-				$rawDefinitions = file_get_contents($pathToService);
+				$rawDefinitions = file_get_contents($path);
 				$definitions = json_decode($rawDefinitions, true);
 
 

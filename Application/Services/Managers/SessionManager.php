@@ -19,7 +19,7 @@ class SessionManager
 	{
 		// No session in CLI
 
-		if (\z\app()->isRunningCli() === true)
+		if (\z\app()->isCli() === true)
 		{
 			return;
 		}
@@ -47,7 +47,7 @@ class SessionManager
 	{
 		// No session in CLI
 
-		if (\z\app()->isRunningCli() === true)
+		if (\z\app()->isCli() === true)
 		{
 			return;
 		}

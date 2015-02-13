@@ -25,14 +25,14 @@ $dependencies =
 	PATH_ZERO . 'Core/zero-shortcuts.php'
 ];
 
-foreach ($dependencies as $pathToDependency)
+foreach ($dependencies as $dependency)
 {
-	if (file_exists($pathToDependency) === false)
+	if (file_exists($dependency) === false)
 	{
 		die("*** ERROR: Cannot find dependency.\n");
 	}
 
-	require_once($pathToDependency);
+	require_once($dependency);
 }
 
 

@@ -46,7 +46,7 @@ extends \PHPUnit_Framework_TestCase
 	 *
 	 */
 	
-	public function test_isRunningCli()
+	public function test_isCli()
 	{
 		$this->markTestIncomplete();
 	}
