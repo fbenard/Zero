@@ -31,7 +31,7 @@ class ControllerManager
 	{
 		// Get the current route
 
-		$route = \z\service('manager/route')->_route;
+		$route = \z\service('manager/route')->route;
 
 		
 		// Build the controller for this route
@@ -74,7 +74,7 @@ class ControllerManager
 	{
 		// Get the current route
 
-		$route = \z\service('manager/route')->_route;
+		$route = \z\service('manager/route')->route;
 
 
 		// Execute each pre action
