@@ -1,0 +1,3 @@
+{
+	"authenticator/cli": "\\fbenard\\Zero\\Services\\Authenticators\\CliAuthenticator"
+}
