@@ -1,0 +1,20 @@
+{
+	"cache.clear":
+	{
+		"pre":
+		[
+			{
+				"method": "check",
+				"service": "authenticator/cli"
+			}
+		],
+		"verbs":
+		{
+			"CLI":
+			{
+				"action": "cache_clear",
+				"controller": "\\fbenard\\Zero\\Controllers\\CliController"
+			}
+		}
+	}
+}
