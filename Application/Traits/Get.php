@@ -22,12 +22,9 @@ trait Get
 		$attributeCode = '_' . $attributeCode;
 
 
-		// If attribute exists, return it
+		// Get the attribute
 
-		if (isset($this->$attributeCode) === true)
-		{
-			return $this->$attributeCode;
-		}
+		return $this->$attributeCode;
 	}
 }
 
