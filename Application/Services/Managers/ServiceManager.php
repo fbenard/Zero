@@ -111,16 +111,20 @@ class ServiceManager
 	 *
 	 */
 	
-	public function getService($serviceCode = null)
+	public function getService($serviceCode, $clone = false)
 	{
-		// If no service code given, return service manager
+		// Clone the service
 
-		if (empty($serviceCode) === true)
+		if ($clone === true)
 		{
-			return $this;
+			return $this->_factory->buildService
+			(
+				$serviceCode,
+				$this->_definitions
+			);
 		}
 
-
+		
 		// Has the service been retrieved already?
 
 		if (array_key_exists($serviceCode, $this->_services) === false)
