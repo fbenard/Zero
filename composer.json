@@ -24,7 +24,7 @@
 	{
 		"php": ">=5.4.0",
 		"guzzlehttp/guzzle": "5.*",
-		"predis/predis": "dev-master"
+		"predis/predis": "1.1.*@dev"
 	},
 	"require-dev":
 	{
