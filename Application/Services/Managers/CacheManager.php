@@ -25,24 +25,9 @@ class CacheManager
 	 *
 	 */
 
-	public function initialize()
+	public function __construct()
 	{
-		// Create a Redis driver
-
-		$this->_predis = new \Predis\Client
-		(
-			array
-			(
-				/*
-				'host' => \z\pref('fbenard/zero/redis/host'),
-				'port' => \z\pref('fbenard/zero/redis/port'),
-				'database' => \z\pref('fbenard/zero/redis/database')
-				*/
-				'host' => '127.0.0.1',
-				'port' => 6379,
-				'database' => 1
-			)
-		);
+		$this->_predis = new \Predis\Client();
 	}
 
 

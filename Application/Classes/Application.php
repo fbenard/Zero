@@ -79,7 +79,6 @@ class Application
 	{
 		//
 
-		$this->_cacheManager->initialize();
 		$this->_bootManager->initialize();
 		$this->_serviceManager->initialize();
 
