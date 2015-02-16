@@ -157,7 +157,7 @@ class ServiceManager
 	 *
 	 */
 
-	private function registerServices($services)
+	public function registerServices($services)
 	{
 		// Register each service provided
 
