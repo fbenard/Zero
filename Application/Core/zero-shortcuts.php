@@ -190,9 +190,16 @@ function request()
  *
  */
 
-function service($serviceCode, $clone = false)
+function service($serviceCode = null, $clone = false)
 {
-	return \z\app()->serviceManager->getService($serviceCode, $clone);
+	if (empty($serviceCode) === true)
+	{
+		return \z\app()->serviceManager;
+	}
+	else
+	{
+		return \z\app()->serviceManager->getService($serviceCode, $clone);
+	}
 }
 
 ?>
