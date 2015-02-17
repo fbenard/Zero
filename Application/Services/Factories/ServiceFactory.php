@@ -43,10 +43,10 @@ class ServiceFactory
 		{
 			\z\e
 			(
-				EXCEPTION_SERVICE_NOT_INSTANTIABLE,
+				EXCEPTION_SERVICE_NOT_FOUND,
 				[
 					'serviceCode' => $serviceCode,
-					'definitions' => $definitions
+					'className' => $className
 				]
 			);
 		}
@@ -63,7 +63,7 @@ class ServiceFactory
 				EXCEPTION_SERVICE_NOT_INSTANTIABLE,
 				[
 					'serviceCode' => $serviceCode,
-					'definitions' => $definitions
+					'className' => $className
 				]
 			);
 		}
