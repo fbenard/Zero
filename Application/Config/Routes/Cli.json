@@ -16,5 +16,23 @@
 				"controller": "\\fbenard\\Zero\\Controllers\\CliController"
 			}
 		}
+	},
+	"migration.apply":
+	{
+		"pre":
+		[
+			{
+				"method": "check",
+				"service": "authenticator/cli"
+			}
+		],
+		"verbs":
+		{
+			"CLI":
+			{
+				"action": "migration_apply",
+				"controller": "\\fbenard\\Zero\\Controllers\\CliController"
+			}
+		}
 	}
 }

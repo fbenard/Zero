@@ -20,6 +20,16 @@ extends \fbenard\Zero\Classes\AbstractController
 	{
 		\z\cache()->clear();
 	}
+
+
+	/**
+	 *
+	 */
+
+	public function action_migration_apply($from, $to)
+	{
+		\z\service('manager/migration')->apply($from, $to);
+	}
 }
 
 ?>
