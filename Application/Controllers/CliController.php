@@ -26,9 +26,9 @@ extends \fbenard\Zero\Classes\AbstractController
 	 *
 	 */
 
-	public function action_migration_apply($from, $to)
+	public function action_migration_apply($from = null, $to = null)
 	{
-		\z\service('manager/migration')->apply($from, $to);
+		\z\service('manager/migration')->applyMigration($from, $to);
 	}
 }
 
