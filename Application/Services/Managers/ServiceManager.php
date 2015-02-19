@@ -159,6 +159,14 @@ class ServiceManager
 
 	public function registerServices($services)
 	{
+		// Ensure services is an array
+
+		if (is_array($services) === false)
+		{
+			$services = [];
+		}
+
+		
 		// Register each service provided
 
 		foreach ($services as $serviceCode => $serviceClassName)
