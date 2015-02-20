@@ -37,6 +37,8 @@ class CacheManager
 
 	public function clear()
 	{
+		// Flush the whole database
+		
 		$this->_predis->flushdb();
 	}
 
@@ -47,7 +49,7 @@ class CacheManager
 
 	public function getCache($cacheCode)
 	{
-		//
+		// Does the cache exist?
 
 		if ($this->_predis->exists($cacheCode) === false)
 		{
@@ -55,7 +57,7 @@ class CacheManager
 		}
 
 
-		//
+		// Get the cache
 
 		$result = $this->_predis->get($cacheCode);
 
@@ -70,6 +72,8 @@ class CacheManager
 
 	public function setCache($cacheCode, $cacheValue)
 	{
+		// Set the cache
+
 		$this->_predis->set($cacheCode, $cacheValue);
 	}
 }
