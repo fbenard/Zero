@@ -51,7 +51,18 @@ class Response
 
 		// Print body
 
-		print $this->_body;
+		if
+		(
+			(is_array($this->_body) === true) ||
+			(is_object($this->_body) === true)
+		)
+		{
+			print_r($this->_body);
+		}
+		else
+		{
+			print($this->_body);
+		}
 	}
 
 
