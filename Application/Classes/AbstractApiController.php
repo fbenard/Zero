@@ -32,6 +32,8 @@ extends \fbenard\Zero\Classes\AbstractController
 				'Cache-Control' => 'private, no-cache, no-store, must-revalidate'
 			]
 		);
+
+		$this->_output = json_encode(null);
 	}
 
 
