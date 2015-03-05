@@ -5,9 +5,10 @@
 	"manager/error": "\\fbenard\\Zero\\Services\\Managers\\ErrorManager",
 	"manager/exception": "\\fbenard\\Zero\\Services\\Managers\\ExceptionManager",
 	"manager/log": "\\fbenard\\Zero\\Services\\Managers\\LogManager",
-	"manager/preference": "\\fbenard\\Zero\\Services\\Managers\\PreferenceManager",
 	"manager/migration": "\\fbenard\\Zero\\Services\\Managers\\MigrationManager",
+	"manager/preference": "\\fbenard\\Zero\\Services\\Managers\\PreferenceManager",
 	"manager/request": "\\fbenard\\Zero\\Services\\Managers\\RequestManager",
 	"manager/route": "\\fbenard\\Zero\\Services\\Managers\\RouteManager",
-	"manager/session": "\\fbenard\\Zero\\Services\\Managers\\SessionManager"
+	"manager/session": "\\fbenard\\Zero\\Services\\Managers\\SessionManager",
+	"manager/string": "\\fbenard\\Zero\\Services\\Managers\\StringManager"
 }
