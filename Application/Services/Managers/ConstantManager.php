@@ -44,7 +44,7 @@ class ConstantManager
 	{
 		// Has the constant already been defined?
 		
-		if (defined($constantCode) == false)
+		if (defined($constantCode) === false)
 		{
 			// Gets the number of arguments to the function
 

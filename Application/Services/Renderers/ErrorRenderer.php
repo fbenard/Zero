@@ -165,7 +165,7 @@ class ErrorRenderer
 		
 		$handlers = ob_list_handlers();
 		
-		while (empty($handlers) == false)
+		while (empty($handlers) === false)
 		{
 			ob_end_clean();
 			$handlers = ob_list_handlers();
