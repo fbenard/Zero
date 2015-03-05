@@ -19,8 +19,7 @@ class Response
 	// Attributes
 
 	private $_body = null;
-	private $_charset = null;
-	private $_contentType = null;
+	private $_headers = null;
 	private $_statusCode = null;
 
 
