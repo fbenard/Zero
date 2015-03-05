@@ -7,7 +7,7 @@ $pathToZero = dirname(getcwd()) . '/Components/fbenard/zero/Application/Core/zer
 if (file_exists($pathToZero) === false)
 {
 	header('Status: 500 Internal Server Error');
-	die();
+	exit();
 }
 
 require_once($pathToZero);
