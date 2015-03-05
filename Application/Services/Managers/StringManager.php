@@ -99,7 +99,7 @@ class StringManager
 		if ($cache !== false)
 		{
 			$this->_strings = unserialize($cache);
-			//return;
+			return;
 		}
 
 
