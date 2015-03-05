@@ -70,7 +70,7 @@ class LogRenderer
 
 		// Generate pads
 
-		$pads = str_pad(null, @exec('tput cols') - strlen($message) - strlen('%{pads}'), ' ');
+		$pads = str_pad(null, exec('tput cols') - strlen($message) - strlen('%{pads}'), ' ');
 
 
 		// Format the message with pads
