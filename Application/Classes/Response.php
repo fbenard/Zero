@@ -53,7 +53,7 @@ class Response
 
 		if (is_array($this->_body) === true)
 		{
-			print(implode(null, $this->_body);
+			print(implode(null, $this->_body));
 		}
 		else
 		{
