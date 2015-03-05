@@ -65,14 +65,6 @@ class PreferenceManager
 	
 	public function initialize()
 	{
-		// Initialize CLI
-
-		if (\z\app()->isCli() === true)
-		{
-			ini_set('memory_limit', '-1');
-		}
-
-
 		// Load preferences
 
 		$this->loadPreferences();
