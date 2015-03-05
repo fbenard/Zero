@@ -15,7 +15,7 @@ class ErrorRenderer
 	 *
 	 */
 
-	public function renderError($errorCode, $errorTitle, $errorDescription, $errorFile, $errorLine, $errorContext, $errorTraces)
+	public function renderError()
 	{
 		// Define method name
 
