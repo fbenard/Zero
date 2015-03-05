@@ -81,18 +81,6 @@ class ExceptionManager
 		// Display the output
 
 		print($output);
-
-
-		// Exit
-
-		if (is_int($exception->getCode()) === true)
-		{
-			exit($exception->getCode());
-		}
-		else
-		{
-			exit(1);
-		}
 	}
 }
 
