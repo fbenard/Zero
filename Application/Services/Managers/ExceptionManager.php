@@ -15,7 +15,7 @@ class ExceptionManager
 	 *
 	 */
 	
-	public static function onException($exception)
+	public static function onException(\Exception $exception)
 	{
 		// Try to get the file
 
