@@ -17,11 +17,6 @@ class HttpHelper
 
 	public function call($verb, $host, $port, $uri, $headers = null, $query = null, $body = null, $statusCode = null)
 	{
-		// Globals
-
-		global $argv;
-
-
 		// Fix headers, query and body
 
 		if (is_array($headers) === false)
@@ -70,35 +65,9 @@ class HttpHelper
 		$request->setBody(\GuzzleHttp\Stream\Stream::factory($body));
 
 
-		// Log the request
-
-		if
-		(
-			(is_array($argv) === true) &&
-			(in_array('--verbose', $argv) === true)
-		)
-		{
-			print("\n>>> Request\n\n");
-			print($request . "\n");
-		}
-
-
 		// Send the request
 
 		$response = $client->send($request);
-
-
-		// Log the response
-
-		if
-		(
-			(is_array($argv) === true) &&
-			(in_array('--verbose', $argv) === true)
-		)
-		{
-			print("\n>>> Response\n\n");
-			print($response . "\n");
-		}
 
 
 		// Did it succeed?
