@@ -63,8 +63,25 @@ class StringManager
 				(array_key_exists($stringCode, $this->_strings[$localeCode]) === true)
 			)
 			{
+				//
+
 				$result = $this->_strings[$localeCode][$stringCode];
+
+
+				//
+
 				break;
+			}
+		}
+
+
+		//
+
+		if (is_array($stringArguments) === true)
+		{
+			foreach ($stringArguments as $key => $value)
+			{
+				str_replace('{' . $key . '}', $value, $result);
 			}
 		}
 
