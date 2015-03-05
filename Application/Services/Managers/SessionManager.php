@@ -25,14 +25,6 @@ class SessionManager
 		}
 
 
-		// Extend duration of session to a week
-
-		$duration = 7 * 24 * 60 * 60;
-
-		ini_set('session.gc_maxlifetime', $duration);
-		ini_set('session.cookie_lifetime', $duration);
-
-
 		// Start the session
 		
 		session_start();
