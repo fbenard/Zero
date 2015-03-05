@@ -6,7 +6,8 @@ $pathToZero = getcwd() . '/Components/fbenard/zero/Application/Core/zero-boot.ph
 
 if (file_exists($pathToZero) === false)
 {
-	die("*** ERROR: Cannot find Zero.\n");
+	print("Cannot find Zero.\n");
+	trigger_error(null, E_USER_ERROR);
 }
 
 require_once($pathToZero);

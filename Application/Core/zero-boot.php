@@ -27,7 +27,8 @@ foreach ($dependencies as $dependency)
 {
 	if (file_exists($dependency) === false)
 	{
-		die("*** ERROR: Cannot find dependency.\n");
+		print("Cannot find dependency.\n");
+		trigger_error(null, E_USER_ERROR);
 	}
 
 	require_once($dependency);

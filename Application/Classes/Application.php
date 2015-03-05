@@ -36,21 +36,6 @@ class Application
 		$this->_cacheManager = new \fbenard\Zero\Services\Managers\CacheManager();
 		$this->_serviceManager = new \fbenard\Zero\Services\Managers\ServiceManager();
 	}
-	
-	
-	/**
-	 *
-	 */
-	
-	private function finalize()
-	{
-		// If in CLI mode, exit with 0
-
-		if ($this->isCli() === true)
-		{
-			exit(0);
-		}
-	}
 
 	
 	/**
@@ -88,6 +73,7 @@ class Application
 		\z\service('manager/constant')->initialize();
 		\z\service('manager/preference')->initialize();
 		\z\service('manager/route')->initialize();
+		\z\service('manager/string')->initialize();
 		\z\service('manager/controller')->initialize();
 		\z\service('manager/session')->initialize();
 	}
@@ -124,11 +110,6 @@ class Application
 		// Run the controller manager
 
 		\z\service('manager/controller')->run();
-		
-		
-		// Finalize the application
-		
-		$this->finalize();
 	}
 }
 
