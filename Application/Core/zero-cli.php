@@ -1,6 +1,11 @@
 #!/usr/bin/env php
 <?php
 
+// Namespace
+
+namespace z;
+
+
 /**
  *
  */
@@ -9,14 +14,14 @@ function install()
 {
 	// Log
 
-	display('Installing Zero CLI...', 'info');
+	\z\display('Installing Zero CLI...', 'info');
 
 	
 	// Install zero-cli and zero-app
 
 	$pathToZero = __DIR__ . '/';
 
-	execute
+	\z\execute
 	(
 		[
 			'rm -f /usr/local/bin/zero',
@@ -31,7 +36,7 @@ function install()
 
 	// Log
 
-	display('Zero CLI successfully installed!', 'success');
+	\z\display('Zero CLI successfully installed!', 'success');
 }
 
 
@@ -43,14 +48,14 @@ function create()
 {
 	// Log
 
-	display('Creating a new application...', 'info');
+	\z\display('Creating a new application...', 'info');
 
 
 	// Get the application code
 
 	do
 	{
-		display('App code: ', 'prompt');
+		\z\display('App code: ', 'prompt');
 		$applicationCode = readline();
 	}
 	while (empty($applicationCode) === true);
@@ -61,7 +66,7 @@ function create()
 	$pathToZero = __DIR__ . '/';
 	$pathToApplication = getcwd() . '/' . $applicationCode . '/';
 
-	execute
+	\z\execute
 	(
 		[
 			'mkdir -p ' . $pathToApplication,
@@ -80,7 +85,7 @@ function create()
 
 	// Log
 
-	display('Application successfully created!', 'success');
+	\z\display('Application successfully created!', 'success');
 }
 
 
@@ -105,7 +110,7 @@ function display($message = null, $templateCode = null)
 
 	// Does the template exist?
 
-	if (isset($templates[$templateCode]) === false)
+	if (array_key_exists($templateCode, $templates) === false)
 	{
 		print $message;
 	}
@@ -144,9 +149,9 @@ function execute($commands)
 	{
 		// Display it if --verbose
 
-		if (verbose() === true)
+		if (\z\verbose() === true)
 		{
-			display($command);
+			\z\display($command);
 		}
 
 		
@@ -163,13 +168,13 @@ function execute($commands)
 
 function help()
 {
-	display('Zero CLI', 'info');
-	display('Usage: zero [action]');
-	display('Commands:');
-	display("\t" . 'create' . "\t\t" . 'Creates a new application');
-	display("\t" . 'help' . "\t\t" . 'Displays this help');
-	display("\t" . 'install' . "\t\t" . 'Installs Zero CLI');
-	display("\t" . 'update' . "\t\t" . 'Updates an existing application');
+	\z\display('Zero CLI', 'info');
+	\z\display('Usage: zero [action]');
+	\z\display('Commands:');
+	\z\display("\t" . 'create' . "\t\t" . 'Creates a new application');
+	\z\display("\t" . 'help' . "\t\t" . 'Displays this help');
+	\z\display("\t" . 'install' . "\t\t" . 'Installs Zero CLI');
+	\z\display("\t" . 'update' . "\t\t" . 'Updates an existing application');
 }
 
 
@@ -190,7 +195,7 @@ function main()
 
 	if (array_key_exists(1, $argv) === true)
 	{
-		$action = $argv[1];
+		$action = '\\z\\' . $argv[1];
 	}
 
 
@@ -208,7 +213,7 @@ function update()
 {
 	// Log
 
-	display('Updating application...', 'info');
+	\z\display('Updating application...', 'info');
 
 	
 	// Update the application
@@ -216,7 +221,7 @@ function update()
 	$pathToZero = __DIR__ . '/';
 	$pathToApplication = getcwd() . '/';
 
-	execute
+	\z\execute
 	(
 		[
 			'mkdir -p ' . $pathToApplication,
@@ -231,7 +236,7 @@ function update()
 
 	// Log
 
-	display('Application successfully updated!', 'success');
+	\z\display('Application successfully updated!', 'success');
 }
 
 
@@ -261,6 +266,6 @@ function verbose()
 
 //
 
-main();
+\z\main();
 
 ?>
