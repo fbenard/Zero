@@ -159,7 +159,7 @@ class ErrorRenderer
 	 *
 	 */
 
-	public function renderErrorGui($errorCode, $errorTitle, $errorDescription, $errorFile, $errorLine, $errorContext, $errorTraces)
+	public function renderErrorGui()
 	{
 		// Clean the buffer
 		
@@ -353,6 +353,7 @@ class ErrorRenderer
 		(
 			[
 				'errorCode' => $errorCode,
+				'errorContext' => $errorContext,
 				'errorDescription' => $errorDescription,
 				'errorFile' => $errorFile,
 				'errorLine' => $errorLine,
