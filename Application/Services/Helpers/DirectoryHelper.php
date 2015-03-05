@@ -19,7 +19,7 @@ class DirectoryHelper
 	{
 		//
 		
-		if (file_exists($path) == false)
+		if (file_exists($path) === false)
 		{
 			return;
 		}
@@ -36,13 +36,13 @@ class DirectoryHelper
 			
 			if
 			(
-				($filename == '.') ||
-				($filename == '..')
+				($filename === '.') ||
+				($filename === '..')
 			)
 			{
 				continue;
 			}
-			else if (is_dir($pathToFile) == true)
+			else if (is_dir($pathToFile) === true)
 			{
 				self::deleteDirectory($pathToFile . '/');
 			}
