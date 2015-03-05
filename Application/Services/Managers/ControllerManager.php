@@ -41,7 +41,7 @@ class ControllerManager
 
 		// Check whether the action is supported by the controller
 
-		$this->_action = 'action_' . $route['action'];
+		$this->_action = 'action' . ucfirst($route['action']);
 
 		if (method_exists($this->_controller, $this->_action) === false)
 		{

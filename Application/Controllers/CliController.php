@@ -16,7 +16,7 @@ extends \fbenard\Zero\Classes\AbstractController
 	 *
 	 */
 
-	public function action_cache_clear()
+	public function actionCacheClear()
 	{
 		\z\cache()->clear();
 	}
@@ -26,7 +26,7 @@ extends \fbenard\Zero\Classes\AbstractController
 	 *
 	 */
 
-	public function action_migration_apply($from = null, $to = null)
+	public function actionMigrationApply($from = null, $to = null)
 	{
 		\z\service('manager/migration')->applyMigration($from, $to);
 	}
