@@ -19,6 +19,8 @@ class Request
 	// Attributes
 
 	private $_get = null;
+	private $_headers = null;
+	private $_options = null;
 	private $_post = null;
 
 
@@ -29,6 +31,8 @@ class Request
 	public function __construct()
 	{
 		$this->_get = $_GET;
+		$this->_options = [];
+		$this->_headers = apache_request_headers();
 		$this->_post = $_POST;
 	}
 
