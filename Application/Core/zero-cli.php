@@ -183,18 +183,13 @@ function help()
 
 function main()
 {
-	// Globals
-
-	global $argv;
-	
-
 	// Define the action
 
 	$action = 'help';
 
-	if (array_key_exists(1, $argv) === true)
+	if (array_key_exists(1, $GLOBALS['argv']) === true)
 	{
-		$action = '\\z\\' . $argv[1];
+		$action = '\\z\\' . $GLOBALS['argv'][1];
 	}
 
 
@@ -252,7 +247,7 @@ function verbose()
 	
 	//
 
-	if (in_array('--verbose', $argv) === true)
+	if (in_array('--verbose', $GLOBALS['argv']) === true)
 	{
 		return true;
 	}
