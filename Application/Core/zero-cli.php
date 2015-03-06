@@ -240,11 +240,6 @@ function update()
 
 function verbose()
 {
-	// Globals
-
-	global $argv;
-
-	
 	//
 
 	if (in_array('--verbose', $GLOBALS['argv']) === true)
