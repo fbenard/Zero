@@ -94,6 +94,16 @@ class Application
 			return false;
 		}
 	}
+
+
+	/**
+	 *
+	 */
+
+	public function quit()
+	{
+		exit();
+	}
 	
 	
 	/**
