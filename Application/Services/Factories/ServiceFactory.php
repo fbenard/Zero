@@ -32,12 +32,27 @@ class ServiceFactory
 		}
 
 
-		// Build the classname
+		// Build the class name
 
 		$className = $definitions[$serviceCode];
 
 
-		// Make sure the service is instantiable
+		// Make sure the class exists
+
+		if (class_exists($className) === false)
+		{
+			\z\e
+			(
+				EXCEPTION_SERVICE_NOT_FOUND,
+				[
+					'serviceCode' => $serviceCode,
+					'className' => $className
+				]
+			);
+		}
+
+
+		// Make sure the class is instantiable
 		
 		$reflection = new \ReflectionClass($className);
 
@@ -48,7 +63,7 @@ class ServiceFactory
 				EXCEPTION_SERVICE_NOT_INSTANTIABLE,
 				[
 					'serviceCode' => $serviceCode,
-					'definitions' => $definitions
+					'className' => $className
 				]
 			);
 		}

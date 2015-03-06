@@ -19,6 +19,26 @@ function app()
  *
  */
 
+function boot()
+{
+	return \z\app()->bootManager;
+}
+
+
+/**
+ *
+ */
+
+function cache()
+{
+	return \z\app()->cacheManager;
+}
+
+
+/**
+ *
+ */
+
 function cons($constantName, $constantValue = null)
 {
 	return \z\service('manager/constant')->setConstant($constantName, $constantValue);
@@ -128,8 +148,8 @@ function pref($preferenceCode, $preferenceValue = null, $isLocked = false)
 
 function redirect($url)
 {
-	header('Location: ' . $url);
-	die();
+	$response = new \fbenard\Zero\Classes\Response();
+	$response->redirect($url);
 }
 
 
@@ -160,9 +180,36 @@ function render($viewCode, $viewArguments = null, $print = true)
  *
  */
 
-function service($serviceCode = null)
+function request()
 {
-	return \z\app()->_serviceManager->getService($serviceCode);
+	return \z\service('manager/request')->request;
+}
+
+
+/**
+ *
+ */
+
+function service($serviceCode = null, $clone = false)
+{
+	if (empty($serviceCode) === true)
+	{
+		return \z\app()->serviceManager;
+	}
+	else
+	{
+		return \z\app()->serviceManager->getService($serviceCode, $clone);
+	}
+}
+
+
+/**
+ *
+ */
+
+function str($stringCode, $stringArguments = null, $localeCode = null, $fallbackCode = null)
+{
+	return \z\service('manager/string')->getString($stringCode, $stringArguments, $localeCode, $fallbackCode);
 }
 
 ?>

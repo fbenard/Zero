@@ -3,8 +3,6 @@
 // Setup error reporting
 
 error_reporting(E_ALL | E_STRICT);
-ini_set('error_reporting', E_ALL | E_STRICT);
-ini_set('display_errors', 'on');
 
 
 // Build paths
@@ -25,14 +23,15 @@ $dependencies =
 	PATH_ZERO . 'Core/zero-shortcuts.php'
 ];
 
-foreach ($dependencies as $pathToDependency)
+foreach ($dependencies as $dependency)
 {
-	if (file_exists($pathToDependency) === false)
+	if (file_exists($dependency) === false)
 	{
-		die("*** ERROR: Cannot find dependency.\n");
+		print("Cannot find dependency.\n");
+		trigger_error(null, E_USER_ERROR);
 	}
 
-	require_once($pathToDependency);
+	require_once($dependency);
 }
 
 

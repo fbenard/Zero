@@ -11,9 +11,14 @@ namespace fbenard\Zero\Classes;
 
 class View
 {
-	//
+	// Traits
 
-	public $_variables = null;
+	use \fbenard\Zero\Traits\Get;
+
+	
+	// Attributes
+
+	private $_variables = null;
 
 
 	/**
@@ -66,7 +71,7 @@ class View
 
 		// Start buffering output
 		
-		if (\z\app()->isRunningCli() === false)
+		if (\z\app()->isCli() === false)
 		{
 			ob_start();
 		}
@@ -81,7 +86,7 @@ class View
 		
 		$output = null;
 
-		if (\z\app()->isRunningCli() === false)
+		if (\z\app()->isCli() === false)
 		{
 			$output = ob_get_contents();
 		}
@@ -89,7 +94,7 @@ class View
 
 		// Clean the buffer
 		
-		if (\z\app()->isRunningCli() === false)
+		if (\z\app()->isCli() === false)
 		{
 			ob_end_clean();
 		}

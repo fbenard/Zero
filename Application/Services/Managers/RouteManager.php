@@ -11,12 +11,17 @@ namespace fbenard\Zero\Services\Managers;
 
 class RouteManager
 {
+	// Traits
+
+	use \fbenard\Zero\Traits\Get;
+
+	
 	// Attributes
 
 	private $_definitions = null;
-	public $_route = null;
-	public $_uri = null;
-	public $_verb = null;
+	private $_route = null;
+	private $_uri = null;
+	private $_verb = null;
 
 
 	/**
@@ -46,31 +51,39 @@ class RouteManager
 
 	private function loadDefinitions()
 	{
-		// Define paths
+		// Get the cache
 
-		$paths =
-		[
-			PATH_ZERO,
-			PATH_APPLICATION
-		];
+		$cacheCode = 'routes_' . \z\boot()->environment . '_' . \z\boot()->universe;
+		$cache = \z\cache()->getCache($cacheCode);
+
+		if ($cache !== false)
+		{
+			$this->_definitions = unserialize($cache);
+			return;
+		}
+
+
+		//
+
+		$dependencies = \z\boot()->dependencies;
 		
 		
-		// For each path
+		//
 
-		foreach ($paths as $path)
+		foreach ($dependencies as $dependency)
 		{
 			// Find definitions
 
-			$pathToDefinitions = \z\service('helper/file')->listFiles($path . 'Config/Routes/', '*.json');
+			$paths = \z\service('helper/file')->listFiles($dependency . 'Config/Routes/', '*.json');
 
 
 			// For each definitions
 			
-			foreach ($pathToDefinitions as $pathToDefinition)
+			foreach ($paths as $path)
 			{
 				// Load definitions
 
-				$rawDefinitions = file_get_contents($pathToDefinition);
+				$rawDefinitions = file_get_contents($path);
 				$definitions = json_decode($rawDefinitions, true);
 
 
@@ -127,6 +140,15 @@ class RouteManager
 				);
 			}
 		}
+
+
+		// Set the cache
+
+		\z\cache()->setCache
+		(
+			$cacheCode,
+			serialize($this->_definitions)
+		);
 	}
 
 
@@ -136,25 +158,20 @@ class RouteManager
 
 	public function setRoute($uri = null, $verb = null)
 	{
-		// Globals
-
-		global $argv;
-
-
 		// Build the URI
 
 		if (empty($uri) === true)
 		{
-			if (\z\app()->isRunningCli() === true)
+			if (\z\app()->isCli() === true)
 			{
-				if (array_key_exists(1, $argv) === true)
+				if (array_key_exists(1, $GLOBALS['argv']) === true)
 				{
-					$this->_uri = $argv[1];
+					$this->_uri = $GLOBALS['argv'][1];
 				}
 			}
 			else
 			{
-				$this->_uri = explode('?', $_SERVER['REQUEST_URI'], 2)[0];
+				$this->_uri = explode('?', \z\request()->server('REQUEST_URI'), 2)[0];
 			}			
 		}
 
@@ -163,13 +180,13 @@ class RouteManager
 
 		if (empty($verb) === true)
 		{
-			if (\z\app()->isRunningCli() === true)
+			if (\z\app()->isCli() === true)
 			{
 				$this->_verb = 'CLI';
 			}
 			else
 			{
-				$this->_verb = $_SERVER['REQUEST_METHOD'];
+				$this->_verb = \z\request()->server('REQUEST_METHOD');
 			}
 		}
 
@@ -216,9 +233,9 @@ class RouteManager
 
 			// Build arguments
 
-			if (\z\app()->isRunningCli() === true)
+			if (\z\app()->isCli() === true)
 			{
-				$arguments = array_slice($argv, 2);
+				$arguments = array_slice($GLOBALS['argv'], 2);
 
 				foreach ($arguments as $key => &$value)
 				{

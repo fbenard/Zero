@@ -11,6 +11,11 @@ namespace fbenard\Zero\Services\Managers;
 
 class PreferenceManager
 {
+	// Traits
+
+	use \fbenard\Zero\Traits\Get;
+
+	
 	// Attributes
 	
 	private $_preferences = null;
@@ -60,37 +65,45 @@ class PreferenceManager
 	
 	public function initialize()
 	{
-		// Initialize CLI
+		// Load preferences
 
-		if (\z\app()->isRunningCli() === true)
+		$this->loadPreferences();
+	}
+
+
+	/**
+	 *
+	 */
+
+	private function loadPreferences()
+	{
+		// Get the cache
+
+		$cacheCode = 'preferences_' . \z\boot()->environment . '_' . \z\boot()->universe;
+		$cache = \z\cache()->getCache($cacheCode);
+
+		if ($cache !== false)
 		{
-			ini_set('memory_limit', '-1');
+			$this->_preferences = unserialize($cache);
+			return;
 		}
 
 
-		//
-
-		$pathToExtensions =
-		[
-			PATH_ZERO,
-			PATH_APPLICATION
-		];
-
-		
 		// Define the number of passes
 		
-		$nbPasses = count($pathToExtensions) - 1;
+		$dependencies = \z\boot()->dependencies;
+		$nbPasses = count($dependencies) - 1;
 
 
 		// Perform n passes
 		
 		for ($i = 0; $i < $nbPasses; $i++)
 		{
-			foreach ($pathToExtensions as $pathToExtension)
+			foreach ($dependencies as $dependency)
 			{
 				// Prepare global path
 
-				$path = $pathToExtension . 'Config/Preferences/Preferences';
+				$path = $dependency . 'Config/Preferences/Preferences';
 
 
 				// Build paths
@@ -98,9 +111,9 @@ class PreferenceManager
 				$paths =
 				[
 					$path . '.php',
-					$path . '.' . \z\service('manager/boot')->_environment . '.php',
-					$path . '.' . \z\service('manager/boot')->_universe . '.php',
-					$path . '.' . \z\service('manager/boot')->_environment . '.' . \z\service('manager/boot')->_universe . '.php'
+					$path . '.' . \z\boot()->environment . '.php',
+					$path . '.' . \z\boot()->universe . '.php',
+					$path . '.' . \z\boot()->environment . '.' . \z\boot()->universe . '.php'
 				];
 
 				
@@ -118,8 +131,17 @@ class PreferenceManager
 			
 			// End of pass, remove the first extension
 			
-			array_shift($pathToExtensions);
+			array_shift($dependencies);
 		}
+
+
+		// Set the cache
+
+		\z\cache()->setCache
+		(
+			$cacheCode,
+			serialize($this->_preferences)
+		);
 	}
 	
 	

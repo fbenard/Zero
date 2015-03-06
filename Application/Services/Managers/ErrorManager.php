@@ -51,18 +51,6 @@ class ErrorManager
 		// Display the output
 
 		print($output);
-
-
-		// Exit
-
-		if (is_int($errorCode) === true)
-		{
-			exit($errorCode);
-		}
-		else
-		{
-			exit(1);
-		}
 	}
 }
 

@@ -1,0 +1,38 @@
+{
+	"cache.clear":
+	{
+		"pre":
+		[
+			{
+				"method": "check",
+				"service": "authenticator/cli"
+			}
+		],
+		"verbs":
+		{
+			"CLI":
+			{
+				"action": "cacheClear",
+				"controller": "\\fbenard\\Zero\\Controllers\\CliController"
+			}
+		}
+	},
+	"migration.apply":
+	{
+		"pre":
+		[
+			{
+				"method": "check",
+				"service": "authenticator/cli"
+			}
+		],
+		"verbs":
+		{
+			"CLI":
+			{
+				"action": "migrationApply",
+				"controller": "\\fbenard\\Zero\\Controllers\\CliController"
+			}
+		}
+	}
+}

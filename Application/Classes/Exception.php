@@ -12,6 +12,11 @@ namespace fbenard\Zero\Classes;
 class Exception
 extends \Exception
 {
+	// Traits
+
+	use \fbenard\Zero\Traits\Get;
+
+	
 	// Attributes
 
 	private $_context = null;

@@ -1,12 +1,14 @@
 {
-	"manager/boot": "\\fbenard\\Zero\\Services\\Managers\\BootManager",
 	"manager/buffer": "\\fbenard\\Zero\\Services\\Managers\\BufferManager",
 	"manager/constant": "\\fbenard\\Zero\\Services\\Managers\\ConstantManager",
 	"manager/controller": "\\fbenard\\Zero\\Services\\Managers\\ControllerManager",
 	"manager/error": "\\fbenard\\Zero\\Services\\Managers\\ErrorManager",
 	"manager/exception": "\\fbenard\\Zero\\Services\\Managers\\ExceptionManager",
 	"manager/log": "\\fbenard\\Zero\\Services\\Managers\\LogManager",
+	"manager/migration": "\\fbenard\\Zero\\Services\\Managers\\MigrationManager",
 	"manager/preference": "\\fbenard\\Zero\\Services\\Managers\\PreferenceManager",
+	"manager/request": "\\fbenard\\Zero\\Services\\Managers\\RequestManager",
 	"manager/route": "\\fbenard\\Zero\\Services\\Managers\\RouteManager",
-	"manager/session": "\\fbenard\\Zero\\Services\\Managers\\SessionManager"
+	"manager/session": "\\fbenard\\Zero\\Services\\Managers\\SessionManager",
+	"manager/string": "\\fbenard\\Zero\\Services\\Managers\\StringManager"
 }

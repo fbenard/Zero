@@ -11,10 +11,15 @@ namespace fbenard\Zero\Classes;
 
 abstract class AbstractController
 {
+	// Traits
+
+	use \fbenard\Zero\Traits\Get;
+
+	
 	// Attributes
 
-	protected $_contentType = null;
-	protected $_statusCode = null;
+	protected $_output = null;
+	protected $_response = null;
 	protected $_view = null;
 
 
@@ -24,24 +29,29 @@ abstract class AbstractController
 
 	public function __construct()
 	{
-		//
+		// Build attributes
 
-		$this->_contentType = 'text/html';
-		$this->_statusCode = 200;
+		$this->_response = new \fbenard\Zero\Classes\Response
+		(
+			200,
+			[
+				'Content-Type' => 'text/html; charset=UTF-8',
+				'Cache-Control' => 'private, no-cache, no-store, must-revalidate'
+			]
+		);
+
 		$this->_view = new \fbenard\Zero\Classes\View();
+	}
 
 
-		//
+	/**
+	 *
+	 */
 
-		if (\z\app()->isRunningCli() === false)
-		{
-			$headers = apache_request_headers();
-			
-			if (array_key_exists('Accept', $headers) === true)
-			{
-				$this->_contentType = $headers['Accept'];
-			}
-		}
+	public function pushResponse()
+	{
+		$this->_response->setBody($this->_output);
+		$this->_response->push();
 	}
 
 
@@ -51,7 +61,12 @@ abstract class AbstractController
 
 	protected function redirect($url)
 	{
-		\z\redirect($url);
+		$this->_response->setHeaders
+		(
+			[
+				'Location' => $url
+			]
+		);
 	}
 
 
@@ -61,9 +76,7 @@ abstract class AbstractController
 
 	protected function renderView($viewCode, $viewArguments = null)
 	{
-		$output = $this->_view->render($viewCode, $viewArguments);
-		$this->sendHeaders();
-		print $output;
+		$this->setOutput($this->_view->render($viewCode, $viewArguments));
 	}
 
 
@@ -71,34 +84,9 @@ abstract class AbstractController
 	 *
 	 */
 
-	protected function renderJson($data = null)
+	protected function setOutput($output)
 	{
-		$json = json_encode($data);
-		$this->sendHeaders();
-		print $json;
-	}
-	
-	
-	/**
-	 *
-	 */
-	
-	public function sendHeaders()
-	{
-		//
-		
-		if (headers_sent() === true)
-		{
-			return;
-		}
-
-
-		// Send HTTP headers
-
-		http_response_code($this->_statusCode);
-
-		header('Content-Type: ' . $this->_contentType . '; charset=UTF-8');
-		header('Cache-Control: private, no-cache, no-store, must-revalidate');
+		$this->_output = $output;
 	}
 }
 

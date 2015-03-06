@@ -15,7 +15,7 @@ class ErrorRenderer
 	 *
 	 */
 
-	public function renderError($errorCode, $errorTitle, $errorDescription, $errorFile, $errorLine, $errorContext, $errorTraces)
+	public function renderError()
 	{
 		// Define method name
 
@@ -159,13 +159,13 @@ class ErrorRenderer
 	 *
 	 */
 
-	public function renderErrorGui($errorCode, $errorTitle, $errorDescription, $errorFile, $errorLine, $errorContext, $errorTraces)
+	public function renderErrorGui()
 	{
 		// Clean the buffer
 		
 		$handlers = ob_list_handlers();
 		
-		while (empty($handlers) == false)
+		while (empty($handlers) === false)
 		{
 			ob_end_clean();
 			$handlers = ob_list_handlers();
@@ -353,6 +353,7 @@ class ErrorRenderer
 		(
 			[
 				'errorCode' => $errorCode,
+				'errorContext' => $errorContext,
 				'errorDescription' => $errorDescription,
 				'errorFile' => $errorFile,
 				'errorLine' => $errorLine,

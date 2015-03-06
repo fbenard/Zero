@@ -15,7 +15,7 @@ class ExceptionManager
 	 *
 	 */
 	
-	public static function onException($exception)
+	public static function onException(\Exception $exception)
 	{
 		// Try to get the file
 
@@ -81,18 +81,6 @@ class ExceptionManager
 		// Display the output
 
 		print($output);
-
-
-		// Exit
-
-		if (is_int($exception->getCode()) === true)
-		{
-			exit($exception->getCode());
-		}
-		else
-		{
-			exit(1);
-		}
 	}
 }
 

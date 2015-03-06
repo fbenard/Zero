@@ -11,91 +11,63 @@ namespace fbenard\Zero\Services\Helpers;
 
 class HttpHelper
 {
-	// Attributes
-
-	private $_client = null;
-
-
 	/**
 	 *
 	 */
 
-	public function __construct($host)
+	public function call($verb, $host, $port, $uri, $headers = null, $query = null, $body = null, $statusCode = null)
 	{
-		// Build the HTTP client
-
-		$this->_client = new \GuzzleHttp\Client
-		(
-			[
-				'base_url' => $host
-			]
-		);
-	}
-
-
-	/**
-	 *
-	 */
-
-	public function call($verb, $uri, $headers = null, $query = null, $body = null, $statusCode = 200)
-	{
-		// Globals
-
-		global $argv;
-
-
-		// Make sure headers is an array
+		// Fix headers, query and body
 
 		if (is_array($headers) === false)
 		{
 			$headers = [];
 		}
 
+		if (is_array($query) === false)
+		{
+			$query = [];
+		}
+
+		if (is_null($body) === true)
+		{
+			$body = '';
+		}
+
+
+		// Build the HTTP client
+
+		$client = new \GuzzleHttp\Client
+		(
+			[
+				'base_url' => $host
+			]
+		);
+
 
 		// Build the request
 
-		$request = $this->_client->createRequest
+		$request = $client->createRequest
 		(
 			$verb,
 			$uri,
 			[
-				'headers' => $headers,
-				'query' => $query,
-				'body' => $body,
 				'exceptions' => false
 			]
 		);
 
 
-		// Log the request
+		// Setup the request
 
-		if
-		(
-			(is_array($argv) === true) &&
-			(in_array('--verbose', $argv) === true)
-		)
-		{
-			print("\n>>> Request\n\n");
-			print($request . "\n");
-		}
+		$request->setPort($port);
+		$request->setHeaders($headers);
+		$request->setQuery($query);
+		$request->setBody(\GuzzleHttp\Stream\Stream::factory($body));
 
 
 		// Send the request
 
-		$response = $this->_client->send($request);
-
-
-		// Log the response
-
-		if
-		(
-			(is_array($argv) === true) &&
-			(in_array('--verbose', $argv) === true)
-		)
-		{
-			print("\n>>> Response\n\n");
-			print($response . "\n");
-		}
+		$response = $client->send($request);
 
 
 		// Did it succeed?

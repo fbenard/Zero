@@ -1,4 +1,5 @@
 {
 	"helper/directory": "\\fbenard\\Zero\\Services\\Helpers\\DirectoryHelper",
-	"helper/file": "\\fbenard\\Zero\\Services\\Helpers\\FileHelper"
+	"helper/file": "\\fbenard\\Zero\\Services\\Helpers\\FileHelper",
+	"helper/http": "\\fbenard\\Zero\\Services\\Helpers\\HttpHelper"
 }

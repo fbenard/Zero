@@ -11,11 +11,16 @@ namespace fbenard\Zero\Services\Managers;
 
 class ControllerManager
 {
+	// Traits
+
+	use \fbenard\Zero\Traits\Get;
+
+	
 	// Attributes
 
-	public $_action = null;
-	public $_arguments = null;
-	public $_controller = null;
+	private $_action = null;
+	private $_arguments = null;
+	private $_controller = null;
 
 
 	/**
@@ -24,23 +29,29 @@ class ControllerManager
 
 	public function initialize()
 	{
-		//
+		// Get the current route
 
-		$route = \z\service('manager/route')->_route;
+		$route = \z\service('manager/route')->route;
 
 		
-		//
+		// Build the controller for this route
 
 		$this->_controller = \z\service('factory/controller')->buildController($route['controller']);
 
 
-		//
+		// Check whether the action is supported by the controller
 
-		$this->_action = 'action_' . $route['action'];
+		$this->_action = 'action' . ucfirst($route['action']);
 
 		if (method_exists($this->_controller, $this->_action) === false)
 		{
-			\z\e(EXCEPTION_CONTROLLER_ACTION_NOT_FOUND);
+			\z\e
+			(
+				EXCEPTION_CONTROLLER_ACTION_NOT_FOUND,
+				[
+					'action' => $route['action']
+				]
+			);
 		}
 
 
@@ -61,12 +72,12 @@ class ControllerManager
 
 	public function run()
 	{
-		//
+		// Get the current route
 
-		$route = \z\service('manager/route')->_route;
+		$route = \z\service('manager/route')->route;
 
 
-		//
+		// Execute each pre action
 
 		foreach ($route['pre'] as $pre)
 		{
@@ -90,7 +101,7 @@ class ControllerManager
 
 		// Run the controller
 
-		$result = call_user_func_array
+		call_user_func_array
 		(
 			[
 				$this->_controller,
@@ -100,7 +111,7 @@ class ControllerManager
 		);
 
 
-		//
+		// Execute each post action
 
 		foreach ($route['post'] as $post)
 		{
@@ -119,7 +130,7 @@ class ControllerManager
 		
 		// Push the response
 		
-		//$this->_controller->response->push($output);
+		$this->_controller->pushResponse();
 	}
 }
 

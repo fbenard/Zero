@@ -19,18 +19,10 @@ class SessionManager
 	{
 		// No session in CLI
 
-		if (\z\app()->isRunningCli() === true)
+		if (\z\app()->isCli() === true)
 		{
 			return;
 		}
-
-
-		// Extend duration of session to a week
-
-		$duration = 7 * 24 * 60 * 60;
-
-		ini_set('session.gc_maxlifetime', $duration);
-		ini_set('session.cookie_lifetime', $duration);
 
 
 		// Start the session
@@ -47,7 +39,7 @@ class SessionManager
 	{
 		// No session in CLI
 
-		if (\z\app()->isRunningCli() === true)
+		if (\z\app()->isCli() === true)
 		{
 			return;
 		}

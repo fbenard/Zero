@@ -1,5 +1,10 @@
 <?php
 
+// Namespace
+
+namespace z;
+
+
 /**
  *
  */

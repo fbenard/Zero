@@ -11,6 +11,11 @@ namespace fbenard\Zero\Services\Managers;
 
 class ServiceManager
 {
+	// Traits
+
+	use \fbenard\Zero\Traits\Get;
+
+	
 	// Attributes
 
 	private $_definitions = null;
@@ -36,32 +41,52 @@ class ServiceManager
 
 	public function initialize()
 	{
-		// Define paths
+		// Load definitions
 
-		$paths =
-		[
-			PATH_ZERO,
-			PATH_APPLICATION
-		];
+		$this->loadDefinitions();
+	}
+
+
+	/**
+	 *
+	 */
+
+	private function loadDefinitions()
+	{
+		// Get the cache
+
+		$cacheCode = 'services_' . \z\boot()->environment . '_' . \z\boot()->universe;
+		$cache = \z\cache()->getCache($cacheCode);
+
+		if ($cache !== false)
+		{
+			$this->_definitions = unserialize($cache);
+			return;
+		}
+
+
+		//
+
+		$dependencies = \z\boot()->dependencies;
 		
 		
-		// For each path
+		//
 		
-		foreach ($paths as $path)
+		foreach ($dependencies as $dependency)
 		{
 			// Find services
 
 			$fileHelper = new \fbenard\Zero\Services\Helpers\FileHelper();
-			$pathToServices = $fileHelper->listFiles($path . 'Config/Services/', '*.json');
+			$paths = $fileHelper->listFiles($dependency . 'Config/Services/', '*.json');
 
 
 			// For each service
 
-			foreach ($pathToServices as $pathToService)
+			foreach ($paths as $path)
 			{
 				// Load definitions
 
-				$rawDefinitions = file_get_contents($pathToService);
+				$rawDefinitions = file_get_contents($path);
 				$definitions = json_decode($rawDefinitions, true);
 
 
@@ -70,6 +95,15 @@ class ServiceManager
 				$this->registerServices($definitions);
 			}
 		}
+
+
+		// Set the cache
+
+		\z\cache()->setCache
+		(
+			$cacheCode,
+			serialize($this->_definitions)
+		);
 	}
 
 
@@ -77,16 +111,20 @@ class ServiceManager
 	 *
 	 */
 	
-	public function getService($serviceCode = null)
+	public function getService($serviceCode, $clone = false)
 	{
-		// If no service code given, return service manager
+		// Clone the service
 
-		if (empty($serviceCode) === true)
+		if ($clone === true)
 		{
-			return $this;
+			return $this->_factory->buildService
+			(
+				$serviceCode,
+				$this->_definitions
+			);
 		}
 
-
+		
 		// Has the service been retrieved already?
 
 		if (array_key_exists($serviceCode, $this->_services) === false)
@@ -121,6 +159,14 @@ class ServiceManager
 
 	public function registerServices($services)
 	{
+		// Ensure services is an array
+
+		if (is_array($services) === false)
+		{
+			$services = [];
+		}
+
+		
 		// Register each service provided
 
 		foreach ($services as $serviceCode => $serviceClassName)

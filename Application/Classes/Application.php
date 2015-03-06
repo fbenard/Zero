@@ -11,10 +11,17 @@ namespace fbenard\Zero\Classes;
 
 class Application
 {
+	// Traits
+
+	use \fbenard\Zero\Traits\Get;
+
+	
 	// Attributes
 	
 	private static $_instance = null;
-	public $_serviceManager = null;
+	private $_bootManager = null;
+	private $_cacheManager = null;
+	private $_serviceManager = null;
 	
 	
 	/**
@@ -23,23 +30,11 @@ class Application
 	
 	private function __construct()
 	{
-		$this->_serviceManager = new \fbenard\Zero\Services\Managers\ServiceManager();
-		$this->_serviceManager->initialize();
-	}
-	
-	
-	/**
-	 *
-	 */
-	
-	private function finalize()
-	{
-		// If in CLI mode, exit with 0
+		//
 
-		if ($this->isRunningCli() === true)
-		{
-			exit(0);
-		}
+		$this->_bootManager = new \fbenard\Zero\Services\Managers\BootManager();
+		$this->_cacheManager = new \fbenard\Zero\Services\Managers\CacheManager();
+		$this->_serviceManager = new \fbenard\Zero\Services\Managers\ServiceManager();
 	}
 
 	
@@ -67,11 +62,19 @@ class Application
 	
 	private function initialize()
 	{
+		//
+
+		$this->_bootManager->initialize();
+		$this->_serviceManager->initialize();
+
+
+		//
+
 		\z\service('manager/constant')->initialize();
-		\z\service('manager/boot')->initialize();
-		\z\service('manager/route')->initialize();
-		\z\service('manager/controller')->initialize();
 		\z\service('manager/preference')->initialize();
+		\z\service('manager/route')->initialize();
+		\z\service('manager/string')->initialize();
+		\z\service('manager/controller')->initialize();
 		\z\service('manager/session')->initialize();
 	}
 	
@@ -80,7 +83,7 @@ class Application
 	 *
 	 */
 	
-	public function isRunningCli()
+	public function isCli()
 	{
 		if (php_sapi_name() === 'cli')
 		{
@@ -90,6 +93,16 @@ class Application
 		{
 			return false;
 		}
+	}
+
+
+	/**
+	 *
+	 */
+
+	public function quit()
+	{
+		exit();
 	}
 	
 	
@@ -107,11 +120,6 @@ class Application
 		// Run the controller manager
 
 		\z\service('manager/controller')->run();
-		
-		
-		// Finalize the application
-		
-		$this->finalize();
 	}
 }
 

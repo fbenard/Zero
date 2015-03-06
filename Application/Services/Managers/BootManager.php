@@ -11,10 +11,85 @@ namespace fbenard\Zero\Services\Managers;
 
 class BootManager
 {
+	// Traits
+
+	use \fbenard\Zero\Traits\Get;
+
+	
 	// Attributes
 
-	public $_environment = null;
-	public $_universe = null;
+	private $_dependencies = null;
+	private $_environment = null;
+	private $_universe = null;
+
+
+	/**
+	 *
+	 */
+
+	private function fixBoot($boot)
+	{
+		// Ensure boot is an array
+
+		if (is_array($boot) === false)
+		{
+			$boot = [];
+		}
+
+
+		// Ensure boot has the expected structure
+
+		$boot = array_merge
+		(
+			[
+				'dependencies' => [],
+				'hosts' => [],
+				'environment' => null,
+				'universe' => null,
+			],
+			$boot
+		);
+
+
+		return $boot;
+	}
+
+
+	/**
+	 *
+	 */
+
+	private function fixDependencies($dependencies)
+	{
+		// Ensure dependencies is an array
+
+		if (is_array($dependencies) === false)
+		{
+			$dependencies = [];
+		}
+
+
+		//
+
+		foreach ($dependencies as &$dependency)
+		{
+			$dependency = PATH_COMPONENTS . $dependency;
+		}
+
+
+		// Inject Zero and the application
+
+		array_unshift($dependencies, PATH_ZERO);
+		array_push($dependencies, PATH_APPLICATION);
+		
+
+		// De-duplicate dependencies
+
+		$dependencies = array_unique($dependencies);
+
+
+		return $dependencies;
+	}
 
 
 	/**
@@ -23,76 +98,68 @@ class BootManager
 
 	public function initialize()
 	{
-		// Default boot
+		// Load boot
 
-		$this->_environment = null;
-		$this->_universe = null;
+		$boot = $this->loadBoot();
 
-		
-		// Get boot from Boot.json
 
-		$pathToBoot = PATH_APPLICATION . 'Config/Boot.json';
-		$boot = [];
+		// Build attributes
 
-		if (file_exists($pathToBoot) === true)
-		{
-			// Decode Boot.json
+		$this->_dependencies = $boot['dependencies'];
+		$this->_environment = $boot['environment'];
+		$this->_universe = $boot['universe'];
 
-			$rawBoot = file_get_contents($pathToBoot);
-			$boot = json_decode($rawBoot, true);
 
-			
-			// Grab environment and universe
+		// Fix dependencies
 
-			if (array_key_exists('environment', $boot) === true)
-			{
-				$this->_environment = $boot['environment'];
-			}
-
-			if (array_key_exists('universe', $boot) === true)
-			{
-				$this->_universe = $boot['universe'];
-			}
-		}
+		$this->_dependencies = $this->fixDependencies($this->_dependencies);
 
 
 		// Are we in CLI mode?
 
-		if (\z\app()->isRunningCli() === true)
+		if (\z\app()->isCli() === true)
 		{
 			// Extract arguments
 
-			global $argv;
-			$options = [];
+			$arguments = [];
 
-			foreach ($argv as $arg)
+			if
+			(
+				(array_key_exists('argv', $GLOBALS) === true) &&
+				(is_array($GLOBALS['argv']) === true)
+			)
 			{
-				//
+				// Parse each argument
 
-				$pattern = '/^\-\-([a-z]*)=(.*)$/';
-
-				if (preg_match($pattern, $arg, $matches) !== 1)
+				foreach ($GLOBALS['argv'] as $arg)
 				{
-					continue;
+					// Try to find the pattern --arg="value"
+
+					$pattern = '/^\-\-([a-z]*)=(.*)$/';
+
+					if (preg_match($pattern, $arg, $matches) !== 1)
+					{
+						continue;
+					}
+
+
+					// Store the argument
+
+					$arguments[$matches[1]] = $matches[2];
 				}
-
-				
-				//
-
-				$options[$matches[1]] = $matches[2];
 			}
 
 
 			// Grab environment and universe
 
-			if (array_key_exists('environment', $options) === true)
+			if (array_key_exists('env', $arguments) === true)
 			{
-				$this->_environment = $options['environment'];
+				$this->_environment = $arguments['env'];
 			}
 
-			if (array_key_exists('universe', $options) === true)
+			if (array_key_exists('universe', $arguments) === true)
 			{
-				$this->_universe = $options['universe'];
+				$this->_universe = $arguments['universe'];
 			}
 		}
 		else if
@@ -119,7 +186,35 @@ class BootManager
 			}
 		}
 	}
-}
 
+
+	/**
+	 *
+	 */
+
+	private function loadBoot()
+	{
+		// Load Boot.json
+
+		$boot = null;
+		$pathToBoot = PATH_APPLICATION . 'Config/Boot.json';
+
+		if (file_exists($pathToBoot) === true)
+		{
+			// Decode Boot.json
+
+			$rawBoot = file_get_contents($pathToBoot);
+			$boot = json_decode($rawBoot, true);
+		}
+
+
+		// Fix boot
+
+		$boot = $this->fixBoot($boot);
+
+
+		return $boot;
+	}
+}
 
 ?>

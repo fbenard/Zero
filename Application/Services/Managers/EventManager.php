@@ -11,9 +11,14 @@ namespace fbenard\Zero\Services\Managers;
 
 class EventManager
 {
+	// Traits
+
+	use \fbenard\Zero\Traits\Get;
+
+	
 	// Attributes
 
-	public $_listeners = null;
+	private $_listeners = null;
 
 
 	/**

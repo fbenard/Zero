@@ -13,76 +13,27 @@ class Response
 {
 	// Traits
 
-	use \fbenard\Zero\Traits\GetSet;
+	use \fbenard\Zero\Traits\Get;
 
-
+	
 	// Attributes
 
-	private $_contentType = null;
+	private $_body = null;
+	private $_headers = null;
 	private $_statusCode = null;
-	private $_statusStrings = null;
 
 
 	/**
 	 *
 	 */
 
-	public function __construct()
+	public function __construct($statusCode = 200, $headers = null, $body = null)
 	{
-		$this->_statusCode = 200;
-		$this->_statusStrings =
-		[
-			100 => 'Continue',
-			101 => 'Switching Protocols',
-			102 => 'Processing',
-			200 => 'OK',
-			201 => 'Created',
-			202 => 'Accepted',
-			203 => 'Non-Authoritative Information',
-			204 => 'No Content',
-			205 => 'Reset Content',
-			206 => 'Partial Content',
-			207 => 'Multi-Status',
-			300 => 'Multiple Choices',
-			301 => 'Moved Permanently',
-			302 => 'Found',
-			303 => 'See Other',
-			304 => 'Not Modified',
-			305 => 'Use Proxy',
-			307 => 'Temporary Redirect',
-			400 => 'Bad Request',
-			401 => 'Unauthorized',
-			402 => 'Payment Required',
-			403 => 'Forbidden',
-			404 => 'Not Found',
-			405 => 'Method Not Allowed',
-			406 => 'Not Acceptable',
-			407 => 'Proxy Authentication Required',
-			408 => 'Request Timeout',
-			409 => 'Conflict',
-			410 => 'Gone',
-			411 => 'Length Required',
-			412 => 'Precondition Failed',
-			413 => 'Request Entity Too Large',
-			414 => 'Request-URI Too Long',
-			415 => 'Unsupported Media Type',
-			416 => 'Requested Range Not Satisfiable',
-			417 => 'Expectation Failed',
-			422 => 'Unprocessable Entity',
-			423 => 'Locked',
-			424 => 'Failed Dependency',
-			426 => 'Upgrade Required',
-			500 => 'Internal Server Error',
-			501 => 'Not Implemented',
-			502 => 'Bad Gateway',
-			503 => 'Service Unavailable',
-			504 => 'Gateway Timeout',
-			505 => 'HTTP Version Not Supported',
-			506 => 'Variant Also Negotiates',
-			507 => 'Insufficient Storage',
-			509 => 'Bandwidth Limit Exceeded',
-			510 => 'Not Extended'
-		];
+		// Build attributes
+
+		$this->_body = $body;
+		$this->_headers = $headers;
+		$this->_statusCode = $statusCode;
 	}
 
 
@@ -90,21 +41,112 @@ class Response
 	 *
 	 */
 
-	public function push($content)
+	public function push()
 	{
-		// Have headers already been sent?
-		
-		if (headers_sent() === false)
+		// Send headers
+
+		$this->sendHeaders();
+
+
+		// Print body
+
+		if (is_array($this->_body) === true)
 		{
-			header(\Zero\request()->SERVER['SERVER_PROTOCOL'] . ' ' . $this->_statusCode . ' ' . $this->_statusStrings[$this->_statusCode], true, $this->_statusCode);
-			header('Content-Type: ' . $this->_contentType . '; charset=UTF-8');
-			header('Cache-Control: private, no-cache, no-store, must-revalidate');
+			print(implode(null, $this->_body));
+		}
+		else
+		{
+			print($this->_body);
+		}
+	}
+
+
+	/**
+	 *
+	 */
+
+	public function redirect($url)
+	{
+		header('Location: ' . $url);
+		\z\app()->quit();
+	}
+	
+	
+	/**
+	 *
+	 */
+	
+	private function sendHeaders()
+	{
+		// Have HTTP response headers already been sent?
+		
+		if (headers_sent() === true)
+		{
+			return;
 		}
 
 
-		// Print content
+		// Send HTTP headers
 
-		print $content;
+		http_response_code($this->_statusCode);
+
+		if (is_array($this->_headers) === true)
+		{
+			foreach ($this->_headers as $headerCode => $headerValues)
+			{
+				if (is_array($headerValues) === true)
+				{
+					foreach ($headerValues as $headerValue)
+					{
+						header($headerCode . ': ' . $headerValue);
+					}
+				}
+				else
+				{
+					header($headerCode . ': ' . $headerValues);
+				}
+			}
+		}
+	}
+
+
+	/**
+	 *
+	 */
+
+	public function setBody($body)
+	{
+		$this->_body = $body;
+	}
+
+
+	/**
+	 *
+	 */
+
+	public function setHeaders($headers)
+	{
+		$this->_headers = $headers;
+	}
+
+
+	/**
+	 *
+	 */
+
+	public function setContentType($contentType)
+	{
+		$this->_contentType = $contentType;
+	}
+
+
+	/**
+	 *
+	 */
+
+	public function setStatusCode($statusCode)
+	{
+		$this->_statusCode = $statusCode;
 	}
 }
 
