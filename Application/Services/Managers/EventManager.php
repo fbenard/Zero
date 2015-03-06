@@ -18,7 +18,7 @@ class EventManager
 	
 	// Attributes
 
-	private $_listeners = null;
+	private $_followers = null;
 
 
 	/**
@@ -27,7 +27,7 @@ class EventManager
 
 	public function __construct()
 	{
-		$this->_listeners = [];
+		$this->_followers = [];
 	}
 
 
@@ -35,8 +35,42 @@ class EventManager
 	 *
 	 */
 
-	public function addListener($eventCode, $listener)
+	public function addFollower($eventCode, $follower)
 	{
+		// Build followers for this event code
+
+		if (array_key_exists($eventCode, $this->_followers) === false)
+		{
+			$this->_followers[$eventCode] = [];
+		}
+
+		
+		// Build the follower code
+
+		$followerCode = $this->computeFollowerCode();
+
+
+		// Add the follower
+
+		if (array_key_exists($followerCode, $this->_followers[$eventCode]) === false)
+		{
+			$this->_followers[$eventCode][$followerCode] = $follower;
+		}
+	}
+
+
+	/**
+	 *
+	 */
+
+	private function computeFollowerCode($follower)
+	{
+		//
+
+		$followerCode = sha1(serialize($follower));
+
+
+		return $followerCode;
 	}
 
 
@@ -62,8 +96,18 @@ class EventManager
 	 *
 	 */
 
-	public function removeListener()
+	public function removeFollower($follower)
 	{
+		// Remove the follower
+
+		if
+		(
+			(array_key_exists($eventCode, $this->_followers) === true) &&
+			(in_array($followerCode, $this->_followers[$eventCode]) === true)
+		)
+		{
+			unset($this->_followers[$eventCode][$followerCode]);
+		}
 	}
 }
 
