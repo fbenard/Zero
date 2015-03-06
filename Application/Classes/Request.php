@@ -125,6 +125,102 @@ class Request
 			}
 		}
 	}
+
+
+	/**
+	 *
+	 */
+
+	public function cookie($variableCode, $variableValue = null, $expire = null, $path = null, $domain = null, $secure = null, $httpOnly = null)
+	{
+		//
+
+		if (is_array($_COOKIE) === false)
+		{
+			return;
+		}
+
+
+		//
+
+		if (func_num_args() === 1)
+		{
+			//
+
+			if (array_key_exists($variableCode, $_COOKIE) === true)
+			{
+				return $_COOKIE[$variableCode];
+			}
+		}
+		else
+		{
+			//
+
+			if (is_null($variableValue) === true)
+			{
+				setcookie($variableCode, false);
+			}
+			else
+			{
+				//
+
+				if (is_bool($variableValue) === true)
+				{
+					$variableValue = intval($variableValue);
+				}
+
+
+				//
+
+				setcookie($variableCode, $variableValue, $expire, $path, $domain, $secure, $httpOnly);
+			}
+		}
+	}
+
+
+	/**
+	 *
+	 */
+
+	public function session($variableCode, $variableValue = null)
+	{
+		//
+
+		if (is_array($_SESSION) === false)
+		{
+			return;
+		}
+
+
+		//
+
+		if (func_num_args() === 1)
+		{
+			//
+
+			if
+			(
+				(is_array($_SESSION) === true) &&
+				(array_key_exists($variableCode, $_SESSION) === true)
+			)
+			{
+				return $_SESSION[$variableCode];
+			}			
+		}
+		else
+		{
+			//
+
+			if (is_null($variableValue) === true)
+			{
+				unset($_SESSION[$variableCode]);
+			}
+			else
+			{
+				$_SESSION[$variableCode] = $variableValue;
+			}
+		}
+	}
 }
 
 ?>
