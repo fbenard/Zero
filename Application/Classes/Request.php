@@ -45,7 +45,7 @@ class Request
 		$this->_header = [];
 		$this->_post = $_POST;
 		$this->_server = $_SERVER;
-		$this->_session = $_SESSION;
+		$this->_session = [];
 
 
 		// Inject HTTP headers and CLI options
@@ -82,6 +82,11 @@ class Request
 		}
 		else
 		{
+			if (empty(session_id()) === false)
+			{
+				$this->_session = $_SESSION;
+			}
+			
 			$this->_header = apache_request_headers();
 		}
 	}
