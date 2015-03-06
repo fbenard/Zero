@@ -121,37 +121,45 @@ class BootManager
 		{
 			// Extract arguments
 
-			global $argv;
-			$options = [];
+			$arguments = [];
 
-			foreach ($argv as $arg)
+			if
+			(
+				(array_key_exists('argv', $GLOBALS) === true) &&
+				(is_array($GLOBALS['argv']) === true)
+			)
 			{
-				//
+				// Parse each argument
 
-				$pattern = '/^\-\-([a-z]*)=(.*)$/';
-
-				if (preg_match($pattern, $arg, $matches) !== 1)
+				foreach ($GLOBALS['argv'] as $arg)
 				{
-					continue;
+					// Try to find the pattern --arg="value"
+
+					$pattern = '/^\-\-([a-z]*)=(.*)$/';
+
+					if (preg_match($pattern, $arg, $matches) !== 1)
+					{
+						continue;
+					}
+
+
+					// Store the argument
+
+					$arguments[$matches[1]] = $matches[2];
 				}
-
-				
-				//
-
-				$options[$matches[1]] = $matches[2];
 			}
 
 
 			// Grab environment and universe
 
-			if (array_key_exists('environment', $options) === true)
+			if (array_key_exists('env', $arguments) === true)
 			{
-				$this->_environment = $options['environment'];
+				$this->_environment = $arguments['env'];
 			}
 
-			if (array_key_exists('universe', $options) === true)
+			if (array_key_exists('universe', $arguments) === true)
 			{
-				$this->_universe = $options['universe'];
+				$this->_universe = $arguments['universe'];
 			}
 		}
 		else if
