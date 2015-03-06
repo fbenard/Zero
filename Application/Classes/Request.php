@@ -38,14 +38,12 @@ class Request
 		// Build attributes
 
 		$this->_argument = [];
-		$this->_cookie = $_COOKIE;
 		$this->_env = $_ENV;
 		$this->_file = $_FILES;
 		$this->_get = $_GET;
 		$this->_header = [];
 		$this->_post = $_POST;
 		$this->_server = $_SERVER;
-		$this->_session = [];
 
 
 		// Inject HTTP headers and CLI options
@@ -82,11 +80,6 @@ class Request
 		}
 		else
 		{
-			if (empty(session_id()) === false)
-			{
-				$this->_session = $_SESSION;
-			}
-			
 			$this->_header = apache_request_headers();
 		}
 	}
