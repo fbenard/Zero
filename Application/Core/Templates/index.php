@@ -10,6 +10,9 @@ if (file_exists($pathToZero) === false)
 	trigger_error(null, E_USER_ERROR);
 }
 
+
+// Load Zero
+
 require_once($pathToZero);
 
 ?>
