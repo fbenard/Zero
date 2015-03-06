@@ -19,14 +19,12 @@ class Request
 	// Attributes
 
 	private $_argument = null;
-	private $_cookie = null;
 	private $_env = null;
 	private $_file = null;
 	private $_get = null;
 	private $_header = null;
 	private $_post = null;
 	private $_server = null;
-	private $_session = null;
 
 
 	/**
