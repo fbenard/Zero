@@ -158,25 +158,20 @@ class RouteManager
 
 	public function setRoute($uri = null, $verb = null)
 	{
-		// Globals
-
-		global $argv;
-
-
 		// Build the URI
 
 		if (empty($uri) === true)
 		{
 			if (\z\app()->isCli() === true)
 			{
-				if (array_key_exists(1, $argv) === true)
+				if (array_key_exists(1, $GLOBALS['argv']) === true)
 				{
-					$this->_uri = $argv[1];
+					$this->_uri = $GLOBALS['argv'][1];
 				}
 			}
 			else
 			{
-				$this->_uri = explode('?', $_SERVER['REQUEST_URI'], 2)[0];
+				$this->_uri = explode('?', \z\request()->server('REQUEST_URI'), 2)[0];
 			}			
 		}
 
@@ -191,7 +186,7 @@ class RouteManager
 			}
 			else
 			{
-				$this->_verb = $_SERVER['REQUEST_METHOD'];
+				$this->_verb = \z\request()->server('REQUEST_METHOD');
 			}
 		}
 
@@ -240,7 +235,7 @@ class RouteManager
 
 			if (\z\app()->isCli() === true)
 			{
-				$arguments = array_slice($argv, 2);
+				$arguments = array_slice($GLOBALS['argv'], 2);
 
 				foreach ($arguments as $key => &$value)
 				{
