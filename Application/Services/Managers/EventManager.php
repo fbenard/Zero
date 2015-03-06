@@ -80,6 +80,20 @@ class EventManager
 
 	public function dispatchEvent($eventCode, $event, $sender)
 	{
+		// Check whether there are any followers
+
+		if (array_key_exists($eventCode, $this->_followers) === false)
+		{
+			return;
+		}
+
+		
+		// Parse each follower
+
+		foreach ($this->_followers[$eventCode] as $followerCode => $follower)
+		{
+			$follower->onEvent($eventCode, $event, $sender);
+		}
 	}
 
 
