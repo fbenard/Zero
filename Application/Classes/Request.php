@@ -18,10 +18,15 @@ class Request
 	
 	// Attributes
 
+	private $_argument = null;
+	private $_cookie = null;
+	private $_env = null;
+	private $_file = null;
 	private $_get = null;
-	private $_headers = null;
-	private $_options = null;
+	private $_header = null;
 	private $_post = null;
+	private $_server = null;
+	private $_session = null;
 
 
 	/**
@@ -30,10 +35,55 @@ class Request
 
 	public function __construct()
 	{
+		// Build attributes
+
+		$this->_argument = [];
+		$this->_cookie = $_COOKIE;
+		$this->_env = $_ENV;
+		$this->_file = $_FILES;
 		$this->_get = $_GET;
-		$this->_options = [];
-		$this->_headers = apache_request_headers();
+		$this->_header = [];
 		$this->_post = $_POST;
+		$this->_server = $_SERVER;
+		$this->_session = $_SESSION;
+
+
+		// Inject HTTP headers and CLI options
+
+		if (\z\app()->isCli() === true)
+		{
+			// Extract arguments
+
+			if
+			(
+				(array_key_exists('argv', $GLOBALS) === true) &&
+				(is_array($GLOBALS['argv']) === true)
+			)
+			{
+				// Parse each argument
+
+				foreach ($GLOBALS['argv'] as $arg)
+				{
+					// Try to find the pattern --arg="value"
+
+					$pattern = '/^\-\-([a-z]*)=(.*)$/';
+
+					if (preg_match($pattern, $arg, $matches) !== 1)
+					{
+						continue;
+					}
+
+
+					// Store the argument
+
+					$this->_argument[$matches[1]] = $matches[2];
+				}
+			}
+		}
+		else
+		{
+			$this->_header = apache_request_headers();
+		}
 	}
 
 
