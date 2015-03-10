@@ -93,7 +93,7 @@ class EventManager
 	{
 		// Load preferences
 
-		$this->loadPreferences();
+		$this->loadConfig();
 	}
 
 
@@ -101,7 +101,7 @@ class EventManager
 	 *
 	 */
 
-	private function loadPreferences()
+	private function loadConfig()
 	{
 		// Get the cache
 
