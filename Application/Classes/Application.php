@@ -71,6 +71,7 @@ class Application
 		//
 
 		\z\service('manager/constant')->initialize();
+		\z\service('manager/event')->initialize();
 		\z\service('manager/preference')->initialize();
 		\z\service('manager/route')->initialize();
 		\z\service('manager/string')->initialize();

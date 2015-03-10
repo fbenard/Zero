@@ -35,7 +35,7 @@ class EventManager
 	 *
 	 */
 
-	public function addFollower($eventCode, $follower)
+	public function addFollower($eventCode, $followerCode)
 	{
 		// Build followers for this event code
 
@@ -45,16 +45,11 @@ class EventManager
 		}
 
 		
-		// Build the follower code
-
-		$followerCode = $this->computeFollowerCode();
-
-
 		// Add the follower
 
 		if (array_key_exists($followerCode, $this->_followers[$eventCode]) === false)
 		{
-			$this->_followers[$eventCode][$followerCode] = $follower;
+			$this->_followers[$eventCode][$followerCode] = $followerCode;
 		}
 	}
 
@@ -78,7 +73,7 @@ class EventManager
 	 *
 	 */
 
-	public function dispatchEvent($eventCode, $event, $sender)
+	public function dispatchEvent($eventCode, $eventContext, $sender)
 	{
 		// Check whether there are any followers
 
@@ -90,9 +85,9 @@ class EventManager
 		
 		// Parse each follower
 
-		foreach ($this->_followers[$eventCode] as $followerCode => $follower)
+		foreach ($this->_followers[$eventCode] as $followerCode)
 		{
-			$follower->onEvent($eventCode, $event, $sender);
+			service($followerCode)->onEvent($eventCode, $eventContext, $sender);
 		}
 	}
 
@@ -103,6 +98,23 @@ class EventManager
 
 	public function initialize()
 	{
+		// TODO add followers to cache
+		//
+
+		$dependencies = \z\boot()->dependencies;
+		
+		
+		//
+
+		foreach ($dependencies as $dependency)
+		{
+			$paths = \z\service('helper/file')->listFiles($dependency . 'Events/', '*.php');
+			
+			foreach ($paths as $path)
+			{
+				require_once($path);
+			}
+		}
 	}
 
 
@@ -110,14 +122,14 @@ class EventManager
 	 *
 	 */
 
-	public function removeFollower($follower)
+	public function removeFollower($eventCode, $follower)
 	{
 		// Remove the follower
 
 		if
 		(
 			(array_key_exists($eventCode, $this->_followers) === true) &&
-			(in_array($followerCode, $this->_followers[$eventCode]) === true)
+			(array_key_exists($followerCode, $this->_followers[$eventCode]) === true)
 		)
 		{
 			unset($this->_followers[$eventCode][$followerCode]);

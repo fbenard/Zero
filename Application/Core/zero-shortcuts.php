@@ -49,9 +49,9 @@ function cons($constantName, $constantValue = null)
  *
  */
 
-function dispatch($eventCode, $event, $sender)
+function dispatch($eventCode, $eventContext, $sender)
 {
-	return \z\service('manager/event')->dispatch($eventCode, $event, $sender);
+	return \z\service('manager/event')->dispatch($eventCode, $eventContext, $sender);
 }
 
 
@@ -119,9 +119,9 @@ function e($exceptionCode, $exceptionContext = null)
  *
  */
 
-function listen($eventCode, $listener)
+function follow($eventCode, $followerCode)
 {
-	return \z\service('manager/event')->listen($eventCode, $listener);
+	return \z\service('manager/event')->addFollower($eventCode, $followerCode);
 }
 
 
@@ -210,6 +210,16 @@ function service($serviceCode = null, $clone = false)
 function str($stringCode, $stringArguments = null, $localeCode = null, $fallbackCode = null)
 {
 	return \z\service('manager/string')->getString($stringCode, $stringArguments, $localeCode, $fallbackCode);
+}
+
+
+/**
+ *
+ */
+
+function unfollow($eventCode, $followerCode)
+{
+	return \z\service('manager/event')->removeFollower($eventCode, $followerCode);
 }
 
 ?>
