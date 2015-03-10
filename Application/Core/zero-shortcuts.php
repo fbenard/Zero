@@ -49,7 +49,7 @@ function cons($constantName, $constantValue = null)
  *
  */
 
-function dispatch($eventCode, $eventContext, $sender)
+function dispatch($eventCode, $eventContext, $sender = null)
 {
 	return \z\service('manager/event')->dispatchEvent($eventCode, $eventContext, $sender);
 }

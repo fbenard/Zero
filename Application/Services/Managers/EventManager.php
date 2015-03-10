@@ -58,7 +58,7 @@ class EventManager
 	 *
 	 */
 
-	public function dispatchEvent($eventCode, $eventContext, $sender)
+	public function dispatchEvent($eventCode, $eventContext, $sender = null)
 	{
 		// Check whether there are any followers
 
