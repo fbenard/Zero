@@ -15,7 +15,6 @@ TODO
 - order followers
 - define local callback
 - plug with oompa loompa
-- use an Event class instead of a context
 */
 
 class EventManager
@@ -67,7 +66,7 @@ class EventManager
 	 *
 	 */
 
-	public function dispatchEvent($eventCode, $eventContext, $sender = null)
+	public function dispatchEvent($eventCode, $event)
 	{
 		// Check whether there are any followers
 
@@ -81,7 +80,7 @@ class EventManager
 
 		foreach ($this->_followers[$eventCode] as $followerCode => $methodCode)
 		{
-			\z\service($followerCode)->$methodCode($eventCode, $eventContext, $sender);
+			\z\service($followerCode)->$methodCode($eventCode, $event);
 		}
 	}
 	
