@@ -51,7 +51,7 @@ function cons($constantName, $constantValue = null)
 
 function dispatch($eventCode, $eventContext, $sender)
 {
-	return \z\service('manager/event')->dispatch($eventCode, $eventContext, $sender);
+	return \z\service('manager/event')->dispatchEvent($eventCode, $eventContext, $sender);
 }
 
 
@@ -119,9 +119,9 @@ function e($exceptionCode, $exceptionContext = null)
  *
  */
 
-function follow($eventCode, $followerCode)
+function follow($eventCode, $followerCode, $methodCode)
 {
-	return \z\service('manager/event')->addFollower($eventCode, $followerCode);
+	return \z\service('manager/event')->addFollower($eventCode, $followerCode, $methodCode);
 }
 
 

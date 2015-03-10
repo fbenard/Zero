@@ -35,7 +35,7 @@ class EventManager
 	 *
 	 */
 
-	public function addFollower($eventCode, $followerCode)
+	public function addFollower($eventCode, $followerCode, $methodCode)
 	{
 		// Build followers for this event code
 
@@ -49,23 +49,8 @@ class EventManager
 
 		if (array_key_exists($followerCode, $this->_followers[$eventCode]) === false)
 		{
-			$this->_followers[$eventCode][$followerCode] = $followerCode;
+			$this->_followers[$eventCode][$followerCode] = $methodCode;
 		}
-	}
-
-
-	/**
-	 *
-	 */
-
-	private function computeFollowerCode($follower)
-	{
-		//
-
-		$followerCode = sha1(serialize($follower));
-
-
-		return $followerCode;
 	}
 
 
@@ -85,10 +70,22 @@ class EventManager
 		
 		// Parse each follower
 
-		foreach ($this->_followers[$eventCode] as $followerCode)
+		foreach ($this->_followers[$eventCode] as $followerCode => $methodCode)
 		{
-			service($followerCode)->onEvent($eventCode, $eventContext, $sender);
+			\z\service($followerCode)->$methodCode($eventCode, $eventContext, $sender);
 		}
+	}
+	
+	
+	/**
+	 *
+	 */
+	
+	public function initialize()
+	{
+		// Load preferences
+
+		$this->loadPreferences();
 	}
 
 
@@ -96,25 +93,44 @@ class EventManager
 	 *
 	 */
 
-	public function initialize()
+	private function loadPreferences()
 	{
-		// TODO add followers to cache
-		//
+		// Get the cache
+
+		$cacheCode = 'events_' . \z\boot()->environment . '_' . \z\boot()->universe;
+		$cache = \z\cache()->getCache($cacheCode);
+
+		if ($cache !== false)
+		{
+			$this->_followers = unserialize($cache);
+			return;
+		}
+
+
+		// Parse each dependency
 
 		$dependencies = \z\boot()->dependencies;
-		
-		
-		//
 
 		foreach ($dependencies as $dependency)
 		{
-			$paths = \z\service('helper/file')->listFiles($dependency . 'Events/', '*.php');
+			//
+
+			$paths = \z\service('helper/file')->listFiles($dependency . 'Config/Events/', '*.php');
 			
 			foreach ($paths as $path)
 			{
 				require_once($path);
 			}
 		}
+
+
+		// Set the cache
+
+		\z\cache()->setCache
+		(
+			$cacheCode,
+			serialize($this->_followers)
+		);
 	}
 
 
@@ -122,7 +138,7 @@ class EventManager
 	 *
 	 */
 
-	public function removeFollower($eventCode, $follower)
+	public function removeFollower($eventCode, $followerCode)
 	{
 		// Remove the follower
 

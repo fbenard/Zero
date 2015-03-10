@@ -3,6 +3,7 @@
 	"manager/constant": "\\fbenard\\Zero\\Services\\Managers\\ConstantManager",
 	"manager/controller": "\\fbenard\\Zero\\Services\\Managers\\ControllerManager",
 	"manager/error": "\\fbenard\\Zero\\Services\\Managers\\ErrorManager",
+	"manager/event": "\\fbenard\\Zero\\Services\\Managers\\EventManager",
 	"manager/exception": "\\fbenard\\Zero\\Services\\Managers\\ExceptionManager",
 	"manager/log": "\\fbenard\\Zero\\Services\\Managers\\LogManager",
 	"manager/migration": "\\fbenard\\Zero\\Services\\Managers\\MigrationManager",
