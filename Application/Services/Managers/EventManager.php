@@ -9,6 +9,15 @@ namespace fbenard\Zero\Services\Managers;
  *
  */
 
+/*
+TODO
+- try/catch around followers
+- order followers
+- define local callback
+- plug with oompa loompa
+- use an Event class instead of a context
+*/
+
 class EventManager
 {
 	// Traits
