@@ -1,3 +1,4 @@
+#!/usr/bin/env php
 <?php
 
 // Namespace
@@ -63,7 +64,7 @@ function create()
 	// Create the application
 
 	$pathToZero = __DIR__ . '/';
-	$pathToApplication = getcwd() . '/' . $applicationCode . '/';
+	$pathToApplication = getcwd();// . '/' . $applicationCode . '/';
 
 	\z\execute
 	(
