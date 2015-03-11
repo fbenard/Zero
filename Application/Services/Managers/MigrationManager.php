@@ -28,6 +28,13 @@ class MigrationManager
 
 		foreach ($migrations as $migration)
 		{
+			// Log
+
+			\z\dlogi('Applying migration ' . get_class($migration) . '...');
+
+			
+			//
+
 			$migration->upgrade();
 		}
 	}
