@@ -103,6 +103,16 @@ class Application
 
 	public function quit()
 	{
+		//
+
+		if ($this->isCli() === true)
+		{
+			print("\n");
+		}
+
+
+		//
+
 		exit();
 	}
 	
@@ -121,6 +131,11 @@ class Application
 		// Run the controller manager
 
 		\z\service('manager/controller')->run();
+
+
+		// Quit the application
+
+		$this->quit();
 	}
 }
 
