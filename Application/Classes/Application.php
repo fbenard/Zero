@@ -107,7 +107,7 @@ class Application
 
 		if ($this->isCli() === true)
 		{
-			print("\n");
+			\z\dlogs('Done!');
 		}
 
 
