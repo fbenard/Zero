@@ -79,7 +79,7 @@ class View
 		
 		// Render the view
 
-		require_once($pathToView);
+		require($pathToView);
 
 
 		// Get output
