@@ -2,21 +2,21 @@
 	"name": "fbenard/zero",
 	"description": "Micro PHP Framework",
 	"type": "library",
-	"keywords": ["micro", "php", "framework"],
+	"keywords": ["micro", "framework", "php"],
 	"homepage": "http://github.com/fbenard/zero",
 	"license": "MIT",
 	"authors":
 	[
 		{
 			"name": "Fabien BÉNARD",
-			"email": "contact@fabienbenard.com",
+			"email": "fbenard.public@gmail.com",
 			"homepage": "http://fabienbenard.com",
 			"role": "Developer"
 		}
 	],
 	"support":
 	{
-		"email": "fb.spam@me.com",
+		"email": "fbenard.public@gmail.com",
 		"issues": "http://github.com/fbenard/zero/issues",
 		"source": "http://github.com/fbenard/zero"
 	},
