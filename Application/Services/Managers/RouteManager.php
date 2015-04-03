@@ -235,10 +235,17 @@ class RouteManager
 
 			if (\z\app()->isCli() === true)
 			{
+				// Get arguments
+
 				$arguments = array_slice($GLOBALS['argv'], 2);
+
+				
+				// Parse each argument
 
 				foreach ($arguments as $key => &$value)
 				{
+					// Remove arguments starting with a dash
+
 					if (strpos($value, '-') === 0)
 					{
 						unset($arguments[$key]);
@@ -247,7 +254,13 @@ class RouteManager
 			}
 			else
 			{
+				// Remove the first match
+
 				array_shift($matches);
+
+
+				// Arguments are remaining matches
+
 				$arguments = $matches;
 			}
 
@@ -258,7 +271,7 @@ class RouteManager
 			$nbArgumentsDefined = count($definition['arguments']);
 
 
-			// Extract arguments
+			// Store arguments into definition
 
 			if
 			(
@@ -266,8 +279,6 @@ class RouteManager
 				($nbArguments === $nbArgumentsDefined)
 			)
 			{
-				//
-
 				$keys = array_keys($definition['arguments']);
 
 				foreach ($arguments as $key => $value)
