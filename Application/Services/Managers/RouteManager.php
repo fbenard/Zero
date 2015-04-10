@@ -231,38 +231,14 @@ class RouteManager
 			}
 
 
-			// Build arguments
+			// Remove the first match
 
-			if (\z\app()->isCli() === true)
-			{
-				// Get arguments
-
-				$arguments = array_slice($GLOBALS['argv'], 2);
-
-				
-				// Parse each argument
-
-				foreach ($arguments as $key => &$value)
-				{
-					// Remove arguments starting with a dash
-
-					if (strpos($value, '-') === 0)
-					{
-						unset($arguments[$key]);
-					}
-				}
-			}
-			else
-			{
-				// Remove the first match
-
-				array_shift($matches);
+			array_shift($matches);
 
 
-				// Arguments are remaining matches
+			// Arguments are remaining matches
 
-				$arguments = $matches;
-			}
+			$arguments = $matches;
 
 
 			// Count arguments
