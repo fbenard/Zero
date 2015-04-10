@@ -119,47 +119,24 @@ class BootManager
 
 		if (\z\app()->isCli() === true)
 		{
-			// Extract arguments
-
-			$arguments = [];
-
-			if
-			(
-				(array_key_exists('argv', $GLOBALS) === true) &&
-				(is_array($GLOBALS['argv']) === true)
-			)
-			{
-				// Parse each argument
-
-				foreach ($GLOBALS['argv'] as $arg)
-				{
-					// Try to find the pattern --arg="value"
-
-					$pattern = '/^\-\-([a-z]*)=(.*)$/';
-
-					if (preg_match($pattern, $arg, $matches) !== 1)
-					{
-						continue;
-					}
-
-
-					// Store the argument
-
-					$arguments[$matches[1]] = $matches[2];
-				}
-			}
-
-
 			// Grab environment and universe
+			
+			$request = new \fbenard\Zero\Classes\Request();
 
-			if (array_key_exists('env', $arguments) === true)
+			$environment = $request->argument('env');
+			$universe = $request->argument('universe');
+
+
+			// Store environment and universe
+
+			if (empty($environment) === false)
 			{
-				$this->_environment = $arguments['env'];
+				$this->_environment = $environment;
 			}
 
-			if (array_key_exists('universe', $arguments) === true)
+			if (empty($universe) === false)
 			{
-				$this->_universe = $arguments['universe'];
+				$this->_universe = $universe;
 			}
 		}
 		else if
