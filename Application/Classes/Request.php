@@ -109,13 +109,12 @@ class Request
 			
 			//
 
-			if
-			(
-				(array_key_exists(0, $methodArguments) === true) &&
-				(array_key_exists($methodArguments[0], $attribute) === true)
-			)
+			if (array_key_exists(0, $methodArguments) === true)
 			{
-				return $attribute[$methodArguments[0]];
+				if (array_key_exists($methodArguments[0], $attribute) === true)
+				{
+					return $attribute[$methodArguments[0]];
+				}
 			}
 			else
 			{
