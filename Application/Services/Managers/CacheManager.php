@@ -11,14 +11,9 @@ namespace fbenard\Zero\Services\Managers;
 
 class CacheManager
 {
-	// Traits
-
-	use \fbenard\Zero\Traits\Get;
-
-	
 	// Attributes
 
-	private $_predis = null;
+	private $_redis = null;
 
 
 	/**
@@ -27,7 +22,7 @@ class CacheManager
 
 	public function __construct()
 	{
-		$this->_predis = new \Predis\Client();
+		$this->_redis = new \fbenard\Zero\Services\Drivers\RedisDriver();
 	}
 
 
@@ -39,7 +34,7 @@ class CacheManager
 	{
 		// Flush the whole database
 		
-		$this->_predis->flushdb();
+		$this->_redis->flushdb();
 	}
 
 
@@ -51,7 +46,7 @@ class CacheManager
 	{
 		// Does the cache exist?
 
-		if ($this->_predis->exists($cacheCode) === false)
+		if ($this->_redis->exists($cacheCode) === false)
 		{
 			return false;
 		}
@@ -59,7 +54,7 @@ class CacheManager
 
 		// Get the cache
 
-		$result = $this->_predis->get($cacheCode);
+		$result = $this->_redis->get($cacheCode);
 
 
 		return $result;
@@ -74,7 +69,7 @@ class CacheManager
 	{
 		// Set the cache
 
-		$this->_predis->set($cacheCode, $cacheValue);
+		$this->_redis->set($cacheCode, $cacheValue);
 	}
 }
 
