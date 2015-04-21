@@ -30,7 +30,7 @@ class CacheManager
 	 *
 	 */
 
-	public function clear()
+	public function clearCache()
 	{
 		// Flush the whole database
 		

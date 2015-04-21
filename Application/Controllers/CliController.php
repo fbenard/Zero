@@ -18,7 +18,7 @@ extends \fbenard\Zero\Classes\AbstractController
 
 	public function actionCacheClear()
 	{
-		\z\cache()->clear();
+		\z\cache()->clearCache();
 	}
 
 
