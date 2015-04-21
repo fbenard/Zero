@@ -92,7 +92,17 @@ class ControllerManager
 				$pre
 			);
 
-			\z\service($pre['service'])->$pre['method']();
+			
+			// Call the pre action
+
+			call_user_func_array
+			(
+				[
+					\z\service($pre['service']),
+					$pre['method']
+				],
+				$this->_arguments
+			);
 		}
 
 		
@@ -128,7 +138,17 @@ class ControllerManager
 				$post
 			);
 
-			\z\service($post['service'])->$post['method']();
+			
+			// Call the post action
+
+			call_user_func_array
+			(
+				[
+					\z\service($post['service']),
+					$post['method']
+				],
+				$this->_arguments
+			);
 		}
 
 		
