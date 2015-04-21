@@ -81,6 +81,8 @@ class ControllerManager
 
 		foreach ($route['pre'] as $pre)
 		{
+			// Fix the definition
+
 			$pre = array_merge
 			(
 				[
@@ -115,6 +117,8 @@ class ControllerManager
 
 		foreach ($route['post'] as $post)
 		{
+			// Fix the definition
+
 			$post = array_merge
 			(
 				[
