@@ -44,6 +44,14 @@ class CacheManager
 
 	public function getCache($cacheCode)
 	{
+		// Is cache enabled?
+
+		if ($this->isCacheEnabled() === false)
+		{
+			return false;
+		}
+
+
 		// Does the cache exist?
 
 		if ($this->_redis->exists($cacheCode) === false)
@@ -58,6 +66,23 @@ class CacheManager
 
 
 		return $result;
+	}
+
+
+	/**
+	 *
+	 */
+
+	private function isCacheEnabled()
+	{
+		if (in_array(\z\boot()->environment, \z\boot()->cache) === true)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 

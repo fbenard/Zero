@@ -18,6 +18,7 @@ class BootManager
 	
 	// Attributes
 
+	private $_cache = null;
 	private $_dependencies = null;
 	private $_environment = null;
 	private $_universe = null;
@@ -42,6 +43,7 @@ class BootManager
 		$boot = array_merge
 		(
 			[
+				'cache' => [],
 				'dependencies' => [],
 				'hosts' => [],
 				'environment' => null,
@@ -105,6 +107,7 @@ class BootManager
 
 		// Build attributes
 
+		$this->_cache = $boot['cache'];
 		$this->_dependencies = $boot['dependencies'];
 		$this->_environment = $boot['environment'];
 		$this->_universe = $boot['universe'];
