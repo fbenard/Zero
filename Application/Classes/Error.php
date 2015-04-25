@@ -33,12 +33,27 @@ class Error
 
 	public function __construct($errorCode, $errorDescription, $errorFile = null, $errorLine = null, $errorContext = null)
 	{
+		// Store attributes
+
 		$this->_code = $errorCode;
 		$this->_description = $errorDescription;
 		$this->_file = $errorFile;
 		$this->_line = $errorLine;
 		$this->_context = $errorContext;
 		$this->_traces = $errorTraces;
+
+
+		// Makes context and traces are arrays
+
+		if (is_array($this->_context) === false)
+		{
+			$this->_context = [];
+		}
+
+		if (is_array($this->_traces) === false)
+		{
+			$this->_traces = [];
+		}
 	}
 }
 
