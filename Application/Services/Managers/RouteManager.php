@@ -97,7 +97,7 @@ class RouteManager
 
 				// For each definition
 
-				foreach ($definitions as $uri => &$definition)
+				foreach ($definitions as &$definition)
 				{
 					// Make sure the definition is valid
 
@@ -115,7 +115,7 @@ class RouteManager
 
 					// For each verb
 
-					foreach ($definition['verbs'] as $verbCode => &$verb)
+					foreach ($definition['verbs'] as &$verb)
 					{
 						// Make sure the verb is valid
 
