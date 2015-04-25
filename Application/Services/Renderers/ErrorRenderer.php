@@ -15,7 +15,7 @@ class ErrorRenderer
 	 *
 	 */
 
-	public function renderError()
+	public function renderError(\fbenard\Zero\Classes\Error $error)
 	{
 		// Define method name
 
@@ -31,14 +31,7 @@ class ErrorRenderer
 
 		// Render the error
 
-		$result = call_user_func_array
-		(
-			[
-				$this,
-				$methodName
-			],
-			func_get_args()
-		);
+		$result = $this->$methodName($error);
 
 
 		// Convert arrays to string
@@ -57,7 +50,7 @@ class ErrorRenderer
 	 *
 	 */
 
-	public function renderErrorCli($errorCode, $errorTitle, $errorDescription, $errorFile, $errorLine, $errorContext, $errorTraces)
+	public function renderErrorCli(\fbenard\Zero\Classes\Error $error)
 	{
 		// Build result
 
@@ -66,14 +59,14 @@ class ErrorRenderer
 
 		// Display title and description
 
-		if (empty($errorTitle) === false)
+		if (empty($error->title) === false)
 		{
-			$result[] = "\n\033[1;31m*** \033[1;31m" . $errorTitle . " (" . $errorCode . ")\n";
+			$result[] = "\n\033[1;31m*** \033[1;31m" . $error->title . " (" . $error->code . ")\n";
 		}
 		
-		if (empty($errorDescription) === false)
+		if (empty($error->description) === false)
 		{
-			$result[] = "\033[0;31m" . $errorDescription . "\n";
+			$result[] = "\033[0;31m" . $error->description . "\n";
 		}
 
 		$result[] = "\n";
@@ -81,14 +74,14 @@ class ErrorRenderer
 		
 		// Display error location
 
-		if (empty($errorFile) === false)
+		if (empty($error->file) === false)
 		{
-			$result[] = "\033[1;37mFile:\t\033[0;0m" . str_replace(getcwd(), null, $errorFile) . "\n";
+			$result[] = "\033[1;37mFile:\t\033[0;0m" . str_replace(getcwd(), null, $error->file) . "\n";
 		}
 
-		if (empty($errorLine) === false)
+		if (empty($error->line) === false)
 		{
-			$result[] = "\033[1;37mLine:\t\033[0;0m" . $errorLine . "\n";
+			$result[] = "\033[1;37mLine:\t\033[0;0m" . $error->line . "\n";
 		}
 		
 		
@@ -96,13 +89,13 @@ class ErrorRenderer
 
 		if
 		(
-			(is_array($errorContext) === true) &&
-			(empty($errorContext) === false)
+			(is_array($error->context) === true) &&
+			(empty($error->context) === false)
 		)
 		{
 			$result[] = "\n\033[1;37mContext:" . "\n";
 			
-			foreach ($errorContext as $key => $value)
+			foreach ($error->context as $key => $value)
 			{
 				$result[] = "\033[0;0m- " . $key . ' = ';
 
@@ -126,13 +119,13 @@ class ErrorRenderer
 
 		if
 		(
-			(is_array($errorTraces) === true) &&
-			(empty($errorTraces) === false)
+			(is_array($error->traces) === true) &&
+			(empty($error->traces) === false)
 		)
 		{
 			$result[] = "\n\033[1;37mTrace:" . "\n";
 			
-			foreach ($errorTraces as $errorTrace)
+			foreach ($error->traces as $errorTrace)
 			{
 				if
 				(
@@ -159,7 +152,7 @@ class ErrorRenderer
 	 *
 	 */
 
-	public function renderErrorGui()
+	public function renderErrorGui(\fbenard\Zero\Classes\Error $error)
 	{
 		// Clean the buffer
 		
@@ -247,7 +240,7 @@ class ErrorRenderer
 	 *
 	 */
 
-	private function renderErrorHtml($errorCode, $errorTitle, $errorDescription, $errorFile, $errorLine, $errorContext, $errorTraces)
+	private function renderErrorHtml(\fbenard\Zero\Classes\Error $error)
 	{
 		// Build result
 
@@ -262,31 +255,31 @@ class ErrorRenderer
 
 		//
 
-		$result[] = '<h1>' . $errorTitle . ' (' . $errorCode . ')</h1>';
-		$result[] = '<p>' . $errorDescription . '</p>';
+		$result[] = '<h1>' . $error->title . ' (' . $error->code . ')</h1>';
+		$result[] = '<p>' . $error->description . '</p>';
 		
 
 		//
 
 		$result[] = '<hr />';
 		$result[] = '<p><strong>File</strong></p>';
-		$result[] = '<pre>' . str_replace(getcwd(), null, $errorFile) . '</pre>';
+		$result[] = '<pre>' . str_replace(getcwd(), null, $error->file) . '</pre>';
 		$result[] = '<p><strong>Line</strong></p>';
-		$result[] = '<pre>' . $errorLine . '</pre>';
+		$result[] = '<pre>' . $error->line . '</pre>';
 		
 		
 		// Display the context
 
 		if
 		(
-			(is_array($errorContext) === true) &&
-			(empty($errorContext) === false)
+			(is_array($error->context) === true) &&
+			(empty($error->context) === false)
 		)
 		{
 			$result[] = '<hr />';
 			$result[] = '<h2>Context</h2>';
 			
-			foreach ($errorContext as $key => $value)
+			foreach ($error->context as $key => $value)
 			{
 				$result[] = '<p><strong>' . $key . '</strong></p>';
 				$result[] = '<pre>' . print_r($value, true) . '</pre>';
@@ -298,15 +291,15 @@ class ErrorRenderer
 
 		if
 		(
-			(is_array($errorTraces) === true) &&
-			(empty($errorTraces) === false)
+			(is_array($error->traces) === true) &&
+			(empty($error->traces) === false)
 		)
 		{
 			$result[] = '<hr />';
 			$result[] = '<h2>Trace</h2>';
 			$result[] = '<table>';
 			
-			foreach ($errorTraces as $errorTrace)
+			foreach ($error->traces as $errorTrace)
 			{
 				$errorTrace = array_merge
 				(
@@ -345,20 +338,20 @@ class ErrorRenderer
 	 *
 	 */
 
-	private function renderErrorJson($errorCode, $errorTitle, $errorDescription, $errorFile, $errorLine, $errorContext, $errorTraces)
+	private function renderErrorJson(\fbenard\Zero\Classes\Error $error)
 	{
 		// Build the result
 
 		$result = json_encode
 		(
 			[
-				'errorCode' => $errorCode,
-				'errorContext' => $errorContext,
-				'errorDescription' => $errorDescription,
-				'errorFile' => $errorFile,
-				'errorLine' => $errorLine,
-				'errorTitle' => $errorTitle,
-				'errorTraces' => $errorTraces
+				'errorCode' => $error->code,
+				'errorContext' => $error->context,
+				'errorDescription' => $error->description,
+				'errorFile' => $error->file,
+				'errorLine' => $error->line,
+				'errorTitle' => $error->title,
+				'errorTraces' => $error->traces
 			]
 		);
 

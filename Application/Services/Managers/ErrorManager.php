@@ -19,8 +19,8 @@ class ErrorManager
 	{
 		// Build error
 
-		$error =
-		[
+		$error = new \fbenard\Zero\Classes\Error
+		(
 			$errorCode,
 			$errorCode,
 			$errorDescription,
@@ -28,7 +28,7 @@ class ErrorManager
 			$errorLine,
 			$errorContext,
 			debug_backtrace()
-		];
+		);
 
 
 		// Build error renderer
@@ -38,19 +38,12 @@ class ErrorManager
 
 		// Render the error
 
-		$output = call_user_func_array
-		(
-			[
-				$errorRenderer,
-				'renderError'
-			],
-			$error
-		);
+		$result = $errorRenderer->renderError($error);
 
 		
-		// Display the output
+		// Display the error
 
-		print($output);
+		print($result);
 	}
 }
 
