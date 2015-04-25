@@ -77,33 +77,9 @@ class ControllerManager
 		$route = \z\service('manager/route')->route;
 
 
-		// Execute each pre action
+		// Execute pre actions
 
-		foreach ($route['pre'] as $pre)
-		{
-			// Fix the definition
-
-			$pre = array_merge
-			(
-				[
-					'method' => null,
-					'service' => null
-				],
-				$pre
-			);
-
-			
-			// Call the pre action
-
-			call_user_func_array
-			(
-				[
-					\z\service($pre['service']),
-					$pre['method']
-				],
-				$this->_arguments
-			);
-		}
+		$this->runActions($route['pre']);
 
 		
 		// Clear buffer
@@ -123,19 +99,36 @@ class ControllerManager
 		);
 
 
+		// Execute post actions
+
+		$this->runActions($route['post']);
+
+		
+		// Push the response
+		
+		$this->_controller->pushResponse();
+	}
+
+
+	/**
+	 *
+	 */
+
+	private function runActions($actions)
+	{
 		// Execute each post action
 
-		foreach ($route['post'] as $post)
+		foreach ($actions as $action)
 		{
 			// Fix the definition
 
-			$post = array_merge
+			$action = array_merge
 			(
 				[
 					'method' => null,
 					'service' => null
 				],
-				$post
+				$action
 			);
 
 			
@@ -144,17 +137,12 @@ class ControllerManager
 			call_user_func_array
 			(
 				[
-					\z\service($post['service']),
-					$post['method']
+					\z\service($action['service']),
+					$action['method']
 				],
 				$this->_arguments
 			);
 		}
-
-		
-		// Push the response
-		
-		$this->_controller->pushResponse();
 	}
 }
 
