@@ -15,7 +15,7 @@ class MigrationManager
 	 *
 	 */
 
-	public function applyMigration($from = null, $to = null)
+	public function applyMigration($origin = null, $destination = null)
 	{
 		/*
 		Goal is to migrate from A to B
