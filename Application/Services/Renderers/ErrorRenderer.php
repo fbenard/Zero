@@ -170,25 +170,11 @@ class ErrorRenderer
 
 			// Render the error
 
-			$result = call_user_func_array
-			(
-				[
-					$this,
-					'renderErrorJson'
-				],
-				func_get_args()
-			);
+			$result = $this->renderErrorJson($error);
 		}
 		else
 		{
-			$result = call_user_func_array
-			(
-				[
-					$this,
-					'renderErrorHtml'
-				],
-				func_get_args()
-			);
+			$result = $this->renderErrorHtml($error);
 		}
 
 
