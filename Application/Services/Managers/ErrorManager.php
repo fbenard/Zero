@@ -15,19 +15,18 @@ class ErrorManager
 	 *
 	 */
 	
-	public static function onError($errorCode, $errorDescription, $errorFile = null, $errorLine = null, $errorContext = null)
+	public static function onError($errorCode, $errorDescription, $errorFile = null, $errorLine = null, $errorContext = null, $errorTraces = null)
 	{
 		// Build error
 
 		$error = new \fbenard\Zero\Classes\Error
 		(
 			$errorCode,
-			$errorCode,
 			$errorDescription,
 			$errorFile,
 			$errorLine,
 			$errorContext,
-			debug_backtrace()
+			$errorTraces
 		);
 
 

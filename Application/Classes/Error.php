@@ -31,7 +31,7 @@ class Error
 	 *
 	 */
 
-	public function __construct($errorCode, $errorDescription, $errorFile = null, $errorLine = null, $errorContext = null)
+	public function __construct($errorCode, $errorDescription, $errorFile = null, $errorLine = null, $errorContext = null, $errorTraces = null)
 	{
 		// Store attributes
 

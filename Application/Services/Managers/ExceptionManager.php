@@ -46,41 +46,18 @@ class ExceptionManager
 			$exceptionContext = $exception->getContext();
 		}
 
+		
+		// Handle the error
 
-		// Build error
-
-		$error =
-		[
+		\fbenard\Zero\Services\Managers\ErrorManager::onError
+		(
 			$exception->getCode(),
 			$exception->getMessage(),
-			null,
 			$exceptionFile,
 			$exceptionLine,
 			$exceptionContext,
 			$exception->getTrace()
-		];
-
-
-		// Build error renderer
-
-		$errorRenderer = new \fbenard\Zero\Services\Renderers\ErrorRenderer();
-
-
-		// Render the error
-
-		$output = call_user_func_array
-		(
-			[
-				$errorRenderer,
-				'renderError'
-			],
-			$error
 		);
-
-		
-		// Display the output
-
-		print($output);
 	}
 }
 
