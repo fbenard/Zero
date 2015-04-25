@@ -20,7 +20,6 @@ abstract class AbstractController
 
 	protected $_output = null;
 	protected $_response = null;
-	protected $_view = null;
 
 
 	/**
@@ -39,8 +38,6 @@ abstract class AbstractController
 				'Cache-Control' => 'private, no-cache, no-store, must-revalidate'
 			]
 		);
-
-		$this->_view = new \fbenard\Zero\Classes\View();
 	}
 
 
@@ -76,7 +73,7 @@ abstract class AbstractController
 
 	protected function renderView($viewCode, $viewArguments = null)
 	{
-		$this->setOutput($this->_view->render($viewCode, $viewArguments));
+		$this->setOutput(\z\service('renderer/view')->renderView($viewCode, $viewArguments));
 	}
 
 
