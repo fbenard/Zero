@@ -59,82 +59,53 @@ class ErrorRenderer
 
 		// Display title and description
 
-		if (empty($error->title) === false)
-		{
-			$result[] = "\n\033[1;31m*** \033[1;31m" . $error->title . " (" . $error->code . ")\n";
-		}
-		
-		if (empty($error->description) === false)
-		{
-			$result[] = "\033[0;31m" . $error->description . "\n";
-		}
-
+		$result[] = "\n\033[1;31m*** \033[1;31m" . $error->title . " (" . $error->code . ")\n";
+		$result[] = "\033[0;31m" . $error->description . "\n";
 		$result[] = "\n";
 
 		
 		// Display error location
 
-		if (empty($error->file) === false)
-		{
-			$result[] = "\033[1;37mFile:\t\033[0;0m" . str_replace(getcwd(), null, $error->file) . "\n";
-		}
-
-		if (empty($error->line) === false)
-		{
-			$result[] = "\033[1;37mLine:\t\033[0;0m" . $error->line . "\n";
-		}
+		$result[] = "\033[1;37mFile:\t\033[0;0m" . str_replace(getcwd(), null, $error->file) . "\n";
+		$result[] = "\033[1;37mLine:\t\033[0;0m" . $error->line . "\n";
 		
 		
 		// Display context
 
-		if
-		(
-			(is_array($error->context) === true) &&
-			(empty($error->context) === false)
-		)
+		$result[] = "\n\033[1;37mContext:" . "\n";
+		
+		foreach ($error->context as $key => $value)
 		{
-			$result[] = "\n\033[1;37mContext:" . "\n";
-			
-			foreach ($error->context as $key => $value)
-			{
-				$result[] = "\033[0;0m- " . $key . ' = ';
+			$result[] = "\033[0;0m- " . $key . ' = ';
 
-				if (is_object($value) === true)
-				{
-					$result[] = "\033[0;0m" . '"' . get_class($value) . '"' . "\n";
-				}
-				else if (is_array($value) === true)
-				{
-					$result[] = "\n\033[0;0m" . print_r($value, true) . "\n";
-				}
-				else
-				{
-					$result[] = "\033[0;0m" . '"' . $value . '"' . "\n";
-				}
+			if (is_object($value) === true)
+			{
+				$result[] = "\033[0;0m" . '"' . get_class($value) . '"' . "\n";
+			}
+			else if (is_array($value) === true)
+			{
+				$result[] = "\n\033[0;0m" . print_r($value, true) . "\n";
+			}
+			else
+			{
+				$result[] = "\033[0;0m" . '"' . $value . '"' . "\n";
 			}
 		}
 		
 		
 		// Display trace
 
-		if
-		(
-			(is_array($error->traces) === true) &&
-			(empty($error->traces) === false)
-		)
+		$result[] = "\n\033[1;37mTrace:" . "\n";
+		
+		foreach ($error->traces as $errorTrace)
 		{
-			$result[] = "\n\033[1;37mTrace:" . "\n";
-			
-			foreach ($error->traces as $errorTrace)
+			if
+			(
+				(isset($errorTrace['file']) === true) &&
+				(isset($errorTrace['line']) === true)
+			)
 			{
-				if
-				(
-					(isset($errorTrace['file']) === true) &&
-					(isset($errorTrace['line']) === true)
-				)
-				{
-					$result[] = "\033[0;0m- " . str_replace(getcwd(), null, $errorTrace['file']) . ' (' . $errorTrace['line'] . ')' . "\n";
-				}
+				$result[] = "\033[0;0m- " . str_replace(getcwd(), null, $errorTrace['file']) . ' (' . $errorTrace['line'] . ')' . "\n";
 			}
 		}
 
