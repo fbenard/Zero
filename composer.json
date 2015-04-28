@@ -27,10 +27,6 @@
 		"mustache/mustache": "*",
 		"predis/predis": "1.0.0"
 	},
-	"require-dev":
-	{
-		"phpunit/phpunit": "4.4.x-dev"
-	},
 	"autoload":
 	{
 		"psr-4":
