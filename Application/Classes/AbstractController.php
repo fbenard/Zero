@@ -35,7 +35,7 @@ abstract class AbstractController
 			200,
 			[
 				'Cache-Control' => 'private, no-cache, no-store, must-revalidate',
-				'Content-Language' => \z\culture()->locale,
+				'Content-Language' => \z\service('manager/culture')->locale,
 				'Content-Type' => 'text/html; charset=UTF-8'
 			]
 		);

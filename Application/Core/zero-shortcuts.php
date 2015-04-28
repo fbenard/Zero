@@ -44,15 +44,6 @@ function cons($constantName, $constantValue = null)
 	return \z\service('manager/constant')->setConstant($constantName, $constantValue);
 }
 
-/**
- *
- */
-
-function culture()
-{
-	return \z\service('manager/culture');
-}
-
 
 /**
  *
