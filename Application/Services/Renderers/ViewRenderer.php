@@ -55,7 +55,7 @@ class ViewRenderer
 	{
 		// Check whether the view exists
 
-		$pathToView = PATH_APPLICATION . 'Views/' . $viewCode . '.handlebars';
+		$pathToView = PATH_APPLICATION . 'Views/' . $viewCode;
 
 		if (file_exists($pathToView) === false)
 		{
@@ -88,7 +88,7 @@ class ViewRenderer
 				],
 				'fileext' =>
 				[
-					'.handlebars'
+					'.' . pathinfo($pathToView, PATHINFO_EXTENSION)
 				],
 				'flags' => \LightnCandy::FLAG_HANDLEBARS | \LightnCandy::FLAG_ERROR_EXCEPTION | \LightnCandy::FLAG_RENDER_DEBUG,
 				'helpers' =>
