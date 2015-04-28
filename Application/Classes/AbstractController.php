@@ -34,9 +34,9 @@ abstract class AbstractController
 		(
 			200,
 			[
+				'Cache-Control' => 'private, no-cache, no-store, must-revalidate',
 				'Content-Language' => \z\culture()->locale,
-				'Content-Type' => 'text/html; charset=UTF-8',
-				'Cache-Control' => 'private, no-cache, no-store, must-revalidate'
+				'Content-Type' => 'text/html; charset=UTF-8'
 			]
 		);
 	}
