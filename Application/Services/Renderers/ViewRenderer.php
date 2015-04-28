@@ -102,18 +102,6 @@ class ViewRenderer
 					{
 						return \z\service('manager/culture')->locale;
 					},
-					'pref' => function($args, $named)
-					{
-						return \z\pref($preferenceCode);
-					},
-					'request' => function()
-					{
-						return \z\request();
-					},
-					'service' => function($serviceCode)
-					{
-						return \z\service($serviceCode);
-					},
 					'str' => function($indexed, $associative)
 					{
 						$args = $this->buildArguments
