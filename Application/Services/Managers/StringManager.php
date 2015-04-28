@@ -96,9 +96,17 @@ class StringManager
 
 	public function initialize()
 	{
+		//
+
+		die(\z\request()->header('accept-language'));
+		
 		// Load strings
 
-		$this->loadStrings('fr', 'en');
+		$this->loadStrings
+		(
+			\z\pref('fbenard/zero/culture/language'),
+			\z\pref('fbenard/zero/culture/language/fallback')
+		);
 	}
 
 
