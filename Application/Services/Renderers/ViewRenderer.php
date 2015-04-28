@@ -90,7 +90,12 @@ class ViewRenderer
 				[
 					'.' . pathinfo($pathToView, PATHINFO_EXTENSION)
 				],
-				'flags' => \LightnCandy::FLAG_HANDLEBARS | \LightnCandy::FLAG_ERROR_EXCEPTION | \LightnCandy::FLAG_RENDER_DEBUG,
+				'flags' =>
+				\LightnCandy::FLAG_ERROR_EXCEPTION |
+				\LightnCandy::FLAG_HANDLEBARS |
+				\LightnCandy::FLAG_RENDER_DEBUG |
+				\LightnCandy::FLAG_RUNTIMEPARTIAL |
+				\LightnCandy::FLAG_THIS,
 				'helpers' =>
 				[
 					'locale' => function()
