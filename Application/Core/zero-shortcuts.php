@@ -216,9 +216,9 @@ function service($serviceCode = null, $clone = false)
  *
  */
 
-function str($stringCode, $stringArguments = null, $localeCode = null, $fallbackCode = null)
+function str($stringCode, $stringArguments = null)
 {
-	return \z\service('manager/string')->getString($stringCode, $stringArguments, $localeCode, $fallbackCode);
+	return \z\service('manager/culture')->getString($stringCode, $stringArguments);
 }
 
 
