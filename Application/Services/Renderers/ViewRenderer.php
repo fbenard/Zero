@@ -11,20 +11,25 @@ namespace fbenard\Zero\Services\Renderers;
 
 class ViewRenderer
 {
-	// Attributes
-
-	private $_mustache = null;
-
-
 	/**
 	 *
 	 */
 
-	public function __construct()
+	public function renderView($viewCode, $viewContext = null)
 	{
-		$this->_mustache = new \Mustache_Engine
+		$code = \LightnCandy::compile
 		(
+			$viewCode,
 			[
+				'basedir' =>
+				[
+					PATH_APPLICATION . 'Views/'
+				],
+				'fileext' =>
+				[
+					'.handlebars'
+				],
+				'flags' => \LightnCandy::FLAG_HANDLEBARS | \LightnCandy::FLAG_ERROR_EXCEPTION | \LightnCandy::FLAG_RENDER_DEBUG,
 				'helpers' =>
 				[
 					'pref' => function($preferenceCode)
@@ -43,23 +48,19 @@ class ViewRenderer
 					{
 						return \z\str($stringCode);
 					}
-				],
-				'loader' => new \Mustache_Loader_FilesystemLoader(PATH_APPLICATION . 'Views/'),
-				'partials_loader' => new \Mustache_Loader_FilesystemLoader(PATH_APPLICATION . 'Views/'),
+				]
 			]
 		);
-	}
 
 
-	/**
-	 *
-	 */
+		//
 
-	public function renderView($viewCode, $viewArguments = null)
-	{
+		$renderer = \LightnCandy::prepare($code);
+
+
 		// Render the view
-
-		$result = $this->_mustache->render($viewCode, $viewArguments);
+		
+		$result = $renderer($viewContext);
 
 
 		return $result;
