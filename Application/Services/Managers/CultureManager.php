@@ -148,8 +148,12 @@ class CultureManager
 			
 			// List string files for this locale
 
-			$paths = \z\service('helper/file')->listFiles(PATH_APPLICATION . 'Config/Strings/' . $localeCode . '/');
-			
+			$paths = \z\service('helper/file')->listFiles
+			(
+				PATH_APPLICATION . 'Config/Strings/' . $localeCode . '/',
+				'*.json'
+			);
+
 
 			// Parse each string file
 
