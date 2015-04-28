@@ -166,11 +166,11 @@ function redirect($url)
  *
  */
 
-function render($viewCode, $viewArguments = null, $print = true)
+function render($viewCode, $viewContext = null, $print = true)
 {
 	// Render the view
 
-	$output = \z\service('renderer/view')->renderView($viewCode, $viewArguments);
+	$output = \z\service('renderer/view')->renderView($viewCode, $viewContext);
 
 
 	// Print it
