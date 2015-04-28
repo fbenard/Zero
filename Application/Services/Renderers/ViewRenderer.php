@@ -15,18 +15,19 @@ class ViewRenderer
 	 *
 	 */
 
-	private function buildArguments($keys, $indexed, $associative)
+	private function buildArguments($arguments, $indexed, $associative)
 	{
-		//
+		// Build result
 
 		$result = [];
 
 		
-		//
+		// Parse each argument
 
-		foreach ($keys as $i => $key)
+		foreach ($arguments as $i => $key)
 		{
-			//
+			// Check whether the key is associative, indexed or none
+			// And store its value
 
 			if (array_key_exists($key, $associative) === true)
 			{
@@ -104,7 +105,9 @@ class ViewRenderer
 					},
 					'str' => function($indexed, $associative)
 					{
-						$args = $this->buildArguments
+						// Build arguments
+
+						$arguments = $this->buildArguments
 						(
 							[
 								'stringCode'
@@ -113,7 +116,13 @@ class ViewRenderer
 							$associative
 						);
 
-						return \z\str($args['stringCode']);
+
+						// Get the string
+
+						$result = \z\str($arguments['stringCode']);
+
+
+						return $result;
 					}
 				]
 			]
@@ -122,7 +131,7 @@ class ViewRenderer
 
 		// Build path to code
 
-		$pathToCode = '/tmp/' . sha1('fbenard/zero_' . $pathToView);
+		$pathToCode = '/tmp/' . sha1('fbenard/zero_' . $pathToView) . '.php';
 
 
 		// Get the view renderer
