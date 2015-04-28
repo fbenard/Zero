@@ -72,9 +72,9 @@ abstract class AbstractController
 	 *
 	 */
 
-	protected function renderView($viewCode, $viewArguments = null)
+	protected function renderView($viewCode, $viewContext = null)
 	{
-		$this->setOutput(\z\service('renderer/view')->renderView($viewCode, $viewArguments));
+		$this->setOutput(\z\service('renderer/view')->renderView($viewCode, $viewContext));
 	}
 
 
