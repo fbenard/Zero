@@ -89,7 +89,7 @@ class ViewRenderer
 				],
 				'fileext' =>
 				[
-					'.' . pathinfo($pathToView, PATHINFO_EXTENSION)
+					''
 				],
 				'flags' =>
 				\LightnCandy::FLAG_ERROR_EXCEPTION |
