@@ -77,6 +77,15 @@ class Application
 		\z\service('manager/culture')->initialize();
 		\z\service('manager/controller')->initialize();
 		\z\service('manager/session')->initialize();
+
+
+		// Dispatch post event
+
+		\z\dispatch
+		(
+			EVENT_APP_INIT_POST,
+			new \fbenard\Zero\Events\AppInitEvent($this)
+		);
 	}
 	
 	
