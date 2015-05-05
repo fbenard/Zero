@@ -62,13 +62,13 @@ class Application
 	
 	private function initialize()
 	{
-		//
+		// Initialize core managers
 
 		$this->_bootManager->initialize();
 		$this->_serviceManager->initialize();
 
 
-		//
+		// Initialize managers
 
 		\z\service('manager/constant')->initialize();
 		\z\service('manager/event')->initialize();
