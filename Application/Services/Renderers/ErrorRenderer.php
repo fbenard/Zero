@@ -204,19 +204,19 @@ class ErrorRenderer
 		$result = [];
 
 
-		//
+		// Render the header
 
 		$result[] = '<html>';
 		$result[] = '<body>';
 
 
-		//
+		// Render the title and description
 
 		$result[] = '<h1>' . $error->title . ' (' . $error->code . ')</h1>';
 		$result[] = '<p>' . $error->description . '</p>';
 		
 
-		//
+		// Render the location
 
 		$result[] = '<hr />';
 		$result[] = '<p><strong>File</strong></p>';
@@ -224,18 +224,14 @@ class ErrorRenderer
 		$result[] = '<p><strong>Line</strong></p>';
 		$result[] = '<pre>' . $error->line . '</pre>';
 		
-		
-		// Display the context
 
-		if
-		(
-			(is_array($error->context) === true) &&
-			(empty($error->context) === false)
-		)
-		{
-			$result[] = '<hr />';
-			$result[] = '<h2>Context</h2>';
-			
+		// Render the context
+
+		$result[] = '<hr />';
+		$result[] = '<h2>Context</h2>';
+		
+		if (is_array($error->context) === true)
+		{			
 			foreach ($error->context as $key => $value)
 			{
 				$result[] = '<p><strong>' . $key . '</strong></p>';
@@ -244,18 +240,14 @@ class ErrorRenderer
 		}
 		
 		
-		// Display the trace
+		// Render the trace
 
-		if
-		(
-			(is_array($error->traces) === true) &&
-			(empty($error->traces) === false)
-		)
+		$result[] = '<hr />';
+		$result[] = '<h2>Trace</h2>';
+		$result[] = '<table>';
+		
+		if (is_array($error->traces) === true)
 		{
-			$result[] = '<hr />';
-			$result[] = '<h2>Trace</h2>';
-			$result[] = '<table>';
-			
 			foreach ($error->traces as $errorTrace)
 			{
 				$errorTrace = array_merge
@@ -276,9 +268,9 @@ class ErrorRenderer
 				$result[] = '<td valign="top"><pre>' . $errorTrace['line'] . '</pre></td>';
 				$result[] = '</tr>';
 			}
-			
-			$result[] = '</table>';
 		}
+			
+		$result[] = '</table>';
 
 
 		//
