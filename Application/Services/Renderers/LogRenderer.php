@@ -13,7 +13,7 @@ class LogRenderer
 {
 	// Traits
 
-	use \fbenard\Zero\Traits\Get;
+	use \fbenard\Zero\Traits\GetTrait;
 
 	
 	// Attributes
