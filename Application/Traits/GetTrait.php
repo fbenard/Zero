@@ -21,9 +21,12 @@ trait GetTrait
 
 		$attributeCode = '_' . $attributeCode;
 
+		
+		// Get the attribute
+		
 		if (property_exists($this, $attributeCode) === true)
 		{
-			return $this->$attributeCode;		
+			return $this->$attributeCode;
 		}
 		else
 		{
