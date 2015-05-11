@@ -9,22 +9,22 @@ namespace fbenard\Zero\Traits;
  *
  */
 
-trait Get
+trait SetTrait
 {
 	/**
 	 *
 	 */
 
-	public function __get($attributeCode)
+	public function __set($attributeCode, $attributeValue)
 	{
 		// Build attribute code
 
 		$attributeCode = '_' . $attributeCode;
 
 
-		// Get the attribute
+		// Set the attribute
 
-		return $this->$attributeCode;
+		$this->$attributeCode = $attributeValue;
 	}
 }
 
