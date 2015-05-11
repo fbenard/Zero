@@ -39,6 +39,16 @@ function cache()
  *
  */
 
+function conf($config, $defaultConfig = null)
+{
+	return \z\service('helper/config')->fixConfig($config, $defaultConfig);
+}
+
+
+/**
+ *
+ */
+
 function cons($constantName, $constantValue = null)
 {
 	return \z\service('manager/constant')->setConstant($constantName, $constantValue);
