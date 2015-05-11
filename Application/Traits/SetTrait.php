@@ -24,7 +24,10 @@ trait SetTrait
 
 		// Set the attribute
 
-		$this->$attributeCode = $attributeValue;
+		if (property_exists($this, $attributeCode) === true)
+		{
+			$this->$attributeCode = $attributeValue;
+		}
 	}
 }
 
