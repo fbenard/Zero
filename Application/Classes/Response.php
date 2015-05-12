@@ -134,16 +134,6 @@ class Response
 	 *
 	 */
 
-	public function setContentType($contentType)
-	{
-		$this->_contentType = $contentType;
-	}
-
-
-	/**
-	 *
-	 */
-
 	public function setStatusCode($statusCode)
 	{
 		$this->_statusCode = $statusCode;
