@@ -60,7 +60,8 @@ class CultureManager
 			(
 				(array_key_exists($localeCode, $this->_strings) === true) &&
 				(is_array($this->_strings[$localeCode]) === true) &&
-				(array_key_exists($stringCode, $this->_strings[$localeCode]) === true)
+				(array_key_exists($stringCode, $this->_strings[$localeCode]) === true) &&
+				(empty($this->_strings[$localeCode][$stringCode]) === false)
 			)
 			{
 				// Yes, grab the string
