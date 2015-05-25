@@ -32,7 +32,44 @@ class ConfigFactory
 		
 		// Fix the config
 
-		$config = array_merge($defaultConfig, $config);
+		foreach ($defaultConfig as $key => $value)
+		{
+			// Does the default key exist already?
+
+			if (array_key_exists($key, $config) === false)
+			{
+				// No it doesn't
+				// Create it
+
+				if (is_array($value) === true)
+				{
+					$config[$key] = [];
+				}
+				else
+				{
+					$config[$key] = $value;
+				}
+			}
+
+
+			// Is the key an array?
+			// Should we fill it in?
+
+			if
+			(
+				(is_array($value) === true) &&
+				(count($value) > 0) &&
+				(is_array($config[$key]) === true)
+			)
+			{
+				// Fix each existing entry with the default config
+				
+				foreach ($config[$key] as &$subConfig)
+				{
+					$subConfig = $this->fixConfig($subConfig, $value);
+				}
+			}
+		}
 
 
 		return $config;
