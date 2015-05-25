@@ -15,7 +15,7 @@ class ConfigFactory
 	 *
 	 */
 
-	public function fixConfig($config, $defaultConfig = null, $mapping = null)
+	public function fixConfig($config, $defaultConfig = null)
 	{
 		// Make sure config and default config are arrays
 
@@ -35,11 +35,6 @@ class ConfigFactory
 		$config = array_merge($defaultConfig, $config);
 
 
-		// Map the config
-
-		$config = $this->mapConfig($config, $mapping);
-
-
 		return $config;
 	}
 
@@ -48,7 +43,7 @@ class ConfigFactory
 	 *
 	 */
 
-	public function loadConfig($pathToConfig, $defaultConfig = null, $mapping = null)
+	public function loadConfig($pathToConfig, $defaultConfig = null)
 	{
 		// Load the config
 
@@ -63,50 +58,10 @@ class ConfigFactory
 
 		// Fix the config
 
-		$config = $this->fixConfig($config, $defaultConfig, $mapping);
+		$config = $this->fixConfig($config, $defaultConfig);
 
 
 		return $config;
-	}
-
-
-	/**
-	 *
-	 */
-
-	public function mapConfig($config, $mapping)
-	{
-		// Make sure mapping is an array
-
-		if (is_array($mapping) === false)
-		{
-			$mapping = [];
-		}
-		
-
-		// Build the result
-
-		$result = [];
-
-		
-		// Parse each config
-
-		foreach ($config as $key => $value)
-		{
-			// Map the config
-			
-			if (array_key_exists($key, $mapping) === true)
-			{
-				$result[$mapping[$key]] = $value;
-			}
-			else
-			{
-				$result[$key] = $value;
-			}
-		}
-
-
-		return $result;
 	}
 }
 

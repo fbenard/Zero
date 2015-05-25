@@ -39,9 +39,9 @@ function cache()
  *
  */
 
-function conf($config, $defaultConfig = null, $mapping = null)
+function conf($config, $defaultConfig = null)
 {
-	return \z\service('factory/config')->fixConfig($config, $defaultConfig, $mapping);
+	return \z\service('factory/config')->fixConfig($config, $defaultConfig);
 }
 
 
