@@ -74,9 +74,9 @@ class Application
 		\z\service('manager/event')->initialize();
 		\z\service('manager/preference')->initialize();
 		\z\service('manager/route')->initialize();
+		\z\service('manager/session')->initialize();
 		\z\service('manager/culture')->initialize();
 		\z\service('manager/controller')->initialize();
-		\z\service('manager/session')->initialize();
 
 
 		// Dispatch post event

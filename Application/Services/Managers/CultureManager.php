@@ -99,10 +99,19 @@ class CultureManager
 
 	public function initialize()
 	{
-		// Define locale and fallback
+		// Define locale (first from session, then from HTTP header)
 
-		$this->_locale = locale_accept_from_http(\z\request()->header('Accept-Language'));
-		$this->_fallback = \z\pref('fbenard/zero/culture/locale/fallback');
+		$this->_localeCode = \z\request()->session('fbenard/zero/culture/locale');
+
+		if (empty($this->_localeSession) === false)
+		{
+			$this->_localeCode = locale_accept_from_http(\z\request()->header('Accept-Language'));
+		}
+
+
+		// Define fallback
+
+		$this->_fallbackCode = \z\pref('fbenard/zero/culture/locale/fallback');
 
 
 		// Load strings
@@ -184,6 +193,23 @@ class CultureManager
 			$cacheCode,
 			serialize($this->_strings)
 		);
+	}
+
+
+	/**
+	 *
+	 */
+
+	public function setLocale($localeCode)
+	{
+		// Store the locale in session
+
+		\z\request()->session('fbenard/zero/culture/locale', $localeCode);
+
+
+		// Re-initialize the culture manager
+
+		$this->initialize();
 	}
 }
 
