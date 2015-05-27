@@ -119,6 +119,16 @@ function dlogs($message)
  *
  */
 
+function dlogw($message)
+{
+	return \z\service('manager/log')->logWarning($message);
+}
+
+
+/**
+ *
+ */
+
 function e($exceptionCode, $exceptionContext = null)
 {
 	throw new \fbenard\Zero\Classes\Exception($exceptionCode, $exceptionContext);

@@ -150,6 +150,20 @@ class LogManager
 			'success'
 		);
 	}
+
+
+	/**
+	 *
+	 */
+
+	public function logWarning($message)
+	{
+		\z\service('renderer/log')->renderLog
+		(
+			$message,
+			'warning'
+		);
+	}
 }
 
 ?>

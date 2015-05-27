@@ -34,7 +34,8 @@ class LogRenderer
 			'information' => "\033[1;36m=== %{message}\033[0;0m%{pads}\n",
 			'progress' => "%{message}%{pads}\r",
 			'prompt' => "\033[1;33m*** %{message}\033[0;0m",
-			'success' => "\033[1;32m=== %{message}\033[0;0m%{pads}\n"
+			'success' => "\033[1;32m=== %{message}\033[0;0m%{pads}\n",
+			'warning' => "\033[1;33m*** %{message}\033[0;0m%{pads}\n"
 		];
 	}
 
