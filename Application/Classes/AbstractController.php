@@ -34,9 +34,9 @@ abstract class AbstractController
 		(
 			200,
 			[
-				'Accept-Language' => \z\service('manager/culture')->locale,
+				'Accept-Language' => \z\service('manager/culture')->localeCode,
 				'Cache-Control' => 'private, no-cache, no-store, must-revalidate',
-				'Content-Language' => \z\service('manager/culture')->locale,
+				'Content-Language' => \z\service('manager/culture')->localeCode,
 				'Content-Type' => 'text/html; charset=UTF-8'
 			]
 		);

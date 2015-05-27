@@ -101,7 +101,7 @@ class ViewRenderer
 				[
 					'locale' => function()
 					{
-						return \z\service('manager/culture')->locale;
+						return \z\service('manager/culture')->localeCode;
 					},
 					'str' => function($indexed, $associative)
 					{

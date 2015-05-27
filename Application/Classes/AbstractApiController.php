@@ -28,9 +28,9 @@ extends \fbenard\Zero\Classes\AbstractController
 		$this->_response->setHeaders
 		(
 			[
-				'Accept-Language' => \z\service('manager/culture')->locale,
+				'Accept-Language' => \z\service('manager/culture')->localeCode,
 				'Cache-Control' => 'private, no-cache, no-store, must-revalidate',
-				'Content-Language' => \z\service('manager/culture')->locale,
+				'Content-Language' => \z\service('manager/culture')->localeCode,
 				'Content-Type' => 'application/json; charset=UTF-8'
 			]
 		);
