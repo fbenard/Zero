@@ -183,7 +183,11 @@ class Request
 	{
 		//
 
-		if (is_array($_SESSION) === false)
+		if
+		(
+			(isset($_SESSION) === false) ||
+			(is_array($_SESSION) === false)
+		)
 		{
 			return;
 		}
