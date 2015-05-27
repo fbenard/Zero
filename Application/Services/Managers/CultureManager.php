@@ -18,8 +18,8 @@ class CultureManager
 	
 	// Attributes
 	
-	private $_fallback = null;
-	private $_locale = null;
+	private $_fallbackCode = null;
+	private $_localeCode = null;
 	private $_strings = null;
 		
 	
@@ -43,8 +43,8 @@ class CultureManager
 
 		$locales =
 		[
-			$this->_locale,
-			$this->_fallback
+			$this->_localeCode,
+			$this->_fallbackCode
 		];
 
 
@@ -119,7 +119,7 @@ class CultureManager
 	{
 		// Get the cache
 
-		$cacheCode = 'strings_' . $this->_locale . '_' . $this->_fallback;
+		$cacheCode = 'strings_' . $this->_localeCode . '_' . $this->_fallbackCode;
 		$cache = \z\cache()->getCache($cacheCode);
 
 		if ($cache !== false)
@@ -133,8 +133,8 @@ class CultureManager
 
 		$locales =
 		[
-			$this->_locale,
-			$this->_fallback
+			$this->_localeCode,
+			$this->_fallbackCode
 		];
 
 		
