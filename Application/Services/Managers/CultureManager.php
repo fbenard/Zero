@@ -103,7 +103,7 @@ class CultureManager
 
 		$this->_localeCode = \z\request()->session('fbenard/zero/culture/locale');
 
-		if (empty($this->_localeSession) === false)
+		if (empty($this->_localeCode) === true)
 		{
 			$this->_localeCode = locale_accept_from_http(\z\request()->header('Accept-Language'));
 		}
