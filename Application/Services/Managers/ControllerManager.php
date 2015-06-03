@@ -33,6 +33,14 @@ class ControllerManager
 
 		$route = \z\service('manager/route')->route;
 
+
+		// Do we have a route?
+
+		if (is_null($route) === true)
+		{
+			return;
+		}
+
 		
 		// Build the controller for this route
 
@@ -77,6 +85,14 @@ class ControllerManager
 		$route = \z\service('manager/route')->route;
 
 
+		// Do we have a route?
+
+		if (is_null($route) === true)
+		{
+			return;
+		}
+
+		
 		// Execute pre actions
 
 		$this->runActions($route['pre']);
