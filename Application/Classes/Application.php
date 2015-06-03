@@ -136,6 +136,14 @@ class Application
 
 	public function quit()
 	{
+		// Do not quit if app is embedded
+
+		if (\z\app()->isEmbedded() === true)
+		{
+			return;
+		}
+
+
 		//
 
 		if ($this->isCli() === true)

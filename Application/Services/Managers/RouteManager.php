@@ -40,6 +40,16 @@ class RouteManager
 
 	public function initialize()
 	{
+		// Do not initialize if app is embedded
+
+		if (\z\app()->isEmbedded() === true)
+		{
+			return;
+		}
+
+
+		// Initialize
+
 		$this->loadDefinitions();
 		$this->setRoute();
 	}
