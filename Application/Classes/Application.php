@@ -110,6 +110,30 @@ class Application
 	 *
 	 */
 
+	public function isEmbedded()
+	{
+		// Get the environment variable
+
+		$isEmbedded = (bool)(intval(getenv('ZERO_EMBEDDED')));
+
+
+		// Is the app embedded?
+
+		if ($isEmbedded === true)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+
+	/**
+	 *
+	 */
+
 	public function quit()
 	{
 		//
