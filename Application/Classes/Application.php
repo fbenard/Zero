@@ -30,7 +30,7 @@ class Application
 	
 	private function __construct()
 	{
-		//
+		// Build low-level managers
 
 		$this->_bootManager = new \fbenard\Zero\Services\Managers\BootManager();
 		$this->_cacheManager = new \fbenard\Zero\Services\Managers\CacheManager();
