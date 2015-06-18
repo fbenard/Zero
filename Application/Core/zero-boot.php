@@ -11,7 +11,6 @@ define('PATH_ROOT', getcwd() . '/');
 
 define('PATH_APPLICATION', PATH_ROOT . 'Application/');
 define('PATH_COMPONENTS', PATH_ROOT . 'Components/');
-define('PATH_TEMPORARY', PATH_ROOT . 'Temporary/');
 define('PATH_ZERO', PATH_COMPONENTS . 'fbenard/zero/Application/');
 
 
