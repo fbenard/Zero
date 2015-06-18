@@ -69,15 +69,6 @@ function dispatch($eventCode, $event)
  *
  */
 
-function dlogp($nbItemsRemaining, $nbItems, &$timeOfStart, $message = null)
-{
-}
-
-
-/**
- *
- */
-
 function e($exceptionCode, $exceptionContext = null)
 {
 	throw new \fbenard\Zero\Classes\Exception($exceptionCode, $exceptionContext);
