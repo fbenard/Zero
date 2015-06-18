@@ -9,18 +9,22 @@ namespace fbenard\Zero\Services\Managers;
  *
  */
 
-class LogManager
+class LoggerManager
 {
+	// Attributes
+
+	private $_handlers = null;
+	private $_loggers = null;
+
+
 	/**
 	 *
 	 */
 
-	public function log($message)
+	public function __construct()
 	{
-		\z\service('renderer/log')->renderLog
-		(
-			$message
-		);
+		$this->_handlers = [];
+		$this->_loggers = [];
 	}
 
 
@@ -28,13 +32,58 @@ class LogManager
 	 *
 	 */
 
-	public function logError($message)
+	public function getLogger($loggerCode = null)
 	{
-		\z\service('renderer/log')->renderLog
-		(
-			$message,
-			'error'
-		);
+		//
+
+		if (empty($loggerCode) === true)
+		{
+			$loggerCode = 'app';
+		}
+
+
+		// Does the logger exist?
+
+		if (array_key_exists($loggerCode, $this->_loggers) === false)
+		{
+			// Create a new logger
+
+			$logger = new \Monolog\Logger($loggerCode);
+
+
+			// Setup processors
+
+			$logger->pushProcessor(new \Monolog\Processor\IntrospectionProcessor());
+			$logger->pushProcessor(new \Monolog\Processor\ProcessIdProcessor());
+			$logger->pushProcessor(new \Monolog\Processor\WebProcessor());
+
+
+			// Parse each handler
+
+			print_r($logger->getHandlers());
+
+			//$logger->pushFormatter(new \fbenard\Zero\Services\Formatters\CliLogFormatter());
+
+			foreach ($this->_handlers as $handler)
+			{
+				// Push the handler
+
+				$logger->pushHandler($handler);
+			}
+
+
+			// Store the logger
+
+			$this->_loggers[$loggerCode] = $logger;
+		}
+
+
+		//
+
+		$logger = $this->_loggers[$loggerCode];
+
+
+		return $logger;
 	}
 
 
@@ -42,21 +91,7 @@ class LogManager
 	 *
 	 */
 
-	public function logInformation($message)
-	{
-		\z\service('renderer/log')->renderLog
-		(
-			$message,
-			'information'
-		);
-	}
-
-
-	/**
-	 *
-	 */
-
-	public function logProgress($nbItemsCompleted, $nbItems, &$timeOfStart, $message = null)
+	public function progress($nbItemsCompleted, $nbItems, &$timeOfStart, $message = null)
 	{
 		//
 
@@ -134,34 +169,6 @@ class LogManager
 		(
 			$message,
 			'progress'
-		);
-	}
-
-
-	/**
-	 *
-	 */
-
-	public function logSuccess($message)
-	{
-		\z\service('renderer/log')->renderLog
-		(
-			$message,
-			'success'
-		);
-	}
-
-
-	/**
-	 *
-	 */
-
-	public function logWarning($message)
-	{
-		\z\service('renderer/log')->renderLog
-		(
-			$message,
-			'warning'
 		);
 	}
 }

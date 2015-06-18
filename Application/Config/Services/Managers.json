@@ -6,7 +6,7 @@
 	"manager/error": "\\fbenard\\Zero\\Services\\Managers\\ErrorManager",
 	"manager/event": "\\fbenard\\Zero\\Services\\Managers\\EventManager",
 	"manager/exception": "\\fbenard\\Zero\\Services\\Managers\\ExceptionManager",
-	"manager/log": "\\fbenard\\Zero\\Services\\Managers\\LogManager",
+	"manager/logger": "\\fbenard\\Zero\\Services\\Managers\\LoggerManager",
 	"manager/migration": "\\fbenard\\Zero\\Services\\Managers\\MigrationManager",
 	"manager/preference": "\\fbenard\\Zero\\Services\\Managers\\PreferenceManager",
 	"manager/request": "\\fbenard\\Zero\\Services\\Managers\\RequestManager",
