@@ -22,6 +22,7 @@
 	},
 	"require":
 	{
+		"monolog/monolog": "*",
 		"guzzlehttp/guzzle": "5.*",
 		"php": ">=5.4.0",
 		"predis/predis": "1.0.0",
