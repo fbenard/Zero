@@ -136,25 +136,22 @@ class Application
 
 	public function quit()
 	{
-		// Do not quit if app is embedded
+		// Log
+
+		\z\logger()->notice('Quitting app...');
+		
+
+		// Exit the process
+		// Do not exit if app is embedded
 
 		if (\z\app()->isEmbedded() === true)
 		{
 			return;
 		}
-
-
-		//
-
-		if ($this->isCli() === true)
+		else
 		{
-			\z\dlogs('Done!');
+			exit();
 		}
-
-
-		//
-
-		exit();
 	}
 	
 	
