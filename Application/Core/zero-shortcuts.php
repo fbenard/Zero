@@ -89,9 +89,9 @@ function follow($eventCode, $followerCode, $methodCode)
  *
  */
 
-function logger($loggerCode = null)
+function logger($loggerCode = null, $handlers = null)
 {
-	return \z\service('manager/logger')->getLogger($loggerCode);
+	return \z\service('manager/logger')->getLogger($loggerCode, $handlers);
 }
 
 

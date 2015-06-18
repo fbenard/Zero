@@ -13,7 +13,6 @@ class LoggerManager
 {
 	// Attributes
 
-	private $_handlers = null;
 	private $_loggers = null;
 
 
@@ -23,7 +22,6 @@ class LoggerManager
 
 	public function __construct()
 	{
-		$this->_handlers = [];
 		$this->_loggers = [];
 	}
 
@@ -32,9 +30,9 @@ class LoggerManager
 	 *
 	 */
 
-	public function getLogger($loggerCode = null)
+	public function getLogger($loggerCode = null, $handlers = null)
 	{
-		//
+		// Use the default channel if none provided
 
 		if (empty($loggerCode) === true)
 		{
@@ -46,42 +44,9 @@ class LoggerManager
 
 		if (array_key_exists($loggerCode, $this->_loggers) === false)
 		{
-			// Create a new logger
+			// Build the logger
 
-			$logger = new \Monolog\Logger($loggerCode);
-
-
-			// Setup processors
-
-			$logger->pushProcessor(new \Monolog\Processor\IntrospectionProcessor());
-			$logger->pushProcessor(new \Monolog\Processor\ProcessIdProcessor());
-			$logger->pushProcessor(new \Monolog\Processor\WebProcessor());
-
-
-			// In CLI mode, print log
-			
-			if (\z\app()->isCli() === true)
-			{
-				$handler = new \Monolog\Handler\StreamHandler
-				(
-					'php://stdout',
-					\Monolog\Logger::DEBUG
-				);
-
-				$handler->setFormatter(new \fbenard\Zero\Services\Formatters\CliLogFormatter());
-
-				$logger->pushHandler($handler);
-			}
-
-
-			// Parse each handler
-
-			foreach ($this->_handlers as $handler)
-			{
-				// Push the handler
-
-				$logger->pushHandler($handler);
-			}
+			$logger = \z\service('factory/logger')->buildLogger($loggerCode, $handlers);
 
 			
 			// Store the logger
@@ -90,7 +55,7 @@ class LoggerManager
 		}
 
 
-		//
+		// Get the logger
 
 		$logger = $this->_loggers[$loggerCode];
 
