@@ -60,8 +60,6 @@ class LoggerManager
 
 			// Parse each handler
 
-			print_r($logger->getHandlers());
-
 			//$logger->pushFormatter(new \fbenard\Zero\Services\Formatters\CliLogFormatter());
 
 			foreach ($this->_handlers as $handler)
