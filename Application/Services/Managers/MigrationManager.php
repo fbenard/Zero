@@ -30,7 +30,7 @@ class MigrationManager
 		{
 			// Log
 
-			\z\dlogi('Applying migration ' . get_class($migration) . '...');
+			\z\logger()->notice('Applying migration ' . get_class($migration) . '...');
 
 			
 			//
