@@ -58,9 +58,23 @@ class LoggerManager
 			$logger->pushProcessor(new \Monolog\Processor\WebProcessor());
 
 
-			// Parse each handler
+			// In CLI mode, print log
+			
+			if (\z\app()->isCli() === true)
+			{
+				$handler = new \Monolog\Handler\StreamHandler
+				(
+					'php://stdout',
+					\Monolog\Logger::DEBUG
+				);
 
-			//$logger->pushFormatter(new \fbenard\Zero\Services\Formatters\CliLogFormatter());
+				$handler->setFormatter(new \fbenard\Zero\Services\Formatters\CliLogFormatter());
+
+				$logger->pushHandler($handler);
+			}
+
+
+			// Parse each handler
 
 			foreach ($this->_handlers as $handler)
 			{
@@ -69,7 +83,7 @@ class LoggerManager
 				$logger->pushHandler($handler);
 			}
 
-
+			
 			// Store the logger
 
 			$this->_loggers[$loggerCode] = $logger;
@@ -163,11 +177,13 @@ class LoggerManager
 
 		//
 
+		/*
 		\z\service('renderer/log')->renderLog
 		(
 			$message,
 			'progress'
 		);
+		*/
 	}
 }
 

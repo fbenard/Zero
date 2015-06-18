@@ -25,13 +25,13 @@ implements \Monolog\Formatter\FormatterInterface
 	{
 		$this->_templates =
 		[
-			null => "%{message}%{pads}\n",
-			'error' => "\033[1;31m*** %{message}\033[0;0m%{pads}\n",
-			'information' => "\033[1;36m=== %{message}\033[0;0m%{pads}\n",
+			\Monolog\Logger::ERROR => "\033[1;31m*** %{message}\033[0;0m%{pads}\n",
+			\Monolog\Logger::INFO => "%{message}%{pads}\n",
+			\Monolog\Logger::NOTICE => "\033[1;36m=== %{message}\033[0;0m%{pads}\n",
 			'progress' => "%{message}%{pads}\r",
 			'prompt' => "\033[1;33m*** %{message}\033[0;0m",
 			'success' => "\033[1;32m=== %{message}\033[0;0m%{pads}\n",
-			'warning' => "\033[1;33m*** %{message}\033[0;0m%{pads}\n"
+			\Monolog\Logger::WARNING => "\033[1;33m*** %{message}\033[0;0m%{pads}\n"
 		];
 	}
 
@@ -42,7 +42,47 @@ implements \Monolog\Formatter\FormatterInterface
 
     public function format(array $record)
     {
-    	print_r($record);
+    	//
+
+		$result = "${record['message']}\n";
+
+
+		// Does the template exist?
+		
+		if (array_key_exists($record['level'], $this->_templates) === true)
+		{
+			// Get the template
+
+			$template = $this->_templates[$record['level']];
+
+
+			// Format the message
+
+			$result = str_replace
+			(
+				'%{message}',
+				$record['message'],
+				$template
+			);
+			
+
+			// Generate pads
+
+			$pads = str_pad(null, exec('tput cols') - strlen($result) - strlen('%{pads}'), ' ');
+
+
+			// Format the message with pads
+
+			$result = str_replace
+			(
+				'%{pads}',
+				$pads,
+				$result
+			);
+		}
+
+
+		return $result;
     }
 
 
@@ -52,7 +92,6 @@ implements \Monolog\Formatter\FormatterInterface
 
     public function formatBatch(array $records)
     {
-    	print_r($records);
     	foreach ($records as $record)
     	{
     		$this->format($record);
@@ -66,96 +105,6 @@ implements \Monolog\Formatter\FormatterInterface
 
 	public function formatMessage($message, $templateCode)
 	{
-		// Does the template exist?
-
-		if (isset($this->_templates[$templateCode]) === false)
-		{
-			return $message;
-		}
-
-
-		// Get the template
-
-		$template = $this->_templates[$templateCode];
-
-
-		// Format the message
-
-		$message = str_replace
-		(
-			'%{message}',
-			$message,
-			$template
-		);
-		
-
-		// Generate pads
-
-		$pads = str_pad(null, exec('tput cols') - strlen($message) - strlen('%{pads}'), ' ');
-
-
-		// Format the message with pads
-
-		$message = str_replace
-		(
-			'%{pads}',
-			$pads,
-			$message
-		);
-
-
-		return $message;
-	}
-
-
-	/**
-	 *
-	 */
-
-	private function isMute()
-	{
-		//
-
-		if (\z\app()->isCli() === true)
-		{
-			return false;
-		}
-		else
-		{
-			return true;
-		}
-	}
-
-
-	/**
-	 *
-	 */
-
-	public function renderLog($message, $templateCode = null)
-	{
-		// Format the message
-
-		if
-		(
-			(is_array($message) === true) ||
-			(is_object($message) === true)
-		)
-		{
-			$message = print_r($message, true);
-		}
-
-
-		// Format the output
-
-		$output = $this->formatMessage($message, $templateCode);
-
-
-		// Print the output
-
-		if ($this->isMute() === false)
-		{
-			print $output;
-		}
 	}
 }
 
