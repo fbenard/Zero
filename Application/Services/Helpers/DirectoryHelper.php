@@ -14,6 +14,26 @@ class DirectoryHelper
 	/**
 	 *
 	 */
+
+	public function createDirectory($path)
+	{
+		// If directory already exists, delete it
+
+		if (is_dir($path) === true)
+		{
+			$this->deleteDirectory($path);
+		}
+
+		
+		// Create the directory
+
+		mkdir($path, 0755, true);
+	}
+
+
+	/**
+	 *
+	 */
 	
 	public function deleteDirectory($path)
 	{
