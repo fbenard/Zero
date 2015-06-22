@@ -69,66 +69,6 @@ function dispatch($eventCode, $event)
  *
  */
 
-function dlog($message)
-{
-	return \z\service('manager/log')->log($message);
-}
-
-
-/**
- *
- */
-
-function dloge($message)
-{
-	return \z\service('manager/log')->logError($message);
-}
-
-
-/**
- *
- */
-
-function dlogi($message)
-{
-	return \z\service('manager/log')->logInformation($message);
-}
-
-
-/**
- *
- */
-
-function dlogp($nbItemsRemaining, $nbItems, &$timeOfStart, $message = null)
-{
-	return \z\service('manager/log')->logProgress($nbItemsRemaining, $nbItems, $timeOfStart, $message);
-}
-
-
-/**
- *
- */
-
-function dlogs($message)
-{
-	return \z\service('manager/log')->logSuccess($message);
-}
-
-
-/**
- *
- */
-
-function dlogw($message)
-{
-	return \z\service('manager/log')->logWarning($message);
-}
-
-
-/**
- *
- */
-
 function e($exceptionCode, $exceptionContext = null)
 {
 	throw new \fbenard\Zero\Classes\Exception($exceptionCode, $exceptionContext);
@@ -142,6 +82,16 @@ function e($exceptionCode, $exceptionContext = null)
 function follow($eventCode, $followerCode, $methodCode)
 {
 	return \z\service('manager/event')->addFollower($eventCode, $followerCode, $methodCode);
+}
+
+
+/**
+ *
+ */
+
+function logger($loggerCode = null, $handlers = null)
+{
+	return \z\service('manager/logger')->getLogger($loggerCode, $handlers);
 }
 
 

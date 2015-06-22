@@ -1,5 +1,6 @@
 {
 	"factory/config": "\\fbenard\\Zero\\Services\\Factories\\ConfigFactory",
 	"factory/controller": "\\fbenard\\Zero\\Services\\Factories\\ControllerFactory",
+	"factory/logger": "\\fbenard\\Zero\\Services\\Factories\\LoggerFactory",
 	"factory/service": "\\fbenard\\Zero\\Services\\Factories\\ServiceFactory"
 }

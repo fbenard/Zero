@@ -30,7 +30,7 @@ class Application
 	
 	private function __construct()
 	{
-		//
+		// Build low-level managers
 
 		$this->_bootManager = new \fbenard\Zero\Services\Managers\BootManager();
 		$this->_cacheManager = new \fbenard\Zero\Services\Managers\CacheManager();
@@ -136,25 +136,22 @@ class Application
 
 	public function quit()
 	{
-		// Do not quit if app is embedded
+		// Log
+
+		\z\logger()->notice('Quitting app...');
+		
+
+		// Exit the process
+		// Do not exit if app is embedded
 
 		if (\z\app()->isEmbedded() === true)
 		{
 			return;
 		}
-
-
-		//
-
-		if ($this->isCli() === true)
+		else
 		{
-			\z\dlogs('Done!');
+			exit();
 		}
-
-
-		//
-
-		exit();
 	}
 	
 	
