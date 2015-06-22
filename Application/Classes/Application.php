@@ -136,11 +136,6 @@ class Application
 
 	public function quit()
 	{
-		// Log
-
-		\z\logger()->notice('Quitting app...');
-		
-
 		// Exit the process
 		// Do not exit if app is embedded
 
