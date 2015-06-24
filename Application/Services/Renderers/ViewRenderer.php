@@ -52,11 +52,19 @@ class ViewRenderer
 	 *
 	 */
 
-	public function renderView($viewCode, $viewContext = null)
+	public function renderView($viewCode, $viewContext = null, $viewRoot = null)
 	{
+		// Fix the view root
+
+		if (empty($viewRoot) === true)
+		{
+			$viewRoot = PATH_APPLICATION . 'Views/';
+		}
+
+		
 		// Check whether the view exists
 
-		$pathToView = PATH_APPLICATION . 'Views/' . $viewCode;
+		$pathToView = $viewRoot . $viewCode;
 
 		if (file_exists($pathToView) === false)
 		{
