@@ -72,13 +72,10 @@ function create()
 			'mkdir -p ' . $pathToApplication,
 			'mkdir -p ' . $pathToApplication . 'Application',
 			'mkdir -p ' . $pathToApplication . 'Static',
-			'mkdir -p ' . $pathToApplication . 'Temporary',
-			'cp -R ' . $pathToZero . 'Templates/Static/* ' . $pathToApplication . 'Static',
 			'cp -R ' . $pathToZero . 'Templates/index.php ' . $pathToApplication . 'index.php',
 			'cp ' . $pathToZero . 'Templates/_.gitignore ' . $pathToApplication . '.gitignore',
 			'cp ' . $pathToZero . 'Templates/_.htaccess ' . $pathToApplication . '.htaccess',
-			'cp ' . $pathToZero . 'Templates/composer.json ' . $pathToApplication . 'composer.json',
-			'chmod -R 755 ' . $pathToApplication . 'Temporary'
+			'cp ' . $pathToZero . 'Templates/composer.json ' . $pathToApplication . 'composer.json'
 		]
 	);
 
