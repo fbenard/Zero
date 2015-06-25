@@ -54,6 +54,11 @@ class CultureManager
 
 		foreach ($locales as $localeCode)
 		{
+			// Fix the locale code
+
+			$localeCode = strval($localeCode);
+
+
 			// Does the locale have a string?
 
 			if
