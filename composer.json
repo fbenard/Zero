@@ -9,14 +9,14 @@
 	[
 		{
 			"name": "Fabien BÉNARD",
-			"email": "fbenard.public@gmail.com",
-			"homepage": "http://fabienbenard.com",
+			"email": "fabien@benard.co",
+			"homepage": "http://fabien.benard.co",
 			"role": "Developer"
 		}
 	],
 	"support":
 	{
-		"email": "fbenard.public@gmail.com",
+		"email": "fabien@benard.co",
 		"issues": "http://github.com/fbenard/zero/issues",
 		"source": "http://github.com/fbenard/zero"
 	},
