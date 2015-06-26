@@ -27,7 +27,7 @@ zero create
 
 ## Authors
 
-Zero is carefully taken care of by [Fabien BÉNARD](http://fabienbenard.com).
+Zero is carefully taken care of by [Fabien BÉNARD](http://fabien.benard.co).
 
 
 ## License
