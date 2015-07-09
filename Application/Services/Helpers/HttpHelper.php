@@ -19,15 +19,8 @@ class HttpHelper
 	{
 		// Fix headers, query and body
 
-		if (is_array($headers) === false)
-		{
-			$headers = [];
-		}
-
-		if (is_array($query) === false)
-		{
-			$query = [];
-		}
+		$headers = \z\conf($headers);
+		$query = \z\conf($query);
 
 		if (is_null($body) === true)
 		{
