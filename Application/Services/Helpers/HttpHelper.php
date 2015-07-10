@@ -29,7 +29,7 @@ class HttpHelper
 
 
 		// Body must be a string
-		
+
 		if (is_string($body) === false)
 		{
 			\z\e
@@ -38,7 +38,7 @@ class HttpHelper
 				[
 					'body' => json_encode($body)
 				]
-			)
+			);
 		}
 
 
