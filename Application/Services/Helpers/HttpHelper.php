@@ -36,7 +36,8 @@ class HttpHelper
 			(
 				EXCEPTION_HTTP_BODY_NOT_VALID,
 				[
-					'body' => json_encode($body)
+					'body' => json_encode($body),
+					'type' => gettype($body)
 				]
 			);
 		}
