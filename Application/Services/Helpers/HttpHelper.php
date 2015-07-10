@@ -28,6 +28,21 @@ class HttpHelper
 		}
 
 
+		// Body must be a string
+		
+		if (is_string($body) === false)
+		{
+			\z\e
+			(
+				EXCEPTION_HTTP_BODY_NOT_VALID,
+				[
+					'body' => json_encode($body)
+				]
+			)
+		}
+
+
+
 		// Build the HTTP client
 
 		$client = new \GuzzleHttp\Client
