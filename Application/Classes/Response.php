@@ -14,8 +14,9 @@ class Response
 	// Traits
 
 	use \fbenard\Zero\Traits\GetTrait;
+	use \fbenard\Zero\Traits\SetTrait;
 
-	
+
 	// Attributes
 
 	private $_body = null;
@@ -70,16 +71,16 @@ class Response
 		header('Location: ' . $url);
 		\z\app()->quit();
 	}
-	
-	
+
+
 	/**
 	 *
 	 */
-	
+
 	private function sendHeaders()
 	{
 		// Have HTTP response headers already been sent?
-		
+
 		if (headers_sent() === true)
 		{
 			return;
