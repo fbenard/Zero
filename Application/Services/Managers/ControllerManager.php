@@ -122,7 +122,7 @@ class ControllerManager
 		
 		// Push the response
 		
-		$this->_controller->pushResponse();
+		$this->_controller->push();
 	}
 
 

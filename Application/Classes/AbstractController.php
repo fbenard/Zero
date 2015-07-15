@@ -48,9 +48,8 @@ abstract class AbstractController
 	 *
 	 */
 
-	public function pushResponse()
+	public function push()
 	{
-		$this->_response->body = $this->_output;
 		$this->_response->push();
 	}
 
