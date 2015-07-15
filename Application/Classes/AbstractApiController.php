@@ -25,7 +25,7 @@ extends \fbenard\Zero\Classes\AbstractController
 
 		// Build attributes
 
-		$this->_response->setHeaders
+		$this->_response->headers
 		(
 			[
 				'Accept-Language' => \z\service('manager/culture')->localeCode,

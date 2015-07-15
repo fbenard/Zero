@@ -109,36 +109,6 @@ class Response
 			}
 		}
 	}
-
-
-	/**
-	 *
-	 */
-
-	public function setBody($body)
-	{
-		$this->_body = $body;
-	}
-
-
-	/**
-	 *
-	 */
-
-	public function setHeaders($headers)
-	{
-		$this->_headers = $headers;
-	}
-
-
-	/**
-	 *
-	 */
-
-	public function setStatusCode($statusCode)
-	{
-		$this->_statusCode = $statusCode;
-	}
 }
 
 ?>

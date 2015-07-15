@@ -14,8 +14,9 @@ abstract class AbstractController
 	// Traits
 
 	use \fbenard\Zero\Traits\GetTrait;
+	use \fbenard\Zero\Traits\SetTrait;
 
-	
+
 	// Attributes
 
 	protected $_output = null;
@@ -49,7 +50,7 @@ abstract class AbstractController
 
 	public function pushResponse()
 	{
-		$this->_response->setBody($this->_output);
+		$this->_response->body = $this->_output;
 		$this->_response->push();
 	}
 
@@ -60,12 +61,10 @@ abstract class AbstractController
 
 	protected function redirect($url)
 	{
-		$this->_response->setHeaders
-		(
-			[
-				'Location' => $url
-			]
-		);
+		$this->_response->headers =
+		[
+			'Location' => $url
+		];
 	}
 
 
@@ -73,9 +72,14 @@ abstract class AbstractController
 	 *
 	 */
 
-	protected function renderView($viewCode, $viewContext = null)
+	protected function renderView($viewCode, $viewContext = null, $viewRoot = null)
 	{
-		$this->setOutput(\z\service('renderer/view')->renderView($viewCode, $viewContext));
+		$this->_output = \z\service('renderer/view')->renderView
+		(
+			$viewCode,
+			$viewContext,
+			$viewRoot
+		);
 	}
 
 
