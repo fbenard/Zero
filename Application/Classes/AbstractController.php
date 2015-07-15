@@ -29,7 +29,7 @@ abstract class AbstractController
 
 	public function __construct()
 	{
-		// Build attributes
+		// Build the response
 
 		$this->_response = new \fbenard\Zero\Classes\Response
 		(
