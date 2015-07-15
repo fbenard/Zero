@@ -87,14 +87,20 @@ class Response
 		}
 
 
-		// Send HTTP headers
+		// Set the status code
 
 		http_response_code($this->_statusCode);
+
+		
+
+		// Parse each header
 
 		if (is_array($this->_headers) === true)
 		{
 			foreach ($this->_headers as $headerCode => $headerValues)
 			{
+				// Set the header
+
 				if (is_array($headerValues) === true)
 				{
 					foreach ($headerValues as $headerValue)
