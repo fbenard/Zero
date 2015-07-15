@@ -115,6 +115,26 @@ class Response
 			}
 		}
 	}
+
+
+	/**
+	 *
+	 */
+
+	public function setHeader($headerCode, $headerValue = null)
+	{
+		if (count(func_get_args()) === 1)
+		{
+			if (array_key_exists($headerCode, $this->_headers) === true)
+			{
+				unset($this->_headers[$headerCode]);
+			}
+		}
+		else
+		{
+			$this->_headers[$headerCode] = $headerValue;
+		}
+	}
 }
 
 ?>

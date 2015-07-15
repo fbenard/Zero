@@ -18,24 +18,19 @@ extends \fbenard\Zero\Classes\AbstractController
 
 	public function __construct()
 	{
-		// Parent constructor
+		// Call the parent constructor
 
 		parent::__construct();
 
 
-		// Build attributes
+		// Set the Content-Type header
 
-		$this->_response->headers
-		(
-			[
-				'Accept-Language' => \z\service('manager/culture')->localeCode,
-				'Cache-Control' => 'private, no-cache, no-store, must-revalidate',
-				'Content-Language' => \z\service('manager/culture')->localeCode,
-				'Content-Type' => 'application/json; charset=UTF-8'
-			]
-		);
+		$this->setHeader('Content-Type', 'application/json; charset=UTF-8');
 
-		$this->_output = json_encode(null);
+		
+		// Set a null output
+
+		$this->setOutput(null);
 	}
 
 
@@ -45,7 +40,14 @@ extends \fbenard\Zero\Classes\AbstractController
 
 	protected function setOutput($output)
 	{
-		$this->_output = json_encode($output);
+		// Encode the output as JSON
+
+		$output = json_encode($output, JSON_PRETTY_PRINT);
+
+
+		// Set the output
+		
+		parent::setOutput($output);
 	}
 }
 

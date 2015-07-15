@@ -14,12 +14,10 @@ abstract class AbstractController
 	// Traits
 
 	use \fbenard\Zero\Traits\GetTrait;
-	use \fbenard\Zero\Traits\SetTrait;
 
 
 	// Attributes
 
-	protected $_output = null;
 	protected $_response = null;
 
 
@@ -73,11 +71,14 @@ abstract class AbstractController
 
 	protected function renderView($viewCode, $viewContext = null, $viewRoot = null)
 	{
-		$this->_output = \z\service('renderer/view')->renderView
+		$this->setOutput
 		(
-			$viewCode,
-			$viewContext,
-			$viewRoot
+			\z\service('renderer/view')->renderView
+			(
+				$viewCode,
+				$viewContext,
+				$viewRoot
+			)
 		);
 	}
 
@@ -88,7 +89,27 @@ abstract class AbstractController
 
 	protected function setOutput($output)
 	{
-		$this->_output = $output;
+		$this->_response->body = $output;
+	}
+
+
+	/**
+	 *
+	 */
+
+	protected function setStatusCode($statusCode)
+	{
+		$this->_response->statusCode = $statusCode;
+	}
+
+
+	/**
+	 *
+	 */
+
+	protected function setHeader($headerCode, $headerValue = null)
+	{
+		$this->_response->setHeader($headerCode, $headerValue);
 	}
 }
 
