@@ -97,15 +97,6 @@ implements \Monolog\Formatter\FormatterInterface
     		$this->format($record);
     	}
     }
-
-
-	/**
-	 *
-	 */
-
-	public function formatMessage($message, $templateCode)
-	{
-	}
 }
 
 ?>
