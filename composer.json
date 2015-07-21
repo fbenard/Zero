@@ -2,7 +2,7 @@
 	"name": "fbenard/zero",
 	"description": "",
 	"type": "library",
-	"keywords": ["micro", "framework", "php"],
+	"keywords": ["framework", "php"],
 	"homepage": "http://github.com/fbenard/zero",
 	"license": "MIT",
 	"authors":
