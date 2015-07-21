@@ -14,7 +14,6 @@ Zero is a lightweight framework written in PHP, for PHP applications.
 
 ```
 composer global require fbenard/zero:*
-php ~/.composer/vendor/fbenard/zero/Application/Core/zero-cli.php install
 ```
 
 
