@@ -25,13 +25,10 @@ implements \Monolog\Formatter\FormatterInterface
 	{
 		$this->_templates =
 		[
-			\Monolog\Logger::ERROR => "\033[1;31m*** %{message}\033[0;0m%{pads}\n",
-			\Monolog\Logger::INFO => "%{message}%{pads}\n",
-			\Monolog\Logger::NOTICE => "\033[1;36m=== %{message}\033[0;0m%{pads}\n",
-			'progress' => "%{message}%{pads}\r",
-			'prompt' => "\033[1;33m*** %{message}\033[0;0m",
-			'success' => "\033[1;32m=== %{message}\033[0;0m%{pads}\n",
-			\Monolog\Logger::WARNING => "\033[1;33m*** %{message}\033[0;0m%{pads}\n"
+			\Monolog\Logger::ERROR => "\033[1;31m*** %{message}\033[0;0m\n",
+			\Monolog\Logger::INFO => "%{message}\n",
+			\Monolog\Logger::NOTICE => "\033[1;36m=== %{message}\033[0;0m\n",
+			\Monolog\Logger::WARNING => "\033[1;33m*** %{message}\033[0;0m\n"
 		];
 	}
 
@@ -63,21 +60,6 @@ implements \Monolog\Formatter\FormatterInterface
 				'%{message}',
 				$record['message'],
 				$template
-			);
-			
-
-			// Generate pads
-
-			$pads = str_pad(null, exec('tput cols') - strlen($result) - strlen('%{pads}'), ' ');
-
-
-			// Format the message with pads
-
-			$result = str_replace
-			(
-				'%{pads}',
-				$pads,
-				$result
 			);
 		}
 
