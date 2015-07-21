@@ -17,13 +17,6 @@ composer global require fbenard/zero:*
 ```
 
 
-## Create a new application
-
-```
-zero create
-```
-
-
 ## Authors
 
 Zero is carefully taken care of by [Fabien BÉNARD](http://fabien.benard.co).
