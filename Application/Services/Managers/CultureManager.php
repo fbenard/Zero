@@ -165,8 +165,8 @@ class CultureManager
 
 			$paths = \z\service('helper/file')->listFiles
 			(
-				PATH_APPLICATION . 'Config/Strings/' . $localeCode . '/',
-				'*.json'
+				PATH_APPLICATION . '/Config/Strings/' . $localeCode,
+				'json'
 			);
 
 

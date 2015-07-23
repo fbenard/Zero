@@ -26,7 +26,7 @@ class ConstantManager
 
 		foreach ($dependencies as $dependency)
 		{
-			$paths = \z\service('helper/file')->listFiles($dependency . 'Constants/', '*.php');
+			$paths = \z\service('helper/file')->listFiles($dependency . '/Constants', 'php');
 			
 			foreach ($paths as $path)
 			{

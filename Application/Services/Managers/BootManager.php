@@ -177,7 +177,7 @@ class BootManager
 		// Load Boot.json
 
 		$boot = null;
-		$pathToBoot = PATH_APPLICATION . 'Config/Boot.json';
+		$pathToBoot = PATH_APPLICATION . '/Config/Boot.json';
 
 		if (file_exists($pathToBoot) === true)
 		{

@@ -15,30 +15,70 @@ class FileHelper
 	 * 
 	 */
 	
-	public function listFiles($path, $pattern = '*')
+	public function listFiles($path, $extension = null, $recursive = false)
 	{
-		// Make sure the path ends with a slash
+		// Build the result
+
+		$result = [];
+
 		
-		if (substr($path, -1) != '/')
+		// Is the path an actual directory?
+
+		if (is_dir($path) === false)
 		{
-			$path .= '/';
+			return $result;
 		}
+
+
+		// Build iterators
+
+		if ($recursive === true)
+		{
+			$directoryIterator = new \RecursiveDirectoryIterator($path);
+			$fileIterator = new \RecursiveIteratorIterator
+			(
+				$directoryIterator,
+				\RecursiveIteratorIterator::SELF_FIRST
+			);
+		}
+		else
+		{
+			$directoryIterator = new \DirectoryIterator($path);
+			$fileIterator = new \IteratorIterator($directoryIterator);
+		}
+
 		
-
-		// Find files matching the pattern
-		
-		$files = glob($path . $pattern);
-
-
 		//
 
-		if (is_array($files) === false)
+		foreach ($fileIterator as $file)
 		{
-			$files = [];
+			// Skip if not a file
+
+			if ($file->isFile() === false)
+			{
+				//continue;
+			}
+
+
+			// Skip if not the right extension
+
+			if
+			(
+				(empty($extension) === false) &&
+				($file->getExtension() !== $extension)
+			)
+			{
+				continue;
+			}
+
+
+			// Store the file
+
+			$result[] = $file->getRealPath();
 		}
+	
 		
-		
-		return $files;
+		return $result;
 	}
 }
 

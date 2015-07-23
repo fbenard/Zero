@@ -58,7 +58,7 @@ class ViewRenderer
 
 		if (empty($viewRoot) === true)
 		{
-			$viewRoot = PATH_APPLICATION . 'Views/';
+			$viewRoot = PATH_APPLICATION . '/Views';
 		}
 
 		
@@ -93,7 +93,7 @@ class ViewRenderer
 			[
 				'basedir' =>
 				[
-					PATH_APPLICATION . 'Views/'
+					PATH_APPLICATION . '/Views'
 				],
 				'fileext' =>
 				[

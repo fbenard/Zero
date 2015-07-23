@@ -103,7 +103,7 @@ class PreferenceManager
 			{
 				// Prepare global path
 
-				$path = $dependency . 'Config/Preferences/Preferences';
+				$path = $dependency . '/Config/Preferences/Preferences';
 
 
 				// Build paths

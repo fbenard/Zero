@@ -77,7 +77,8 @@ class ServiceManager
 			// Find services
 
 			$fileHelper = new \fbenard\Zero\Services\Helpers\FileHelper();
-			$paths = $fileHelper->listFiles($dependency . 'Config/Services/', '*.json');
+			$paths = $fileHelper->listFiles($dependency . '/Config/Services', 'json');
+			print_r($paths);
 
 
 			// For each service

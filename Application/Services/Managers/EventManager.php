@@ -123,7 +123,7 @@ class EventManager
 		{
 			//
 
-			$paths = \z\service('helper/file')->listFiles($dependency . 'Config/Events/', '*.php');
+			$paths = \z\service('helper/file')->listFiles($dependency . '/Config/Events', 'php');
 			
 			foreach ($paths as $path)
 			{
