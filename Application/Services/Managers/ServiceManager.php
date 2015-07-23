@@ -78,7 +78,6 @@ class ServiceManager
 
 			$fileHelper = new \fbenard\Zero\Services\Helpers\FileHelper();
 			$paths = $fileHelper->listFiles($dependency . '/Config/Services', 'json');
-			print_r($paths);
 
 
 			// For each service
