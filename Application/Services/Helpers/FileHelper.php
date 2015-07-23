@@ -56,7 +56,7 @@ class FileHelper
 
 			if ($file->isFile() === false)
 			{
-				//continue;
+				continue;
 			}
 
 
