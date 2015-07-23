@@ -64,7 +64,7 @@ class ViewRenderer
 		
 		// Check whether the view exists
 
-		$pathToView = $viewRoot . '/' . $viewCode;
+		$pathToView = $viewRoot . $viewCode;
 
 		if (file_exists($pathToView) === false)
 		{
