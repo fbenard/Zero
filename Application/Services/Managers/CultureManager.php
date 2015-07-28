@@ -113,6 +113,11 @@ class CultureManager
 			$this->_localeCode = locale_accept_from_http(\z\request()->header('Accept-Language'));
 		}
 
+		if (empty($this->_localeCode) === true)
+		{
+			$this->_localeCode = \z\pref('fbenard/zero/culture/locale');
+		}
+
 
 		// Define fallback
 
