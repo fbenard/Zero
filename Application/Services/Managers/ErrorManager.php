@@ -43,6 +43,11 @@ class ErrorManager
 		// Display the error
 
 		print($result);
+
+
+		// Exit
+
+		exit(1);
 	}
 }
 
