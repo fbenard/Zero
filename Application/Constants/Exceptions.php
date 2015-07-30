@@ -19,6 +19,11 @@
 \z\cons('EXCEPTION_HTTP_STATUS_CODE_NOT_VALID');
 
 
+// Methods
+
+\z\cons('EXCEPTION_METHOD_NOT_FOUND');
+
+
 // Permissions
 
 \z\cons('EXCEPTION_PERMISSION_NOT_GRANTED');
