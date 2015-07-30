@@ -224,7 +224,11 @@ class RouteManager
 
 			foreach ($uriFragments as $key => &$uriFragment)
 			{
-				if (preg_match('/\{([a-zA-Z0-9]+)\}/', $uriFragment, $matches) === 1)
+				if
+				(
+					(preg_match('/\{([a-zA-Z0-9]+)\}/', $uriFragment, $matches) === 1) &&
+					(array_key_exists($matches[1], $definition['arguments']) === true)
+				)
 				{
 					$uriFragment = '(' . $definition['arguments'][$matches[1]]['pattern'] . ')';
 				}
