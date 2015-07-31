@@ -42,7 +42,7 @@ extends \fbenard\Zero\Classes\AbstractController
 	{
 		// Encode the output as JSON
 
-		$output = json_encode($output, JSON_PRETTY_PRINT);
+		$output = \z\service('factory/json')->encodeJson($output);
 
 
 		// Set the output
