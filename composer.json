@@ -23,7 +23,7 @@
 	"require":
 	{
 		"monolog/monolog": "*",
-		"guzzlehttp/guzzle": "5.*",
+		"guzzlehttp/guzzle": "6.*",
 		"php": ">=5.5.0",
 		"predis/predis": "1.0.0",
 		"zordius/lightncandy": "*"
