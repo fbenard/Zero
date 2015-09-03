@@ -134,6 +134,23 @@ class Application
 	 *
 	 */
 
+	public function isVerbose()
+	{
+		if (in_array('--verbose', $GLOBALS['argv']) === true)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+
+	/**
+	 *
+	 */
+
 	public function quit()
 	{
 		// Exit the process
