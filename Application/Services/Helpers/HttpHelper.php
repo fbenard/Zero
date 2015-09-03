@@ -74,9 +74,25 @@ class HttpHelper
 		$request->setBody(\GuzzleHttp\Stream\Stream::factory($body));
 
 
+		// Log
+
+		if (\z\app()->isVerbose() === true)
+		{
+			\z\logger()->info($request);
+		}
+
+
 		// Send the request
 
 		$response = $client->send($request);
+
+
+		// Log
+
+		if (\z\app()->isVerbose() === true)
+		{
+			\z\logger()->info($response);
+		}
 
 
 		// Did it succeed?
@@ -92,7 +108,9 @@ class HttpHelper
 				EXCEPTION_HTTP_STATUS_CODE_NOT_VALID,
 				[
 					'expected' => $statusCode,
-					'actual' => $response->getStatusCode()
+					'actual' => $response->getStatusCode(),
+					'request' => $request,
+					'response' => $response
 				]
 			);
 		}
