@@ -43,7 +43,10 @@ class ServiceManager
 	{
 		// Fix services
 
-		$services = \z\conf($services);
+		if (is_array($services) === false)
+		{
+			$services = [];
+		}
 
 		
 		// Parse each service
@@ -188,7 +191,10 @@ class ServiceManager
 	{
 		// Fix services
 
-		$services = \z\conf($services);
+		if (is_array($services) === false)
+		{
+			$services = [];
+		}
 
 		
 		// Parse each service
@@ -196,7 +202,7 @@ class ServiceManager
 		foreach ($services as $serviceCode => $serviceClassName)
 		{
 			// Register the service
-			
+
 			$this->_definitions[$serviceCode] = $serviceClassName;
 		}
 	}
