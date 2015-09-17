@@ -39,6 +39,79 @@ class ServiceManager
 	 *
 	 */
 
+	public function deregisterServices($services)
+	{
+		// Fix services
+
+		$services = \z\conf($services);
+
+		
+		// Parse each service
+
+		foreach ($services as $serviceCode)
+		{
+			// Is the service registered?
+
+			if (array_key_exists($serviceCode, $this->_definitions) === true)
+			{
+				// De-register the service
+
+				unset($this->_definitions[$serviceCode]);
+			}
+		}
+	}
+
+
+	/**
+	 *
+	 */
+	
+	public function getService($serviceCode, $clone = false)
+	{
+		// Clone the service
+
+		if ($clone === true)
+		{
+			return $this->_factory->buildService
+			(
+				$serviceCode,
+				$this->_definitions
+			);
+		}
+
+		
+		// Has the service been retrieved already?
+
+		if (array_key_exists($serviceCode, $this->_services) === false)
+		{
+			// Build the service
+
+			$service = $this->_factory->buildService
+			(
+				$serviceCode,
+				$this->_definitions
+			);
+
+
+			// Store the service
+
+			$this->_services[$serviceCode] = $service;
+		}
+		
+		
+		// Get the service
+
+		$service = $this->_services[$serviceCode];
+
+
+		return $service;
+	}
+
+
+	/**
+	 *
+	 */
+
 	public function initialize()
 	{
 		// Load definitions
@@ -110,67 +183,20 @@ class ServiceManager
 	/**
 	 *
 	 */
-	
-	public function getService($serviceCode, $clone = false)
-	{
-		// Clone the service
-
-		if ($clone === true)
-		{
-			return $this->_factory->buildService
-			(
-				$serviceCode,
-				$this->_definitions
-			);
-		}
-
-		
-		// Has the service been retrieved already?
-
-		if (array_key_exists($serviceCode, $this->_services) === false)
-		{
-			// Build the service
-
-			$service = $this->_factory->buildService
-			(
-				$serviceCode,
-				$this->_definitions
-			);
-
-
-			// Store the service
-
-			$this->_services[$serviceCode] = $service;
-		}
-		
-		
-		// Get the service
-
-		$service = $this->_services[$serviceCode];
-
-
-		return $service;
-	}
-
-
-	/**
-	 *
-	 */
 
 	public function registerServices($services)
 	{
-		// Ensure services is an array
+		// Fix services
 
-		if (is_array($services) === false)
-		{
-			$services = [];
-		}
+		$services = \z\conf($services);
 
 		
-		// Register each service provided
+		// Parse each service
 
 		foreach ($services as $serviceCode => $serviceClassName)
 		{
+			// Register the service
+			
 			$this->_definitions[$serviceCode] = $serviceClassName;
 		}
 	}
