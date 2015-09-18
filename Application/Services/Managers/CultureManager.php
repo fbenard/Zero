@@ -96,6 +96,25 @@ class CultureManager
 
 		return $result;
 	}
+	
+	
+	/**
+	 *
+	 */
+
+	public function getStrings()
+	{
+		// Merge strings
+
+		$result = array_merge
+		(
+			$this->_strings[$this->_localeCode],
+			$this->_strings[$this->_fallbackCode]
+		);
+
+
+		return $result;
+	}
 
 
 	/**
