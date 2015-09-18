@@ -108,8 +108,8 @@ class CultureManager
 
 		$result = array_merge
 		(
-			$this->_strings[$this->_localeCode],
-			$this->_strings[$this->_fallbackCode]
+			$this->_strings[$this->_fallbackCode],
+			$this->_strings[$this->_localeCode]
 		);
 
 
