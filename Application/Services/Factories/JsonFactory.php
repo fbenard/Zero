@@ -45,6 +45,21 @@ class JsonFactory
 		);
 
 
+		// Check whether JSON is valid
+
+		if (json_last_error() !== JSON_ERROR_NONE)
+		{
+			\z\e
+			(
+				EXCEPTION_JSON_NOT_VALID,
+				[
+					'error' => json_last_error_msg(),
+					'json' => $json
+				]
+			);
+		}
+
+
 		return $result;
 	}
 
@@ -72,22 +87,7 @@ class JsonFactory
 		// Load and decode the JSON
 
 		$rawJson = file_get_contents($pathToJson);
-		$json = json_decode($rawJson, true);
-
-
-		// Check whether JSON is valid
-
-		if (json_last_error() !== JSON_ERROR_NONE)
-		{
-			\z\e
-			(
-				EXCEPTION_JSON_NOT_VALID,
-				[
-					'pathToJson' => $pathToJson,
-					'error' => json_last_error_msg()
-				]
-			);
-		}
+		$json = $this->decodeJson($rawJson);
 
 
 		return $json;
