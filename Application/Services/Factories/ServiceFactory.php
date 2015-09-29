@@ -32,9 +32,23 @@ class ServiceFactory
 		}
 
 
-		// Build the class name
+		// Get the definition
 
-		$className = $definitions[$serviceCode];
+		$definition = $definitions[$serviceCode];
+
+
+		// If the definition is an object
+		// Return it as such
+
+		if (is_object($definition) === true)
+		{
+			return $definition;
+		}
+
+
+		// Otherwise, it's a classname
+
+		$className = $definition;
 
 
 		// Make sure the class exists
