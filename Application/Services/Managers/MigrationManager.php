@@ -24,7 +24,7 @@ class MigrationManager
 		*/
 
 		$migrations = [];
-		$migrations[] = new \Splio\Goloboard\Migrations\Migration_0000();
+		$migrations[] = new \Splio\Appforge\Migrations\Migration_0000();
 
 		foreach ($migrations as $migration)
 		{
