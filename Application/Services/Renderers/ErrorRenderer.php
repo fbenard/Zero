@@ -41,8 +41,20 @@ class ErrorRenderer
 			$result = implode(null, $result);
 		}
 
+		
+		// Set the HTTP status code to 500
 
-		return $result;
+		http_response_code(500);
+
+
+		// Display the result
+
+		print($result);
+
+
+		// Exit
+
+		exit(1);
 	}
 
 
@@ -143,8 +155,6 @@ class ErrorRenderer
 
 
 		// Build HTTP response headers
-
-		http_response_code(500);
 
 		$responseHeaders =
 		[

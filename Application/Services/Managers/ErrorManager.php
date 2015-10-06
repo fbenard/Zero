@@ -37,17 +37,7 @@ class ErrorManager
 
 		// Render the error
 
-		$result = $errorRenderer->renderError($error);
-
-		
-		// Display the error
-
-		print($result);
-
-
-		// Exit
-
-		exit(1);
+		$errorRenderer->renderError($error);
 	}
 }
 
