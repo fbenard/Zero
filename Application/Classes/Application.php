@@ -136,7 +136,11 @@ class Application
 
 	public function isVerbose()
 	{
-		if (in_array('--verbose', $GLOBALS['argv']) === true)
+		if
+		(
+			(array_key_exists('argv', $GLOBALS) === true) &&
+			(in_array('--verbose', $GLOBALS['argv']) === true)
+		)
 		{
 			return true;
 		}
