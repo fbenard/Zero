@@ -101,34 +101,43 @@ class PreferenceManager
 		{
 			foreach ($dependencies as $dependency)
 			{
-				// Prepare global path
+				// List preferences
 
-				$path = $dependency . '/Config/Preferences/Preferences';
-
-
-				// Build paths
-			
-				$paths =
-				[
-					$path . '.php',
-					$path . '.' . \z\boot()->environment . '.php',
-					$path . '.' . \z\boot()->universe . '.php',
-					$path . '.' . \z\boot()->environment . '.' . \z\boot()->universe . '.php'
-				];
+				$paths = array_merge
+				(
+					\z\service('helper/file')->listFiles($dependency . '/Config/Preferences', 'json'),
+					\z\service('helper/file')->listFiles($dependency . '/Config/Preferences/' . \z\boot()->environment, 'json')
+				);
 
 				
-				// Load each path
+				// Parse each path
 
 				foreach ($paths as $path)
 				{
-					if (file_exists($path) === true)
+					// Build the preference code
+
+					$parentPreferenceCode = strtolower(basename($path, '.json'));
+
+
+					// Load preferences
+
+					$preferences = \z\service('factory/json')->loadJson($path);
+
+
+					// Store preferences
+
+					foreach ($preferences as $preferenceCode => $preferenceValue)
 					{
-						require($path);
+						\z\pref
+						(
+							$parentPreferenceCode . '/' . $preferenceCode,
+							$preferenceValue
+						);
 					}
 				}
 			}
-			
-			
+
+
 			// End of pass, remove the first extension
 			
 			array_shift($dependencies);
@@ -167,11 +176,11 @@ class PreferenceManager
 
 		// Handle PRE special cases
 
-		if ($preferenceCode === 'fbenard/zero/localization/language')
+		if ($preferenceCode === 'culture/locale')
 		{
 			setlocale(LC_ALL, $preferenceValue);
 		}
-		else if ($preferenceCode === 'fbenard/zero/localization/timezone')
+		else if ($preferenceCode === 'culture/timezone')
 		{
 			date_default_timezone_set($preferenceValue);
 		}

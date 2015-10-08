@@ -125,7 +125,7 @@ class CultureManager
 	{
 		// Define locale (first from session, then from HTTP header)
 
-		$this->_localeCode = \z\request()->session('fbenard/zero/culture/locale');
+		$this->_localeCode = \z\request()->session('culture/locale');
 
 		if (empty($this->_localeCode) === true)
 		{
@@ -134,13 +134,13 @@ class CultureManager
 
 		if (empty($this->_localeCode) === true)
 		{
-			$this->_localeCode = \z\pref('fbenard/zero/culture/locale');
+			$this->_localeCode = \z\pref('culture/locale');
 		}
 
 
 		// Define fallback
 
-		$this->_fallbackCode = \z\pref('fbenard/zero/culture/locale/fallback');
+		$this->_fallbackCode = \z\pref('culture/fallback');
 
 
 		// Load strings
@@ -233,7 +233,7 @@ class CultureManager
 	{
 		// Store the locale in session
 
-		\z\request()->session('fbenard/zero/culture/locale', $localeCode);
+		\z\request()->session('culture/locale', $localeCode);
 
 
 		// Re-initialize the culture manager
