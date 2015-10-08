@@ -79,7 +79,7 @@ class PreferenceManager
 	{
 		// Get the cache
 
-		$cacheCode = 'preferences_' . \z\boot()->environment . '_' . \z\boot()->universe;
+		$cacheCode = 'preferences_' . \z\boot()->environment;
 		$cache = \z\cache()->getCache($cacheCode);
 
 		if ($cache !== false)

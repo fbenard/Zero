@@ -21,7 +21,6 @@ class BootManager
 	private $_cache = null;
 	private $_dependencies = null;
 	private $_environment = null;
-	private $_universe = null;
 
 
 	/**
@@ -46,8 +45,7 @@ class BootManager
 				'cache' => [],
 				'dependencies' => [],
 				'hosts' => [],
-				'environment' => null,
-				'universe' => null,
+				'environment' => null
 			],
 			$boot
 		);
@@ -110,7 +108,6 @@ class BootManager
 		$this->_cache = $boot['cache'];
 		$this->_dependencies = $boot['dependencies'];
 		$this->_environment = $boot['environment'];
-		$this->_universe = $boot['universe'];
 
 
 		// Fix dependencies
@@ -122,24 +119,18 @@ class BootManager
 
 		if (\z\app()->isCli() === true)
 		{
-			// Grab environment and universe
+			// Grab environment
 			
 			$request = new \fbenard\Zero\Classes\Request();
 
 			$environment = $request->argument('env');
-			$universe = $request->argument('universe');
 
 
-			// Store environment and universe
+			// Store environment
 
 			if (empty($environment) === false)
 			{
 				$this->_environment = $environment;
-			}
-
-			if (empty($universe) === false)
-			{
-				$this->_universe = $universe;
 			}
 		}
 		else if
@@ -153,16 +144,11 @@ class BootManager
 			$host = $boot['hosts'][$_SERVER['SERVER_NAME']];
 
 
-			// Grab environment and universe
+			// Grab environment
 
 			if (array_key_exists('environment', $host) === true)
 			{
 				$this->_environment = $host['environment'];
-			}
-
-			if (array_key_exists('universe', $host) === true)
-			{
-				$this->_universe = $host['universe'];
 			}
 		}
 	}

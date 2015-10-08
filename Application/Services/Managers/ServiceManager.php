@@ -131,7 +131,7 @@ class ServiceManager
 	{
 		// Get the cache
 
-		$cacheCode = 'services_' . \z\boot()->environment . '_' . \z\boot()->universe;
+		$cacheCode = 'services_' . \z\boot()->environment;
 		$cache = \z\cache()->getCache($cacheCode);
 
 		if ($cache !== false)

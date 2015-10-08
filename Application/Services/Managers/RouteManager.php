@@ -63,7 +63,7 @@ class RouteManager
 	{
 		// Get the cache
 
-		$cacheCode = 'routes_' . \z\boot()->environment . '_' . \z\boot()->universe;
+		$cacheCode = 'routes_' . \z\boot()->environment;
 		$cache = \z\cache()->getCache($cacheCode);
 
 		if ($cache !== false)
