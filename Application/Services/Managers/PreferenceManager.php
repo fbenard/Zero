@@ -128,9 +128,35 @@ class PreferenceManager
 
 					foreach ($preferences as $preferenceCode => $preferenceValue)
 					{
+						// Build the new preference code
+
+						$preferenceCode = $parentPreferenceCode . '/' . $preferenceCode;
+
+
+						// Get the previous preference value
+
+						$oldPreferenceValue = \z\pref($preferenceCode);
+
+
+						// Is it an array?
+
+						if (is_array($oldPreferenceValue) === true)
+						{
+							// Merge the old + the new
+
+							$preferenceValue = array_merge
+							(
+								$oldPreferenceValue,
+								$preferenceValue
+							);
+						}
+
+
+						// Set the preference
+
 						\z\pref
 						(
-							$parentPreferenceCode . '/' . $preferenceCode,
+							$preferenceCode,
 							$preferenceValue
 						);
 					}
