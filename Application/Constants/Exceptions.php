@@ -19,6 +19,11 @@
 \z\cons('EXCEPTION_HTTP_STATUS_CODE_NOT_VALID');
 
 
+// JSON
+
+\z\cons('EXCEPTION_JSON_NOT_VALID');
+
+
 // Methods
 
 \z\cons('EXCEPTION_METHOD_NOT_FOUND');

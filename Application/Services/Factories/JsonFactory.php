@@ -34,14 +34,14 @@ class JsonFactory
 	 *
 	 */
 	
-	public function decodeJson($json)
+	public function decodeJson($json, $array = true)
 	{
 		// Decode
 
 		$result = json_decode
 		(
 			$json,
-			true
+			$array
 		);
 
 
@@ -68,7 +68,7 @@ class JsonFactory
 	 *
 	 */
 
-	public function loadJson($pathToJson)
+	public function loadJson($pathToJson, $array = true)
 	{
 		// Does the JSON exist?
 
@@ -87,7 +87,7 @@ class JsonFactory
 		// Load and decode the JSON
 
 		$rawJson = file_get_contents($pathToJson);
-		$json = $this->decodeJson($rawJson);
+		$json = $this->decodeJson($rawJson, $array);
 
 
 		return $json;
