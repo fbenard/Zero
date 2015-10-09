@@ -20,6 +20,10 @@
 		"issues": "http://github.com/fbenard/zero/issues",
 		"source": "http://github.com/fbenard/zero"
 	},
+	"config":
+	{
+		"vendor-dir": "Components"
+	},
 	"require":
 	{
 		"monolog/monolog": "*",
