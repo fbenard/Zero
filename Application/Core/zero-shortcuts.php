@@ -99,7 +99,7 @@ function logger($loggerCode = null, $handlers = null)
  *
  */
 
-function pref($preferenceCode, $preferenceValue = null, $isLocked = false)
+function pref($preferenceCode, $preferenceValue = null)
 {
 	if (func_num_args() === 1)
 	{
@@ -107,7 +107,7 @@ function pref($preferenceCode, $preferenceValue = null, $isLocked = false)
 	}
 	else
 	{
-		return \z\service('manager/preference')->setPreference($preferenceCode, $preferenceValue, $isLocked);
+		return \z\service('manager/preference')->setPreference($preferenceCode, $preferenceValue);
 	}
 }
 

@@ -39,12 +39,7 @@ class PreferenceManager
 	{
 		//
 
-		if
-		(
-			(array_key_exists($preferenceCode, $this->_preferences) === false) ||
-			(is_array($this->_preferences[$preferenceCode]) === false) ||
-			(array_key_exists('value', $this->_preferences[$preferenceCode]) === false)
-		)
+		if (array_key_exists($preferenceCode, $this->_preferences) === false)
 		{
 			return;
 		}
@@ -52,7 +47,7 @@ class PreferenceManager
 		
 		//
 
-		$result = $this->_preferences[$preferenceCode]['value'];
+		$result = $this->_preferences[$preferenceCode];
 
 
 		return $result;
@@ -178,28 +173,14 @@ class PreferenceManager
 			serialize($this->_preferences)
 		);
 	}
-	
-	
+
+
 	/**
 	 *
 	 */
 	
-	public function setPreference($preferenceCode, $preferenceValue, $isLocked = false)
+	public function setPreference($preferenceCode, $preferenceValue)
 	{
-		//
-
-		if
-		(
-			(array_key_exists($preferenceCode, $this->_preferences) === true) &&
-			(is_array($this->_preferences[$preferenceCode]) === true) &&
-			(array_key_exists('isLocked', $this->_preferences[$preferenceCode]) === true) &&
-			($this->_preferences[$preferenceCode]['isLocked'] === true)
-		)
-		{
-			return;
-		}
-
-
 		// Handle PRE special cases
 
 		if ($preferenceCode === 'culture/locale')
@@ -214,11 +195,7 @@ class PreferenceManager
 		
 		// Set the preference
 		
-		$this->_preferences[$preferenceCode] =
-		[
-			'value' => $preferenceValue,
-			'isLocked' => $isLocked
-		];
+		$this->_preferences[$preferenceCode] = $preferenceValue;
 	}
 }
 
