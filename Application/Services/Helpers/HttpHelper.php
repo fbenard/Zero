@@ -76,10 +76,8 @@ class HttpHelper
 
 		// Log
 
-		if (\z\app()->isVerbose() === true)
-		{
-			\z\logger()->info($request);
-		}
+		\z\logger()->notice('HTTP Request');
+		\z\logger()->info($request);
 
 
 		// Send the request
@@ -89,10 +87,8 @@ class HttpHelper
 
 		// Log
 
-		if (\z\app()->isVerbose() === true)
-		{
-			\z\logger()->info($response);
-		}
+		\z\logger()->notice('HTTP Response');
+		\z\logger()->info($response);
 
 
 		// Did it succeed?

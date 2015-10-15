@@ -29,20 +29,42 @@ class LoggerFactory
 		$logger->pushProcessor(new \Monolog\Processor\WebProcessor());
 
 
-		// In CLI mode, print log to standard output
+		// Are we in CLI/verbose mode?
 		
-		if (\z\app()->isCli() === true)
+		if
+		(
+			(\z\app()->isCli() === true) &&
+			(\z\app()->isVerbose() === true)
+		)
 		{
+			// Redirect to standard output
+
 			$handler = new \Monolog\Handler\StreamHandler
 			(
 				'php://stdout',
 				\Monolog\Logger::DEBUG
 			);
 
-			$handler->setFormatter(new \fbenard\Zero\Services\Formatters\CliLogFormatter());
 
-			$logger->pushHandler($handler);
+			// Format for CLI
+
+			$handler->setFormatter(new \fbenard\Zero\Services\Formatters\CliLogFormatter());
 		}
+		else
+		{
+			// Redirect to log.txt
+
+			$handler = new \Monolog\Handler\StreamHandler
+			(
+				'log.txt',
+				\Monolog\Logger::DEBUG
+			);
+		}
+
+		
+		// Push the handler
+
+		$logger->pushHandler($handler);
 
 
 		// Parse each handler
