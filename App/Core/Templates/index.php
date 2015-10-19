@@ -2,7 +2,7 @@
 
 // Boot Zero
 
-$pathToZero = getcwd() . '/Components/fbenard/zero/Application/Core/zero-boot.php';
+$pathToZero = getcwd() . '/Components/fbenard/zero/App/Core/zero-boot.php';
 
 if (file_exists($pathToZero) === false)
 {
