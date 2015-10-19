@@ -143,6 +143,12 @@ class CultureManager
 		$this->_fallbackCode = \z\pref('culture/fallback');
 
 
+		// Canonicalize locales
+
+		$this->_localeCode = locale_canonicalize($this->_localeCode);
+		$this->_fallbackCode = locale_canonicalize($this->_fallbackCode);
+
+
 		// List locales available
 
 		$locales = \z\service('helper/file')->listFiles
@@ -155,15 +161,36 @@ class CultureManager
 		);
 
 
-		// Look-up for the best locale
+		// Is the locale available?
 
-		$this->_localeCode = locale_lookup
-		(
-			$locales,
-			$this->_localeCode,
-			true,
-			$this->_fallbackCode
-		);
+		if (in_array($this->_localeCode, $locales) === false)
+		{
+			// Grab the parent code (e.g. en for en_US)
+
+			$primaryCode = locale_get_primary_language($this->_localeCode);
+
+			
+			// Find locales belonging to this parent
+
+			$locales = array_filter
+			(
+				$locales,
+				function($key) use ($primaryCode)
+				{
+					return strpos($key, $primaryCode) === 0;
+				}
+			);
+
+
+			// Sort locales A-Z
+
+			sort($locales);
+
+			
+			// Grab the very first locale
+
+			$this->_localeCode = array_shift($locales);
+		}
 
 
 		// Load strings
