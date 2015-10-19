@@ -80,7 +80,7 @@ class BootManager
 		// Inject Zero and the application
 
 		array_unshift($dependencies, PATH_ZERO);
-		array_push($dependencies, PATH_APPLICATION);
+		array_push($dependencies, PATH_APP);
 		
 
 		// De-duplicate dependencies
@@ -163,7 +163,7 @@ class BootManager
 		// Load Boot.json
 
 		$boot = null;
-		$pathToBoot = PATH_APPLICATION . '/Config/Boot.json';
+		$pathToBoot = PATH_APP . '/Config/Boot.json';
 
 		if (file_exists($pathToBoot) === true)
 		{

@@ -9,7 +9,7 @@ error_reporting(E_ALL | E_STRICT);
 
 define('PATH_ROOT', getcwd());
 
-define('PATH_APPLICATION', PATH_ROOT . '/App');
+define('PATH_APP', PATH_ROOT . '/App');
 define('PATH_COMPONENTS', PATH_ROOT . '/Components');
 define('PATH_ZERO', PATH_COMPONENTS . '/fbenard/zero/App');
 
