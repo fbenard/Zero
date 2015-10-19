@@ -143,6 +143,29 @@ class CultureManager
 		$this->_fallbackCode = \z\pref('culture/fallback');
 
 
+		// List locales available
+
+		$locales = \z\service('helper/file')->listFiles
+		(
+			PATH_APP . '/Config/Strings',
+			null,
+			false,
+			true,
+			false
+		);
+
+
+		// Look-up for the best locale
+
+		$this->_localeCode = locale_lookup
+		(
+			$locales,
+			$this->_localeCode,
+			true,
+			$this->_fallbackCode
+		);
+
+
 		// Load strings
 
 		$this->loadStrings();

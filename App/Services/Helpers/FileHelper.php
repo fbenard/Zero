@@ -15,7 +15,7 @@ class FileHelper
 	 * 
 	 */
 	
-	public function listFiles($path, $extension = null, $recursive = false)
+	public function listFiles($path, $extension = null, $recursive = false, $directories = false, $absolute = true)
 	{
 		// Build the result
 
@@ -52,12 +52,39 @@ class FileHelper
 
 		foreach ($fileIterator as $file)
 		{
-			// Skip if not a file
+			// Skip if not a file / directory
 
-			if ($file->isFile() === false)
+			if ($directories === true)
 			{
-				continue;
+				// Not a directory?
+
+				if ($file->isDir() === false)
+				{
+					continue;
+				}
+
+				
+				// Is it . or ..?
+
+				if
+				(
+					($file->getFilename() === '.') ||
+					($file->getFilename() === '..')
+				)
+				{
+					continue;
+				}
 			}
+			else
+			{
+				// Not a file?
+
+				if ($file->isFile() === false)
+				{
+					continue;
+				}
+			}
+
 
 
 			// Skip if not the right extension
@@ -72,9 +99,21 @@ class FileHelper
 			}
 
 
-			// Store the file
+			// Get the absolute or relative filename
 
-			$result[] = $file->getRealPath();
+			if ($absolute === true)
+			{
+				$fileName = $file->getRealPath();
+			}
+			else
+			{
+				$fileName = $file->getFilename();
+			}
+
+
+			// Store the result
+
+			$result[] = $fileName;
 		}
 	
 		
