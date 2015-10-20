@@ -49,22 +49,12 @@ class LoggerFactory
 			// Format for CLI
 
 			$handler->setFormatter(new \fbenard\Zero\Services\Formatters\CliLogFormatter());
+
+			
+			// Push the handler
+
+			$logger->pushHandler($handler);
 		}
-		else
-		{
-			// Redirect to log.txt
-
-			$handler = new \Monolog\Handler\StreamHandler
-			(
-				'log.txt',
-				\Monolog\Logger::DEBUG
-			);
-		}
-
-		
-		// Push the handler
-
-		$logger->pushHandler($handler);
 
 
 		// Parse each handler
