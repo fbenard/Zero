@@ -49,12 +49,16 @@ class LoggerFactory
 			// Format for CLI
 
 			$handler->setFormatter(new \fbenard\Zero\Services\Formatters\CliLogFormatter());
-
-			
-			// Push the handler
-
-			$logger->pushHandler($handler);
 		}
+		else
+		{
+			$handler = new \Monolog\Handler\NullHandler();
+		}
+
+		
+		// Push the handler
+
+		$logger->pushHandler($handler);
 
 
 		// Parse each handler
