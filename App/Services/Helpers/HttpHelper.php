@@ -105,8 +105,8 @@ class HttpHelper
 				[
 					'expected' => $statusCode,
 					'actual' => $response->getStatusCode(),
-					'request' => $request,
-					'response' => $response
+					'request' => $request->__toString(),
+					'response' => $response->__toString()
 				]
 			);
 		}
