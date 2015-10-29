@@ -179,6 +179,21 @@ class Request
 	 *
 	 */
 
+	public function input()
+	{
+		// Get input
+
+		$input = file_get_contents('php://input');
+
+
+		return $input;
+	}
+
+
+	/**
+	 *
+	 */
+
 	public function session($variableCode, $variableValue = null)
 	{
 		//
