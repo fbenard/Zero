@@ -76,8 +76,8 @@ class HttpHelper
 
 		// Log
 
-		\z\logger()->notice('HTTP Request');
-		\z\logger()->info($request);
+		\z\logger()->debug('HTTP Request');
+		\z\logger()->debug($request);
 
 
 		// Send the request
@@ -87,8 +87,8 @@ class HttpHelper
 
 		// Log
 
-		\z\logger()->notice('HTTP Response');
-		\z\logger()->info($response);
+		\z\logger()->debug('HTTP Response');
+		\z\logger()->debug($response);
 
 
 		// Did it succeed?
