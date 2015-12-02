@@ -31,28 +31,32 @@ class LoggerFactory
 
 		// Are we in CLI/verbose mode?
 		
-		if
-		(
-			(\z\app()->isCli() === true) &&
-			(\z\app()->isVerbose() === true)
-		)
+		if (\z\app()->isCli() === true)
 		{
+			// Define the level
+			
+			if (\z\app()->isVerbose() === true)
+			{
+				$level = \Monolog\Logger::DEBUG;
+			}
+			else
+			{
+				$level = \Monolog\Logger::INFO;
+			}
+
+
 			// Redirect to standard output
 
 			$handler = new \Monolog\Handler\StreamHandler
 			(
 				'php://stdout',
-				\Monolog\Logger::DEBUG
+				$level
 			);
 
 
 			// Format for CLI
 
 			$handler->setFormatter(new \fbenard\Zero\Services\Formatters\CliLogFormatter());
-		}
-		else
-		{
-			$handler = new \Monolog\Handler\NullHandler();
 		}
 
 		
