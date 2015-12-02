@@ -76,7 +76,7 @@ class HttpHelper
 
 		// Log
 
-		\z\logger()->debug('HTTP Request');
+		\z\logger()->notice('HTTP Request');
 		\z\logger()->debug($request);
 
 
@@ -87,7 +87,7 @@ class HttpHelper
 
 		// Log
 
-		\z\logger()->debug('HTTP Response');
+		\z\logger()->notice('HTTP Response');
 		\z\logger()->debug($response);
 
 
