@@ -87,7 +87,7 @@ class ViewRenderer
 
 		// Compile the view
 
-		$code = \LightnCandy::compile
+		$code = \LightnCandy\LightnCandy::compile
 		(
 			$view,
 			[
@@ -100,11 +100,11 @@ class ViewRenderer
 					''
 				],
 				'flags' =>
-				\LightnCandy::FLAG_ERROR_EXCEPTION |
-				\LightnCandy::FLAG_HANDLEBARS |
-				\LightnCandy::FLAG_RENDER_DEBUG |
-				\LightnCandy::FLAG_RUNTIMEPARTIAL |
-				\LightnCandy::FLAG_THIS,
+				\LightnCandy\LightnCandy::FLAG_ERROR_EXCEPTION |
+				\LightnCandy\LightnCandy::FLAG_HANDLEBARS |
+				\LightnCandy\LightnCandy::FLAG_RENDER_DEBUG |
+				\LightnCandy\LightnCandy::FLAG_RUNTIMEPARTIAL |
+				\LightnCandy\LightnCandy::FLAG_THIS,
 				'helpers' =>
 				[
 					'locale' => function()
