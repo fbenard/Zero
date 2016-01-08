@@ -303,13 +303,28 @@ class RouteManager
 
 		if (is_null($this->_route) === true)
 		{
+			// Build definitions
+
+			$definitions = [];
+
+			foreach ($this->_definitions as $definitionCode => $definition)
+			{
+				$definitions[$definitionCode] =
+				[
+					'verbs' => array_keys($definition['verbs'])
+				];
+			}
+
+
+			// Throw the exception
+
 			\z\e
 			(
 				EXCEPTION_ROUTE_NOT_FOUND,
 				[
 					'uri' => $this->_uri,
 					'verb' => $this->_verb,
-					'definitions' => array_keys($this->_definitions)
+					'definitions' => $definitions
 				]
 			);
 		}
