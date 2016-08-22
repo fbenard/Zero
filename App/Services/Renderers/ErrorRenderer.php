@@ -304,13 +304,13 @@ class ErrorRenderer
 		$result = json_encode
 		(
 			[
-				'errorCode' => $error->code,
-				'errorContext' => $error->context,
-				'errorDescription' => $error->description,
-				'errorFile' => $error->file,
-				'errorLine' => $error->line,
-				'errorTitle' => $error->title,
-				'errorTraces' => $error->traces
+				'code' => $error->code,
+				'context' => $error->context,
+				'description' => $error->description,
+				'file' => $error->file,
+				'line' => $error->line,
+				'title' => $error->title,
+				'traces' => $error->traces
 			]
 		);
 
