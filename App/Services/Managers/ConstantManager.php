@@ -17,20 +17,27 @@ class ConstantManager
 	
 	public function initialize()
 	{
-		//
+		// Get dependencies
 
 		$dependencies = \z\boot()->dependencies;
 		
 		
-		//
+		// Parse each dependency
 
 		foreach ($dependencies as $dependency)
 		{
-			$paths = \z\service('helper/file')->listFiles($dependency . '/Constants', 'php');
+			// List constants of dependency
+
+			$files = \z\service('helper/file')->listFiles($dependency . '/Constants', 'php');
 			
-			foreach ($paths as $path)
+			
+			// Parse each file
+
+			foreach ($files as $file)
 			{
-				require_once($path);
+				// Execute the file
+
+				require_once($file);
 			}
 		}
 	}
