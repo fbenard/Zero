@@ -25,3 +25,4 @@
 - Templates should be used by zero-cli
 - CacheManager, BootManager and ServiceManager are forced dependencies of the app
 - Also they're not available via service('manager/*')
+- Improve how cache is loaded / saved
