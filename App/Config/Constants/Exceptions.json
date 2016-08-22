@@ -1,12 +1,5 @@
 <?php
 
-// Controllers
-
-\z\cons('EXCEPTION_CONTROLLER_NOT_FOUND');
-\z\cons('EXCEPTION_CONTROLLER_NOT_INSTANTIABLE');
-\z\cons('EXCEPTION_CONTROLLER_ACTION_NOT_FOUND');
-
-
 // Files
 
 \z\cons('EXCEPTION_FILE_NOT_FOUND');
