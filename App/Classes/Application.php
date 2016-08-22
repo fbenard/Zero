@@ -79,7 +79,7 @@ class Application
 		\z\service('manager/controller')->initialize();
 
 
-		// Dispatch post event
+		// Dispatch EVENT_APP_INIT event
 
 		\z\dispatch
 		(
