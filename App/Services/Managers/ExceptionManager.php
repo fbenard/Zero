@@ -17,26 +17,6 @@ class ExceptionManager
 	
 	public static function onException(\Exception $exception)
 	{
-		// Try to get the file
-
-		$exceptionFile = $exception->getFile();
-
-		if (method_exists($exception, 'computeFile') === true)
-		{
-			$exceptionFile = $exception->computeFile();
-		}
-
-
-		// Try to get the line
-
-		$exceptionLine = $exception->getLine();
-
-		if (method_exists($exception, 'computeLine') === true)
-		{
-			$exceptionLine = $exception->computeLine();
-		}
-
-
 		// Try to get the context
 
 		$exceptionContext = [];
@@ -53,8 +33,8 @@ class ExceptionManager
 		(
 			$exception->getMessage(),
 			$exception->getMessage(),
-			$exceptionFile,
-			$exceptionLine,
+			$exception->getFile(),
+			$exception->getLine(),
 			$exceptionContext,
 			$exception->getTrace()
 		);
