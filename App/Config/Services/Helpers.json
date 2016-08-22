@@ -1,5 +1,4 @@
 {
 	"helper/file": "\\fbenard\\Zero\\Services\\Helpers\\FileHelper",
-	"helper/http": "\\fbenard\\Zero\\Services\\Helpers\\HttpHelper",
-	"helper/string": "\\fbenard\\Zero\\Services\\Helpers\\StringHelper"
+	"helper/http": "\\fbenard\\Zero\\Services\\Helpers\\HttpHelper"
 }
