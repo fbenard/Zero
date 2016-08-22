@@ -75,11 +75,19 @@ class ServiceManager
 
 		if ($clone === true)
 		{
-			return $this->_factory->buildService
+			// Build the service
+
+			$service = $this->_factory->buildService
 			(
 				$serviceCode,
 				$this->_definitions
 			);
+
+
+			// Return the service
+			// Without storing it
+
+			return $service;
 		}
 
 		
