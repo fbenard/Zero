@@ -48,7 +48,7 @@ class FileHelper
 		}
 
 		
-		//
+		// Parse each file
 
 		foreach ($fileIterator as $file)
 		{
