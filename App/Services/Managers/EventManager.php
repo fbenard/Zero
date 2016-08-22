@@ -66,7 +66,7 @@ class EventManager
 	 *
 	 */
 
-	public function dispatchEvent($eventCode, $event)
+	public function dispatchEvent($event)
 	{
 		// Check whether there are any followers
 
@@ -76,11 +76,16 @@ class EventManager
 		}
 
 		
+		// Get event code
+
+		$eventCode = get_class($event);
+
+
 		// Parse each follower
 
 		foreach ($this->_followers[$eventCode] as $followerCode => $methodCode)
 		{
-			\z\service($followerCode)->$methodCode($eventCode, $event);
+			\z\service($followerCode)->$methodCode($event);
 		}
 	}
 	

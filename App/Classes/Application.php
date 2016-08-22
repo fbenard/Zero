@@ -83,7 +83,6 @@ class Application
 
 		\z\dispatch
 		(
-			EVENT_APP_INIT,
 			new \fbenard\Zero\Events\AppInitEvent($this)
 		);
 	}
