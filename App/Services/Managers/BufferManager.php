@@ -44,6 +44,8 @@ class BufferManager
 
 	public function startBuffer()
 	{
+		// Start output buffer
+
 		ob_start();
 	}
 
@@ -54,7 +56,13 @@ class BufferManager
 
 	public function stopBuffer()
 	{
+		// Get output buffer content
+
 		$buffer = ob_get_contents();
+
+
+		// Clean output buffer
+		
 		ob_end_clean();
 
 
