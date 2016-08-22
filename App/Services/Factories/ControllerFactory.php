@@ -28,7 +28,7 @@ class ControllerFactory
 		{
 			\z\e
 			(
-				EXCEPTION_CONTROLLER_NOT_INSTANTIABLE,
+				EXCEPTION_CONTROLLER_NOT_FOUND,
 				[
 					'controllerCode' => $controllerCode
 				]
