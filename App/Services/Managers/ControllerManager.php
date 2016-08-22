@@ -53,12 +53,12 @@ class ControllerManager
 
 		if (method_exists($this->_controller, $this->_action) === false)
 		{
-			\z\e
+			// Throw a ControllerActionNotFound exception
+
+			throw new \fbenard\Zero\Exceptions\ControllerActionNotFoundException
 			(
-				EXCEPTION_CONTROLLER_ACTION_NOT_FOUND,
-				[
-					'action' => $route['action']
-				]
+				$this->_controller,
+				$route['action']
 			);
 		}
 

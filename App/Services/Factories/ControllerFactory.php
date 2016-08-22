@@ -26,12 +26,11 @@ class ControllerFactory
 
 		if (class_exists($className) === false)
 		{
-			\z\e
+			// Throw a ControllerNotFound exception
+
+			throw new \fbenard\Zero\Exceptions\ControllerNotFoundException
 			(
-				EXCEPTION_CONTROLLER_NOT_FOUND,
-				[
-					'controllerCode' => $controllerCode
-				]
+				$controllerCode
 			);
 		}
 
@@ -42,12 +41,11 @@ class ControllerFactory
 
 		if ($reflection->isInstantiable() === false)
 		{
-			\z\e
+			// Throw a ControllerNotInstantiable exception
+			
+			throw new \fbenard\Zero\Exceptions\ControllerNotInstantiableException
 			(
-				EXCEPTION_CONTROLLER_NOT_INSTANTIABLE,
-				[
-					'controllerCode' => $controllerCode
-				]
+				$controllerCode
 			);
 		}
 
