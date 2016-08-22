@@ -22,7 +22,9 @@ class CacheManager
 
 	public function __construct()
 	{
-		$this->_redis = new \fbenard\Zero\Services\Drivers\RedisDriver();
+		// Build a Redis client
+		
+		$this->_redis = new \Predis\Client();
 	}
 
 
