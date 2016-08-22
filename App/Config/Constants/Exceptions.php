@@ -10,7 +10,6 @@
 // Files
 
 \z\cons('EXCEPTION_FILE_NOT_FOUND');
-\z\cons('EXCEPTION_FILE_NOT_GRANTED');
 
 
 // HTTP
@@ -24,19 +23,9 @@
 \z\cons('EXCEPTION_JSON_NOT_VALID');
 
 
-// Methods
-
-\z\cons('EXCEPTION_METHOD_NOT_FOUND');
-
-
 // Permissions
 
 \z\cons('EXCEPTION_PERMISSION_NOT_GRANTED');
-
-
-// Preferences
-
-\z\cons('EXCEPTION_PREFERENCE_NOT_AN_ARRAY');
 
 
 // Routes
@@ -48,12 +37,6 @@
 
 \z\cons('EXCEPTION_SERVICE_NOT_FOUND');
 \z\cons('EXCEPTION_SERVICE_NOT_INSTANTIABLE');
-
-
-// Variables
-
-\z\cons('EXCEPTION_VARIABLE_NOT_FOUND');
-\z\cons('EXCEPTION_VARIABLE_PATH_NOT_VALID');
 
 
 // Views
