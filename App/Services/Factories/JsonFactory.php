@@ -11,23 +11,6 @@ namespace fbenard\Zero\Services\Factories;
 
 class JsonFactory
 {
-	/**
-	 *
-	 */
-	
-	public function encodeJson($json)
-	{
-		// Encode
-
-		$result = json_encode
-		(
-			$json,
-			JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE
-		);
-
-
-		return $result;
-	}
 
 
 	/**
@@ -58,6 +41,25 @@ class JsonFactory
 				]
 			);
 		}
+
+
+		return $result;
+	}
+
+
+	/**
+	 *
+	 */
+	
+	public function encodeJson($json)
+	{
+		// Encode
+
+		$result = json_encode
+		(
+			$json,
+			JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE
+		);
 
 
 		return $result;
