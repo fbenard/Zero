@@ -15,6 +15,29 @@ class FileHelper
 	 * 
 	 */
 	
+	public function loadFile($path)
+	{
+		// Check whether the file exists
+
+		if (file_exists($pathToJson) === false)
+		{
+			throw new \fbenard\Exceptions\FileNotFoundException($path);
+		}
+
+
+		// Load the file
+
+		$result = file_get_contents($pathToJson);
+
+
+		return $result;
+	}
+
+
+	/**
+	 * 
+	 */
+	
 	public function listFiles($path, $extension = null, $recursive = false, $directories = false, $absolute = true)
 	{
 		// Build the result
