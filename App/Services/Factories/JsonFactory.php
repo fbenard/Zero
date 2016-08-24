@@ -11,6 +11,25 @@ namespace fbenard\Zero\Services\Factories;
 
 class JsonFactory
 {
+	/**
+	 *
+	 */
+	
+	public function getError()
+	{
+		// Get the latest JSON error
+
+		$error = json_last_error();
+		$message = json_last_error_msg();
+
+
+		// Is there an error?
+
+		if ($error !== JSON_ERROR_NONE)
+		{
+			return $message;
+		}
+	}
 
 
 	/**
