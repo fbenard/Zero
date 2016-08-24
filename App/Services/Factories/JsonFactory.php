@@ -47,17 +47,19 @@ class JsonFactory
 		);
 
 
-		// Check whether JSON is valid
+		// Get the latest JSON error
 
-		if (json_last_error() !== JSON_ERROR_NONE)
+		$error = $this->getError();
+
+
+		// Check whether decoding worked
+
+		if (is_null($error) === false)
 		{
-			\z\e
+			throw new \fbenard\Zero\Exceptions\JsonDecodeException
 			(
-				EXCEPTION_JSON_NOT_VALID,
-				[
-					'error' => json_last_error_msg(),
-					'json' => $json
-				]
+				$json,
+				$error
 			);
 		}
 
@@ -79,6 +81,23 @@ class JsonFactory
 			$json,
 			JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE
 		);
+
+
+		// Get the latest JSON error
+
+		$error = $this->getError();
+
+
+		// Check whether encoding worked
+
+		if (is_null($error) === false)
+		{
+			throw new \fbenard\Zero\Exceptions\JsonEncodeException
+			(
+				$json,
+				$error
+			);
+		}
 
 
 		return $result;
