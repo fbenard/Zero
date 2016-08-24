@@ -38,7 +38,7 @@ class JsonFactory
 	
 	public function decodeJson($json, $array = true)
 	{
-		// Decode
+		// Decode JSON
 
 		$result = json_decode
 		(
@@ -72,7 +72,7 @@ class JsonFactory
 	
 	public function encodeJson($json)
 	{
-		// Encode
+		// Encode JSON
 
 		$result = json_encode
 		(
