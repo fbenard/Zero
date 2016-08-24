@@ -89,29 +89,19 @@ class JsonFactory
 	 *
 	 */
 
-	public function loadJson($pathToJson, $array = true)
+	public function loadJson($path, $array = true)
 	{
-		// Does the JSON exist?
+		// Load the JSON file
 
-		if (file_exists($pathToJson) === false)
-		{
-			\z\e
-			(
-				EXCEPTION_FILE_NOT_FOUND,
-				[
-					'pathToJson' => $pathToJson
-				]
-			);
-		}
+		$json = \z\service('helper/file')->loadFile($path);
 
 
 		// Load and decode the JSON
 
-		$rawJson = file_get_contents($pathToJson);
-		$json = $this->decodeJson($rawJson, $array);
+		$result = $this->decodeJson($json, $array);
 
 
-		return $json;
+		return $result;
 	}
 }
 
