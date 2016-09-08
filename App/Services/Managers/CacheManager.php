@@ -58,6 +58,7 @@ class CacheManager
 
 	public function getCache($cacheCode)
 	{
+		return false;
 		/*
 		// Is cache enabled?
 
