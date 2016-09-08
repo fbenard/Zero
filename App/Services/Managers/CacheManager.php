@@ -24,7 +24,7 @@ class CacheManager
 	{
 		// Build a Redis client
 		
-		$this->_redis = new \Predis\Client();
+		//$this->_redis = new \Predis\Client();
 	}
 
 
