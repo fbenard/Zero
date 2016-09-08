@@ -10,6 +10,7 @@ namespace fbenard\Zero\Tests\Services\Factories;
  */
 
 class JsonFactoryTest
+extends \PHPUnit\Framework\TestCase
 {
 	// Attributes
 

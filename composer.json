@@ -32,6 +32,10 @@
 		"predis/predis": "1.0.0",
 		"zordius/lightncandy": "v0.89"
 	},
+	"require-dev":
+	{
+		"phpunit/phpunit": "5.5"
+	},
 	"autoload":
 	{
 		"psr-4":
