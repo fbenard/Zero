@@ -22,9 +22,17 @@ class CacheManager
 
 	public function __construct()
 	{
+		// Is cache enabled?
+
+		if ($this->isCacheEnabled() === false)
+		{
+			return;
+		}
+
+
 		// Build a Redis client
 		
-		//$this->_redis = new \Predis\Client();
+		$this->_redis = new \Predis\Client();
 	}
 
 
@@ -34,6 +42,14 @@ class CacheManager
 
 	public function clearCache()
 	{
+		// Is cache enabled?
+
+		if ($this->isCacheEnabled() === false)
+		{
+			return;
+		}
+
+
 		// Flush the whole database
 		
 		$this->_redis->flushdb();
@@ -94,6 +110,14 @@ class CacheManager
 
 	public function setCache($cacheCode, $cacheValue)
 	{
+		// Is cache enabled?
+
+		if ($this->isCacheEnabled() === false)
+		{
+			return;
+		}
+
+
 		// Set the cache
 
 		$this->_redis->set($cacheCode, $cacheValue);
