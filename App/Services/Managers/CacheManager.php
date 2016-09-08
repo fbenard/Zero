@@ -22,17 +22,11 @@ class CacheManager
 
 	public function __construct()
 	{
-		// Is cache enabled?
-
-		if ($this->isCacheEnabled() === false)
-		{
-			return;
-		}
-
-
+		/*
 		// Build a Redis client
 		
 		$this->_redis = new \Predis\Client();
+		*/
 	}
 
 
@@ -42,6 +36,7 @@ class CacheManager
 
 	public function clearCache()
 	{
+		/*
 		// Is cache enabled?
 
 		if ($this->isCacheEnabled() === false)
@@ -53,6 +48,7 @@ class CacheManager
 		// Flush the whole database
 		
 		$this->_redis->flushdb();
+		*/
 	}
 
 
@@ -62,6 +58,7 @@ class CacheManager
 
 	public function getCache($cacheCode)
 	{
+		/*
 		// Is cache enabled?
 
 		if ($this->isCacheEnabled() === false)
@@ -84,6 +81,7 @@ class CacheManager
 
 
 		return $result;
+		*/
 	}
 
 
@@ -93,6 +91,7 @@ class CacheManager
 
 	private function isCacheEnabled()
 	{
+		/*
 		if (in_array(\z\boot()->environment, \z\boot()->cache) === true)
 		{
 			return true;
@@ -101,6 +100,7 @@ class CacheManager
 		{
 			return false;
 		}
+		*/
 	}
 
 
@@ -110,6 +110,7 @@ class CacheManager
 
 	public function setCache($cacheCode, $cacheValue)
 	{
+		/*
 		// Is cache enabled?
 
 		if ($this->isCacheEnabled() === false)
@@ -121,6 +122,7 @@ class CacheManager
 		// Set the cache
 
 		$this->_redis->set($cacheCode, $cacheValue);
+		*/
 	}
 }
 
