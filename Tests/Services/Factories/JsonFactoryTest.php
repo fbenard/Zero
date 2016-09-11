@@ -49,26 +49,26 @@ extends \PHPUnit\Framework\TestCase
 		[
 			'valid' =>
 			[
-				'string' =>
-				'{
-					"a": 1,
-					"b": "string",
-					"c": [1, 2, 3, 4],
-					"d": null,
-					"e": {}
-				}',
 				'array' =>
 				[
 					'a' => 1,
 					'b' => 'string',
 					'c' => [1, 2, 3, 4],
-					'd' => null,
-					'e' => new \StdClass()
-				],
-				'object' => new \StdClass()
+					'd' => null
+				]
 			],
 			'invalid' => 'Not a valid JSON'
 		];
+
+
+		// Encode the string version
+
+		$this->_data['valid']['string'] = json_encode($this->_data['valid']['array'], true);
+		
+
+		// Encode the object version
+
+		$this->_data['valid']['object'] = json_decode($this->_data['valid']['string']);
 	}
 
 
