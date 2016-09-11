@@ -3,4 +3,4 @@ machine:
         version: 7.0.4
 test:
   override:
-    - phpunit
+    - phpunit --log-junit $CIRCLE_TEST_REPORTS/phpunit/junit.xml
