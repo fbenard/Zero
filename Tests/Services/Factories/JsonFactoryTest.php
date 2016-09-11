@@ -63,9 +63,9 @@ extends \PHPUnit\Framework\TestCase
 					'b' => 'string',
 					'c' => [1, 2, 3, 4],
 					'd' => null,
-					'e' => new \StdObject()
+					'e' => new \StdClass()
 				],
-				'object' => new \StdObject()
+				'object' => new \StdClass()
 			],
 			'invalid' => 'Not a valid JSON'
 		];
