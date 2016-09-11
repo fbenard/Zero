@@ -78,6 +78,7 @@ extends \PHPUnit\Framework\TestCase
 
 	public function tearDown()
 	{
+		test
 		// Parse each file
 
 		foreach ($this->_files as $path)
