@@ -27,7 +27,7 @@ extends \PHPUnit\Framework\TestCase
 	{
 		// Build a JSON factory
 
-		$this->_jsonFactory = new \fbenard\Services\Factories\JsonFactory();
+		$this->_jsonFactory = new \fbenard\Zero\Services\Factories\JsonFactory();
 	}
 
 
