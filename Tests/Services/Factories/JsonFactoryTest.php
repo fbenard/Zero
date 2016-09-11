@@ -144,7 +144,7 @@ extends \PHPUnit\Framework\TestCase
 	 *
 	 */
 
-	public function testDecodeJson_valid()
+	public function testEncodeJson_valid()
 	{
 		// Build formats
 
@@ -159,9 +159,9 @@ extends \PHPUnit\Framework\TestCase
 
 		foreach ($formats as $format => $isArray)
 		{
-			// Decode the JSON
+			// Encode the JSON
 
-			$json = $this->_jsonFactory->decodeJson
+			$json = $this->_jsonFactory->encodeJson
 			(
 				$this->_data['valid'][$format],
 				$isArray
@@ -183,7 +183,7 @@ extends \PHPUnit\Framework\TestCase
 	 *
 	 */
 
-	public function testDecodeJson_invalid()
+	public function testEncodeJson_invalid()
 	{
 		// If decoding fails because of invalid JSON
 		// An exception should be thrown
@@ -193,7 +193,7 @@ extends \PHPUnit\Framework\TestCase
 		{
 			// Decode the invalid JSON
 
-			$json = $this->_jsonFactory->decodeJson
+			$json = $this->_jsonFactory->encodeJson
 			(
 				$this->_data['invalid']
 			);
@@ -236,7 +236,7 @@ extends \PHPUnit\Framework\TestCase
 	 *
 	 */
 
-	public function testEncodeJson_valid()
+	public function testDecodeJson_valid()
 	{
 		// Build formats
 
@@ -253,7 +253,7 @@ extends \PHPUnit\Framework\TestCase
 		{
 			// Encode the JSON
 
-			$json = $this->_jsonFactory->encodeJson
+			$json = $this->_jsonFactory->decodeJson
 			(
 				$this->_data['valid']['string'],
 				$isArray
