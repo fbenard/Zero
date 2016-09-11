@@ -3,6 +3,8 @@ Zero
 
 Zero is a lightweight framework written in PHP, for PHP applications.
 
+[![CircleCI](https://circleci.com/gh/fbenard/Zero.svg?style=svg)](https://circleci.com/gh/fbenard/Zero)
+
 
 ## Install
 
