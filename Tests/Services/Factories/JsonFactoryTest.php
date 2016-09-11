@@ -92,98 +92,13 @@ extends \PHPUnit\Framework\TestCase
 			}
 		}
 	}
-
-
-	/**
-	 *
-	 */
-
-	public function testGetError_valid()
-	{
-		// Encode the JSON
-
-		$json = json_decode($this->_data['valid']['string']);
-
-
-		// Get the error
-
-		$error = $this->_jsonFactory->getError();
-
-
-		// And as it should have worked
-		// Make sure no error is returned
-
-		$this->assertEmpty($error);
-	}
-
-
-	/**
-	 *
-	 */
-
-	public function testGetError_invalid()
-	{
-		// Encode the invalid JSON
-
-		$json = json_decode($this->_data['invalid']);
-
-
-		// Get the error
-
-		$error = $this->_jsonFactory->getError();
-
-
-		// And as it should not have worked
-		// Make sure an error is returned
-
-		$this->assertNotEmpty($error);
-	}
-
+	
 	
 	/**
 	 *
 	 */
 
-	public function testEncodeJson_valid()
-	{
-		// Build formats
-
-		$formats =
-		[
-			'array' => true,
-			'object' => false
-		];
-
-
-		// Parse each format
-
-		foreach ($formats as $format => $isArray)
-		{
-			// Encode the JSON
-
-			$json = $this->_jsonFactory->encodeJson
-			(
-				$this->_data['valid'][$format],
-				$isArray
-			);
-
-
-			// Make sure it matches the expected JSON
-
-			$this->assertEquals
-			(
-				$this->_data['valid']['string'],
-				$json
-			);
-		}
-	}
-		
-	
-	/**
-	 *
-	 */
-
-	public function testEncodeJson_invalid()
+	public function testDecodeJson_invalid()
 	{
 		// If decoding fails because of invalid JSON
 		// An exception should be thrown
@@ -193,7 +108,7 @@ extends \PHPUnit\Framework\TestCase
 		{
 			// Decode the invalid JSON
 
-			$json = $this->_jsonFactory->encodeJson
+			$json = $this->_jsonFactory->decodeJson
 			(
 				$this->_data['invalid']
 			);
@@ -211,22 +126,8 @@ extends \PHPUnit\Framework\TestCase
 
 			$this->assertEquals
 			(
-				'\fbenard\Exceptions\JsonDecodeException',
+				'fbenard\Zero\Exceptions\JsonDecodeException',
 				get_class($e)
-			);
-
-
-			// Get the expected error
-
-			$error = $this->_jsonFactory->getError();
-
-			
-			// Make sure it matches the actual error
-
-			$this->assertEquals
-			(
-				$error,
-				$e->context['error']
 			);
 		}
 	}
@@ -261,14 +162,97 @@ extends \PHPUnit\Framework\TestCase
 
 
 			// Make sure it matches the expected JSON
-			// @todo: This will fail as pretty print is enabled
 
 			$this->assertEquals
 			(
-				$this->_data['valid'][$format],
+				serialize($this->_data['valid'][$format]),
+				serialize($json)
+			);
+		}
+	}
+
+	
+	/**
+	 *
+	 */
+
+	public function testEncodeJson_valid()
+	{
+		// Build formats
+
+		$formats =
+		[
+			'array' => true,
+			'object' => false
+		];
+
+
+		// Parse each format
+
+		foreach ($formats as $format => $isArray)
+		{
+			// Encode the JSON
+
+			$json = $this->_jsonFactory->encodeJson
+			(
+				$this->_data['valid'][$format]
+			);
+
+
+			// Make sure it matches the expected JSON
+
+			$this->assertEquals
+			(
+				json_encode($this->_data['valid'][$format], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
 				$json
 			);
 		}
+	}
+
+
+	/**
+	 *
+	 */
+
+	public function testGetError_valid()
+	{
+		// Decode a valid JSON
+
+		$json = json_decode($this->_data['valid']['string']);
+
+
+		// Get the error
+
+		$error = $this->_jsonFactory->getError();
+
+
+		// And as it should have worked
+		// Make sure no error is returned
+
+		$this->assertEmpty($error);
+	}
+
+
+	/**
+	 *
+	 */
+
+	public function testGetError_invalid()
+	{
+		// Decode an invalid JSON
+
+		$json = json_decode($this->_data['invalid']);
+
+
+		// Get the error
+
+		$error = $this->_jsonFactory->getError();
+
+
+		// And as it should not have worked
+		// Make sure an error is returned
+
+		$this->assertNotEmpty($error);
 	}
 
 
@@ -282,14 +266,6 @@ extends \PHPUnit\Framework\TestCase
 
 		$path = '/tmp/found.json';
 		$this->_files[] = $path;
-
-
-		// Make sure the JSON file does not exist
-
-		if (file_exists($path) === true)
-		{
-			unlink($path);
-		}
 
 
 		// Write the JSON file
@@ -341,14 +317,6 @@ extends \PHPUnit\Framework\TestCase
 
 		$path = '/tmp/not_found.json';
 		$this->_files[] = $path;
-
-
-		// Make sure the JSON file does not exist
-
-		if (file_exists($path) === true)
-		{
-			unlink($path);
-		}
 
 
 		// If loading fails because file cannot be found
