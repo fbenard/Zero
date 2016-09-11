@@ -101,10 +101,8 @@ extends \PHPUnit\Framework\TestCase
 	public function testGetError_valid()
 	{
 		// Encode the JSON
-		// @todo: Use string, array and object
-		// @todo: Try to encode AND encode
 
-		$json = json_encode($this->_data['valid']['string']);
+		$json = json_decode($this->_data['valid']['string']);
 
 
 		// Get the error
@@ -126,10 +124,8 @@ extends \PHPUnit\Framework\TestCase
 	public function testGetError_invalid()
 	{
 		// Encode the invalid JSON
-		// @todo: Use string, array and object
-		// @todo: Try to encode AND encode
 
-		$json = json_encode($$this->_data['invalid']['string']);
+		$json = json_decode($this->_data['invalid']);
 
 
 		// Get the error
