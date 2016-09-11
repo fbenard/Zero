@@ -115,7 +115,7 @@ extends \PHPUnit\Framework\TestCase
 		// And as it should have worked
 		// Make sure no error is returned
 
-		$this->assertNull($error);
+		$this->assertEmpty($error);
 	}
 
 
@@ -140,7 +140,6 @@ extends \PHPUnit\Framework\TestCase
 		// And as it should not have worked
 		// Make sure an error is returned
 
-		$this->assertNotNull($error);
 		$this->assertNotEmpty($error);
 	}
 
