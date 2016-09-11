@@ -286,7 +286,10 @@ extends \PHPUnit\Framework\TestCase
 
 		// Make sure the JSON file does not exist
 
-		unlink($path);
+		if (file_exists($path) === true)
+		{
+			unlink($path);
+		}
 
 
 		// Write the JSON file
@@ -342,7 +345,10 @@ extends \PHPUnit\Framework\TestCase
 
 		// Make sure the JSON file does not exist
 
-		unlink($path);
+		if (file_exists($path) === true)
+		{
+			unlink($path);
+		}
 
 
 		// If loading fails because file cannot be found
