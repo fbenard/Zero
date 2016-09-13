@@ -18,6 +18,7 @@ abstract class AbstractEvent
 
 	// Attributes
 
+	private $_code = null;
 	private $_sender = null;
 
 
@@ -27,6 +28,7 @@ abstract class AbstractEvent
 
 	public function __construct($sender)
 	{
+		$this->_code = get_class($this);
 		$this->_sender = $sender;
 	}
 }

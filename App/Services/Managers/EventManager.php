@@ -70,20 +70,15 @@ class EventManager
 	{
 		// Check whether there are any followers
 
-		if (array_key_exists($eventCode, $this->_followers) === false)
+		if (array_key_exists($event->code, $this->_followers) === false)
 		{
 			return;
 		}
 
 		
-		// Get event code
-
-		$eventCode = get_class($event);
-
-
 		// Parse each follower
 
-		foreach ($this->_followers[$eventCode] as $followerCode => $methodCode)
+		foreach ($this->_followers[$event->code] as $followerCode => $methodCode)
 		{
 			\z\service($followerCode)->$methodCode($event);
 		}
