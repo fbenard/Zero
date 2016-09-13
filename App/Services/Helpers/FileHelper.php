@@ -19,7 +19,7 @@ class FileHelper
 	{
 		// Check whether the file exists
 
-		if (file_exists($pathToJson) === false)
+		if (file_exists($path) === false)
 		{
 			throw new \fbenard\Exceptions\FileNotFoundException($path);
 		}
@@ -27,7 +27,7 @@ class FileHelper
 
 		// Load the file
 
-		$result = file_get_contents($pathToJson);
+		$result = file_get_contents($path);
 
 
 		return $result;
