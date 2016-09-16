@@ -11,6 +11,28 @@ namespace fbenard\Zero\Services\Factories;
 
 class JsonFactory
 {
+	// Traits
+
+	use \fbenard\Zero\Traits\DependantTrait;
+
+
+	/**
+	 *
+	 */
+
+	public function __construct()
+	{
+		// Define dependencies
+
+		$this->defineDependencies
+		(
+			[
+				'helper/file' => '\fbenard\Zero\Interfaces\Helpers\FileHelper'
+			]
+		);
+	}
+
+
 	/**
 	 *
 	 */
@@ -112,7 +134,7 @@ class JsonFactory
 	{
 		// Load the JSON file
 
-		$json = \z\service('helper/file')->loadFile($path);
+		$json = $this->getDependency('helper/file')->loadFile($path);
 
 
 		// Load and decode the JSON
