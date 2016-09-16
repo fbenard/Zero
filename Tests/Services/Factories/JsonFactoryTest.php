@@ -309,7 +309,7 @@ extends \PHPUnit\Framework\TestCase
 
 			$this->assertEquals
 			(
-				$this->_data['valid']['string'],
+				$this->_data['valid'][$format],
 				$json
 			);
 		}
@@ -351,7 +351,7 @@ extends \PHPUnit\Framework\TestCase
 
 			$this->assertEquals
 			(
-				'\fbenard\Exceptions\FileNotFoundException',
+				'fbenard\Zero\Exceptions\FileNotFoundException',
 				get_class($e)
 			);
 		}
