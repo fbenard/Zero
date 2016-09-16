@@ -29,3 +29,5 @@
 - Do I need all shortcuts functions? e.g. str()
 - Can I test Core code?
 - Do I need to test Events and Exceptions?
+
+- See how I can pass arguments of child exception automatically to parent
