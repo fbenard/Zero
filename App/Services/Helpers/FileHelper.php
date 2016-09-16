@@ -22,7 +22,7 @@ implements \fbenard\Zero\Interfaces\Helpers\FileHelper
 
 		if (file_exists($path) === false)
 		{
-			throw new \fbenard\Exceptions\FileNotFoundException($path);
+			throw new \fbenard\Zero\Exceptions\FileNotFoundException($path);
 		}
 
 
