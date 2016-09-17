@@ -1,6 +1,21 @@
 machine:
     php:
         version: 7.0.4
+dependencies:
+  pre:
+    # enable Xdebug
+    - sed -i 's/^;//' ~/.phpenv/versions/$(phpenv global)/etc/conf.d/xdebug.ini
+    # update Xdebug (hotfix)
+    - |
+      php --version
+      wget https://xdebug.org/files/xdebug-2.4.0.tgz
+      tar -xvzf xdebug-2.4.0.tgz
+      cd xdebug-2.4.0
+      phpize
+      ./configure
+      make
+      cp modules/xdebug.so /home/ubuntu/.phpenv/versions/7.0.0RC7/lib/php/extensions/no-debug-non-zts-20151012
+      php --version
 test:
   override:
     - phpunit --coverage-text --log-junit $CIRCLE_TEST_REPORTS/phpunit/junit.xml
