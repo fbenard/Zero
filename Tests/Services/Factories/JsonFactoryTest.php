@@ -15,7 +15,6 @@ extends \PHPUnit\Framework\TestCase
 	// Attributes
 
 	private $_data = null;
-	private $_files = null;
 	private $_jsonFactory = null;
 
 
@@ -46,11 +45,6 @@ extends \PHPUnit\Framework\TestCase
 
 	public function setUp()
 	{
-		// Build an empty array for files
-
-		$this->_files = [];		
-
-
 		// Build test data
 		// @todo: Maybe use json_encode to build object and array
 
@@ -78,28 +72,6 @@ extends \PHPUnit\Framework\TestCase
 		// Encode the object version
 
 		$this->_data['valid']['object'] = json_decode($this->_data['valid']['string']);
-	}
-
-
-	/**
-	 *
-	 */
-
-	public function tearDown()
-	{
-		// Parse each file
-
-		foreach ($this->_files as $path)
-		{
-			// If the file exists
-
-			if (file_exists($path) === true)
-			{
-				// Delete the file
-
-				unlink($path);
-			}
-		}
 	}
 	
 	
@@ -274,7 +246,6 @@ extends \PHPUnit\Framework\TestCase
 		// Declare the file
 
 		$path = '/tmp/found.json';
-		$this->_files[] = $path;
 
 
 		// Write the JSON file
@@ -348,6 +319,7 @@ extends \PHPUnit\Framework\TestCase
 		catch (\Exception $e)
 		{
 			// Make sure it's a FileNotFoundException
+		// Delete the file
 
 			$this->assertEquals
 			(
@@ -355,6 +327,7 @@ extends \PHPUnit\Framework\TestCase
 				get_class($e)
 			);
 		}
+		unlink($path);
 	}
 }
 
