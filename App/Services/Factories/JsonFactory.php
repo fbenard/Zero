@@ -24,12 +24,7 @@ class JsonFactory
 	{
 		// Define dependencies
 
-		$this->defineDependencies
-		(
-			[
-				'helper/file' => '\fbenard\Zero\Interfaces\Helpers\FileHelper'
-			]
-		);
+		$this->defineDependency('helper/file', '\fbenard\Zero\Interfaces\Helpers\FileHelper');
 	}
 
 

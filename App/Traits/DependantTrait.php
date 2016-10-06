@@ -13,29 +13,32 @@ trait DependantTrait
 {
 	// Attributes
 
-	private $_dependencies = null;
+	private $_dependencies = [];
 
 
 	/**
 	 *
 	 */
 
-	public function defineDependencies(array $dependencies = null)
+	public function defineDependency(string $dependencyCode, string $interfaceCode)
 	{
-		//
+		// Create the dependency
 
-		$this->_dependencies = [];
+		$dependency = new \fbenard\Zero\Classes\Dependency($interfaceCode);
 
 
-		//
+		// Make sure dependencies is an array
 
-		foreach ($dependencies as $dependencyCode => $interfaceCode)
+		if (is_array($this->_dependencies) === false)
 		{
-			$this->_dependencies[$dependencyCode] = new \fbenard\Zero\Classes\Dependency
-			(
-				$interfaceCode
-			);
+			$this->_dependencies = [];
 		}
+
+
+		// Store the dependency
+
+		$this->_dependencies[$dependencyCode] = $dependency;
+	}
 	}
 
 
