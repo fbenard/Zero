@@ -13,7 +13,7 @@
 			"CLI":
 			{
 				"action": "cacheClear",
-				"controller": "\\fbenard\\Zero\\Controllers\\CliController"
+				"controller": "fbenard\\Zero\\Controllers\\CliController"
 			}
 		}
 	},
@@ -31,7 +31,7 @@
 			"CLI":
 			{
 				"action": "migrationApply",
-				"controller": "\\fbenard\\Zero\\Controllers\\CliController"
+				"controller": "fbenard\\Zero\\Controllers\\CliController"
 			}
 		}
 	}

@@ -1,4 +1,4 @@
 {
-	"renderer/error": "\\fbenard\\Zero\\Services\\Renderers\\ErrorRenderer",
-	"renderer/view": "\\fbenard\\Zero\\Services\\Renderers\\ViewRenderer"
+	"renderer/error": "fbenard\\Zero\\Services\\Renderers\\ErrorRenderer",
+	"renderer/view": "fbenard\\Zero\\Services\\Renderers\\ViewRenderer"
 }
