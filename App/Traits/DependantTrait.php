@@ -27,18 +27,51 @@ trait DependantTrait
 		$dependency = new fbenard\Zero\Classes\Dependency($interfaceCode);
 
 
-		// Make sure dependencies is an array
-
-		if (is_array($this->_dependencies) === false)
-		{
-			$this->_dependencies = [];
-		}
-
-
 		// Store the dependency
 
 		$this->_dependencies[$dependencyCode] = $dependency;
 	}
+
+
+	/**
+	 *
+	 */
+
+	public function checkDependencyCode(string $dependencyCode)
+	{	
+		// Check whether dependency code exists
+
+		if (array_key_exists($dependencyCode, $this->_dependencies) === false)
+		{
+			throw new fbenard\Zero\Exceptions\DependencyNotFoundException
+			(
+				$dependencyCode
+			);
+		}
+	}
+
+
+	/**
+	 *
+	 */
+
+	public function checkDependencyValue(string $dependencyInterface, $dependencyValue)
+	{	
+		// Get interfaces implemented by the dependency
+
+		$interfaces = class_implements($dependencyValue);
+
+
+		// Check whether the interface is indeed implemented
+
+		if (in_array($dependencyInterface, $interfaces) === false)
+		{
+			throw new fbenard\Zero\Exceptions\DependencyInterfaceNotValidException
+			(
+				$dependencyInterface,
+				$dependencyValue
+			);
+		}
 	}
 
 
@@ -48,9 +81,12 @@ trait DependantTrait
 
 	public function ejectDependency(string $dependencyCode)
 	{
-		// Check array key
-		// Check interface
-		//
+		// Check dependency code
+
+		$this->checkDependencyCode($dependencyCode);
+
+
+		// Free the dependency
 		
 		$this->_dependencies[$dependencyCode]->value = null;
 	}
@@ -62,45 +98,30 @@ trait DependantTrait
 
 	public function getDependency(string $dependencyCode)
 	{
-		//
+		// Check dependency code
 
-		if (array_key_exists($dependencyCode, $this->_dependencies) === false)
-		{
-			throw new \fbenard\Exceptions\DependencyNotFoundException();
-		}
+		$this->checkDependencyCode($dependencyCode);
 
 
-		//
+		// Get the dependency
 
 		$dependency = $this->_dependencies[$dependencyCode];
 
 
-		//
+		// Does the dependency have a value?
 
 		if (is_null($dependency->value) === true)
 		{
+			// No, use the corresponding global service
+
 			$result = \z\service($dependencyCode);
 		}
 		else
 		{
+			// Yes, use the dependency value
+
 			$result = $dependency->value;
 		}
-
-
-		/*
-		//
-
-		$interfaces = class_implements($dependency->value);
-		print_r($interfaces);
-
-
-		//
-
-		if (in_array($dependency->interface, $interfaces) === false)
-		{
-			throw new \fbenard\Exceptions\DependencyInterfaceNotValidException();
-		}
-		*/
 
 
 		return $result;
@@ -113,11 +134,29 @@ trait DependantTrait
 
 	public function injectDependency(string $dependencyCode, $dependencyValue)
 	{
-		// CHeck array key
-		// Check interface
-		//
+		// Check dependency code
 
-		$this->_dependencies[$dependencyCode]->value = $dependencyValue;
+		$this->checkDependencyCode($dependencyCode);
+
+
+		// Get the dependency
+
+		$dependency = $this->_dependencies[$dependencyCode];
+
+
+		// Check dependency value
+
+		$this->checkDependencyValue($dependency->interface, $dependencyValue);
+
+
+		// Store the dependency value
+
+		$dependency->value = $dependencyValue;
+
+
+		// Store the dependency
+
+		$this->_dependencies[$dependencyCode] = $dependency;
 	}
 }
 
