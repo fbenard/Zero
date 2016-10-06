@@ -26,4 +26,15 @@
 			<directory>Tests/Services</directory>
 		</testsuite>
 	</testsuites>
+	<filter>
+		<whitelist processUncoveredFilesFromWhitelist="true">
+			<directory suffix=".php">App/Classes</directory>
+			<directory suffix=".php">App/Controllers</directory>
+			<directory suffix=".php">App/Events</directory>
+			<directory suffix=".php">App/Exceptions</directory>
+			<directory suffix=".php">App/Interfaces</directory>
+			<directory suffix=".php">App/Services</directory>
+			<directory suffix=".php">App/Traits</directory>
+		</whitelist>
+	</filter>
 </phpunit>
