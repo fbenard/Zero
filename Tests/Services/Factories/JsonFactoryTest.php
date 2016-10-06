@@ -241,7 +241,7 @@ extends \PHPUnit\Framework\TestCase
 	 *
 	 */
 
-	public function testLoadJson_found()
+	public function testLoadJson()
 	{
 		// Declare the file
 
@@ -284,49 +284,10 @@ extends \PHPUnit\Framework\TestCase
 				$json
 			);
 		}
-	}
 
 
-	/**
-	 *
-	 */
-
-	public function testLoadJson_notFound()
-	{
-		// Declare the file
-
-		$path = '/tmp/not_found.json';
-		$this->_files[] = $path;
-
-
-		// If loading fails because file cannot be found
-		// An exception should be thrown
-		// So we need to catch it
-
-		try
-		{
-			// Load the JSON
-
-			$this->_jsonFactory->loadJson($path);
-
-
-			// If we're still here
-			// It means no exception has been thrown
-			// That's a failure
-
-			$this->fail('No FileNotFoundException has been thrown');
-		}
-		catch (\Exception $e)
-		{
-			// Make sure it's a FileNotFoundException
 		// Delete the file
 
-			$this->assertEquals
-			(
-				'fbenard\Zero\Exceptions\FileNotFoundException',
-				get_class($e)
-			);
-		}
 		unlink($path);
 	}
 }
