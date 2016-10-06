@@ -10,7 +10,7 @@ namespace fbenard\Zero\Controllers;
  */
 
 class CliController
-extends \fbenard\Zero\Classes\AbstractController
+extends fbenard\Zero\Classes\AbstractController
 {
 	/**
 	 *

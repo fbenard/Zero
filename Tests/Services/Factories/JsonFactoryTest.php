@@ -26,7 +26,7 @@ extends \PHPUnit\Framework\TestCase
 	{
 		// Build a JSON factory
 
-		$this->_jsonFactory = new \fbenard\Zero\Services\Factories\JsonFactory();
+		$this->_jsonFactory = new fbenard\Zero\Services\Factories\JsonFactory();
 		
 
 		// Inject dependencies
@@ -34,7 +34,7 @@ extends \PHPUnit\Framework\TestCase
 		$this->_jsonFactory->injectDependency
 		(
 			'helper/file',
-			new \fbenard\Zero\Services\Helpers\FileHelper()
+			new fbenard\Zero\Services\Helpers\FileHelper()
 		);
 	}
 

@@ -13,8 +13,8 @@ class Response
 {
 	// Traits
 
-	use \fbenard\Zero\Traits\GetTrait;
-	use \fbenard\Zero\Traits\SetTrait;
+	use fbenard\Zero\Traits\GetTrait;
+	use fbenard\Zero\Traits\SetTrait;
 
 
 	// Attributes

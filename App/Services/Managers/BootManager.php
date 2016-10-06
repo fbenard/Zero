@@ -13,7 +13,7 @@ class BootManager
 {
 	// Traits
 
-	use \fbenard\Zero\Traits\GetTrait;
+	use fbenard\Zero\Traits\GetTrait;
 
 	
 	// Attributes
@@ -121,7 +121,7 @@ class BootManager
 		{
 			// Grab environment
 			
-			$request = new \fbenard\Zero\Classes\Request();
+			$request = new fbenard\Zero\Classes\Request();
 
 			$environment = $request->argument('env');
 

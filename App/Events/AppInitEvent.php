@@ -10,7 +10,7 @@ namespace fbenard\Zero\Events;
  */
 
 class AppInitEvent
-extends \fbenard\Zero\Classes\AbstractEvent
+extends fbenard\Zero\Classes\AbstractEvent
 {
 }
 

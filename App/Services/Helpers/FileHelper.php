@@ -10,7 +10,7 @@ namespace fbenard\Zero\Services\Helpers;
  */
 
 class FileHelper
-implements \fbenard\Zero\Interfaces\Helpers\FileHelper
+implements fbenard\Zero\Interfaces\Helpers\FileHelper
 {
 	/**
 	 * 
@@ -22,7 +22,7 @@ implements \fbenard\Zero\Interfaces\Helpers\FileHelper
 
 		if (file_exists($path) === false)
 		{
-			throw new \fbenard\Zero\Exceptions\FileNotFoundException($path);
+			throw new fbenard\Zero\Exceptions\FileNotFoundException($path);
 		}
 
 

@@ -56,7 +56,7 @@ class LoggerFactory
 
 			// Format for CLI
 
-			$handler->setFormatter(new \fbenard\Zero\Services\Formatters\CliLogFormatter());
+			$handler->setFormatter(new fbenard\Zero\Services\Formatters\CliLogFormatter());
 		}
 		else
 		{

@@ -13,7 +13,7 @@ abstract class AbstractController
 {
 	// Traits
 
-	use \fbenard\Zero\Traits\GetTrait;
+	use fbenard\Zero\Traits\GetTrait;
 
 
 	// Attributes
@@ -29,7 +29,7 @@ abstract class AbstractController
 	{
 		// Build the response
 
-		$this->_response = new \fbenard\Zero\Classes\Response
+		$this->_response = new fbenard\Zero\Classes\Response
 		(
 			200,
 			[

@@ -24,7 +24,7 @@ trait DependantTrait
 	{
 		// Create the dependency
 
-		$dependency = new \fbenard\Zero\Classes\Dependency($interfaceCode);
+		$dependency = new fbenard\Zero\Classes\Dependency($interfaceCode);
 
 
 		// Make sure dependencies is an array

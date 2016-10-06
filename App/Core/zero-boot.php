@@ -37,8 +37,8 @@ foreach ($dependencies as $dependency)
 
 // Setup error/exception handlers
 
-set_error_handler('\\fbenard\\Zero\\Services\\Managers\\ErrorManager::onError', E_ALL | E_STRICT);
-set_exception_handler('\\fbenard\\Zero\\Services\\Managers\\ExceptionManager::onException');
+set_error_handler('\fbenard\\Zero\\Services\\Managers\\ErrorManager::onError', E_ALL | E_STRICT);
+set_exception_handler('\fbenard\\Zero\\Services\\Managers\\ExceptionManager::onException');
 
 
 // Start the application

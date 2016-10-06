@@ -15,7 +15,7 @@ class ErrorRenderer
 	 *
 	 */
 
-	public function renderError(\fbenard\Zero\Classes\Error $error)
+	public function renderError(fbenard\Zero\Classes\Error $error)
 	{
 		// Define method name
 
@@ -62,7 +62,7 @@ class ErrorRenderer
 	 *
 	 */
 
-	public function renderErrorCli(\fbenard\Zero\Classes\Error $error)
+	public function renderErrorCli(fbenard\Zero\Classes\Error $error)
 	{
 		// Build result
 
@@ -135,7 +135,7 @@ class ErrorRenderer
 	 *
 	 */
 
-	public function renderErrorGui(\fbenard\Zero\Classes\Error $error)
+	public function renderErrorGui(fbenard\Zero\Classes\Error $error)
 	{
 		// Clean the buffer
 		
@@ -207,7 +207,7 @@ class ErrorRenderer
 	 *
 	 */
 
-	private function renderErrorHtml(\fbenard\Zero\Classes\Error $error)
+	private function renderErrorHtml(fbenard\Zero\Classes\Error $error)
 	{
 		// Build result
 
@@ -297,7 +297,7 @@ class ErrorRenderer
 	 *
 	 */
 
-	private function renderErrorJson(\fbenard\Zero\Classes\Error $error)
+	private function renderErrorJson(fbenard\Zero\Classes\Error $error)
 	{
 		// Build the result
 

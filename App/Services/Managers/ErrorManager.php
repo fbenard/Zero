@@ -19,7 +19,7 @@ class ErrorManager
 	{
 		// Build error
 
-		$error = new \fbenard\Zero\Classes\Error
+		$error = new fbenard\Zero\Classes\Error
 		(
 			$errorCode,
 			$errorDescription,
@@ -32,7 +32,7 @@ class ErrorManager
 
 		// Build error renderer
 
-		$errorRenderer = new \fbenard\Zero\Services\Renderers\ErrorRenderer();
+		$errorRenderer = new fbenard\Zero\Services\Renderers\ErrorRenderer();
 
 
 		// Render the error

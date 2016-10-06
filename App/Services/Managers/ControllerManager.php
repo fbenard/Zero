@@ -13,7 +13,7 @@ class ControllerManager
 {
 	// Traits
 
-	use \fbenard\Zero\Traits\GetTrait;
+	use fbenard\Zero\Traits\GetTrait;
 
 	
 	// Attributes
@@ -55,7 +55,7 @@ class ControllerManager
 		{
 			// Throw a ControllerActionNotFound exception
 
-			throw new \fbenard\Zero\Exceptions\ControllerActionNotFoundException
+			throw new fbenard\Zero\Exceptions\ControllerActionNotFoundException
 			(
 				$this->_controller,
 				$route['action']
