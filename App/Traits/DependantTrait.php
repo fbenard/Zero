@@ -48,7 +48,7 @@ trait DependantTrait
 
 	public function ejectDependency(string $dependencyCode)
 	{
-		// CHeck array key
+		// Check array key
 		// Check interface
 		//
 		
