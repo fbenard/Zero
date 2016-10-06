@@ -36,17 +36,9 @@ extends \PHPUnit\Framework\TestCase
 			'helper/file',
 			new \fbenard\Zero\Services\Helpers\FileHelper()
 		);
-	}
 
-
-	/**
-	 *
-	 */
-
-	public function setUp()
-	{
+		
 		// Build test data
-		// @todo: Maybe use json_encode to build object and array
 
 		$this->_data =
 		[
