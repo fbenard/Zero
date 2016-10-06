@@ -157,6 +157,45 @@ extends \PHPUnit\Framework\TestCase
 	 *
 	 */
 
+	public function testEncodeJson_invalid()
+	{
+		// If decoding fails because of invalid JSON
+		// An exception should be thrown
+		// So we need to catch it
+
+		try
+		{
+			// Decode the invalid JSON
+
+			$json = $this->_jsonFactory->encodeJson
+			(
+				"\xB1\x31"
+			);
+
+			
+			// If we're still here
+			// It means no exception has been thrown
+			// That's a failure
+
+			$this->fail('No JsonEncodeException has been thrown');
+		}
+		catch (\Exception $e)
+		{
+			// Make sure it's a JsonEncodeException
+
+			$this->assertEquals
+			(
+				'fbenard\Zero\Exceptions\JsonEncodeException',
+				get_class($e)
+			);
+		}
+	}
+
+	
+	/**
+	 *
+	 */
+
 	public function testEncodeJson_valid()
 	{
 		// Build formats
