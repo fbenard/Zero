@@ -13,7 +13,7 @@ class JsonFactory
 {
 	// Traits
 
-	use fbenard\Zero\Traits\DependantTrait;
+	use \fbenard\Zero\Traits\DependantTrait;
 
 
 	/**

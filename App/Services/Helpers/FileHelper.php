@@ -10,7 +10,7 @@ namespace fbenard\Zero\Services\Helpers;
  */
 
 class FileHelper
-implements fbenard\Zero\Interfaces\Helpers\FileHelper
+implements \fbenard\Zero\Interfaces\Helpers\FileHelper
 {
 	/**
 	 * 

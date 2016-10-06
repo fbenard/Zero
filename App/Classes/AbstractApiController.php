@@ -10,7 +10,7 @@ namespace fbenard\Zero\Classes;
  */
 
 abstract class AbstractApiController
-extends fbenard\Zero\Classes\AbstractController
+extends \fbenard\Zero\Classes\AbstractController
 {
 	/**
 	 *

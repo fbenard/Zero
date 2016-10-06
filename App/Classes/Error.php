@@ -13,7 +13,7 @@ class Error
 {
 	// Traits
 
-	use fbenard\Zero\Traits\GetTrait;
+	use \fbenard\Zero\Traits\GetTrait;
 
 	
 	// Attributes
