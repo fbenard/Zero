@@ -29,7 +29,7 @@ class ExceptionManager
 
 		// Build error
 
-		$error = new fbenard\Zero\Classes\Error
+		$error = new \fbenard\Zero\Classes\Error
 		(
 			$exception->getMessage(),
 			$exception->getMessage(),
@@ -42,7 +42,7 @@ class ExceptionManager
 
 		// Build error renderer
 
-		$errorRenderer = new fbenard\Zero\Services\Renderers\ErrorRenderer();
+		$errorRenderer = new \fbenard\Zero\Services\Renderers\ErrorRenderer();
 
 
 		// Render the error

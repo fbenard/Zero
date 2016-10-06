@@ -29,7 +29,7 @@ abstract class AbstractController
 	{
 		// Build the response
 
-		$this->_response = new fbenard\Zero\Classes\Response
+		$this->_response = new \fbenard\Zero\Classes\Response
 		(
 			200,
 			[

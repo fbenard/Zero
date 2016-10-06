@@ -71,7 +71,7 @@ function dispatch($event)
 
 function e($exceptionCode, $exceptionContext = null)
 {
-	throw new fbenard\Zero\Classes\Exception($exceptionCode, $exceptionContext);
+	throw new \fbenard\Zero\Classes\Exception($exceptionCode, $exceptionContext);
 }
 
 
@@ -118,7 +118,7 @@ function pref($preferenceCode, $preferenceValue = null)
 
 function redirect($url)
 {
-	$response = new fbenard\Zero\Classes\Response();
+	$response = new \fbenard\Zero\Classes\Response();
 	$response->redirect($url);
 }
 

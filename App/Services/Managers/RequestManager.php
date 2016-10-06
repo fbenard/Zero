@@ -27,7 +27,7 @@ class RequestManager
 
 	public function __construct()
 	{
-		$this->_request = new fbenard\Zero\Classes\Request();
+		$this->_request = new \fbenard\Zero\Classes\Request();
 	}
 }
 

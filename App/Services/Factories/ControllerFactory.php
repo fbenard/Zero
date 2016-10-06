@@ -28,7 +28,7 @@ class ControllerFactory
 		{
 			// Throw a ControllerNotFound exception
 
-			throw new fbenard\Zero\Exceptions\ControllerNotFoundException
+			throw new \fbenard\Zero\Exceptions\ControllerNotFoundException
 			(
 				$controllerCode
 			);
@@ -43,7 +43,7 @@ class ControllerFactory
 		{
 			// Throw a ControllerNotInstantiable exception
 			
-			throw new fbenard\Zero\Exceptions\ControllerNotInstantiableException
+			throw new \fbenard\Zero\Exceptions\ControllerNotInstantiableException
 			(
 				$controllerCode
 			);

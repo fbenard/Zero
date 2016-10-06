@@ -121,7 +121,7 @@ class BootManager
 		{
 			// Grab environment
 			
-			$request = new fbenard\Zero\Classes\Request();
+			$request = new \fbenard\Zero\Classes\Request();
 
 			$environment = $request->argument('env');
 

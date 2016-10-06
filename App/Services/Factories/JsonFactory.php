@@ -73,7 +73,7 @@ class JsonFactory
 
 		if (is_null($error) === false)
 		{
-			throw new fbenard\Zero\Exceptions\JsonDecodeException
+			throw new \fbenard\Zero\Exceptions\JsonDecodeException
 			(
 				$json,
 				$error
@@ -109,7 +109,7 @@ class JsonFactory
 
 		if (is_null($error) === false)
 		{
-			throw new fbenard\Zero\Exceptions\JsonEncodeException
+			throw new \fbenard\Zero\Exceptions\JsonEncodeException
 			(
 				$json,
 				$error

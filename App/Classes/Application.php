@@ -32,9 +32,9 @@ class Application
 	{
 		// Build low-level managers
 
-		$this->_bootManager = new fbenard\Zero\Services\Managers\BootManager();
-		$this->_cacheManager = new fbenard\Zero\Services\Managers\CacheManager();
-		$this->_serviceManager = new fbenard\Zero\Services\Managers\ServiceManager();
+		$this->_bootManager = new \fbenard\Zero\Services\Managers\BootManager();
+		$this->_cacheManager = new \fbenard\Zero\Services\Managers\CacheManager();
+		$this->_serviceManager = new \fbenard\Zero\Services\Managers\ServiceManager();
 	}
 
 	
@@ -48,7 +48,7 @@ class Application
 		
 		if (is_null(Application::$_instance) === true)
 		{
-			fbenard\Zero\Classes\Application::$_instance = new fbenard\Zero\Classes\Application();
+			fbenard\Zero\Classes\Application::$_instance = new \fbenard\Zero\Classes\Application();
 		}
 		
 		
@@ -83,7 +83,7 @@ class Application
 
 		\z\dispatch
 		(
-			new fbenard\Zero\Events\AppInitEvent($this)
+			new \fbenard\Zero\Events\AppInitEvent($this)
 		);
 	}
 	

@@ -24,7 +24,7 @@ trait DependantTrait
 	{
 		// Create the dependency
 
-		$dependency = new fbenard\Zero\Classes\Dependency($interfaceCode);
+		$dependency = new \fbenard\Zero\Classes\Dependency($interfaceCode);
 
 
 		// Store the dependency
@@ -43,7 +43,7 @@ trait DependantTrait
 
 		if (array_key_exists($dependencyCode, $this->_dependencies) === false)
 		{
-			throw new fbenard\Zero\Exceptions\DependencyNotFoundException
+			throw new \fbenard\Zero\Exceptions\DependencyNotFoundException
 			(
 				$dependencyCode
 			);
@@ -66,7 +66,7 @@ trait DependantTrait
 
 		if (in_array($dependencyInterface, $interfaces) === false)
 		{
-			throw new fbenard\Zero\Exceptions\DependencyInterfaceNotValidException
+			throw new \fbenard\Zero\Exceptions\DependencyInterfaceNotValidException
 			(
 				$dependencyInterface,
 				$dependencyValue
