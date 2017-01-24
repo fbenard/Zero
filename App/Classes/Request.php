@@ -78,7 +78,7 @@ class Request
 		}
 		else
 		{
-			$this->_header = apache_request_headers();
+			$this->_header = $this->getHeaders();
 		}
 	}
 
@@ -289,7 +289,7 @@ class Request
 			
 
 			//
-			
+
 			$result[$result_key] = $value;
 		}
 
