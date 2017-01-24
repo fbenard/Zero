@@ -167,6 +167,7 @@ class ErrorRenderer
 
 		$result = [];
 
+		/*
 		if
 		(
 			(array_key_exists('accept-content', $requestHeaders) === true) &&
@@ -183,6 +184,7 @@ class ErrorRenderer
 			$result = $this->renderErrorJson($error);
 		}
 		else
+		*/
 		{
 			$result = $this->renderErrorHtml($error);
 		}
