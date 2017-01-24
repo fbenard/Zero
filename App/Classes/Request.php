@@ -78,7 +78,7 @@ class Request
 		}
 		else
 		{
-			$this->_header = apache_request_headers();
+			$this->_header = $this->getHeaders();
 		}
 	}
 
@@ -236,6 +236,64 @@ class Request
 				$_SESSION[$variableCode] = $variableValue;
 			}
 		}
+	}
+
+
+	/**
+	 *
+	 */
+
+	public function getHeaders()
+	{
+		//
+
+		$result = [];
+		$pattern = '/\AHTTP_/';
+		
+		
+		// Parse each $_SERVER variable
+
+		foreach ($_SERVER as $key => $value)
+		{
+			//
+
+			if (preg_match($pattern, $key) !== 1)
+			{
+				continue;
+			}
+
+
+			//
+
+			$result_key = preg_replace($pattern, '', $key);
+			$rx_matches = [];
+			$rx_matches = explode('_', $result_key);
+
+			
+			//
+
+			if (count($rx_matches) > 0 and strlen($result_key) > 2 )
+			{
+				//
+
+				foreach ($rx_matches as $ak_key => $ak_val)
+				{
+					$rx_matches[$ak_key] = ucfirst($ak_val);
+				}
+
+				
+				//
+
+				$result_key = implode('-', $rx_matches);
+			}
+			
+
+			//
+
+			$result[$result_key] = $value;
+		}
+
+		return($result);
 	}
 }
 
