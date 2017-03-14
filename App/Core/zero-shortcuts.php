@@ -49,16 +49,6 @@ function conf($config, $defaultConfig = null)
  *
  */
 
-function cons($constantName, $constantValue = null)
-{
-	return \z\service('manager/constant')->setConstant($constantName, $constantValue);
-}
-
-
-/**
- *
- */
-
 function dispatch($event)
 {
 	return \z\service('manager/event')->dispatchEvent($event);
