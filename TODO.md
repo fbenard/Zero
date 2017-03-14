@@ -7,7 +7,7 @@
 	"predis/predis": "1.0.0",
 	"zordius/lightncandy": "v0.89"
 
-- Shortcut functions should be declared differently
+- Shortcut functions should be declared differently, like aliases of service methods
 - Implement zero-cli to assist dev (create route, etc)
 - Write a documentation with global architecture, classes and methods, tutorials
 - Do dependency injection (e.g. Redis driver), rely more often on interfaces
