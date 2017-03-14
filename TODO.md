@@ -1,3 +1,4 @@
+- Attributes of boot should be in application
 - Use classes for exceptions instead of constants
 - Write unit tests for every part of code
 - Get rid redis dependencies, whenever possible (redis, lightncandy, guzzle)
@@ -7,7 +8,7 @@
 	"predis/predis": "1.0.0",
 	"zordius/lightncandy": "v0.89"
 
-- Shortcut functions should be declared differently, like aliases of service methods
+- Shortcut functions should be declared differently, like aliases of service methods (ShortcutManager + Shortcuts.json)
 - Implement zero-cli to assist dev (create route, etc)
 - Write a documentation with global architecture, classes and methods, tutorials
 - Do dependency injection (e.g. Redis driver), rely more often on interfaces
