@@ -20,9 +20,6 @@ class Application
 	// Attributes
 	
 	private static $_instance = null;
-	private $_bootManager = null;
-	private $_cacheManager = null;
-	private $_serviceManager = null;
 	
 	
 	/**
@@ -31,11 +28,39 @@ class Application
 	
 	private function __construct()
 	{
-		// Build low-level managers
+		// Define dependencies
 
-		$this->_bootManager = new \fbenard\Zero\Services\Managers\BootManager();
-		$this->_cacheManager = new \fbenard\Zero\Services\Managers\CacheManager();
-		$this->_serviceManager = new \fbenard\Zero\Services\Managers\ServiceManager();
+		$this->defineDependency('manager/boot', 'fbenard\Zero\Interfaces\Managers\BootManager');
+		$this->defineDependency('manager/cache', 'fbenard\Zero\Interfaces\Managers\CacheManager');
+		$this->defineDependency('manager/constant', 'fbenard\Zero\Interfaces\Managers\ConstantManager');
+		$this->defineDependency('manager/controller', 'fbenard\Zero\Interfaces\Managers\ControllerManager');
+		$this->defineDependency('manager/culture', 'fbenard\Zero\Interfaces\Managers\CultureManager');
+		$this->defineDependency('manager/event', 'fbenard\Zero\Interfaces\Managers\EventManager');
+		$this->defineDependency('manager/preference', 'fbenard\Zero\Interfaces\Managers\PreferenceManager');
+		$this->defineDependency('manager/route', 'fbenard\Zero\Interfaces\Managers\RouteManager');
+		$this->defineDependency('manager/service', 'fbenard\Zero\Interfaces\Managers\ServiceManager');
+		$this->defineDependency('manager/session', 'fbenard\Zero\Interfaces\Managers\SessionManager');
+
+		
+		// Inject dependencies
+
+		$this->injectDependency
+		(
+			'manager/boot',
+			new \fbenard\Zero\Services\Managers\BootManager()
+		);
+
+		$this->injectDependency
+		(
+			'manager/cache',
+			new \fbenard\Zero\Services\Managers\CacheManager()
+		);
+
+		$this->injectDependency
+		(
+			'manager/service',
+			new \fbenard\Zero\Services\Managers\ServiceManager()
+		);
 	}
 
 	
@@ -65,12 +90,8 @@ class Application
 	{
 		// Initialize core managers
 
-		$this->_bootManager->initialize();
-		$this->_serviceManager->initialize();
-
-
-		// Initialize managers
-
+		$this->getDependency('manager/boot')->initialize($this->isCli());
+		$this->getDependency('manager/service')->initialize();
 		$this->getDependency('manager/constant')->initialize();
 		$this->getDependency('manager/event')->initialize();
 		$this->getDependency('manager/preference')->initialize();
