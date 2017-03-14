@@ -10,6 +10,7 @@ namespace fbenard\Zero\Services\Managers;
  */
 
 class BufferManager
+extends \fbenard\Zero\Classes\AbstractService
 {
 	/**
 	 *

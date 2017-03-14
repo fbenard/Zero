@@ -10,6 +10,7 @@ namespace fbenard\Zero\Services\Helpers;
  */
 
 class HttpHelper
+extends \fbenard\Zero\Classes\AbstractService
 {
 	/**
 	 *

@@ -10,6 +10,7 @@ namespace fbenard\Zero\Services\Factories;
  */
 
 class ConfigFactory
+extends \fbenard\Zero\Classes\AbstractService
 {
 	/**
 	 *

@@ -10,6 +10,7 @@ namespace fbenard\Zero\Services\Managers;
  */
 
 class RequestManager
+extends \fbenard\Zero\Classes\AbstractService
 {
 	// Traits
 

@@ -10,6 +10,7 @@ namespace fbenard\Zero\Services\Managers;
  */
 
 class ErrorManager
+extends \fbenard\Zero\Classes\AbstractService
 {
 	/**
 	 *

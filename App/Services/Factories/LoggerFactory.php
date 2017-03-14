@@ -10,6 +10,7 @@ namespace fbenard\Zero\Services\Factories;
  */
 
 class LoggerFactory
+extends \fbenard\Zero\Classes\AbstractService
 {
 	/**
 	 *

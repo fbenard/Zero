@@ -10,6 +10,7 @@ namespace fbenard\Zero\Services\Authenticators;
  */
 
 class CliAuthenticator
+extends \fbenard\Zero\Classes\AbstractService
 {
 	/**
 	 *

@@ -10,6 +10,7 @@ namespace fbenard\Zero\Services\Managers;
  */
 
 class CacheManager
+extends \fbenard\Zero\Classes\AbstractService
 {
 	// Attributes
 

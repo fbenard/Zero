@@ -10,6 +10,7 @@ namespace fbenard\Zero\Services\Factories;
  */
 
 class ServiceFactory
+extends \fbenard\Zero\Classes\AbstractService
 {
 	/**
 	 *
