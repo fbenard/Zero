@@ -70,13 +70,13 @@ class Application
 
 		// Initialize managers
 
-		\z\service('manager/constant')->initialize();
-		\z\service('manager/event')->initialize();
-		\z\service('manager/preference')->initialize();
-		\z\service('manager/session')->initialize();
-		\z\service('manager/culture')->initialize();
-		\z\service('manager/route')->initialize();
-		\z\service('manager/controller')->initialize();
+		$this->getDependency('manager/constant')->initialize();
+		$this->getDependency('manager/event')->initialize();
+		$this->getDependency('manager/preference')->initialize();
+		$this->getDependency('manager/session')->initialize();
+		$this->getDependency('manager/culture')->initialize();
+		$this->getDependency('manager/route')->initialize();
+		$this->getDependency('manager/controller')->initialize();
 
 
 		// Dispatch EVENT_APP_INIT event
@@ -183,7 +183,7 @@ class Application
 		
 		// Run the controller manager
 
-		\z\service('manager/controller')->run();
+		$this->getDependency('manager/controller')->run();
 
 
 		// Quit the application

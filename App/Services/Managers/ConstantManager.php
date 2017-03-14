@@ -28,7 +28,7 @@ class ConstantManager
 		{
 			// List constants of dependency
 
-			$files = \z\service('helper/file')->listFiles($dependency . '/Constants', 'php');
+			$files = $this->getDependency('helper/file')->listFiles($dependency . '/Constants', 'php');
 			
 			
 			// Parse each file

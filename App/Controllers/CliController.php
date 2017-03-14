@@ -28,7 +28,7 @@ extends \fbenard\Zero\Classes\AbstractController
 
 	public function actionMigrationApply($from = null, $to = null)
 	{
-		\z\service('manager/migration')->applyMigration($from, $to);
+		$this->getDependency('manager/migration')->applyMigration($from, $to);
 	}
 }
 

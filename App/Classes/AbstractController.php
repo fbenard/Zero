@@ -33,9 +33,9 @@ abstract class AbstractController
 		(
 			200,
 			[
-				'Accept-Language' => \z\service('manager/culture')->localeCode,
+				'Accept-Language' => $this->getDependency('manager/culture')->localeCode,
 				'Cache-Control' => 'private, no-cache, no-store, must-revalidate',
-				'Content-Language' => \z\service('manager/culture')->localeCode,
+				'Content-Language' => $this->getDependency('manager/culture')->localeCode,
 				'Content-Type' => 'text/html; charset=UTF-8'
 			]
 		);
@@ -73,7 +73,7 @@ abstract class AbstractController
 	{
 		$this->setOutput
 		(
-			\z\service('renderer/view')->renderView
+			$this->getDependency('renderer/view')->renderView
 			(
 				$viewCode,
 				$viewContext,

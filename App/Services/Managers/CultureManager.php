@@ -151,7 +151,7 @@ class CultureManager
 
 		// List locales available
 
-		$locales = \z\service('helper/file')->listFiles
+		$locales = $this->getDependency('helper/file')->listFiles
 		(
 			PATH_APP . '/Config/Strings',
 			null,
@@ -237,7 +237,7 @@ class CultureManager
 			
 			// List string files for this locale
 
-			$paths = \z\service('helper/file')->listFiles
+			$paths = $this->getDependency('helper/file')->listFiles
 			(
 				PATH_APP . '/Config/Strings/' . $localeCode,
 				'json'

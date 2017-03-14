@@ -31,7 +31,7 @@ class ControllerManager
 	{
 		// Get the current route
 
-		$route = \z\service('manager/route')->route;
+		$route = $this->getDependency('manager/route')->route;
 
 
 		// Do we have a route?
@@ -44,7 +44,7 @@ class ControllerManager
 		
 		// Build the controller for this route
 
-		$this->_controller = \z\service('factory/controller')->buildController($route['controller']);
+		$this->_controller = $this->getDependency('factory/controller')->buildController($route['controller']);
 
 
 		// Check whether the action is supported by the controller
@@ -82,7 +82,7 @@ class ControllerManager
 	{
 		// Get the current route
 
-		$route = \z\service('manager/route')->route;
+		$route = $this->getDependency('manager/route')->route;
 
 
 		// Do we have a route?
@@ -100,7 +100,7 @@ class ControllerManager
 		
 		// Clear buffer
 
-		\z\service('manager/buffer')->clearBuffer();
+		$this->getDependency('manager/buffer')->clearBuffer();
 
 
 		// Run the controller
@@ -153,7 +153,7 @@ class ControllerManager
 			call_user_func_array
 			(
 				[
-					\z\service($action['service']),
+					$this->getDependency($action['service']),
 					$action['method']
 				],
 				$this->_arguments

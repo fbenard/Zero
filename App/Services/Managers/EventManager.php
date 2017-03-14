@@ -80,7 +80,7 @@ class EventManager
 
 		foreach ($this->_followers[$event->code] as $followerCode => $methodCode)
 		{
-			\z\service($followerCode)->$methodCode($event);
+			$this->getDependency($followerCode)->$methodCode($event);
 		}
 	}
 	
@@ -123,7 +123,7 @@ class EventManager
 		{
 			//
 
-			$paths = \z\service('helper/file')->listFiles($dependency . '/Config/Events', 'php');
+			$paths = $this->getDependency('helper/file')->listFiles($dependency . '/Config/Events', 'php');
 			
 			foreach ($paths as $path)
 			{

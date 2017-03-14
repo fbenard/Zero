@@ -46,7 +46,7 @@ class LoggerManager
 		{
 			// Build the logger
 
-			$logger = \z\service('factory/logger')->buildLogger($loggerCode, $handlers);
+			$logger = $this->getDependency('factory/logger')->buildLogger($loggerCode, $handlers);
 
 			
 			// Store the logger

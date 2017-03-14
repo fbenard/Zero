@@ -100,8 +100,8 @@ class PreferenceManager
 
 				$paths = array_merge
 				(
-					\z\service('helper/file')->listFiles($dependency . '/Config/Preferences', 'json'),
-					\z\service('helper/file')->listFiles($dependency . '/Config/Preferences/' . \z\boot()->environment, 'json')
+					$this->getDependency('helper/file')->listFiles($dependency . '/Config/Preferences', 'json'),
+					$this->getDependency('helper/file')->listFiles($dependency . '/Config/Preferences/' . \z\boot()->environment, 'json')
 				);
 
 				
@@ -116,7 +116,7 @@ class PreferenceManager
 
 					// Load preferences
 
-					$preferences = \z\service('factory/json')->loadJson($path);
+					$preferences = $this->getDependency('factory/json')->loadJson($path);
 
 
 					// Store preferences
