@@ -9,7 +9,7 @@ namespace fbenard\Zero\Exceptions;
  *
  */
 
-class DependencyNotFoundException
+class DependencyNotDefinedException
 extends \fbenard\Zero\Classes\AbstractException
 {
 	/**

@@ -9,7 +9,7 @@ namespace fbenard\Zero\Exceptions;
  *
  */
 
-class DependencyInterfaceNotValidException
+class DependencyNotCompatible
 extends \fbenard\Zero\Classes\AbstractException
 {
 	/**
