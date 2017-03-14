@@ -49,11 +49,11 @@ class Application
 		
 		if (is_null(Application::$_instance) === true)
 		{
-			fbenard\Zero\Classes\Application::$_instance = new \fbenard\Zero\Classes\Application();
+			\fbenard\Zero\Classes\Application::$_instance = new \fbenard\Zero\Classes\Application();
 		}
 		
 		
-		return fbenard\Zero\Classes\Application::$_instance;
+		return \fbenard\Zero\Classes\Application::$_instance;
 	}
 
 	
