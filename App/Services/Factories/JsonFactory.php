@@ -10,12 +10,8 @@ namespace fbenard\Zero\Services\Factories;
  */
 
 class JsonFactory
+extends \fbenard\Zero\Classes\AbstractService
 {
-	// Traits
-
-	use \fbenard\Zero\Traits\DependantTrait;
-
-
 	/**
 	 *
 	 */

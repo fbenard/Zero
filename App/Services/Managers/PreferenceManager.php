@@ -10,6 +10,7 @@ namespace fbenard\Zero\Services\Managers;
  */
 
 class PreferenceManager
+extends \fbenard\Zero\Classes\AbstractService
 {
 	// Traits
 

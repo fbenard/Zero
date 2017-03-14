@@ -10,6 +10,7 @@ namespace fbenard\Zero\Services\Managers;
  */
 
 class ConstantManager
+extends \fbenard\Zero\Classes\AbstractService
 {
 	/**
 	 *

@@ -10,6 +10,7 @@ namespace fbenard\Zero\Services\Renderers;
  */
 
 class ViewRenderer
+extends \fbenard\Zero\Classes\AbstractService
 {
 	/**
 	 *

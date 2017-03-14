@@ -18,6 +18,7 @@ TODO
 */
 
 class EventManager
+extends \fbenard\Zero\Classes\AbstractService
 {
 	// Traits
 

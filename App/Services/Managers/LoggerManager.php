@@ -10,6 +10,7 @@ namespace fbenard\Zero\Services\Managers;
  */
 
 class LoggerManager
+extends \fbenard\Zero\Classes\AbstractService
 {
 	// Attributes
 

@@ -14,6 +14,7 @@ class Application
 	// Traits
 
 	use \fbenard\Zero\Traits\GetTrait;
+	use \fbenard\Zero\Traits\DependantTrait;
 
 	
 	// Attributes
