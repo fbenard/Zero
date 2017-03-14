@@ -61,7 +61,7 @@ class Application
 	 *
 	 */
 	
-	private function initialize()
+	public function initialize()
 	{
 		// Initialize core managers
 
