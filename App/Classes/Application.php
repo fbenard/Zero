@@ -87,7 +87,7 @@ class Application
 	
 	public function initialize()
 	{
-		// Initialize core managers
+		// Initialize managers
 
 		$this->getDependency('manager/boot')->initialize($this->isCli());
 		$this->getDependency('manager/service')->initialize();
