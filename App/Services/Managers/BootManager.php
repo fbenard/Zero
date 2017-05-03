@@ -34,6 +34,22 @@ implements \fbenard\Zero\Interfaces\Managers\BootManager
 		// Define dependencies
 
 		$this->defineDependency('factory/boot', 'fbenard\Zero\Interfaces\Factories\BootFactory');
+		$this->defineDependency('loader/boot', 'fbenard\Zero\Interfaces\Loaders\BootLoader');
+
+
+		// Inject dependencies
+
+		$this->injectDependency
+		(
+			'factory/boot',
+			new \fbenard\Zero\Services\Factories\BootFactory()
+		);
+
+		$this->injectDependency
+		(
+			'loader/boot',
+			new \fbenard\Zero\Services\Loaders\BootLoader()
+		);
 	}
 
 
@@ -41,11 +57,11 @@ implements \fbenard\Zero\Interfaces\Managers\BootManager
 	 *
 	 */
 
-	public function initialize($isCli = false)
+	public function initialize(bool $isCli)
 	{
 		// Load boot
 
-		$boot = $this->getDependency('factory/boot')->loadBoot();
+		$boot = $this->getDependency('loader/boot')->loadBoot();
 
 
 		// Build attributes

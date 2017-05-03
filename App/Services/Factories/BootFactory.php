@@ -80,35 +80,6 @@ implements \fbenard\Zero\Interfaces\Factories\BootFactory
 
 		return $dependencies;
 	}
-
-
-	/**
-	 *
-	 */
-
-	public function loadBoot()
-	{
-		// Load Boot.json
-
-		$boot = null;
-		$pathToBoot = PATH_APP . '/Config/Boot.json';
-
-		if (file_exists($pathToBoot) === true)
-		{
-			// Decode Boot.json
-
-			$rawBoot = file_get_contents($pathToBoot);
-			$boot = json_decode($rawBoot, true);
-		}
-
-
-		// Fix boot
-
-		$boot = $this->fixBoot($boot);
-
-
-		return $boot;
-	}
 }
 
 ?>

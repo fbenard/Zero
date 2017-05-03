@@ -23,13 +23,6 @@ interface BootFactory
 	 */
 	
 	public function fixDependencies($dependencies);
-
-	
-	/**
-	 * 
-	 */
-	
-	public function loadBoot();
 }
 
 ?>
