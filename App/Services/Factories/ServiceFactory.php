@@ -16,7 +16,7 @@ extends \fbenard\Zero\Classes\AbstractService
 	 *
 	 */
 	
-	public function buildService($serviceCode, $definitions)
+	public function buildService(string $serviceCode, array $definitions)
 	{
 		// Make sure the service has a definition
 
