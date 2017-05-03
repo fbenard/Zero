@@ -11,6 +11,7 @@ namespace fbenard\Zero\Services\Managers;
 
 class CacheManager
 extends \fbenard\Zero\Classes\AbstractService
+implements \fbenard\Zero\Interfaces\Managers\CacheManager
 {
 	// Attributes
 
@@ -91,7 +92,7 @@ extends \fbenard\Zero\Classes\AbstractService
 	 *
 	 */
 
-	private function isCacheEnabled()
+	public function isCacheEnabled()
 	{
 		/*
 		if (in_array(\z\boot()->environment, \z\boot()->cache) === true)
