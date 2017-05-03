@@ -100,9 +100,9 @@ class Application
 		$this->getDependency('manager/controller')->initialize();
 
 
-		// Dispatch EVENT_APP_INIT event
+		// Dispatch AppInit event
 
-		\z\dispatch
+		$this->getDependency('manager/event')->dispatchEvent
 		(
 			new \fbenard\Zero\Events\AppInitEvent($this)
 		);
