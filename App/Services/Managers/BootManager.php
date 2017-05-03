@@ -66,7 +66,7 @@ implements \fbenard\Zero\Interfaces\Managers\BootManager
 		{
 			// Grab environment
 			
-			$request = new \fbenard\Zero\Classes\Request();
+			$request = new \fbenard\Zero\Classes\CliRequest();
 
 			$environment = $request->argument('env');
 
