@@ -23,6 +23,7 @@ extends \fbenard\Zero\Classes\AbstractService
 		
 		if (\z\app()->isCli() === false)
 		{
+			throw new \fbenard\Zero\Exceptions\
 			\z\e
 			(
 				EXCEPTION_PERMISSION_NOT_GRANTED

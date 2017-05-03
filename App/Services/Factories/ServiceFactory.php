@@ -22,13 +22,10 @@ extends \fbenard\Zero\Classes\AbstractService
 
 		if (array_key_exists($serviceCode, $definitions) === false)
 		{
-			\z\e
+			throw new \fbenard\Zero\Exceptions\ServiceNotDefinedException
 			(
-				EXCEPTION_SERVICE_NOT_FOUND,
-				[
-					'serviceCode' => $serviceCode,
-					'definitions' => $definitions
-				]
+				$serviceCode,
+				$definitions
 			);
 		}
 
