@@ -11,24 +11,13 @@ namespace fbenard\Zero\Services\Factories;
 
 class JsonFactory
 extends \fbenard\Zero\Classes\AbstractService
+implements \fbenard\Zero\Interfaces\Factories\JsonFactory
 {
 	/**
 	 *
 	 */
-
-	public function __construct()
-	{
-		// Define dependencies
-
-		$this->defineDependency('helper/file', 'fbenard\Zero\Interfaces\Helpers\FileHelper');
-	}
-
-
-	/**
-	 *
-	 */
 	
-	public function getError()
+	public function checkError()
 	{
 		// Get the latest JSON error
 
@@ -40,7 +29,11 @@ extends \fbenard\Zero\Classes\AbstractService
 
 		if ($error !== JSON_ERROR_NONE)
 		{
-			return $message;
+			throw new \fbenard\Zero\Exceptions\JsonNotValidException
+			(
+				$error,
+				$message
+			);
 		}
 	}
 
@@ -49,7 +42,7 @@ extends \fbenard\Zero\Classes\AbstractService
 	 *
 	 */
 	
-	public function decodeJson($json, $array = true)
+	public function decodeJson(string $json, bool $array = true)
 	{
 		// Decode JSON
 
@@ -60,19 +53,19 @@ extends \fbenard\Zero\Classes\AbstractService
 		);
 
 
-		// Get the latest JSON error
+		// Check whether JSON decode worked
 
-		$error = $this->getError();
-
-
-		// Check whether decoding worked
-
-		if (is_null($error) === false)
+		try
+		{
+			$this->checkError();
+		}
+		catch (\Exception $e)
 		{
 			throw new \fbenard\Zero\Exceptions\JsonDecodeException
 			(
 				$json,
-				$error
+				$e->getContext()[0],
+				$e->getContext()[1]
 			);
 		}
 
@@ -96,41 +89,21 @@ extends \fbenard\Zero\Classes\AbstractService
 		);
 
 
-		// Get the latest JSON error
+		// Check whether JSON decode worked
 
-		$error = $this->getError();
-
-
-		// Check whether encoding worked
-
-		if (is_null($error) === false)
+		try
+		{
+			$this->checkError();
+		}
+		catch (\Exception $e)
 		{
 			throw new \fbenard\Zero\Exceptions\JsonEncodeException
 			(
 				$json,
-				$error
+				$e->getContext()[0],
+				$e->getContext()[1]
 			);
 		}
-
-
-		return $result;
-	}
-
-	
-	/**
-	 *
-	 */
-
-	public function loadJson($path, $array = true)
-	{
-		// Load the JSON file
-
-		$json = $this->getDependency('helper/file')->loadFile($path);
-
-
-		// Load and decode the JSON
-
-		$result = $this->decodeJson($json, $array);
 
 
 		return $result;

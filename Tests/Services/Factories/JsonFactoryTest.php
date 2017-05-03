@@ -29,80 +29,64 @@ extends \PHPUnit\Framework\TestCase
 		$this->_jsonFactory = new \fbenard\Zero\Services\Factories\JsonFactory();
 		
 
-		// Inject dependencies
+		// Load the raw JSON
 
-		$this->_jsonFactory->injectDependency
-		(
-			'helper/file',
-			new \fbenard\Zero\Services\Helpers\FileHelper()
-		);
+		$path = getcwd() . '/Tests/Test.json';
+		$rawJson = file_get_contents($path);
 
-		
+
 		// Build test data
 
 		$this->_data =
 		[
 			'valid' =>
 			[
-				'array' =>
-				[
-					'a' => 1,
-					'b' => 'string',
-					'c' => [1, 2, 3, 4],
-					'd' => null
-				]
+				'string' => $rawJson,
+				'array' => json_decode($rawJson, true),
+				'object' => json_decode($rawJson, false)
 			],
 			'invalid' => 'Not a valid JSON'
 		];
-
-
-		// Encode the string version
-
-		$this->_data['valid']['string'] = json_encode($this->_data['valid']['array'], true);
-		
-
-		// Encode the object version
-
-		$this->_data['valid']['object'] = json_decode($this->_data['valid']['string']);
 	}
-	
-	
+
+
 	/**
 	 *
 	 */
 
-	public function testDecodeJson_invalid()
+	public function testCheckError_valid()
 	{
-		// If decoding fails because of invalid JSON
-		// An exception should be thrown
-		// So we need to catch it
+		// Decode a valid JSON
 
-		try
-		{
-			// Decode the invalid JSON
+		$json = json_decode($this->_data['valid']['string']);
 
-			$json = $this->_jsonFactory->decodeJson
-			(
-				$this->_data['invalid']
-			);
 
-			
-			// If we're still here
-			// It means no exception has been thrown
-			// That's a failure
+		// Check the error
+		// There should be no exception
 
-			$this->fail('No JsonDecodeException has been thrown');
-		}
-		catch (\Exception $e)
-		{
-			// Make sure it's a JsonDecodeException
+		$this->_jsonFactory->checkError();
+	}
 
-			$this->assertEquals
-			(
-				'fbenard\Zero\Exceptions\JsonDecodeException',
-				get_class($e)
-			);
-		}
+
+	/**
+	 *
+	 */
+
+	public function testCheckError_invalid()
+	{
+		// Decode an invalid JSON
+
+		$json = json_decode($this->_data['invalid']);
+
+
+		// There should be an exception
+
+		$this->expectException('fbenard\Zero\Exceptions\JsonNotValidException');
+
+
+		// Check the error
+
+		$this->_jsonFactory->checkError();
 	}
 
 	
@@ -110,7 +94,7 @@ extends \PHPUnit\Framework\TestCase
 	 *
 	 */
 
-	public function testDecodeJson_valid()
+	public function testDecodeJson()
 	{
 		// Build formats
 
@@ -149,46 +133,7 @@ extends \PHPUnit\Framework\TestCase
 	 *
 	 */
 
-	public function testEncodeJson_invalid()
-	{
-		// If decoding fails because of invalid JSON
-		// An exception should be thrown
-		// So we need to catch it
-
-		try
-		{
-			// Decode the invalid JSON
-
-			$json = $this->_jsonFactory->encodeJson
-			(
-				"\xB1\x31"
-			);
-
-			
-			// If we're still here
-			// It means no exception has been thrown
-			// That's a failure
-
-			$this->fail('No JsonEncodeException has been thrown');
-		}
-		catch (\Exception $e)
-		{
-			// Make sure it's a JsonEncodeException
-
-			$this->assertEquals
-			(
-				'fbenard\Zero\Exceptions\JsonEncodeException',
-				get_class($e)
-			);
-		}
-	}
-
-	
-	/**
-	 *
-	 */
-
-	public function testEncodeJson_valid()
+	public function testEncodeJson()
 	{
 		// Build formats
 
@@ -219,107 +164,6 @@ extends \PHPUnit\Framework\TestCase
 				$json
 			);
 		}
-	}
-
-
-	/**
-	 *
-	 */
-
-	public function testGetError_valid()
-	{
-		// Decode a valid JSON
-
-		$json = json_decode($this->_data['valid']['string']);
-
-
-		// Get the error
-
-		$error = $this->_jsonFactory->getError();
-
-
-		// And as it should have worked
-		// Make sure no error is returned
-
-		$this->assertEmpty($error);
-	}
-
-
-	/**
-	 *
-	 */
-
-	public function testGetError_invalid()
-	{
-		// Decode an invalid JSON
-
-		$json = json_decode($this->_data['invalid']);
-
-
-		// Get the error
-
-		$error = $this->_jsonFactory->getError();
-
-
-		// And as it should not have worked
-		// Make sure an error is returned
-
-		$this->assertNotEmpty($error);
-	}
-
-
-	/**
-	 *
-	 */
-
-	public function testLoadJson()
-	{
-		// Declare the file
-
-		$path = '/tmp/found.json';
-
-
-		// Write the JSON file
-
-		file_put_contents($path, $this->_data['valid']['string']);
-
-
-		// Build formats
-
-		$formats =
-		[
-			'array' => true,
-			'object' => false
-		];
-
-
-		// Parse each format
-
-		foreach ($formats as $format => $isArray)
-		{
-			// Load the JSON
-
-			$json = $this->_jsonFactory->loadJson
-			(
-				$path,
-				$isArray
-			);
-
-
-			// Make sure it matches the expected JSON
-			// @todo: This will fail as pretty print is enabled
-
-			$this->assertEquals
-			(
-				$this->_data['valid'][$format],
-				$json
-			);
-		}
-
-
-		// Delete the file
-
-		unlink($path);
 	}
 }
 
