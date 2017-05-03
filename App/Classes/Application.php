@@ -32,7 +32,6 @@ class Application
 
 		$this->defineDependency('manager/boot', 'fbenard\Zero\Interfaces\Managers\BootManager');
 		$this->defineDependency('manager/cache', 'fbenard\Zero\Interfaces\Managers\CacheManager');
-		$this->defineDependency('manager/constant', 'fbenard\Zero\Interfaces\Managers\ConstantManager');
 		$this->defineDependency('manager/controller', 'fbenard\Zero\Interfaces\Managers\ControllerManager');
 		$this->defineDependency('manager/culture', 'fbenard\Zero\Interfaces\Managers\CultureManager');
 		$this->defineDependency('manager/event', 'fbenard\Zero\Interfaces\Managers\EventManager');
