@@ -1,0 +1,17 @@
+{
+	"app":
+	{
+		"service": "manager/application",
+		"method": "getInstance"
+	},
+	"conf":
+	{
+		"service": "factory/config",
+		"method": "fixConfig"
+	},
+	"service":
+	{
+		"service": "manager/service",
+		"method": "getService"
+	}
+}

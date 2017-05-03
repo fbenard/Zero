@@ -11,7 +11,7 @@ namespace z;
 
 function app()
 {
-	return fbenard\Zero\Classes\Application::getInstance();
+	return \fbenard\Zero\Classes\Application::getInstance();
 }
 
 
@@ -52,16 +52,6 @@ function conf($config, $defaultConfig = null)
 function dispatch($event)
 {
 	return \z\service('manager/event')->dispatchEvent($event);
-}
-
-
-/**
- *
- */
-
-function e($exceptionCode, $exceptionContext = null)
-{
-	throw new \fbenard\Zero\Classes\Exception($exceptionCode, $exceptionContext);
 }
 
 
@@ -143,23 +133,6 @@ function render($viewCode, $viewContext = null, $viewRoot = null, $print = true)
 function request()
 {
 	return \z\service('manager/request')->request;
-}
-
-
-/**
- *
- */
-
-function service($serviceCode = null, $clone = false)
-{
-	if (empty($serviceCode) === true)
-	{
-		return \z\app()->serviceManager;
-	}
-	else
-	{
-		return \z\app()->serviceManager->getService($serviceCode, $clone);
-	}
 }
 
 
