@@ -41,7 +41,7 @@ implements \fbenard\Zero\Interfaces\Managers\BootManager
 	 *
 	 */
 
-	public function initialize()
+	public function initialize($isCli = false)
 	{
 		// Load boot
 
@@ -62,7 +62,7 @@ implements \fbenard\Zero\Interfaces\Managers\BootManager
 
 		// Are we in CLI mode?
 
-		if (\z\app()->isCli() === true)
+		if ($isCli === true)
 		{
 			// Grab environment
 			
