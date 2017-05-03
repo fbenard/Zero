@@ -1,4 +1,5 @@
 {
+	"factory/boot": "fbenard\\Zero\\Services\\Factories\\BootFactory",
 	"factory/config": "fbenard\\Zero\\Services\\Factories\\ConfigFactory",
 	"factory/controller": "fbenard\\Zero\\Services\\Factories\\ControllerFactory",
 	"factory/json": "fbenard\\Zero\\Services\\Factories\\JsonFactory",
