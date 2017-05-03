@@ -13,7 +13,7 @@ trait DependantTrait
 {
 	// Attributes
 
-	private $_dependencies = [];
+	private $_dependantTrait_dependencies = [];
 
 
 	/**
@@ -29,7 +29,7 @@ trait DependantTrait
 
 		// Store the dependency
 
-		$this->_dependencies[$dependencyCode] = $dependency;
+		$this->_dependantTrait_dependencies[$dependencyCode] = $dependency;
 	}
 
 
@@ -41,9 +41,9 @@ trait DependantTrait
 	{	
 		// Check whether dependency code exists
 
-		if (array_key_exists($dependencyCode, $this->_dependencies) === false)
+		if (array_key_exists($dependencyCode, $this->_dependantTrait_dependencies) === false)
 		{
-			throw new \fbenard\Zero\Exceptions\DependencyNotFoundException
+			throw new \fbenard\Zero\Exceptions\DependencyNotDefinedException
 			(
 				$dependencyCode
 			);
@@ -66,7 +66,7 @@ trait DependantTrait
 
 		if (in_array($dependencyInterface, $interfaces) === false)
 		{
-			throw new \fbenard\Zero\Exceptions\DependencyInterfaceNotValidException
+			throw new \fbenard\Zero\Exceptions\DependencyNotCompatible
 			(
 				$dependencyInterface,
 				$dependencyValue
@@ -88,7 +88,7 @@ trait DependantTrait
 
 		// Free the dependency
 		
-		$this->_dependencies[$dependencyCode]->value = null;
+		$this->_dependantTrait_dependencies[$dependencyCode]->value = null;
 	}
 
 
@@ -105,8 +105,8 @@ trait DependantTrait
 
 		// Get the dependency
 
-		$dependency = $this->_dependencies[$dependencyCode];
-
+		$dependency = $this->_dependantTrait_dependencies[$dependencyCode];
+		
 
 		// Does the dependency have a value?
 
@@ -114,7 +114,7 @@ trait DependantTrait
 		{
 			// No, use the corresponding global service
 
-			$result = \z\service($dependencyCode);
+			$result = \fbenard\Zero\Classes\Application::getInstance()->getDependency('manager/service')->getService($dependencyCode);
 		}
 		else
 		{
@@ -141,7 +141,7 @@ trait DependantTrait
 
 		// Get the dependency
 
-		$dependency = $this->_dependencies[$dependencyCode];
+		$dependency = $this->_dependantTrait_dependencies[$dependencyCode];
 
 
 		// Check dependency value
@@ -156,7 +156,7 @@ trait DependantTrait
 
 		// Store the dependency
 
-		$this->_dependencies[$dependencyCode] = $dependency;
+		$this->_dependantTrait_dependencies[$dependencyCode] = $dependency;
 	}
 }
 
