@@ -28,8 +28,12 @@ implements \fbenard\Zero\Interfaces\Managers\BootManager
 	/**
 	 *
 	 */
+	
+	public function __construct()
 	{
+		// Define dependencies
 
+		$this->defineDependency('factory/boot', 'fbenard\Zero\Interfaces\Factories\BootFactory');
 	}
 
 
@@ -41,7 +45,7 @@ implements \fbenard\Zero\Interfaces\Managers\BootManager
 	{
 		// Load boot
 
-		$boot = $this->loadBoot();
+		$boot = $this->getDependency('factory/boot')->loadBoot();
 
 
 		// Build attributes
@@ -53,7 +57,7 @@ implements \fbenard\Zero\Interfaces\Managers\BootManager
 
 		// Fix dependencies
 
-		$this->_dependencies = $this->fixDependencies($this->_dependencies);
+		$this->_dependencies = $this->getDependency('factory/boot')->fixDependencies($this->_dependencies);
 
 
 		// Are we in CLI mode?
