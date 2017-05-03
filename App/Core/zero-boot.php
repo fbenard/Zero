@@ -17,22 +17,7 @@ define('PATH_ZERO', PATH_COMPONENTS . '/fbenard/zero/App');
 
 // Dependencies
 
-$dependencies =
-[
-	PATH_COMPONENTS . '/autoload.php',
-	PATH_ZERO . '/Core/zero-shortcuts.php'
-];
-
-foreach ($dependencies as $dependency)
-{
-	if (file_exists($dependency) === false)
-	{
-		print("Cannot find dependency.\n");
-		trigger_error(null, E_USER_ERROR);
-	}
-
-	require_once($dependency);
-}
+require_once(PATH_COMPONENTS . '/autoload.php');
 
 
 // Setup error/exception handlers
