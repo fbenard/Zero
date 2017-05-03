@@ -11,6 +11,7 @@ namespace fbenard\Zero\Services\Managers;
 
 class ServiceManager
 extends \fbenard\Zero\Classes\AbstractService
+implements \fbenard\Zero\Interfaces\Managers\ServiceManager
 {
 	// Traits
 
