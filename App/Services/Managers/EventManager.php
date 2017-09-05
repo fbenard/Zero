@@ -104,18 +104,6 @@ extends \fbenard\Zero\Classes\AbstractService
 
 	private function loadConfig()
 	{
-		// Get the cache
-
-		$cacheCode = 'events_' . \z\boot()->environment;
-		$cache = \z\cache()->getCache($cacheCode);
-
-		if ($cache !== false)
-		{
-			$this->_followers = unserialize($cache);
-			return;
-		}
-
-
 		// Parse each dependency
 
 		$dependencies = \z\boot()->dependencies;
@@ -131,15 +119,6 @@ extends \fbenard\Zero\Classes\AbstractService
 				require_once($path);
 			}
 		}
-
-
-		// Set the cache
-
-		\z\cache()->setCache
-		(
-			$cacheCode,
-			serialize($this->_followers)
-		);
 	}
 
 

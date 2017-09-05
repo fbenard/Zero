@@ -20,7 +20,6 @@ implements \fbenard\Zero\Interfaces\Managers\BootManager
 	
 	// Attributes
 
-	private $_cache = null;
 	private $_dependencies = null;
 	private $_environment = null;
 
@@ -33,17 +32,10 @@ implements \fbenard\Zero\Interfaces\Managers\BootManager
 	{
 		// Define dependencies
 
-		$this->defineDependency('factory/boot', 'fbenard\Zero\Interfaces\Factories\BootFactory');
 		$this->defineDependency('loader/boot', 'fbenard\Zero\Interfaces\Loaders\BootLoader');
 
 
 		// Inject dependencies
-
-		$this->injectDependency
-		(
-			'factory/boot',
-			new \fbenard\Zero\Services\Factories\BootFactory()
-		);
 
 		$this->injectDependency
 		(
@@ -57,16 +49,10 @@ implements \fbenard\Zero\Interfaces\Managers\BootManager
 	 *
 	 */
 
-	public function initialize(bool $isCli)
+	public function initialize(array $config, bool $isCli)
 	{
-		// Load boot
-
-		$boot = $this->getDependency('loader/boot')->loadBoot();
-
-
 		// Build attributes
 
-		$this->_cache = $boot['cache'];
 		$this->_dependencies = $boot['dependencies'];
 		$this->_environment = $boot['environment'];
 

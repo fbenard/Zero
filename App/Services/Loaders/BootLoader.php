@@ -22,15 +22,6 @@ implements \fbenard\Zero\Interfaces\Loaders\BootLoader
 		// Define dependencies
 
 		$this->defineDependency('factory/boot', 'fbenard\Zero\Interfaces\Factories\BootFactory');
-
-
-		// Inject dependencies
-
-		$this->injectDependency
-		(
-			'factory/boot',
-			new \fbenard\Zero\Services\Factories\BootFactory()
-		);
 	}
 
 

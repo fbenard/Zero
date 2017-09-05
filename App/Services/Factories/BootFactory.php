@@ -32,7 +32,6 @@ implements \fbenard\Zero\Interfaces\Factories\BootFactory
 		$boot = array_merge
 		(
 			[
-				'cache' => [],
 				'dependencies' => [],
 				'hosts' => [],
 				'environment' => null

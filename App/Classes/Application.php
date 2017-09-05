@@ -28,6 +28,18 @@ class Application
 	
 	private function __construct()
 	{
+		// Load core config
+
+		/*
+		$bootLoader = new \fbenard\Zero\Services\Loaders\BootLoader();
+		$boot = $bootLoader->loadBoot();
+		print_r($boot);
+
+		$serviceLoader = new \fbenard\Zero\Services\Loaders\ServiceLoader();
+		$services = $serviceLoader->loadServices();
+		*/
+		
+
 		// Define dependencies
 
 		$this->defineDependency('manager/boot', 'fbenard\Zero\Interfaces\Managers\BootManager');
@@ -46,7 +58,7 @@ class Application
 		$this->injectDependency
 		(
 			'manager/boot',
-			new \fbenard\Zero\Services\Managers\BootManager()
+			new \fbenard\Zero\Services\Managers\BootManager($boot)
 		);
 
 		$this->injectDependency
@@ -58,7 +70,7 @@ class Application
 		$this->injectDependency
 		(
 			'manager/service',
-			new \fbenard\Zero\Services\Managers\ServiceManager()
+			new \fbenard\Zero\Services\Managers\ServiceManager($services)
 		);
 	}
 

@@ -21,7 +21,6 @@ implements \fbenard\Zero\Interfaces\Managers\ServiceManager
 	// Attributes
 
 	private $_definitions = null;
-	private $_factory = null;
 	private $_services = null;
 
 
@@ -31,9 +30,25 @@ implements \fbenard\Zero\Interfaces\Managers\ServiceManager
 
 	public function __construct()
 	{
+		// Build attributes
+
 		$this->_definitions = [];
-		$this->_factory = new \fbenard\Zero\Services\Factories\ServiceFactory();
 		$this->_services = [];
+
+		
+		// Define dependencies
+
+		$this->defineDependency('manager/boot', 'fbenard\Zero\Interfaces\Managers\BootManager');
+		$this->defineDependency('factory/service', 'fbenard\Zero\Interfaces\Factories\ServiceFactory');
+
+
+		// Inject dependencies
+
+		$this->injectDependency
+		(
+			'factory/service',
+			new \fbenard\Zero\Services\Factories\ServiceFactory()
+		);
 	}
 
 
@@ -41,7 +56,7 @@ implements \fbenard\Zero\Interfaces\Managers\ServiceManager
 	 *
 	 */
 
-	public function deregisterServices($services)
+	public function deregisterServices(array $services)
 	{
 		// Fix services
 
@@ -71,7 +86,7 @@ implements \fbenard\Zero\Interfaces\Managers\ServiceManager
 	 *
 	 */
 	
-	public function getService($serviceCode, $clone = false)
+	public function getService(string $serviceCode, bool $clone = false)
 	{
 		// Clone the service
 
@@ -79,7 +94,7 @@ implements \fbenard\Zero\Interfaces\Managers\ServiceManager
 		{
 			// Build the service
 
-			$service = $this->_factory->buildService
+			$service = $this->getDependency('factory/service')->buildService
 			(
 				$serviceCode,
 				$this->_definitions
@@ -93,13 +108,13 @@ implements \fbenard\Zero\Interfaces\Managers\ServiceManager
 		}
 
 		
-		// Has the service been retrieved already?
+		// Does the service need to be built?
 
 		if (array_key_exists($serviceCode, $this->_services) === false)
 		{
 			// Build the service
 
-			$service = $this->_factory->buildService
+			$service = $this->getDependency('factory/service')->buildService
 			(
 				$serviceCode,
 				$this->_definitions
@@ -127,9 +142,9 @@ implements \fbenard\Zero\Interfaces\Managers\ServiceManager
 
 	public function initialize()
 	{
-		// Load definitions
+		// Load services
 
-		$this->loadDefinitions();
+		$this->_definitions = $this->getDependency('loader/service')->loadServices();
 	}
 
 
@@ -137,67 +152,7 @@ implements \fbenard\Zero\Interfaces\Managers\ServiceManager
 	 *
 	 */
 
-	private function loadDefinitions()
-	{
-		// Get the cache
-
-		$cacheCode = 'services_' . \z\boot()->environment;
-		$cache = \z\cache()->getCache($cacheCode);
-
-		if ($cache !== false)
-		{
-			$this->_definitions = unserialize($cache);
-			return;
-		}
-
-
-		//
-
-		$dependencies = \z\boot()->dependencies;
-		
-		
-		//
-		
-		foreach ($dependencies as $dependency)
-		{
-			// Find services
-
-			$fileHelper = new \fbenard\Zero\Services\Helpers\FileHelper();
-			$paths = $fileHelper->listFiles($dependency . '/Config/Services', 'json');
-
-
-			// For each service
-
-			foreach ($paths as $path)
-			{
-				// Load definitions
-
-				$rawDefinitions = file_get_contents($path);
-				$definitions = json_decode($rawDefinitions, true);
-
-
-				// Register services
-
-				$this->registerServices($definitions);
-			}
-		}
-
-
-		// Set the cache
-
-		\z\cache()->setCache
-		(
-			$cacheCode,
-			serialize($this->_definitions)
-		);
-	}
-
-
-	/**
-	 *
-	 */
-
-	public function registerServices($services)
+	public function registerServices(array $services)
 	{
 		// Fix services
 

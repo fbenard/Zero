@@ -11,6 +11,7 @@ namespace fbenard\Zero\Services\Factories;
 
 class ServiceFactory
 extends \fbenard\Zero\Classes\AbstractService
+implements \fbenard\Zero\Interfaces\Factories\ServiceFactory
 {
 	/**
 	 *
@@ -87,6 +88,45 @@ extends \fbenard\Zero\Classes\AbstractService
 
 
 		return $service;
+	}
+
+
+	/**
+	 *
+	 */
+
+	public function loadDefinitions()
+	{
+		//
+
+		$dependencies = \z\boot()->dependencies;
+		
+		
+		//
+		
+		foreach ($dependencies as $dependency)
+		{
+			// Find services
+
+			$fileHelper = new \fbenard\Zero\Services\Helpers\FileHelper();
+			$paths = $fileHelper->listFiles($dependency . '/Config/Services', 'json');
+
+
+			// For each service
+
+			foreach ($paths as $path)
+			{
+				// Load definitions
+
+				$rawDefinitions = file_get_contents($path);
+				$definitions = json_decode($rawDefinitions, true);
+
+
+				// Register services
+
+				$this->registerServices($definitions);
+			}
+		}
 	}
 }
 

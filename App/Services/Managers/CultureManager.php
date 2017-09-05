@@ -206,18 +206,6 @@ extends \fbenard\Zero\Classes\AbstractService
 
 	private function loadStrings()
 	{
-		// Get the cache
-
-		$cacheCode = 'strings_' . $this->_localeCode . '_' . $this->_fallbackCode;
-		$cache = \z\cache()->getCache($cacheCode);
-
-		if ($cache !== false)
-		{
-			$this->_strings = unserialize($cache);
-			return;
-		}
-
-
 		// Build locales
 
 		$locales =
@@ -264,15 +252,6 @@ extends \fbenard\Zero\Classes\AbstractService
 				);
 			}
 		}
-
-
-		// Set the cache
-
-		\z\cache()->setCache
-		(
-			$cacheCode,
-			serialize($this->_strings)
-		);
 	}
 
 

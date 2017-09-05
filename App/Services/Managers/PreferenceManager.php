@@ -73,18 +73,6 @@ extends \fbenard\Zero\Classes\AbstractService
 
 	private function loadPreferences()
 	{
-		// Get the cache
-
-		$cacheCode = 'preferences_' . \z\boot()->environment;
-		$cache = \z\cache()->getCache($cacheCode);
-
-		if ($cache !== false)
-		{
-			$this->_preferences = unserialize($cache);
-			return;
-		}
-
-
 		// Define the number of passes
 		
 		$dependencies = \z\boot()->dependencies;
@@ -164,15 +152,6 @@ extends \fbenard\Zero\Classes\AbstractService
 			
 			array_shift($dependencies);
 		}
-
-
-		// Set the cache
-
-		\z\cache()->setCache
-		(
-			$cacheCode,
-			serialize($this->_preferences)
-		);
 	}
 
 

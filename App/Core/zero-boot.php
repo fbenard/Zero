@@ -28,6 +28,6 @@ set_exception_handler('\fbenard\\Zero\\Services\\Managers\\ExceptionManager::onE
 
 // Start the application
 
-\z\app()->run();
+\fbenard\Zero\Classes\Application::getInstance()->run();
 
 ?>
